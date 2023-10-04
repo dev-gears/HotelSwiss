@@ -1,0 +1,392 @@
+{
+  "luxury": [
+    {
+      "id": "1",
+      "name": "Luxury Hotel 1",
+      "description": "This is a luxury hotel.",
+      "category": "luxury",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Luxury Hotel 2",
+      "description": "This is another luxury hotel.",
+      "category": "luxury",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "25",
+      "name": "Luxury Hotel 3",
+      "description": "This is a luxury hotel.",
+      "category": "luxury",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "26",
+      "name": "Luxury Hotel 4",
+      "description": "This is another luxury hotel.",
+      "category": "luxury",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "budget": [
+    {
+      "id": "3",
+      "name": "Budget Hotel 1",
+      "description": "This is a budget hotel.",
+      "category": "budget",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Budget Hotel 2",
+      "description": "This is another budget hotel.",
+      "category": "budget",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "27",
+      "name": "Budget Hotel 3",
+      "description": "This is a budget hotel.",
+      "category": "budget",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "28",
+      "name": "Budget Hotel 4",
+      "description": "This is another budget hotel.",
+      "category": "budget",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "hostels": [
+    {
+      "id": "5",
+      "name": "Hostel 1",
+      "description": "This is a hostel.",
+      "category": "hostels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Hostel 2",
+      "description": "This is another hostel.",
+      "category": "hostels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "29",
+      "name": "Hostel 3",
+      "description": "This is a hostel.",
+      "category": "hostels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "30",
+      "name": "Hostel 4",
+      "description": "This is another hostel.",
+      "category": "hostels",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "resort": [
+    {
+      "id": "7",
+      "name": "Resort 1",
+      "description": "This is a resort.",
+      "category": "resort",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Resort 2",
+      "description": "This is another resort.",
+      "category": "resort",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "31",
+      "name": "Resort 3",
+      "description": "This is a resort.",
+      "category": "resort",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "32",
+      "name": "Resort 4",
+      "description": "This is another resort.",
+      "category": "resort",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "motels": [
+    {
+      "id": "9",
+      "name": "Motel 1",
+      "description": "This is a motel.",
+      "category": "motels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Motel 2",
+      "description": "This is another motel.",
+      "category": "motels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "33",
+      "name": "Motel 3",
+      "description": "This is a motel.",
+      "category": "motels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "34",
+      "name": "Motel 4",
+      "description": "This is another motel.",
+      "category": "motels",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "boutique-hotels": [
+    {
+      "id": "11",
+      "name": "Boutique Hotel 1",
+      "description": "This is a boutique hotel.",
+      "category": "boutique-hotels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "12",
+      "name": "Boutique Hotel 2",
+      "description": "This is another boutique hotel.",
+      "category": "boutique-hotels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "35",
+      "name": "Boutique Hotel 3",
+      "description": "This is a boutique hotel.",
+      "category": "boutique-hotels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "36",
+      "name": "Boutique Hotel 4",
+      "description": "This is another boutique hotel.",
+      "category": "boutique-hotels",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "family-friendly": [
+    {
+      "id": "13",
+      "name": "Family Friendly Hotel 1",
+      "description": "This is a family friendly hotel.",
+      "category": "family-friendly",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "14",
+      "name": "Family Friendly Hotel 2",
+      "description": "This is another family friendly hotel.",
+      "category": "family-friendly",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "37",
+      "name": "Family Friendly Hotel 3",
+      "description": "This is a family friendly hotel.",
+      "category": "family-friendly",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "38",
+      "name": "Family Friendly Hotel 4",
+      "description": "This is another family friendly hotel.",
+      "category": "family-friendly",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "beachfront": [
+    {
+      "id": "15",
+      "name": "Beachfront Hotel 1",
+      "description": "This is a beachfront hotel.",
+      "category": "beachfront",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "16",
+      "name": "Beachfront Hotel 2",
+      "description": "This is another beachfront hotel.",
+      "category": "beachfront",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "39",
+      "name": "Beachfront Hotel 3",
+      "description": "This is a beachfront hotel.",
+      "category": "beachfront",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "40",
+      "name": "Beachfront Hotel 4",
+      "description": "This is another beachfront hotel.",
+      "category": "beachfront",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "historic-hotels": [
+    {
+      "id": "17",
+      "name": "Historic Hotel 1",
+      "description": "This is a historic hotel.",
+      "category": "historic-hotels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "18",
+      "name": "Historic Hotel 2",
+      "description": "This is another historic hotel.",
+      "category": "historic-hotels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "41",
+      "name": "Historic Hotel 3",
+      "description": "This is a historic hotel.",
+      "category": "historic-hotels",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "42",
+      "name": "Historic Hotel 4",
+      "description": "This is another historic hotel.",
+      "category": "historic-hotels",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "spa-wellness": [
+    {
+      "id": "19",
+      "name": "Spa Hotel 1",
+      "description": "This is a spa hotel.",
+      "category": "spa-wellness",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "20",
+      "name": "Spa Hotel 2",
+      "description": "This is another spa hotel.",
+      "category": "spa-wellness",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "43",
+      "name": "Spa Hotel 3",
+      "description": "This is a spa hotel.",
+      "category": "spa-wellness",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "44",
+      "name": "Spa Hotel 4",
+      "description": "This is another spa hotel.",
+      "category": "spa-wellness",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "pet-friendly": [
+    {
+      "id": "21",
+      "name": "Pet Friendly Hotel 1",
+      "description": "This is a pet friendly hotel.",
+      "category": "pet-friendly",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "22",
+      "name": "Pet Friendly Hotel 2",
+      "description": "This is another pet friendly hotel.",
+      "category": "pet-friendly",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "45",
+      "name": "Pet Friendly Hotel 3",
+      "description": "This is a pet friendly hotel.",
+      "category": "pet-friendly",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "46",
+      "name": "Pet Friendly Hotel 4",
+      "description": "This is another pet friendly hotel.",
+      "category": "pet-friendly",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "ski-resorts": [
+    {
+      "id": "23",
+      "name": "Ski Resort 1",
+      "description": "This is a ski resort.",
+      "category": "ski-resorts",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "24",
+      "name": "Ski Resort 2",
+      "description": "This is another ski resort.",
+      "category": "ski-resorts",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "47",
+      "name": "Ski Resort 3",
+      "description": "This is a ski resort.",
+      "category": "ski-resorts",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "48",
+      "name": "Ski Resort 4",
+      "description": "This is another ski resort.",
+      "category": "ski-resorts",
+      "image": "hotel-mock-image.jpg"
+    }
+  ],
+  "resorts": [
+    {
+      "id": "49",
+      "name": "Resort 5",
+      "description": "This is a resort.",
+      "category": "resorts",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "50",
+      "name": "Resort 6",
+      "description": "This is another resort.",
+      "category": "resorts",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "51",
+      "name": "Resort 7",
+      "description": "This is a resort.",
+      "category": "resorts",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "52",
+      "name": "Resort 8",
+      "description": "This is another resort.",
+      "category": "resorts",
+      "image": "hotel-mock-image.jpg"
+    }
+  ]
+}
