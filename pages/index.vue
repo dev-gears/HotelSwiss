@@ -1,5 +1,7 @@
 <template>
-  <div class="h-screen bg-black w-full"></div>
+  <div class="container mx-auto h-screen w-full bg-white">
+    <HotelsByCategories />
+  </div>
 </template>
 
 <script setup lang="ts"></script>
