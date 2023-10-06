@@ -5,7 +5,7 @@
       <Loader />
     </div>
     <div
-      class="flex grid-cols-3 flex-col gap-2 lg:grid"
+      class="flex flex-col gap-2 md:grid md:grid-cols-2 lg:grid-cols-3"
       v-else-if="hotels.length"
     >
       <Card v-for="hotel in hotels" :hotel="hotel" />
@@ -19,13 +19,13 @@ import { ref, defineProps, onMounted } from "vue";
 import { useHotelService } from "@/services/dataProvider";
 import { Hotel } from "@/types/hotel";
 
-const props = defineProps<{ slug: string; name: string }>();
+const props = defineProps<{ id: string; name: string }>();
 const { fetchHotelsByCategory, categorizedHotels } = useHotelService();
 const hotels = ref<Hotel[]>([]);
 const isLoading = ref(true);
 
 onMounted(() => {
-  fetchHotelsByCategory(props.slug)
+  fetchHotelsByCategory(props.id)
     .then(() => {
       hotels.value = categorizedHotels.value;
     })

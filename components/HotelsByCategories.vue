@@ -2,17 +2,15 @@
   <div>
     <TabView :scrollable="true">
       <TabPanel v-for="tab in categories" :key="tab.id" :header="tab.name">
-        <TabContent :slug="tab.slug" :name="tab.name" />
+        <TabContent :id="tab.id" :name="tab.name" />
       </TabPanel>
     </TabView>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { useHotelService } from "@/services/dataProvider";
 
-const tab = ref(null);
 const { fetchCategories, categories } = useHotelService();
 
 fetchCategories();
@@ -21,6 +19,18 @@ fetchCategories();
 <style>
 .p-tabview-nav-btn {
   @apply shadow-none max-md:hidden;
+}
+
+.p-tabview-ink-bar {
+  @apply bg-primary;
+}
+
+.p-highlight {
+  @apply bg-indigo-100;
+}
+
+.p-tabview-nav-container {
+  @apply sticky top-0 drop-shadow-sm;
 }
 
 .p-tabview-nav-next {

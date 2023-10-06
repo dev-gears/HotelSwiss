@@ -1,9 +1,15 @@
 <template>
-  <div class="rounded-md border">
-    <img class="rounded-md" :src="`/${hotel.image}`" height="200px" />
+  <div class="rounded-md border shadow-md">
+    <NuxtLink :to="`/hotel/${hotel.id}`">
+      <img class="rounded-md" :src="`/${hotel.image}`" height="200px" />
+    </NuxtLink>
     <div class="p-2">
-      <h3>{{ hotel.name }}</h3>
-      <p>{{ hotel.description }}</p>
+      <NuxtLink :to="`/hotel/${hotel.id}`">
+        <h3 class="text-xl font-semibold">{{ hotel.name }}</h3>
+      </NuxtLink>
+      <NuxtLink :to="`/category/${hotel.category}`">
+        <p class="text-sm text-gray-500">{{ hotel.category }}</p>
+      </NuxtLink>
     </div>
   </div>
 </template>

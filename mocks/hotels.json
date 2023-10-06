@@ -27,6 +27,34 @@
       "description": "This is another luxury hotel.",
       "category": "luxury",
       "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "53",
+      "name": "Luxury Hotel 5",
+      "description": "This is a luxury hotel.",
+      "category": "luxury",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "54",
+      "name": "Luxury Hotel 6",
+      "description": "This is another luxury hotel.",
+      "category": "luxury",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "55",
+      "name": "Luxury Hotel 7",
+      "description": "This is a luxury hotel.",
+      "category": "luxury",
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "56",
+      "name": "Luxury Hotel 8",
+      "description": "This is another luxury hotel.",
+      "category": "luxury",
+      "image": "hotel-mock-image.jpg"
     }
   ],
   "budget": [

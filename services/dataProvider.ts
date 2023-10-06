@@ -14,12 +14,23 @@ export const useHotelService = () => {
   const categories = ref<Category[]>([]);
   const hotels = ref<Hotel[]>([]);
   const categorizedHotels = ref<Hotel[]>([]);
+  const hotel = ref<Hotel | null>(null);
 
   const fetchCategories = async () => {
     if (useMockData) {
       categories.value = categoriesMock.data.hotelCategories;
     } else {
       categories.value = await fetcher<Category[]>("/api/categories");
+    }
+  };
+
+  const fetchCategoryById = async (categoryId: string) => {
+    if (useMockData) {
+      return categoriesMock.data.hotelCategories.find(
+        (category) => category.id === categoryId,
+      );
+    } else {
+      return await fetcher<Category>(`/api/categories/${categoryId}`);
     }
   };
 
@@ -31,22 +42,40 @@ export const useHotelService = () => {
     }
   };
 
-  const fetchHotelsByCategory = async (category: string) => {
+  const fetchHotelsByCategory = async (categoryId: string) => {
     if (useMockData) {
-      categorizedHotels.value = (hotelsMock as HotelMockType)[category] || [];
+      const category = await fetchCategoryById(categoryId);
+      categorizedHotels.value = category
+        ? (hotelsMock as HotelMockType)[category.slug] || []
+        : [];
     } else {
       categorizedHotels.value = await fetcher<Hotel[]>(
-        `/api/hotels?category=${category}`,
+        `/api/hotels?categoryId=${categoryId}`,
       );
+    }
+  };
+
+  const fetchHotelById = async (hotelId: string) => {
+    if (useMockData) {
+      const foundHotel = Object.values(hotelsMock)
+        .flat()
+        .find((h) => h.id === hotelId);
+      hotel.value = foundHotel || null;
+    } else {
+      const fetchedHotel = await fetcher<Hotel>(`/api/hotels/${hotelId}`);
+      hotel.value = fetchedHotel;
     }
   };
 
   return {
     fetchCategories,
+    fetchCategoryById,
     fetchHotels,
     fetchHotelsByCategory,
+    fetchHotelById,
     categories,
     hotels,
     categorizedHotels,
+    hotel,
   };
 };
