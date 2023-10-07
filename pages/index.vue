@@ -1,4 +1,5 @@
 <template>
+  <Header />
   <div class="container mx-auto h-screen w-full bg-white">
     <HotelsByCategories />
   </div>
