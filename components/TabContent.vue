@@ -1,16 +1,22 @@
 <template>
-  <div>
-    <h2 class="mb-3 border-b-2 text-[2rem]">{{ props.name }}</h2>
+  <div class="flex flex-col items-center">
+    <CommonBlockHeader :title="props.name" />
     <div v-if="isLoading">
       <Loader />
     </div>
     <div
-      class="flex flex-col gap-2 md:grid md:grid-cols-2 lg:grid-cols-3"
+      class="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3"
       v-else-if="hotels.length"
     >
-      <Card v-for="hotel in hotels" :hotel="hotel" />
+      <CardGridCard v-for="hotel in hotels" :hotel="hotel" />
     </div>
     <div v-else>No hotels found</div>
+
+    <Button
+      icon="pi pi-refresh"
+      class="mx-auto mt-3 border px-3 py-2"
+      label="Load more"
+    />
   </div>
 </template>
 

@@ -8,7 +8,10 @@ export interface Category {
 export interface Hotel {
   id: string;
   name: string;
-  category: string;
+  category: {
+    name: string;
+    id: string;
+  };
   description: string;
   image: string;
 }

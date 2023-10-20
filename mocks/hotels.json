@@ -4,56 +4,60 @@
       "id": "1",
       "name": "Luxury Hotel 1",
       "description": "This is a luxury hotel.",
-      "category": "luxury",
+      "category": {
+        "id": "1",
+        "name": "Luxury"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "2",
       "name": "Luxury Hotel 2",
       "description": "This is another luxury hotel.",
-      "category": "luxury",
+      "category": {
+        "id": "1",
+        "name": "Luxury"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "25",
       "name": "Luxury Hotel 3",
       "description": "This is a luxury hotel.",
-      "category": "luxury",
+      "category": {
+        "id": "1",
+        "name": "Luxury"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "26",
       "name": "Luxury Hotel 4",
       "description": "This is another luxury hotel.",
-      "category": "luxury",
+      "category": {
+        "id": "1",
+        "name": "Luxury"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "53",
       "name": "Luxury Hotel 5",
       "description": "This is a luxury hotel.",
-      "category": "luxury",
+      "category": {
+        "id": "1",
+        "name": "Luxury"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "54",
       "name": "Luxury Hotel 6",
       "description": "This is another luxury hotel.",
-      "category": "luxury",
-      "image": "hotel-mock-image.jpg"
-    },
-    {
-      "id": "55",
-      "name": "Luxury Hotel 7",
-      "description": "This is a luxury hotel.",
-      "category": "luxury",
-      "image": "hotel-mock-image.jpg"
-    },
-    {
-      "id": "56",
-      "name": "Luxury Hotel 8",
-      "description": "This is another luxury hotel.",
-      "category": "luxury",
+      "category": {
+        "id": "1",
+        "name": "Luxury"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -62,28 +66,60 @@
       "id": "3",
       "name": "Budget Hotel 1",
       "description": "This is a budget hotel.",
-      "category": "budget",
+      "category": {
+        "id": "2",
+        "name": "Budget"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "4",
       "name": "Budget Hotel 2",
       "description": "This is another budget hotel.",
-      "category": "budget",
+      "category": {
+        "id": "2",
+        "name": "Budget"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "27",
       "name": "Budget Hotel 3",
       "description": "This is a budget hotel.",
-      "category": "budget",
+      "category": {
+        "id": "2",
+        "name": "Budget"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "28",
       "name": "Budget Hotel 4",
       "description": "This is another budget hotel.",
-      "category": "budget",
+      "category": {
+        "id": "2",
+        "name": "Budget"
+      },
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "55",
+      "name": "Budget Hotel 5",
+      "description": "This is a budget hotel.",
+      "category": {
+        "id": "2",
+        "name": "Budget"
+      },
+      "image": "hotel-mock-image.jpg"
+    },
+    {
+      "id": "56",
+      "name": "Budget Hotel 6",
+      "description": "This is another budget hotel.",
+      "category": {
+        "id": "2",
+        "name": "Budget"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -92,28 +128,40 @@
       "id": "5",
       "name": "Hostel 1",
       "description": "This is a hostel.",
-      "category": "hostels",
+      "category": {
+        "id": "3",
+        "name": "Hostels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "6",
       "name": "Hostel 2",
       "description": "This is another hostel.",
-      "category": "hostels",
+      "category": {
+        "id": "3",
+        "name": "Hostels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "29",
       "name": "Hostel 3",
       "description": "This is a hostel.",
-      "category": "hostels",
+      "category": {
+        "id": "3",
+        "name": "Hostels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "30",
       "name": "Hostel 4",
       "description": "This is another hostel.",
-      "category": "hostels",
+      "category": {
+        "id": "3",
+        "name": "Hostels"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -122,28 +170,40 @@
       "id": "7",
       "name": "Resort 1",
       "description": "This is a resort.",
-      "category": "resort",
+      "category": {
+        "id": "4",
+        "name": "Resort"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "8",
       "name": "Resort 2",
       "description": "This is another resort.",
-      "category": "resort",
+      "category": {
+        "id": "4",
+        "name": "Resort"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "31",
       "name": "Resort 3",
       "description": "This is a resort.",
-      "category": "resort",
+      "category": {
+        "id": "4",
+        "name": "Resort"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "32",
       "name": "Resort 4",
       "description": "This is another resort.",
-      "category": "resort",
+      "category": {
+        "id": "4",
+        "name": "Resort"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -152,28 +212,40 @@
       "id": "9",
       "name": "Motel 1",
       "description": "This is a motel.",
-      "category": "motels",
+      "category": {
+        "id": "5",
+        "name": "Motels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "10",
       "name": "Motel 2",
       "description": "This is another motel.",
-      "category": "motels",
+      "category": {
+        "id": "5",
+        "name": "Motels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "33",
       "name": "Motel 3",
       "description": "This is a motel.",
-      "category": "motels",
+      "category": {
+        "id": "5",
+        "name": "Motels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "34",
       "name": "Motel 4",
       "description": "This is another motel.",
-      "category": "motels",
+      "category": {
+        "id": "5",
+        "name": "Motels"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -182,28 +254,40 @@
       "id": "11",
       "name": "Boutique Hotel 1",
       "description": "This is a boutique hotel.",
-      "category": "boutique-hotels",
+      "category": {
+        "id": "6",
+        "name": "Boutique Hotels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "12",
       "name": "Boutique Hotel 2",
       "description": "This is another boutique hotel.",
-      "category": "boutique-hotels",
+      "category": {
+        "id": "6",
+        "name": "Boutique Hotels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "35",
       "name": "Boutique Hotel 3",
       "description": "This is a boutique hotel.",
-      "category": "boutique-hotels",
+      "category": {
+        "id": "6",
+        "name": "Boutique Hotels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "36",
       "name": "Boutique Hotel 4",
       "description": "This is another boutique hotel.",
-      "category": "boutique-hotels",
+      "category": {
+        "id": "6",
+        "name": "Boutique Hotels"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -212,28 +296,41 @@
       "id": "13",
       "name": "Family Friendly Hotel 1",
       "description": "This is a family friendly hotel.",
-      "category": "family-friendly",
+      "category": {
+        "id": "7",
+        "name": "Family Friendly"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "14",
       "name": "Family Friendly Hotel 2",
       "description": "This is another family friendly hotel.",
-      "category": "family-friendly",
+      "category": {
+        "id": "7",
+        "name": "Family Friendly"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "37",
       "name": "Family Friendly Hotel 3",
-      "description": "This is a family friendly hotel.",
-      "category": "family-friendly",
-      "image": "hotel-mock-image.jpg"
+      "description": "This is a family friendly hotel. Additional text to test the layout. Even more text to test the layout.",
+      "category": {
+        "id": "7",
+        "name": "Family Friendly"
+      },
+      "image": "hotel-mock-image.jpg",
+      "ammenities": ["wifi", "pool", "parking", "breakfast"]
     },
     {
       "id": "38",
       "name": "Family Friendly Hotel 4",
       "description": "This is another family friendly hotel.",
-      "category": "family-friendly",
+      "category": {
+        "id": "7",
+        "name": "Family Friendly"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -242,28 +339,40 @@
       "id": "15",
       "name": "Beachfront Hotel 1",
       "description": "This is a beachfront hotel.",
-      "category": "beachfront",
+      "category": {
+        "id": "8",
+        "name": "Beachfront"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "16",
       "name": "Beachfront Hotel 2",
       "description": "This is another beachfront hotel.",
-      "category": "beachfront",
+      "category": {
+        "id": "8",
+        "name": "Beachfront"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "39",
       "name": "Beachfront Hotel 3",
       "description": "This is a beachfront hotel.",
-      "category": "beachfront",
+      "category": {
+        "id": "8",
+        "name": "Beachfront"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "40",
       "name": "Beachfront Hotel 4",
       "description": "This is another beachfront hotel.",
-      "category": "beachfront",
+      "category": {
+        "id": "8",
+        "name": "Beachfront"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -272,28 +381,40 @@
       "id": "17",
       "name": "Historic Hotel 1",
       "description": "This is a historic hotel.",
-      "category": "historic-hotels",
+      "category": {
+        "id": "9",
+        "name": "Historic Hotels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "18",
       "name": "Historic Hotel 2",
       "description": "This is another historic hotel.",
-      "category": "historic-hotels",
+      "category": {
+        "id": "9",
+        "name": "Historic Hotels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "41",
       "name": "Historic Hotel 3",
       "description": "This is a historic hotel.",
-      "category": "historic-hotels",
+      "category": {
+        "id": "9",
+        "name": "Historic Hotels"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "42",
       "name": "Historic Hotel 4",
       "description": "This is another historic hotel.",
-      "category": "historic-hotels",
+      "category": {
+        "id": "9",
+        "name": "Historic Hotels"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -302,28 +423,40 @@
       "id": "19",
       "name": "Spa Hotel 1",
       "description": "This is a spa hotel.",
-      "category": "spa-wellness",
+      "category": {
+        "id": "10",
+        "name": "Spa & Wellness"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "20",
       "name": "Spa Hotel 2",
       "description": "This is another spa hotel.",
-      "category": "spa-wellness",
+      "category": {
+        "id": "10",
+        "name": "Spa & Wellness"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "43",
       "name": "Spa Hotel 3",
       "description": "This is a spa hotel.",
-      "category": "spa-wellness",
+      "category": {
+        "id": "10",
+        "name": "Spa & Wellness"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "44",
       "name": "Spa Hotel 4",
       "description": "This is another spa hotel.",
-      "category": "spa-wellness",
+      "category": {
+        "id": "10",
+        "name": "Spa & Wellness"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -332,28 +465,40 @@
       "id": "21",
       "name": "Pet Friendly Hotel 1",
       "description": "This is a pet friendly hotel.",
-      "category": "pet-friendly",
+      "category": {
+        "id": "11",
+        "name": "Pet Friendly"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "22",
       "name": "Pet Friendly Hotel 2",
       "description": "This is another pet friendly hotel.",
-      "category": "pet-friendly",
+      "category": {
+        "id": "11",
+        "name": "Pet Friendly"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "45",
       "name": "Pet Friendly Hotel 3",
       "description": "This is a pet friendly hotel.",
-      "category": "pet-friendly",
+      "category": {
+        "id": "11",
+        "name": "Pet Friendly"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "46",
       "name": "Pet Friendly Hotel 4",
       "description": "This is another pet friendly hotel.",
-      "category": "pet-friendly",
+      "category": {
+        "id": "11",
+        "name": "Pet Friendly"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -362,28 +507,40 @@
       "id": "23",
       "name": "Ski Resort 1",
       "description": "This is a ski resort.",
-      "category": "ski-resorts",
+      "category": {
+        "id": "12",
+        "name": "Ski Resorts"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "24",
       "name": "Ski Resort 2",
       "description": "This is another ski resort.",
-      "category": "ski-resorts",
+      "category": {
+        "id": "12",
+        "name": "Ski Resorts"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "47",
       "name": "Ski Resort 3",
       "description": "This is a ski resort.",
-      "category": "ski-resorts",
+      "category": {
+        "id": "12",
+        "name": "Ski Resorts"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "48",
       "name": "Ski Resort 4",
       "description": "This is another ski resort.",
-      "category": "ski-resorts",
+      "category": {
+        "id": "12",
+        "name": "Ski Resorts"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ],
@@ -392,28 +549,40 @@
       "id": "49",
       "name": "Resort 5",
       "description": "This is a resort.",
-      "category": "resorts",
+      "category": {
+        "id": "4",
+        "name": "Resort"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "50",
       "name": "Resort 6",
       "description": "This is another resort.",
-      "category": "resorts",
+      "category": {
+        "id": "4",
+        "name": "Resort"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "51",
       "name": "Resort 7",
       "description": "This is a resort.",
-      "category": "resorts",
+      "category": {
+        "id": "4",
+        "name": "Resort"
+      },
       "image": "hotel-mock-image.jpg"
     },
     {
       "id": "52",
       "name": "Resort 8",
       "description": "This is another resort.",
-      "category": "resorts",
+      "category": {
+        "id": "4",
+        "name": "Resort"
+      },
       "image": "hotel-mock-image.jpg"
     }
   ]
