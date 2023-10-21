@@ -26,6 +26,8 @@ export default defineNuxtConfig({
       "Carousel",
       "Card",
       "Image",
+      "FloatLabel",
+      "Password",
     ],
   },
   css: [
