@@ -5,7 +5,7 @@
       <Loader />
     </div>
     <div
-      class="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3"
+      class="flex grid-cols-2 flex-col gap-4 md:grid md:grid-cols-3 lg:grid-cols-4"
       v-else-if="hotels.length"
     >
       <CardGridCard v-for="hotel in hotels" :hotel="hotel" />

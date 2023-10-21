@@ -1,7 +1,11 @@
 <template>
-  <div class="rounded-md shadow shadow-primary-500">
+  <div class="rounded-md shadow">
     <NuxtLink :to="`/hotel/${hotel.id}`">
-      <img class="rounded-md" :src="`/${hotel.image}`" height="200px" />
+      <img
+        class="w-full rounded-md object-cover"
+        :src="`/${hotel.image}`"
+        height="200px"
+      />
     </NuxtLink>
     <div class="p-2">
       <NuxtLink :to="`/hotel/${hotel.id}`">
@@ -15,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 import { Hotel } from "@/types/hotel";
 
 const { hotel } = defineProps<{ hotel: Hotel }>();

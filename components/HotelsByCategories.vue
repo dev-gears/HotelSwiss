@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <TabView :scrollable="true">
       <TabPanel v-for="tab in categories" :key="tab.id" :header="tab.name">
         <TabContent :id="tab.id" :name="tab.name" />

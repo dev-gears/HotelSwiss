@@ -2,24 +2,52 @@
   <div
     class="relative my-4 flex w-full items-center rounded border border-primary"
   >
-    <InputText
-      v-model="searchText"
-      class="w-full border py-2 pl-7 pr-20 placeholder:ml-5 focus:shadow-sm"
-      placeholder="Search"
-    />
-    <i class="pi pi-search absolute left-0 w-auto p-2 text-gray-300"></i>
+    <div class="p-inputgroup flex-1">
+      <span class="p-inputgroup-addon">
+        <i class="pi pi-search"></i>
+      </span>
+      <InputText
+        placeholder="Search"
+        v-model="localSearchText"
+        class="pr-[5.2rem] focus:shadow-none"
+      />
+    </div>
     <Button
       icon="pi pi-filter"
-      class="absolute right-0 w-auto rounded-none border-l border-primary px-1.5 py-2 text-primary"
+      class="absolute right-0 z-10 w-auto rounded-none border-l border-primary px-1.5 py-2 text-primary"
       label="Filters"
       @click="showFilters = true"
     />
   </div>
+  <Dialog
+    class="h-screen w-[90%]"
+    v-model:visible="showFilters"
+    modal
+    closable
+    dismissableMask
+    blockScroll
+    showHeader
+  >
+    <template #header>
+      <h3 class="text-primary-100">Filters</h3>
+    </template>
+    <template #default>
+      <SearchFiltersCantons />
+    </template>
+  </Dialog>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch, defineEmits } from "vue";
 
-const searchText = ref("");
+const localSearchText = ref("");
 const showFilters = ref(false);
+
+const emit = defineEmits<{
+  (event: "updateSearchValue", payload: string): void;
+}>();
+
+watch(localSearchText, (newValue) => {
+  emit("updateSearchValue", newValue);
+});
 </script>

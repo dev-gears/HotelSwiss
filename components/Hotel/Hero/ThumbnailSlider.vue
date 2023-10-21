@@ -3,7 +3,9 @@
     class="thumbnail-carousel absolute bottom-0 right-5 w-24 translate-y-12 lg:w-2/4 lg:translate-y-2/4"
     :class="isMobile ? 'mobile' : 'desktop'"
   >
-    <CommonBackdrop class="rounded-md px-1 shadow shadow-primary-500">
+    <CommonBackdrop
+      class="rounded-md bg-gradient-to-b from-transparent from-0% via-primary-500 via-50% to-transparent to-100% px-1 max-lg:bg-transparent"
+    >
       <Carousel
         :value="extendedImages"
         :circular="images ? images?.length > 3 : false"
@@ -69,17 +71,23 @@ const carouselHeight = () => {
 <style>
 .thumbnail-carousel {
   .p-link {
-    @apply z-10 rounded-none from-transparent to-primary-300 max-lg:absolute max-lg:w-full;
+    @apply z-10 rounded-none max-lg:absolute max-lg:w-full;
   }
 
   &.mobile {
     .p-link {
       &.p-carousel-prev {
-        @apply top-0 rounded-t-md bg-gradient-to-t;
+        @apply top-0 rounded-t-md;
       }
 
       &.p-carousel-next {
-        @apply bottom-0 rounded-b-md bg-gradient-to-b;
+        @apply bottom-0 rounded-b-md;
+      }
+    }
+
+    .p-carousel-item-active {
+      &:first-of-type {
+        @apply border-4 border-primary-500;
       }
     }
   }

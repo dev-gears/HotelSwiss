@@ -62,11 +62,11 @@ const responsiveOptions = ref([
   }
 
   .p-carousel-next.p-link {
-    @apply max-sm:right-1/3 lg:rounded-r;
+    @apply max-sm:right-[35%] lg:rounded-r;
   }
 
   .p-carousel-prev.p-link {
-    @apply max-sm:left-1/3 lg:rounded-l;
+    @apply max-sm:left-[38%] lg:rounded-l;
   }
 
   .p-highlight {
