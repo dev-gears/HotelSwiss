@@ -1,34 +1,41 @@
 <template>
-  <div
-    class="flex h-screen w-screen flex-col items-center justify-start bg-tertiary"
-  >
+  <div class="flex h-screen w-screen flex-col items-center justify-start">
     <img
-      class="z-10 w-[160px] translate-y-1/2 rounded-full"
+      class="z-10 w-[160px] translate-y-1/2 rounded-full shadow-md shadow-primary-500"
       src="../assets/images/dummy_logo.svg"
       alt=""
     />
-
-    <form
-      class="flex h-3/6 w-5/6 flex-col justify-around rounded-lg bg-primary-300 p-4 pt-20 md:max-w-md"
-      @submit.prevent="submitLogIn"
+    <CommonBackdrop
+      class="flex h-3/6 w-5/6 flex-col justify-around shadow-md shadow-primary md:max-w-md"
     >
-      <input
-        id="email"
-        v-model="email"
-        placeholder="Email / Username"
-        class="rounded-md p-2 text-base placeholder:text-left placeholder:text-base"
-      />
+      <form
+        class="flex flex-col gap-6 rounded-lg p-4 text-primary-100"
+        @submit.prevent="submitLogIn"
+      >
+        <input
+          id="email"
+          v-model="email"
+          placeholder="Email / Username"
+          class="rounded-md p-2 text-base placeholder:text-left placeholder:text-base"
+        />
 
-      <Password
-        v-model="password"
-        :feedback="false"
-        :toggle-mask="true"
-        placeholder="Password"
-        input-class="p-2 rounded-md w-full"
-        class="text-base placeholder:text-center placeholder:text-base"
-      />
-      <Button type="submit" label="LOG IN" class="bg-white p-2" text raised />
-    </form>
+        <Password
+          v-model="password"
+          :feedback="false"
+          :toggle-mask="true"
+          placeholder="Password"
+          input-class="p-2 rounded-md w-full"
+          class="text-base placeholder:text-center placeholder:text-base"
+        />
+        <Button
+          type="submit"
+          label="LOG IN"
+          class="bg-white p-2 text-primary-100"
+          text
+          raised
+        />
+      </form>
+    </CommonBackdrop>
   </div>
 </template>
 

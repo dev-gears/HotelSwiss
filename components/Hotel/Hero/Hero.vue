@@ -5,7 +5,6 @@
       :src="imageSource"
       class="hero-image h-96 w-full lg:h-[500px]"
     />
-
     <ClientOnly>
       <ThumbnailSlider
         :images="images"
@@ -69,7 +68,7 @@ const updateImageSource = (image: string) => {
 <style>
 .hero-image {
   img {
-    @apply h-96 w-full rounded-b-3xl object-cover shadow-md shadow-primary-500 lg:h-full;
+    @apply h-96 w-full rounded-b-3xl object-cover shadow-md shadow-primary-500 lg:h-full lg:rounded-b-xl;
   }
 }
 .p-image-toolbar svg {

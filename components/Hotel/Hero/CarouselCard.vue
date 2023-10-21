@@ -1,14 +1,13 @@
 <template>
   <div
     @click="updateSource"
-    class="flex items-center justify-center rounded-md grayscale transition duration-300 ease-in-out"
-    :class="selected ? 'scale-110 shadow-2xl grayscale-0' : ''"
+    class="flex w-full items-center justify-center rounded-md grayscale transition duration-300 ease-in-out lg:w-4/5"
+    :class="selected ? 'scale-110 grayscale-0' : ''"
   >
-    <img
-      class="visible rounded-md object-cover"
-      :src="imageUrl"
-      alt="carousel image of a hotel"
-    />
+    <div
+      :style="`background-image: url(${imageUrl});`"
+      class="image visible rounded-md bg-cover bg-no-repeat transition duration-300 ease-in-out"
+    ></div>
   </div>
 </template>
 
@@ -32,7 +31,7 @@ const updateSource = () => {
   .p-carousel-item {
     @apply flex items-center justify-center rounded-md;
 
-    img {
+    .image {
       @apply my-1 h-[70px] w-full rounded object-cover;
     }
   }
