@@ -1,5 +1,11 @@
 <template>
   <div class="relative w-full">
+    <button
+      @click="$router.back()"
+      class="absolute left-4 top-4 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-primary-500/50 p-4 text-secondary-800"
+    >
+      <i class="pi pi-arrow-left"></i>
+    </button>
     <Image
       preview
       :src="imageSource"

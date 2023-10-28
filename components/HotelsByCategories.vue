@@ -1,19 +1,20 @@
 <template>
   <div class="">
-    <TabView :scrollable="true">
+    <!-- <TabView :scrollable="true">
       <TabPanel v-for="tab in categories" :key="tab.id" :header="tab.name">
         <TabContent :id="tab.id" :name="tab.name" />
       </TabPanel>
-    </TabView>
+    </TabView> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { useHotelService } from "@/services/dataProvider";
+import { useHotelService } from "@/services/useHotelService";
+import { useFetchData } from "@/composables/useFetchData";
 
-const { fetchCategories, categories } = useHotelService();
+// const { fetchCategories, categories } = useHotelService();
 
-fetchCategories();
+// useFetchData(fetchCategories, categories);
 </script>
 
 <style>

@@ -21,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, onMounted } from "vue";
-import { useHotelService } from "@/services/dataProvider";
+import { ref, onMounted } from "vue";
+import { useHotelService } from "@/services/useHotelService";
 import { Hotel } from "@/types/hotel";
 
 const props = defineProps<{ id: string; name: string }>();
@@ -30,13 +30,18 @@ const { fetchHotelsByCategory, categorizedHotels } = useHotelService();
 const hotels = ref<Hotel[]>([]);
 const isLoading = ref(true);
 
-onMounted(() => {
-  fetchHotelsByCategory(props.id)
-    .then(() => {
-      hotels.value = categorizedHotels.value;
-    })
-    .finally(() => {
-      isLoading.value = false;
-    });
+onMounted(async () => {
+  try {
+    isLoading.value = true;
+    await fetchHotelsByCategory(props.id);
+    hotels.value = categorizedHotels.value;
+  } catch (error) {
+    console.error(
+      "An error occurred while fetching hotels by category:",
+      error,
+    );
+  } finally {
+    isLoading.value = false;
+  }
 });
 </script>

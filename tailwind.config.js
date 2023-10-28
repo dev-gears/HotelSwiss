@@ -1,6 +1,21 @@
 export default {
   theme: {
     extend: {
+      keyframes: {
+        shimmer: {
+          "0%": { "background-position": "-200% 0" },
+          "100%": { "background-position": "200% 0" },
+        },
+      },
+      animation: {
+        shimmer: "shimmer 1.5s infinite",
+      },
+      backgroundImage: {
+        "shimmer-gradient": "linear-gradient(90deg, #f0f0f0, #e0e0e0, #f0f0f0)",
+      },
+      backgroundSize: {
+        "200%": "200% 100%",
+      },
       colors: {
         primary: {
           DEFAULT: "#354f52",

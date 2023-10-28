@@ -8,6 +8,11 @@ export default defineNuxtConfig({
     },
   },
   modules: ["@nuxtjs/tailwindcss", "nuxt-primevue"],
+  routeRules: {
+    "/api/**": {
+      proxy: { to: "http://46.101.106.134:8080/api/**" },
+    },
+  },
   pages: true,
   primevue: {
     usePrimeIcons: true,
@@ -33,6 +38,7 @@ export default defineNuxtConfig({
   css: [
     "primevue/resources/themes/mdc-light-indigo/theme.css",
     "primeicons/primeicons.css",
+    "@/assets/css/global.css",
   ],
   build: {
     transpile: ["primevue"],

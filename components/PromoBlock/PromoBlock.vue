@@ -1,7 +1,9 @@
 <template>
-  <div class="container relative mx-auto">
+  <PromoBlockSkeletonLoader v-if="isLoading" />
+  <div class="container relative mx-auto" v-else>
     <CommonBlockHeader title="Featured hotels" class="px-3" />
     <Carousel
+      v-if="!isLoading"
       :value="hotels"
       :circular="true"
       :numVisible="4"
@@ -14,15 +16,19 @@
         <CardPromoCard :hotel="hotel.data" class="m-2" />
       </template>
     </Carousel>
+    <div v-else>
+      <Loader />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { useHotelService } from "@/services/dataProvider";
+import { useHotelService } from "@/services/useHotelService";
+import { useFetchData } from "@/composables/useFetchData";
 
 const { fetchHotels, hotels } = useHotelService();
-fetchHotels();
+const { isLoading } = useFetchData(fetchHotels, hotels);
 
 const responsiveOptions = ref([
   {
@@ -32,7 +38,7 @@ const responsiveOptions = ref([
   },
   {
     breakpoint: "991px",
-    numVisible: 2,
+    numVisible: 3,
     numScroll: 2,
   },
   {
