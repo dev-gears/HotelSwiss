@@ -5,19 +5,19 @@
     <NuxtLink :to="`/hotel/${hotel.id}`">
       <img
         class="h-full w-full rounded-md object-cover"
-        :src="`/${hotel.image}`"
+        src="/hotel-mock-image.jpg"
         height="100%"
       />
     </NuxtLink>
     <CommonBackdrop class="absolute bottom-0 w-full">
       <NuxtLink :to="`/hotel/${hotel.id}`">
         <h3 class="rounded border border-white p-2 text-2xl">
-          {{ hotel.name }}
+          {{ hotel.title }}
         </h3>
       </NuxtLink>
-      <NuxtLink :to="`/category/${hotel.category.id}`">
+      <NuxtLink :to="`/category/${hotel.id}`">
         <p class="border-b border-white p-2 text-sm">
-          {{ hotel.category.name }}
+          {{ hotel.address }}
         </p>
       </NuxtLink>
     </CommonBackdrop>

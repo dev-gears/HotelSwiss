@@ -1,8 +1,9 @@
 <template>
-  <div class="">
-    <HotelHero :imageUrl="hotel?.image!" :title="hotel?.name!" />
+  <HotelLoadingSkeleton v-if="isLoading" />
+  <div v-else>
+    <HotelHero :imageUrl="hotel?.image!" :title="hotel?.title!" />
     <div class="mt-12 flex w-full flex-col gap-5 p-4">
-      <CommonBlockHeader :title="hotel?.name" />
+      <CommonBlockHeader :title="hotel?.title" />
       <CommonBackdrop>
         <p class="text-lg">
           {{ hotel?.description }}
@@ -13,7 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import { useHotelService } from "@/services/dataProvider";
+import { useHotelService } from "@/services/useHotelService";
+import { useFetchData } from "@/composables/useFetchData";
 
 definePageMeta({
   layout: "single",
@@ -21,7 +23,8 @@ definePageMeta({
 const route = useRoute();
 
 const { fetchHotelById, hotel } = useHotelService();
-onMounted(async () => {
-  await fetchHotelById(`${route.params.id}`);
-});
+const { isLoading } = useFetchData(
+  () => fetchHotelById(`${route.params.id}`),
+  hotel,
+);
 </script>

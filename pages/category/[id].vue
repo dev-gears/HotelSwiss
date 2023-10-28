@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { useHotelService } from "@/services/dataProvider";
+import { useHotelService } from "@/services/useHotelService";
 definePageMeta({
   layout: "archive",
 });
@@ -19,3 +19,4 @@ onMounted(async () => {
   categoryName.value = categorizedHotels.value[0].category.name;
 });
 </script>
+services/useHotelServices

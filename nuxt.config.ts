@@ -8,7 +8,15 @@ export default defineNuxtConfig({
     },
   },
   modules: ["@nuxtjs/tailwindcss", "nuxt-primevue"],
+  routeRules: {
+    "/api/**": {
+      proxy: { to: "http://46.101.106.134:8080/api/**" },
+    },
+  },
   pages: true,
+  rollupOptions: {
+    external: ["quill", "chart.js"],
+  },
   primevue: {
     usePrimeIcons: true,
     theme: "mdc-light-indigo",
