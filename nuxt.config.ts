@@ -38,7 +38,6 @@ export default defineNuxtConfig({
   css: [
     "primevue/resources/themes/mdc-light-indigo/theme.css",
     "primeicons/primeicons.css",
-    "@/assets/css/global.css",
   ],
   build: {
     transpile: ["primevue"],
