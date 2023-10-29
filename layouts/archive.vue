@@ -1,7 +1,8 @@
 <template>
-  <div class="container mx-auto">
+  <div class="flex min-h-screen flex-col justify-between">
     <Header />
     <slot />
+    <Footer />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto h-screen w-full">
+  <div class="container mx-auto w-full">
     <PromoBlock class="promo-block" />
     <!-- <HotelsByCategories /> -->
   </div>
