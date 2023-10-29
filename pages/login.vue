@@ -6,10 +6,10 @@
       alt=""
     />
     <CommonBackdrop
-      class="flex h-3/6 w-5/6 flex-col justify-around shadow-md shadow-primary md:max-w-md"
+      class="flex h-fit w-5/6 flex-col justify-around shadow-md shadow-primary md:max-w-md"
     >
       <form
-        class="flex flex-col gap-6 rounded-lg p-4 text-primary-100"
+        class="mt-24 flex flex-col gap-6 rounded-lg p-4 text-primary-100 md:mt-20"
         @submit.prevent="submitLogIn"
       >
         <input
@@ -27,6 +27,17 @@
           input-class="p-2 rounded-md w-full"
           class="text-base placeholder:text-center placeholder:text-base"
         />
+        <div class="flex justify-between py-4">
+          <div class="flex items-center justify-center gap-2">
+            <Checkbox v-model="checked" :binary="true" />
+            <span class="text-primary-900">Remember Me</span>
+          </div>
+          <NuxtLink to="/password_reset">
+            <span class="text-sm italic text-primary-900"
+              >Forgot password?</span
+            >
+          </NuxtLink>
+        </div>
         <Button
           type="submit"
           label="LOG IN"
@@ -40,12 +51,18 @@
 </template>
 
 <script setup lang="ts">
+import { checkPrime } from "crypto";
 import { ref } from "vue";
+
 const email = ref("");
 const password = ref("");
-
+const checked = ref(false);
 const submitLogIn = () => {
-  console.log("email:" + email.value, "password:" + password.value);
+  console.log(
+    "email:" + email.value,
+    "password:" + password.value,
+    "remember me:" + checked.value,
+  );
 };
 </script>
 
