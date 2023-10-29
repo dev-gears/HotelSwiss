@@ -14,9 +14,6 @@ export default defineNuxtConfig({
     },
   },
   pages: true,
-  rollupOptions: {
-    external: ["quill", "chart.js"],
-  },
   primevue: {
     usePrimeIcons: true,
     theme: "mdc-light-indigo",
@@ -36,6 +33,7 @@ export default defineNuxtConfig({
       "Image",
       "FloatLabel",
       "Password",
+      "Checkbox",
     ],
   },
   css: [
