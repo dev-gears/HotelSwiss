@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto w-full">
     <PromoBlock class="promo-block" />
-    <!-- <HotelsByCategories /> -->
+    <CategoryTabs />
   </div>
 </template>
 

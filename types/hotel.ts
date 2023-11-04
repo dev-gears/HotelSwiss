@@ -1,18 +1,27 @@
 export interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  icon: string;
+  category: {
+    id: string;
+    name: string;
+    slug: string;
+    icon: string;
+  };
 }
 
 export interface Hotel {
   id: string;
   title: string;
   address: string;
-  category: {
-    name: string;
-    id: string;
-  };
+  categories: Category[];
   description: string;
-  image: string;
+  images: HotelImage[];
+}
+
+export interface HotelImage {
+  image: {
+    id: number;
+    title: string;
+    url: string;
+    width: number;
+    height: number;
+  };
 }

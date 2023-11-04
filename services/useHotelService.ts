@@ -1,7 +1,6 @@
 import { ref } from "vue";
 import { fetcher } from "@/services/fetcher";
 import { Category, Hotel } from "@/types/hotel";
-import { useFetchData } from "@/composables/useFetchData";
 
 export const useHotelService = () => {
   const categories = ref<Category[]>([]);
@@ -22,7 +21,7 @@ export const useHotelService = () => {
   };
 
   const fetchHotelsByCategory = async (categoryId: string) => {
-    return await fetcher<Hotel[]>(`/hotels?categoryId=${categoryId}`);
+    return await fetcher<Hotel[]>(`/hotels?category_id=${categoryId}`);
   };
 
   const fetchHotelById = async (hotelId: string) => {

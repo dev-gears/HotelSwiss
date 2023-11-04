@@ -17,10 +17,10 @@
       >
         <template #item="image">
           <HotelHeroCarouselCard
-            :imageUrl="image.data.thumbnailImageSrc"
-            :imageAlt="image.data.alt"
+            :imageUrl="image.data.image.url"
+            :imageAlt="image.data.image.title"
             :clickHandler="updateImageSource"
-            :selected="currentImageUrl === image.data.itemImageSrc"
+            :selected="currentImageUrl === image.data.image.url"
           />
         </template>
       </Carousel>
@@ -29,9 +29,10 @@
 </template>
 
 <script setup lang="ts">
+import { HotelImage } from "@/types/hotel";
 const { images } = defineProps({
   images: {
-    type: Array,
+    type: Array<HotelImage>,
   },
   updateImageSource: {
     type: Function as PropType<(image: string) => void>,

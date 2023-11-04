@@ -12,6 +12,9 @@ export default defineNuxtConfig({
     "/api/**": {
       proxy: { to: "http://46.101.106.134:8080/api/**" },
     },
+    "/media/**": {
+      proxy: { to: "http://46.101.106.134:8080/media/**" },
+    },
   },
   pages: true,
   primevue: {

@@ -5,7 +5,7 @@
     <NuxtLink :to="`/hotel/${hotel.id}`">
       <img
         class="h-full w-full rounded-md object-cover"
-        src="/hotel-mock-image.jpg"
+        :src="`http://192.168.0.26:3000${hotel.images[0].image.url}`"
         height="100%"
       />
     </NuxtLink>

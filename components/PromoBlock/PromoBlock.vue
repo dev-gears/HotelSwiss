@@ -3,11 +3,10 @@
   <div class="container relative mx-auto" v-else>
     <CommonBlockHeader title="Featured hotels" class="px-3" />
     <Carousel
-      v-if="!isLoading"
       :value="hotels"
       :circular="true"
       :numVisible="4"
-      :numScroll="4"
+      :numScroll="2"
       :autoplayInterval="5000"
       :showIndicators="false"
       :responsiveOptions="responsiveOptions"
@@ -16,9 +15,6 @@
         <CardPromoCard :hotel="hotel.data" class="m-2" />
       </template>
     </Carousel>
-    <div v-else>
-      <Loader />
-    </div>
   </div>
 </template>
 
@@ -34,7 +30,7 @@ const responsiveOptions = ref([
   {
     breakpoint: "1199px",
     numVisible: 3,
-    numScroll: 3,
+    numScroll: 2,
   },
   {
     breakpoint: "991px",
