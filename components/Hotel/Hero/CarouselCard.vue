@@ -1,7 +1,7 @@
 <template>
   <div
     @click="updateSource"
-    class="flex w-full items-center justify-center rounded-md grayscale transition duration-300 ease-in-out lg:w-4/5"
+    class="flex w-full cursor-pointer items-center justify-center rounded-md grayscale transition duration-300 ease-in-out lg:w-4/5"
     :class="selected ? 'scale-110 grayscale-0' : ''"
   >
     <div

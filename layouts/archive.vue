@@ -1,7 +1,9 @@
 <template>
   <div class="flex min-h-screen flex-col justify-between">
-    <Header />
-    <slot />
+    <div>
+      <Header />
+      <slot />
+    </div>
     <Footer />
   </div>
 </template>

@@ -1,7 +1,11 @@
 <template>
-  <HotelLoadingSkeleton v-if="isLoading" />
+  <HotelSkeletonLoader v-if="isLoading" />
   <div v-else>
-    <HotelHero :imageUrl="hotel?.image!" :title="hotel?.title!" />
+    <HotelHero
+      :imageUrl="hotel?.images[0].image.url!"
+      :images="hotel?.images"
+      :title="hotel?.title!"
+    />
     <div class="mt-12 flex w-full flex-col gap-5 p-4">
       <CommonBlockHeader :title="hotel?.title" />
       <CommonBackdrop>

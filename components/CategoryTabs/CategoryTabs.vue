@@ -1,10 +1,10 @@
 <template>
   <div class="">
-    <!-- <TabView :scrollable="true">
+    <TabView :scrollable="true">
       <TabPanel v-for="tab in categories" :key="tab.id" :header="tab.name">
-        <TabContent :id="tab.id" :name="tab.name" />
+        <CategoryTabsTabContent :id="tab.id" :name="tab.name" />
       </TabPanel>
-    </TabView> -->
+    </TabView>
   </div>
 </template>
 
@@ -12,9 +12,9 @@
 import { useHotelService } from "@/services/useHotelService";
 import { useFetchData } from "@/composables/useFetchData";
 
-// const { fetchCategories, categories } = useHotelService();
+const { fetchCategories, categories } = useHotelService();
 
-// useFetchData(fetchCategories, categories);
+useFetchData(fetchCategories, categories);
 </script>
 
 <style>

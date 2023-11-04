@@ -6,11 +6,22 @@ type DataRefType = { value: any };
 export const useFetchData = (
   fetchFunction: FetchFunctionType,
   dataRef: DataRefType,
+  requestImmediately: boolean = false,
   initialLoadingState: boolean = true,
 ) => {
   const isLoading = ref(initialLoadingState);
 
-  onMounted(async () => {
+  if (requestImmediately) {
+    onRenderTriggered(() => {
+      fetchData();
+    });
+  } else {
+    onMounted(async () => {
+      fetchData();
+    });
+  }
+
+  const fetchData = async () => {
     try {
       isLoading.value = true;
       const data = await fetchFunction();
@@ -20,7 +31,7 @@ export const useFetchData = (
     } finally {
       isLoading.value = false;
     }
-  });
+  };
 
   return { isLoading };
 };
