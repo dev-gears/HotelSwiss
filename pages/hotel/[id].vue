@@ -1,4 +1,18 @@
 <template>
+  <Head>
+    <Title>{{ hotel?.title }}</Title>
+    <Meta name="description" :content="`Every info you need if staying at ${hotel?.title}`" />
+    <!-- Open Graph -->
+    <Meta property="og:url" :content="`https://hotelswiss.ch/hotel/${hotel?.id}`" />
+    <Meta property="og:title" :content="hotel?.title" />
+    <Meta property="og:description" :content="`Every info you need if staying at ${hotel?.title}`" />
+    <Meta property="og:image" :content="hotel?.images[0].image.url" />
+    <!-- Twitter Card -->
+    <Meta name="twitter:card" content="summary_large_image" />
+    <Meta name="twitter:title" :content="hotel?.title" />
+    <Meta name="twitter:description" :content="`Every info you need if staying at ${hotel?.title}`" />
+    <Meta name="twitter:image" :content="hotel?.images[0].image.url" />
+  </Head>
   <HotelSkeletonLoader v-if="isLoading" />
   <div v-else>
     <HotelHero
