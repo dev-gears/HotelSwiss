@@ -1,13 +1,15 @@
 <template>
   <div
     @click="updateSource"
-    class="flex w-full cursor-pointer items-center justify-center rounded-md grayscale transition duration-300 ease-in-out lg:w-4/5"
-    :class="selected ? 'scale-110 grayscale-0' : ''"
+    class="flex h-full cursor-pointer items-center justify-center rounded-md border-2 border-primary-300 transition duration-300 ease-in-out lg:w-4/5"
   >
-    <div
-      :style="`background-image: url(${imageUrl});`"
-      class="image visible rounded-md bg-cover bg-no-repeat transition duration-300 ease-in-out"
-    ></div>
+    <Image
+      class="image max-w-auto h-full rounded-md object-fill grayscale transition duration-300 ease-in-out"
+      :class="
+        selected ? 'scale-105 border-2 border-secondary-400 grayscale-0' : ''
+      "
+      :src="imageUrl"
+    />
   </div>
 </template>
 
@@ -27,13 +29,9 @@ const updateSource = () => {
 </script>
 
 <style>
-.thumbnail-carousel {
-  .p-carousel-item {
-    @apply flex items-center justify-center rounded-md;
-
-    .image {
-      @apply my-1 h-[70px] w-full rounded object-cover;
-    }
+.image {
+  img {
+    @apply h-full w-full rounded-md object-cover;
   }
 }
 </style>

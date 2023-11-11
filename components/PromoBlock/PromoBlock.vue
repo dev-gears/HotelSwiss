@@ -1,20 +1,23 @@
 <template>
   <PromoBlockSkeletonLoader v-if="isLoading" />
-  <div class="container relative mx-auto" v-else>
-    <CommonBlockHeader title="Featured hotels" class="px-3" />
-    <Carousel
-      :value="hotels"
-      :circular="true"
-      :numVisible="4"
-      :numScroll="2"
-      :autoplayInterval="5000"
-      :showIndicators="false"
-      :responsiveOptions="responsiveOptions"
+  <div class="promo-block container relative mx-auto" v-else>
+    <CommonBlockHeader title="Promo hotels" class="px-3" />
+    <Swiper
+      :modules="[SwiperAutoplay]"
+      :slidesPerView="1.3"
+      :centeredSlides="true"
+      :spaceBetween="20"
+      :autoHeight="false"
+      :breakpoints="responsiveOptions"
+      :autoplay="{
+        delay: 3000,
+        disableOnInteraction: true,
+      }"
     >
-      <template #item="hotel">
-        <CardPromoCard :hotel="hotel.data" class="m-2" />
-      </template>
-    </Carousel>
+      <SwiperSlide v-for="hotel in hotels" :key="hotel.id">
+        <CardPromoCard :hotel="hotel" />
+      </SwiperSlide>
+    </Swiper>
   </div>
 </template>
 
@@ -26,23 +29,18 @@ import { useFetchData } from "@/composables/useFetchData";
 const { fetchHotels, hotels } = useHotelService();
 const { isLoading } = useFetchData(fetchHotels, hotels);
 
-const responsiveOptions = ref([
-  {
-    breakpoint: "1199px",
-    numVisible: 3,
-    numScroll: 2,
+const responsiveOptions = ref({
+  768: {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    centeredSlides: false,
   },
-  {
-    breakpoint: "991px",
-    numVisible: 3,
-    numScroll: 2,
+  1024: {
+    centeredSlides: false,
+    slidesPerView: 4,
+    spaceBetween: 20,
   },
-  {
-    breakpoint: "767px",
-    numVisible: 1,
-    numScroll: 1,
-  },
-]);
+});
 </script>
 
 <style>

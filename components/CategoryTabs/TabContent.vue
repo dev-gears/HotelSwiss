@@ -19,15 +19,13 @@
     />
   </div>
 </template>
-
 <script setup lang="ts">
-import { useHotelService } from "@/services/useHotelService";
+import { defineProps } from "vue";
 
-const { id, name } = defineProps<{ id: string; name: string }>();
-
-const { fetchHotelsByCategory, categorizedHotels } = useHotelService();
-const { isLoading } = useFetchData(
-  () => fetchHotelsByCategory(id),
-  categorizedHotels,
-);
+const { id, name, categorizedHotels, isLoading } = defineProps<{
+  id: number;
+  name: string;
+  categorizedHotels: any;
+  isLoading: boolean;
+}>();
 </script>

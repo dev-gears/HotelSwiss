@@ -78,6 +78,8 @@ export default {
           900: "#e6eee8",
         },
         icons: "rgb(107 114 129)",
+        backgroundColor: "#f2f2f2",
+        lightBackground: "#f8f8f8",
       },
     },
   },
