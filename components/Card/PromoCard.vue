@@ -1,11 +1,11 @@
 <template>
   <div
-    class="card relative aspect-[2/3] w-full rounded-md shadow shadow-primary-500 transition-[scale] ease-in-out max-md:max-h-60"
+    class="card relative aspect-[2/3] w-full rounded-md shadow shadow-primary-500 max-md:h-[350px]"
   >
     <NuxtLink :to="`/hotel/${hotel.id}`">
       <img
         class="h-full w-full rounded-md object-cover"
-        :src="`http://192.168.0.26:3000${hotel.images[0].image.url}`"
+        :src="`http://192.168.0.29:3000${hotel.images[0].image.url}`"
         height="100%"
       />
     </NuxtLink>
@@ -29,3 +29,12 @@ import { Hotel } from "@/types/hotel";
 
 defineProps<{ hotel: Hotel }>();
 </script>
+
+<style>
+.promo-block {
+  .swiper-slide-prev,
+  .swiper-slide-next {
+    @apply h-[80%];
+  }
+}
+</style>

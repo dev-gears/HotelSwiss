@@ -1,29 +1,29 @@
 <template>
   <div
-    class="thumbnail-carousel absolute bottom-0 right-5 w-24 translate-y-12 lg:w-2/4 lg:translate-y-2/4"
+    class="thumbnail-carousel absolute bottom-0 right-5 w-28 translate-y-12 lg:w-2/4 lg:translate-y-2/4"
     :class="isMobile ? 'mobile' : 'desktop'"
   >
     <CommonBackdrop
-      class="rounded-md bg-gradient-to-b from-transparent from-0% via-primary-500 via-50% to-transparent to-100% px-1 max-lg:bg-transparent"
+      class="backdrop relative flex h-[350px] items-center rounded-md px-[2px] py-0"
     >
-      <Carousel
-        :value="extendedImages"
-        :circular="images ? images?.length > 3 : false"
-        :orientation="isMobile ? 'vertical' : 'horizontal'"
-        :verticalViewPortHeight="carouselHeight() + 'px'"
-        :numVisible="3"
-        :numScroll="2"
-        :showIndicators="false"
+      <Swiper
+        class="h-[300px] w-full"
+        :spaceBetween="30"
+        :slidesPerView="2.5"
+        :autoHeight="false"
+        :slideToClickedSlide="true"
+        :direction="isMobile ? 'vertical' : 'horizontal'"
       >
-        <template #item="image">
+        <SwiperSlide v-for="(image, index) in images" :key="index">
           <HotelHeroCarouselCard
-            :imageUrl="image.data.image.url"
-            :imageAlt="image.data.image.title"
+            v-if="image.image.url"
+            :imageUrl="image.image.url"
+            :imageAlt="image.image.title"
             :clickHandler="updateImageSource"
-            :selected="currentImageUrl === image.data.image.url"
+            :selected="currentImageUrl === image.image.url"
           />
-        </template>
-      </Carousel>
+        </SwiperSlide>
+      </Swiper>
     </CommonBackdrop>
   </div>
 </template>
@@ -70,27 +70,15 @@ const carouselHeight = () => {
 </script>
 
 <style>
-.thumbnail-carousel {
-  .p-link {
-    @apply z-10 rounded-none max-lg:absolute max-lg:w-full;
-  }
-
-  &.mobile {
-    .p-link {
-      &.p-carousel-prev {
-        @apply top-0 rounded-t-md;
-      }
-
-      &.p-carousel-next {
-        @apply bottom-0 rounded-b-md;
-      }
-    }
-
-    .p-carousel-item-active {
-      &:first-of-type {
-        @apply border-4 border-primary-500;
-      }
-    }
-  }
+.backdrop {
+  background: linear-gradient(
+    180deg,
+    rgba(53, 79, 82, 0) 0%,
+    rgba(53, 79, 82, 0.7) 5%,
+    rgba(53, 79, 82, 1) 15%,
+    rgba(53, 79, 82, 0.7) 50%,
+    rgba(53, 79, 82, 0.7) 80%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 </style>

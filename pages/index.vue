@@ -7,6 +7,6 @@
 
 <script setup lang="ts">
 definePageMeta({
-  layout: "landing",
+  layout: "base",
 });
 </script>

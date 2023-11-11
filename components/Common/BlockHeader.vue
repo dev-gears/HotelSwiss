@@ -1,5 +1,5 @@
 <template>
-  <h2 class="mb-3 w-full border-b-2 border-primary-400 pb-3 text-2xl">
+  <h2 class="bold font-arial mb-3 w-full pb-3 text-2xl text-primary">
     {{ title }}
   </h2>
 </template>

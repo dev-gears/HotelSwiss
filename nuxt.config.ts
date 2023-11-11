@@ -3,11 +3,11 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: './public/favicon.ico' },
+        { rel: "icon", type: "image/x-icon", href: "./public/favicon.ico" },
       ],
       htmlAttrs: {
-        lang: 'en'
-      }
+        lang: "en",
+      },
     },
   },
   devtools: {
@@ -17,7 +17,10 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
-  modules: ["@nuxtjs/tailwindcss", "nuxt-primevue"],
+  devServer: {
+    url: "http://192.168.0.29/",
+  },
+  modules: ["@nuxtjs/tailwindcss", "nuxt-swiper"],
   routeRules: {
     "/api/**": {
       proxy: { to: "http://46.101.106.134:8080/api/**" },
@@ -26,28 +29,12 @@ export default defineNuxtConfig({
       proxy: { to: "http://46.101.106.134:8080/media/**" },
     },
   },
+  plugins: ["~/plugins/primevue.js"],
   pages: true,
-  primevue: {
-    usePrimeIcons: true,
-    theme: "mdc-light-indigo",
-    options: {
-      unstyled: false,
-      ripple: true,
-      inputStyle: "filled",
-    },
-    components: [
-      "TabView",
-      "TabPanel",
-      "InputText",
-      "Button",
-      "Dialog",
-      "Carousel",
-      "Card",
-      "Image",
-      "FloatLabel",
-      "Password",
-      "Checkbox",
-    ],
+  swiper: {
+    prefix: "Swiper",
+    styleLang: "css",
+    modules: ["autoplay"],
   },
   css: [
     "primevue/resources/themes/mdc-light-indigo/theme.css",

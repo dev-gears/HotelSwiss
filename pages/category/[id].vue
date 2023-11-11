@@ -10,7 +10,7 @@ import { useHotelService } from "@/services/useHotelService";
 import { useFetchData } from "@/composables/useFetchData";
 import { useRoute } from "vue-router";
 definePageMeta({
-  layout: "archive",
+  layout: "base",
 });
 
 const route = useRoute();

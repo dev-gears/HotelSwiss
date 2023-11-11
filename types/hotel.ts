@@ -1,11 +1,9 @@
-export interface Category {
-  category: {
-    id: string;
-    name: string;
-    slug: string;
-    icon: string;
-  };
-}
+export type Category = {
+  id: number;
+  name: string;
+  slug: string;
+  icon: string;
+};
 
 export interface Hotel {
   id: string;
