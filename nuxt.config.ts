@@ -20,7 +20,14 @@ export default defineNuxtConfig({
   devServer: {
     url: "http://192.168.0.29/",
   },
-  modules: ["@nuxtjs/tailwindcss", "nuxt-swiper"],
+  modules: ["@nuxtjs/tailwindcss", "nuxt-swiper", "@pinia/nuxt",
+  [
+    '@nuxtjs/i18n',
+      {
+        vueI18n: './i18n.config.ts'
+      }
+    ]
+  ],
   routeRules: {
     "/api/**": {
       proxy: { to: "http://46.101.106.134:8080/api/**" },
