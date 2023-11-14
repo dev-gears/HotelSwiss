@@ -1,5 +1,6 @@
 <template>
-  <div>About us</div>
+  <div>{{ $t('aboutUs') }}</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
