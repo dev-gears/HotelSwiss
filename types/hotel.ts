@@ -9,9 +9,12 @@ export interface Hotel {
   id: string;
   title: string;
   address: string;
+  city: string;
   categories: Category[];
   description: string;
   images: HotelImage[];
+  start_price: string;
+  end_price: string;
 }
 
 export interface HotelImage {
