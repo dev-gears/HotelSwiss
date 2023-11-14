@@ -16,6 +16,13 @@ export default {
       backgroundSize: {
         "200%": "200% 100%",
       },
+      boxShadow: {
+        cardImage: "2px 4px 4px 0px rgba(0, 0, 0, 0.25)"
+      },
+      fontFamily: {
+        patuaOne: "Patua One",
+        robotoRegular: "Roboto Regular"
+      },
       colors: {
         primary: {
           DEFAULT: "#354f52",
