@@ -1,5 +1,5 @@
 <template>
-  <div class="max-md:px-6">
+  <div>
     <TabView :scrollable="true" @update:activeIndex="onTabChange">
       <TabPanel>
         <template #header>
@@ -10,6 +10,7 @@
           :name="`All hotels`"
           :categorizedHotels="firstTabContent"
           :isLoading="false"
+          :category="`all`"
         />
       </TabPanel>
       <TabPanel v-for="(tab, index) in categories" :key="index">
@@ -23,6 +24,7 @@
           :name="tab.name"
           :categorizedHotels="categorizedHotels"
           :isLoading="isLoading"
+          :category="tab.id.toString()"
         />
       </TabPanel>
     </TabView>
@@ -77,36 +79,43 @@ const onTabChange = async (newIndex: number) => {
   @apply hidden;
 }
 
-.p-highlight a {
-  @apply bg-indigo-100;
-}
-
 .p-tabview-nav-container {
-  @apply sticky top-0 drop-shadow-sm;
+  @apply sticky top-0;
 }
 
 .p-tabview-nav {
-  @apply bg-transparent;
+  @apply !bg-transparent px-4;
 }
 
 .p-tabview-nav-next {
   background: linear-gradient(90deg, transparent 0%, #f2f2f2 30%, #f2f2f2 100%);
+  @apply shadow-none;
 }
 
 .p-tabview-nav-prev {
   background: linear-gradient(90deg, #f2f2f2 0%, #f2f2f2 70%, transparent 100%);
+  @apply shadow-none;
 }
 
 .p-tabview-panels {
-  @apply bg-backgroundColor;
+  @apply bg-backgroundColor px-4;
 }
 
 ul[role="tablist"] {
-  @apply flex gap-4 bg-backgroundColor;
+  @apply flex gap-3 bg-backgroundColor;
 
   li,
   a {
-    @apply rounded-xl bg-primary text-secondary-500;
+    @apply rounded-[10px] bg-primary text-secondary-500;
+  }
+
+  a {
+    @apply h-full;
+  }
+
+  .p-highlight,
+  .p-highlight a {
+    @apply bg-tertiary;
   }
 }
 </style>

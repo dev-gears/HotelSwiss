@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center">
-    <CommonBlockHeader :title="name" />
+    <CommonBlockHeader :title="name" :link="`category/${category}`" />
     <SkeletonLoadersTabContentSkeleton v-if="isLoading" />
     <div
       class="flex grid-cols-2 flex-col gap-4 md:grid md:grid-cols-3 lg:grid-cols-4"
@@ -22,9 +22,10 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 
-const { id, name, categorizedHotels, isLoading } = defineProps<{
+defineProps<{
   id: number;
   name: string;
+  category: string;
   categorizedHotels: any;
   isLoading: boolean;
 }>();
