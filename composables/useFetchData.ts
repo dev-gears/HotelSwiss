@@ -12,8 +12,8 @@ export const useFetchData = (
   const isLoading = ref(initialLoadingState);
 
   const fetchData = async () => {
+    isLoading.value = true;
     try {
-      isLoading.value = true;
       const data = await fetchFunction();
       dataRef.value = data;
     } catch (error) {
@@ -24,9 +24,7 @@ export const useFetchData = (
   };
 
   if (requestImmediately) {
-    onMounted(() => {
-      fetchData();
-    });
+    onMounted(fetchData);
   } else {
     fetchData();
   }

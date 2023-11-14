@@ -7,6 +7,7 @@ export const useHotelService = () => {
   const hotels = ref<Hotel[]>([]);
   const categorizedHotels = ref<Hotel[]>([]);
   const hotel = ref<Hotel | null>(null);
+  const firstScreenData = ref<any>(null);
 
   const fetchCategories = async () => {
     return await fetcher<Category[]>("/categories");
@@ -28,12 +29,18 @@ export const useHotelService = () => {
     return await fetcher<Hotel>(`/hotels/${hotelId}`);
   };
 
+  const fetchFirstScreenData = async () => {
+    return await fetcher("/first-screen");
+  };
+
   return {
     fetchCategories,
     fetchCategoryById,
     fetchHotels,
     fetchHotelsByCategory,
     fetchHotelById,
+    fetchFirstScreenData,
+    firstScreenData,
     categories,
     hotels,
     categorizedHotels,

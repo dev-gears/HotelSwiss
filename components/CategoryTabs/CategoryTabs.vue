@@ -1,6 +1,17 @@
 <template>
-  <div class="">
+  <div class="max-md:px-6">
     <TabView :scrollable="true" @update:activeIndex="onTabChange">
+      <TabPanel>
+        <template #header>
+          <div class="whitespace-nowrap">All hotels</div>
+        </template>
+        <CategoryTabsTabContent
+          :id="0"
+          :name="`All hotels`"
+          :categorizedHotels="firstTabContent"
+          :isLoading="false"
+        />
+      </TabPanel>
       <TabPanel v-for="(tab, index) in categories" :key="index">
         <template #header>
           <div class="whitespace-nowrap">
@@ -21,26 +32,39 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useHotelService } from "@/services/useHotelService";
-import { useFetchData } from "@/composables/useFetchData";
+import { Category } from "types/hotel";
 
-const {
-  fetchCategories,
-  categories,
-  fetchHotelsByCategory,
-  categorizedHotels,
-} = useHotelService();
-const selectedTabIndex = ref(0);
+const { categories, firstTabContent } = defineProps({
+  categories: {
+    type: Array<Category>,
+    required: true,
+  },
+  firstTabContent: {
+    type: Array,
+    required: true,
+  },
+});
 
-const { isLoading } = useFetchData(fetchCategories, categories);
+let isLoading = ref(false);
+
+const { fetchHotelsByCategory, categorizedHotels } = useHotelService();
+const selectedTabIndex = ref(0 as any);
 
 const onTabChange = async (newIndex: number) => {
   selectedTabIndex.value = newIndex;
-  useFetchData(
-    async () =>
-      await fetchHotelsByCategory(categories.value[newIndex].id.toString()),
-    categorizedHotels,
-    false,
-  );
+  if (newIndex !== 0) {
+    isLoading.value = true;
+    try {
+      const data = await fetchHotelsByCategory(
+        categories[newIndex - 1].id.toString(),
+      );
+      categorizedHotels.value = data;
+    } catch (error) {
+      console.error("An error occurred while fetching data:", error);
+    } finally {
+      isLoading.value = false;
+    }
+  }
 };
 </script>
 
@@ -50,10 +74,10 @@ const onTabChange = async (newIndex: number) => {
 }
 
 .p-tabview-ink-bar {
-  @apply bg-primary;
+  @apply hidden;
 }
 
-.p-highlight {
+.p-highlight a {
   @apply bg-indigo-100;
 }
 
@@ -61,12 +85,16 @@ const onTabChange = async (newIndex: number) => {
   @apply sticky top-0 drop-shadow-sm;
 }
 
+.p-tabview-nav {
+  @apply bg-transparent;
+}
+
 .p-tabview-nav-next {
-  background: linear-gradient(90deg, transparent 0%, #ffffff 30%, #ffffff 100%);
+  background: linear-gradient(90deg, transparent 0%, #f2f2f2 30%, #f2f2f2 100%);
 }
 
 .p-tabview-nav-prev {
-  background: linear-gradient(90deg, #ffffff 0%, #ffffff 70%, transparent 100%);
+  background: linear-gradient(90deg, #f2f2f2 0%, #f2f2f2 70%, transparent 100%);
 }
 
 .p-tabview-panels {
@@ -78,7 +106,7 @@ ul[role="tablist"] {
 
   li,
   a {
-    @apply rounded-full bg-primary text-secondary-500;
+    @apply rounded-xl bg-primary text-secondary-500;
   }
 }
 </style>
