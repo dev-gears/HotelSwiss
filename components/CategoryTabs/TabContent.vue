@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center">
     <CommonBlockHeader :title="name" />
-    <CategoryTabsSkeletonLoader v-if="isLoading" />
+    <SkeletonLoadersTabContentSkeleton v-if="isLoading" />
     <div
       class="flex grid-cols-2 flex-col gap-4 md:grid md:grid-cols-3 lg:grid-cols-4"
       v-else-if="categorizedHotels.length"

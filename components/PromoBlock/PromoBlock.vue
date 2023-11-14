@@ -1,6 +1,5 @@
 <template>
-  <PromoBlockSkeletonLoader v-if="isLoading" />
-  <div class="promo-block container relative mx-auto" v-else>
+  <div class="promo-block container relative mx-auto">
     <CommonBlockHeader title="Promo hotels" class="px-3" />
     <Swiper
       :modules="[SwiperAutoplay]"
@@ -23,11 +22,13 @@
 
 <script setup>
 import { ref } from "vue";
-import { useHotelService } from "@/services/useHotelService";
-import { useFetchData } from "@/composables/useFetchData";
 
-const { fetchHotels, hotels } = useHotelService();
-const { isLoading } = useFetchData(fetchHotels, hotels);
+defineProps({
+  hotels: {
+    type: Array,
+    required: true,
+  },
+});
 
 const responsiveOptions = ref({
   768: {
