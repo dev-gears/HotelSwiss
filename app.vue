@@ -1,5 +1,11 @@
 <template>
-  <NuxtLayout class="bg-backgroundColor">
+  <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>
+
+<style>
+html {
+  @apply bg-backgroundColor;
+}
+</style>

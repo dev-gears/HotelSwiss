@@ -1,4 +1,5 @@
 <template>
+  <Header />
   <div class="mx-auto lg:container">
     <slot />
   </div>

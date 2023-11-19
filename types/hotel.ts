@@ -24,5 +24,11 @@ export interface HotelImage {
     url: string;
     width: number;
     height: number;
+    renditions: {
+      400: string;
+      thumbnail: string;
+      medium: string;
+      large: string;
+    };
   };
 }

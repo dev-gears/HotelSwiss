@@ -5,7 +5,7 @@
       name="description"
       :content="`Every info you need if staying at ${hotel?.title}`"
     />
-    <!-- Open Graph -->
+
     <Meta
       property="og:url"
       :content="`https://hotelswiss.ch/hotel/${hotel?.id}`"
@@ -16,7 +16,7 @@
       :content="`Every info you need if staying at ${hotel?.title}`"
     />
     <Meta property="og:image" :content="hotel?.images[0].image.url" />
-    <!-- Twitter Card -->
+
     <Meta name="twitter:card" content="summary_large_image" />
     <Meta name="twitter:title" :content="hotel?.title" />
     <Meta
@@ -25,14 +25,11 @@
     />
     <Meta name="twitter:image" :content="hotel?.images[0].image.url" />
   </Head>
+
   <HotelSkeletonLoader v-if="isLoading" />
   <div v-else>
-    <HotelHero
-      :imageUrl="hotel?.images[0].image.url!"
-      :images="hotel?.images"
-      :title="hotel?.title!"
-    />
-    <div class="mt-12 flex w-full flex-col gap-5 p-4">
+    <HotelHero :images="hotel?.images" />
+    <div class="flex w-full flex-col gap-5 p-4">
       <CommonBlockHeader :title="hotel?.title" />
       <CommonBackdrop>
         <p class="text-lg">
