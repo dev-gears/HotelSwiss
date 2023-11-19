@@ -1,55 +1,36 @@
 <template>
   <div class="relative w-full">
-    <Button
-      icon="pi pi-arrow-left"
-      @click="$router.back()"
-      class="absolute left-4 top-4 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-primary-500/50 p-4 text-secondary-800 shadow-primary-500"
-    />
-    <Image
-      preview
-      :src="imageSource"
-      class="hero-image h-96 w-full lg:h-[500px]"
-    />
-    <ClientOnly>
-      <ThumbnailSlider
-        :images="images"
-        :currentImageUrl="imageSource"
-        :updateImageSource="updateImageSource"
+    <CommonBackButton class="absolute left-4 top-4" />
+    <div v-if="images && images.length">
+      <HotelHeroCarousel v-if="deviceType !== 'desktop'" :images="images" />
+      <HotelHeroCollage v-else :images="images" />
+    </div>
+    <div v-else>
+      <Image
+        src="/images/placeholder.png"
+        class="hero-image mt-5 h-96 w-full rounded object-cover lg:h-full"
       />
-    </ClientOnly>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import ThumbnailSlider from "./ThumbnailSlider.vue";
 import { HotelImage } from "@/types/hotel";
+import useDeviceType from "@/composables/useDeviceType";
 
-const { imageUrl, title, images } = defineProps({
-  imageUrl: {
-    type: String,
-  },
-  title: {
-    type: String,
-  },
+const { images } = defineProps({
   images: {
     type: Array<HotelImage>,
   },
 });
 
-const imageSource = ref(images[0].image.url || imageUrl);
-
-const updateImageSource = (image: string) => {
-  imageSource.value = image;
-};
+const { deviceType } = useDeviceType();
 </script>
 
 <style>
 .hero-image {
   img {
-    @apply h-96 w-full rounded-b-3xl object-cover shadow-md shadow-primary-500 lg:h-full lg:rounded-b-xl;
+    @apply h-96 w-full object-cover lg:h-full;
   }
-}
-.p-image-toolbar svg {
-  @apply !text-secondary-600;
 }
 </style>
