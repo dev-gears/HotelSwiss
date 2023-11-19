@@ -17,11 +17,12 @@ export default {
         "200%": "200% 100%",
       },
       boxShadow: {
-        cardImage: "2px 4px 4px 0px rgba(0, 0, 0, 0.25)"
+        cardImage: "2px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+        card: "1px 2px 4px 0 rgba(0, 0, 0, 0.4)",
       },
       fontFamily: {
         patuaOne: "Patua One",
-        robotoRegular: "Roboto Regular"
+        robotoRegular: "Roboto Regular",
       },
       colors: {
         primary: {
