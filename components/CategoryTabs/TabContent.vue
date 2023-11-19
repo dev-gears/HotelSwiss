@@ -6,7 +6,7 @@
       class="flex grid-cols-2 flex-col gap-4 md:grid md:grid-cols-3 lg:grid-cols-4"
       v-else-if="categorizedHotels.length"
     >
-      <CardGridCard v-for="hotel in categorizedHotels" :hotel="hotel" />
+      <Card v-for="hotel in categorizedHotels" :hotel="hotel" />
     </div>
     <div v-else class="flex h-[400px] items-center justify-center">
       No hotels found
