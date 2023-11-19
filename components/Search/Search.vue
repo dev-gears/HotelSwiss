@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container relative mx-auto my-8 flex w-full items-center gap-2 max-md:px-4"
+    class="container relative mx-auto my-8 flex w-full items-center gap-2 px-3"
   >
     <div @submit.prevent="handleSubmit" class="p-inputgroup p-input-icon-right">
       <InputText

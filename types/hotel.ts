@@ -12,12 +12,14 @@ export interface Hotel {
   city: string;
   categories: Category[];
   description: string;
-  images: HotelImage[];
+  images: Image[];
   start_price: string;
   end_price: string;
+  stars: number;
+  amenities: HotelAmenity[];
 }
 
-export interface HotelImage {
+export interface Image {
   image: {
     id: number;
     title: string;
@@ -30,5 +32,14 @@ export interface HotelImage {
       medium: string;
       large: string;
     };
+  };
+}
+
+export interface HotelAmenity {
+  amenity: {
+    id: number;
+    name: string;
+    description: string;
+    image: Image;
   };
 }
