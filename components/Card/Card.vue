@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card shadow-card relative mb-3 w-full overflow-hidden rounded-[10px] bg-primary-500"
+    class="card relative mb-3 w-full overflow-hidden rounded-[10px] bg-primary-500 shadow-card"
   >
     <div :class="aspect || 'aspect-[3/2]'" class="relative w-full">
       <div

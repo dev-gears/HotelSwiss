@@ -29,14 +29,8 @@
   <HotelSkeletonLoader v-if="isLoading" />
   <div v-else>
     <HotelHero :images="hotel?.images" />
-    <div class="flex w-full flex-col gap-5 p-4">
-      <CommonBlockHeader :title="hotel?.title" />
-      <CommonBackdrop>
-        <p class="text-lg">
-          {{ hotel?.description }}
-        </p>
-      </CommonBackdrop>
-    </div>
+    <HotelContent :hotel="hotel!" />
+    <HotelAmenities v-if="hotel?.amenities" :amenities="hotel?.amenities" />
   </div>
 </template>
 
