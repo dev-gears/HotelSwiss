@@ -1,3 +1,7 @@
+const headerAuth = {
+  Authorization: `Basic ${btoa(process.env.AUTH_CREDENTIALS as string)}`,
+};
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
@@ -10,6 +14,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    public: {
+      backendUrl: process.env.BASE_URL || "http://localhost:3000",
+    },
+  },
   devtools: {
     enabled: true,
 
@@ -17,11 +26,9 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
-  devServer: {
-    url: "http://192.168.0.29/",
-  },
   modules: [
     "@nuxtjs/tailwindcss",
+    "nuxt-api-party",
     "nuxt-swiper",
     "@pinia/nuxt",
     [
@@ -31,12 +38,14 @@ export default defineNuxtConfig({
       },
     ],
   ],
-  routeRules: {
-    "/api/**": {
-      proxy: { to: "http://46.101.106.134:8080/api/**" },
-    },
-    "/media/**": {
-      proxy: { to: "http://46.101.106.134:8080/media/**" },
+  apiParty: {
+    endpoints: {
+      hotelApi: {
+        url:
+          process.env.BASE_URL! + process.env.API_PATH! ||
+          "http://localhost:3000/api",
+        headers: headerAuth,
+      },
     },
   },
   plugins: ["~/plugins/primevue.js"],

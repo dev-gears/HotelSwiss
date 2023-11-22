@@ -13,7 +13,7 @@
       <NuxtLink :to="`/hotel/${hotel.id}`">
         <img
           class="h-full w-full rounded-br-[60px] object-cover shadow-cardImage"
-          :src="`http://192.168.0.29:3000${hotel.images[0].image.renditions[400]}`"
+          :src="`${backendUrl}${hotel.images[0].image.renditions[400]}`"
           :srcset="generateSrcset(hotel.images[0].image.renditions)"
           sizes="(min-width: 800px) 800px, 100vw"
           height="100%"
@@ -59,7 +59,7 @@
             >
               <span v-if="index < 4">
                 <img
-                  :src="amenity.amenity.image?.url"
+                  :src="backendUrl + amenity.amenity.image?.url"
                   :alt="amenity.amenity.name"
                 />
               </span>
@@ -73,16 +73,19 @@
 
 <script setup lang="ts">
 import { Hotel } from "@/types/hotel";
+import { generateSrcset } from "@/utils/generateSrcset";
 
-defineProps<{ hotel: Hotel; aspect: string }>();
+defineProps<{
+  hotel: Hotel;
+  aspect: {
+    type: string;
+    required: false;
+  };
+}>();
+const runtimeConfig = useRuntimeConfig();
+const backendUrl = runtimeConfig.public.backendUrl;
 
 const stars: number = 4;
-
-const generateSrcset = (renditions: Record<string, string>): string => {
-  return Object.entries(renditions)
-    .map(([size, url]) => `${`http://192.168.0.29:3000${url}`} ${size}`)
-    .join(", ");
-};
 </script>
 
 <style>

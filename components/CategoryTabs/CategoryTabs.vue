@@ -33,7 +33,6 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useHotelService } from "@/services/useHotelService";
 import { Category } from "types/hotel";
 
 const { categories, firstTabContent } = defineProps({
@@ -48,24 +47,15 @@ const { categories, firstTabContent } = defineProps({
 });
 
 let isLoading = ref(false);
-
-const { fetchHotelsByCategory, categorizedHotels } = useHotelService();
-const selectedTabIndex = ref(0 as any);
+let categorizedHotels = ref([]);
 
 const onTabChange = async (newIndex: number) => {
-  selectedTabIndex.value = newIndex;
   if (newIndex !== 0) {
-    isLoading.value = true;
-    try {
-      const data = await fetchHotelsByCategory(
-        categories[newIndex - 1].id.toString(),
-      );
-      categorizedHotels.value = data;
-    } catch (error) {
-      console.error("An error occurred while fetching data:", error);
-    } finally {
-      isLoading.value = false;
-    }
+    const { data: hotels, pending } = useHotelApiData(
+      `/hotels?category_id=${categories[newIndex - 1].id.toString()}`,
+    );
+    categorizedHotels = hotels;
+    isLoading = pending;
   }
 };
 </script>

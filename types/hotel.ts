@@ -24,6 +24,10 @@ export interface Image {
   renditions: ImageRenditions;
 }
 
+export interface ImageWrapper {
+  image: Image;
+}
+
 export interface Amenity {
   id: ID;
   name: Name;
