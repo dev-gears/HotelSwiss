@@ -26,7 +26,7 @@
     <Meta name="twitter:image" :content="hotel?.images[0].image.url" />
   </Head>
 
-  <HotelSkeletonLoader v-if="isLoading" />
+  <HotelSkeletonLoader v-if="pending" />
   <div v-else>
     <HotelHero :images="hotel?.images" />
     <HotelContent :hotel="hotel!" />
@@ -35,17 +35,13 @@
 </template>
 
 <script setup lang="ts">
-import { useHotelService } from "@/services/useHotelService";
-import { useFetchData } from "@/composables/useFetchData";
+import { useRoute } from "vue-router";
 
 definePageMeta({
   layout: "single",
 });
+
 const route = useRoute();
 
-const { fetchHotelById, hotel } = useHotelService();
-const { isLoading } = useFetchData(
-  () => fetchHotelById(`${route.params.id}`),
-  hotel,
-);
+const { data: hotel, pending } = useHotelApiData(`hotels/${route.params.id}`);
 </script>

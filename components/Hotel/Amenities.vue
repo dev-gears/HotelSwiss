@@ -9,7 +9,7 @@
         :key="data.amenity.id"
       >
         <img
-          :src="data.amenity?.image?.renditions.thumbnail"
+          :src="backendUrl + data.amenity?.image?.renditions.thumbnail"
           :alt="data.amenity?.name"
           class="h-16 w-16"
         />
@@ -21,6 +21,9 @@
 
 <script setup lang="ts">
 import { Amenity } from "types/hotel";
+
+const runtimeConfig = useRuntimeConfig();
+const backendUrl = runtimeConfig.public.backendUrl;
 
 defineProps<{
   amenities: Array<{

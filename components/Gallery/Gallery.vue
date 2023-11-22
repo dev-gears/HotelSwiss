@@ -7,7 +7,7 @@
       class="transition-all hover:brightness-75 lg:px-0 [&_img]:h-full [&_img]:w-full [&_img]:rounded [&_img]:object-cover"
       v-for="data in images"
       preview
-      :src="data.image.url"
+      :src="backendUrl + data.image.url"
     />
   </div>
 </template>
@@ -19,6 +19,9 @@ defineProps({
     required: true,
   },
 });
+
+const runtimeConfig = useRuntimeConfig();
+const backendUrl = runtimeConfig.public.backendUrl;
 </script>
 
 <style>

@@ -14,7 +14,7 @@
     >
       <div class="flex flex-1 items-center justify-center border-r">
         <p
-          :style="`background-image: url(${hotel?.canton.image.renditions.thumbnail});`"
+          :style="`background-image: url(${backendUrl}${hotel?.canton?.image?.renditions?.thumbnail});`"
           class="bg-contain bg-center bg-no-repeat py-3"
         >
           {{ hotel?.canton.name }}
@@ -30,7 +30,7 @@
         class="flex flex-1 items-center justify-center border-l py-3"
         v-if="hotel?.categories[0]"
       >
-        {{ hotel?.categories[0].category.name }}
+        {{ hotel?.categories[0]?.category?.name }}
       </div>
     </div>
   </div>
@@ -38,6 +38,8 @@
 
 <script setup lang="ts">
 import { Hotel } from "@/types/hotel";
+const runtimeConfig = useRuntimeConfig();
+const backendUrl = runtimeConfig.public.backendUrl;
 defineProps<{
   hotel: Hotel;
 }>();
