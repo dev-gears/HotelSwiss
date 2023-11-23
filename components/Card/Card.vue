@@ -14,7 +14,14 @@
         <img
           class="h-full w-full rounded-br-[60px] object-cover shadow-cardImage"
           :src="`${backendUrl}${hotel.images[0].image.renditions[400]}`"
-          :srcset="generateSrcset(hotel.images[0].image.renditions)"
+          :srcset="
+            generateSrcset(
+              hotel.images[0].image.renditions as Record<
+                keyof ImageRenditions,
+                string
+              >,
+            )
+          "
           sizes="(min-width: 800px) 800px, 100vw"
           height="100%"
         />
@@ -72,13 +79,13 @@
 </template>
 
 <script setup lang="ts">
-import { Hotel } from "@/types/hotel";
+import { Hotel, ImageRenditions } from "@/types/hotel";
 import { generateSrcset } from "@/utils/generateSrcset";
 
 defineProps<{
   hotel: Hotel;
   aspect: {
-    type: string;
+    type: Object | String;
     required: false;
   };
 }>();
