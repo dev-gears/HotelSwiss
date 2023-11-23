@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ImageWrapper } from "@/types/hotel";
+import { ImageRenditions, ImageWrapper } from "@/types/hotel";
 import { generateSrcset } from "@/utils/generateSrcset";
 defineProps({
   images: {

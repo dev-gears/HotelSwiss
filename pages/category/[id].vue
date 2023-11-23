@@ -14,10 +14,7 @@ definePageMeta({
 });
 
 const route = useRoute();
-const { fetchHotelsByCategory, categorizedHotels } = useHotelService();
-const { isLoading } = useFetchData(
-  () => fetchHotelsByCategory(`${route.params.id}`),
-  categorizedHotels,
-  true,
+const { data: categorizedHotels } = useHotelApiData(
+  `/hotels?category_id=${route.params.id}`,
 );
 </script>
