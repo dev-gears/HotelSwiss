@@ -1,9 +1,9 @@
-import { defineStore } from '@pinia/nuxt';
+import { defineStore } from "pinia";
 
 export const nuxtAppStore = defineStore({
-  id: 'nuxtAppStore',
+  id: "nuxtAppStore",
   state: () => ({
-    selectedLanguage: 'en',
+    selectedLanguage: "en",
   }),
   actions: {
     setSelectedLanguage(language) {
