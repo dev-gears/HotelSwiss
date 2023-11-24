@@ -6,6 +6,7 @@
       <NuxtLink to="/">
         <img src="~/assets/images/minimal-logo.svg" alt="Website logo" />
       </NuxtLink>
+      <LanguageSwitcher />
     </div>
   </header>
 </template>

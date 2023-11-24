@@ -7,6 +7,9 @@ export default {
           "100%": { "background-position": "200% 0" },
         },
       },
+      aspectRatio: {
+        "grid-card": "330 / 228",
+      },
       animation: {
         shimmer: "shimmer 1.5s infinite",
       },
@@ -84,6 +87,10 @@ export default {
           700: "#b5ccba",
           800: "#ceddd1",
           900: "#e6eee8",
+        },
+        languageSwitcher: {
+          primary: "#26393B",
+          active: "#1A2729",
         },
         icons: "rgb(107 114 129)",
         backgroundColor: "#f2f2f2",

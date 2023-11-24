@@ -9,6 +9,7 @@ import Carousel from "primevue/carousel";
 import Image from "primevue/image";
 import Password from "primevue/password";
 import Checkbox from "primevue/checkbox";
+import OverlayPanel from "primevue/overlaypanel";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue);
@@ -21,4 +22,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("Image", Image);
   nuxtApp.vueApp.component("Password", Password);
   nuxtApp.vueApp.component("Checkbox", Checkbox);
+  nuxtApp.vueApp.component("OverlayPanel", OverlayPanel);
 });

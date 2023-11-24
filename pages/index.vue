@@ -38,6 +38,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: "base",
+});
 const { data: firstScreenData, pending } =
   await useHotelApiData("/first-screen");
 </script>

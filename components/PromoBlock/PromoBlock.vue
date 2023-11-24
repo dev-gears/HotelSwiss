@@ -1,10 +1,10 @@
 <template>
-  <div class="promo-block container relative mx-auto px-3">
+  <div class="promo-block container relative mx-auto">
     <CommonBlockHeader title="Promo hotels" class="" />
     <Swiper
       :modules="[SwiperAutoplay]"
       :slidesPerView="1.3"
-      :centeredSlides="true"
+      :centeredSlides="false"
       :spaceBetween="20"
       :autoHeight="false"
       :breakpoints="responsiveOptions"
@@ -14,7 +14,7 @@
       }"
     >
       <SwiperSlide v-for="hotel in hotels" :key="hotel.id">
-        <Card :hotel="hotel" :aspect="`aspect-square`" />
+        <Card :hotel="hotel" :aspect="`aspect-square`" :showAmenities="false" />
       </SwiperSlide>
     </Swiper>
   </div>
