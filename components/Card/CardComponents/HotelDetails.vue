@@ -1,14 +1,8 @@
 <template>
   <div class="flex w-full">
-    <div
-      :class="
-        showAmenities
-          ? 'description-section w-3/5'
-          : 'description-section w-full'
-      "
-    >
+    <div :class="`description-section ${showAmenities ? 'w-3/5' : 'w-full'}`">
       <p class="hotel-desc font-robotoRegular text-xs text-white">
-        {{ description }}
+        {{ description || "Description not available" }}
       </p>
     </div>
 

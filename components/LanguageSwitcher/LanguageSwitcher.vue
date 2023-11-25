@@ -5,7 +5,7 @@
       @click="toggleOverlayPanel"
       class="flex items-center justify-center rounded-[10px] rounded-br-none bg-languageSwitcher-primary px-3 py-1"
     >
-      <img :src="currentIcon" class="h-9 w-9" :alt="currentLanguage" />
+      <img :src="currentIcon" class="h-8 w-9" :alt="currentLanguage" />
     </button>
 
     <OverlayPanel
