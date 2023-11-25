@@ -8,6 +8,7 @@
     >
       <Card
         v-for="hotel in categorizedHotels"
+        :key="hotel.id"
         :hotel="hotel"
         :showAmenities="true"
       />

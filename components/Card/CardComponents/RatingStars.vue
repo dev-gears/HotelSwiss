@@ -1,5 +1,5 @@
 <template>
-  <p class="mb-1.5 flex font-patuaOne text-lg text-white">
+  <p class="mb-1.5 flex font-patuaOne text-lg text-white" v-if="stars">
     <span class="mr-1.5">{{ stars }}</span>
     <img
       v-for="index in stars"

@@ -2,7 +2,7 @@
   <NuxtLink :to="`/hotel/${hotelId}`">
     <img
       class="h-full w-full rounded-br-[60px] object-cover shadow-cardImage"
-      :src="`${backendUrl}${imageUrl}`"
+      :src="`${backendUrl}${imageUrl}` || '~/assets/images/placeholder.jpg'"
       :alt="`Image of ${title}`"
     />
   </NuxtLink>

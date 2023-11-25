@@ -5,7 +5,9 @@
         class="mr-1.5"
         src="~/assets/icons/location-pin.svg"
         alt="hotel location"
-      />{{ address }}, {{ city }}
+      />
+      <span v-if="address">{{ address }}</span>
+      <span v-if="city">, {{ city }}</span>
     </NuxtLink>
   </p>
 </template>

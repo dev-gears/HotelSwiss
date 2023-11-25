@@ -14,7 +14,7 @@
       }"
     >
       <SwiperSlide v-for="hotel in hotels" :key="hotel.id">
-        <Card :hotel="hotel" :aspect="`aspect-square`" :showAmenities="false" />
+        <Card :hotel="hotel" aspect="square" :showAmenities="false" />
       </SwiperSlide>
     </Swiper>
   </div>

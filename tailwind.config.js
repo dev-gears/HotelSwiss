@@ -7,9 +7,6 @@ export default {
           "100%": { "background-position": "200% 0" },
         },
       },
-      aspectRatio: {
-        "grid-card": "330 / 228",
-      },
       animation: {
         shimmer: "shimmer 1.5s infinite",
       },
@@ -26,6 +23,10 @@ export default {
       fontFamily: {
         patuaOne: "Patua One",
         robotoRegular: "Roboto Regular",
+      },
+      aspectRatio: {
+        default: "330 / 228",
+        square: "1 / 1",
       },
       colors: {
         primary: {
