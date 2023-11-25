@@ -1,12 +1,13 @@
 <template>
   <div
+    v-if="hotel"
     class="card relative mb-3 w-full overflow-hidden rounded-[10px] bg-primary-500 shadow-card"
   >
     <div :class="aspect || 'aspect-[3/2]'" class="relative w-full">
       <PriceTag :startPrice="hotel.start_price" :endPrice="hotel.end_price" />
       <ImageLink
         :hotelId="hotel.id"
-        :imageUrl="hotel.images[0].image.renditions[400]"
+        :imageUrl="hotel?.images[0]?.image?.renditions[400]"
         :title="hotel.title"
         :backendUrl="backendUrl"
       />

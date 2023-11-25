@@ -5,12 +5,13 @@
     </p>
     <div class="icons flex flex-wrap items-center gap-2">
       <div
+        v-if="limitedAmenities.length"
         v-for="amenity in limitedAmenities"
         :key="amenity.amenity.name"
         class="mock-icon"
       >
         <img
-          :src="backendUrl + amenity.amenity.image.url"
+          :src="backendUrl + amenity.amenity?.image?.url"
           :alt="amenity.amenity.name"
         />
       </div>
