@@ -1,6 +1,6 @@
 <template>
   <div class="mb-3 flex w-full items-center justify-between">
-    <h2 class="bold font-arial w-full text-2xl text-primary">
+    <h2 class="text-title-primary w-full font-patuaOne text-2xl">
       {{ title }}
     </h2>
     <div v-if="link">

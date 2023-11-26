@@ -53,7 +53,7 @@ export default defineNuxtConfig({
   swiper: {
     prefix: "Swiper",
     styleLang: "css",
-    modules: ["autoplay"],
+    modules: ["autoplay", "navigation"],
   },
   css: [
     "primevue/resources/themes/mdc-light-indigo/theme.css",

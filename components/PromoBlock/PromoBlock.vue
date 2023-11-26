@@ -1,21 +1,46 @@
 <template>
-  <div class="promo-block container relative mx-auto">
-    <CommonBlockHeader title="Promo hotels" class="" />
+  <div class="promo-block relative mx-auto">
+    <CommonBlockHeader title="Promo hotels" class="px-3 md:px-0" />
     <Swiper
-      :modules="[SwiperAutoplay]"
-      :slidesPerView="1.3"
+      :modules="[SwiperAutoplay, SwiperNavigation]"
+      :slidesPerView="1.5"
       :centeredSlides="false"
-      :spaceBetween="20"
+      :spaceBetween="16"
       :autoHeight="false"
+      :loop="false"
+      :navigation="{
+        nextEl: '.next-slide-button',
+        prevEl: '.prev-slide-button',
+      }"
       :breakpoints="responsiveOptions"
       :autoplay="{
-        delay: 3000,
+        delay: 4000,
         disableOnInteraction: true,
       }"
     >
       <SwiperSlide v-for="hotel in hotels" :key="hotel.id">
         <Card :hotel="hotel" aspect="square" :showAmenities="false" />
       </SwiperSlide>
+      <div class="flex w-full items-center justify-center gap-3 max-lg:hidden">
+        <button
+          class="prev-slide-button flex h-[36px] w-[36px] items-center justify-center rounded-full bg-primary"
+        >
+          <img
+            class="translate-x-[-2px]"
+            src="~/assets/icons/prev-arrow.svg"
+            alt="previous arrow"
+          />
+        </button>
+        <button
+          class="next-slide-button flex h-[36px] w-[36px] items-center justify-center rounded-full bg-primary"
+        >
+          <img
+            class="translate-x-[2px]"
+            src="~/assets/icons/next-arrow.svg"
+            alt="next arrow"
+          />
+        </button>
+      </div>
     </Swiper>
   </div>
 </template>
@@ -33,20 +58,22 @@ defineProps({
 const responsiveOptions = ref({
   768: {
     slidesPerView: 3,
-    spaceBetween: 20,
     centeredSlides: false,
   },
   1024: {
-    centeredSlides: false,
     slidesPerView: 4,
-    spaceBetween: 20,
+    centeredSlides: false,
   },
 });
 </script>
 
 <style>
 .promo-block {
-  @apply mb-20;
+  @apply mb-5;
+
+  .swiper-wrapper {
+    @apply px-3 md:px-0;
+  }
 
   .p-carousel-items-content {
     @apply max-sm:px-9;

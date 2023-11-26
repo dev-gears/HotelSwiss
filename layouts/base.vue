@@ -2,7 +2,9 @@
   <div class="flex min-h-screen flex-col justify-between">
     <div>
       <Header />
-      <Search />
+      <div class="container mx-auto">
+        <Search />
+      </div>
       <div class="container mx-auto">
         <slot />
       </div>
