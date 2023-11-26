@@ -70,11 +70,11 @@ const onTabChange = async (newIndex: number) => {
 }
 
 .p-tabview-nav-container {
-  @apply sticky top-0;
+  @apply relative sticky top-0 z-50 border-b border-gray-200 !bg-backgroundColor pb-3;
 }
 
 .p-tabview-nav {
-  @apply !bg-transparent px-4;
+  @apply px-3 md:px-0;
 }
 
 .p-tabview-nav-next {
@@ -88,7 +88,7 @@ const onTabChange = async (newIndex: number) => {
 }
 
 .p-tabview-panels {
-  @apply bg-backgroundColor px-4;
+  @apply bg-backgroundColor lg:px-0;
 }
 
 ul[role="tablist"] {
