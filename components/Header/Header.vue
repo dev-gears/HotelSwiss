@@ -1,5 +1,5 @@
 <template>
-  <header class="flex min-h-[40px] w-full bg-primary">
+  <header class="flex min-h-[40px] w-full bg-primary px-3 md:px-0">
     <div
       class="container mx-auto flex items-center justify-between p-3 md:px-0"
     >
