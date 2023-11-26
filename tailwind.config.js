@@ -89,6 +89,9 @@ export default {
           800: "#ceddd1",
           900: "#e6eee8",
         },
+        title: {
+          primary: "#26393B",
+        },
         languageSwitcher: {
           primary: "#26393B",
           active: "#1A2729",
