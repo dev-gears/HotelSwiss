@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-1 gap-4 bg-backgroundColor p-4 md:grid-cols-2 lg:grid-cols-3 lg:p-0"
+    class="bg-light-100 grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 lg:p-0"
   >
     <CommonBackButton class="fixed left-5 top-5" />
     <Image
@@ -26,6 +26,6 @@ const backendUrl = runtimeConfig.public.backendUrl;
 
 <style>
 .p-image-toolbar svg {
-  @apply !text-secondary-600;
+  @apply !text-light;
 }
 </style>

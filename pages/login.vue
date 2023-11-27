@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-screen w-screen flex-col items-center justify-start">
     <img
-      class="z-10 w-[160px] translate-y-1/2 rounded-full shadow-md shadow-primary-500"
+      class="z-10 w-[160px] translate-y-1/2 rounded-full shadow-md shadow-primary"
       src="../assets/images/dummy_logo.svg"
       alt=""
     />
@@ -9,7 +9,7 @@
       class="flex h-fit w-5/6 flex-col justify-around shadow-md shadow-primary md:max-w-md"
     >
       <form
-        class="mt-24 flex flex-col gap-6 rounded-lg p-4 text-primary-100 md:mt-20"
+        class="mt-24 flex flex-col gap-6 rounded-lg p-4 text-primary-200 md:mt-20"
         @submit.prevent="submitLogIn"
       >
         <input
@@ -30,18 +30,16 @@
         <div class="flex justify-between py-4">
           <div class="flex items-center justify-center gap-2">
             <Checkbox v-model="checked" :binary="true" />
-            <span class="text-primary-900">Remember Me</span>
+            <span class="text-light">Remember Me</span>
           </div>
           <NuxtLink to="/password_reset">
-            <span class="text-sm italic text-primary-900"
-              >Forgot password?</span
-            >
+            <span class="text-light text-sm italic">Forgot password?</span>
           </NuxtLink>
         </div>
         <Button
           type="submit"
           label="LOG IN"
-          class="bg-white p-2 text-primary-100"
+          class="bg-white p-2 text-primary-200"
           text
           raised
         />

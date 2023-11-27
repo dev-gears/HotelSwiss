@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden rounded-[10px] bg-primary-500 shadow-card">
+  <div class="overflow-hidden rounded-[10px] bg-primary shadow-card">
     <slot></slot>
   </div>
 </template>

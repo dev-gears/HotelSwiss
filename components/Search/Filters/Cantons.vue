@@ -3,7 +3,7 @@
     <div v-for="canton in cantons" class="h-16 w-1/4 p-1 text-center text-xs">
       <div
         :style="{ 'background-image': `url(${canton.image})` }"
-        class="flex h-full w-full items-center justify-center border border-primary-500"
+        class="flex h-full w-full items-center justify-center border border-primary"
       >
         {{ canton.name }}
       </div>

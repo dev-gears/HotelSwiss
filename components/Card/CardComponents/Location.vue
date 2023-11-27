@@ -1,5 +1,5 @@
 <template>
-  <p class="mb-1.5 font-robotoRegular text-sm text-lightBackground/60">
+  <p class="text-light/60 mb-1.5 font-robotoRegular text-sm">
     <NuxtLink :to="`/category/${hotelId}`" class="flex">
       <img
         class="mr-1.5"

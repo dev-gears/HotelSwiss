@@ -85,7 +85,7 @@ const responsiveOptions = ref({
 
   .p-carousel-next.p-link,
   .p-carousel-prev.p-link {
-    @apply mx-1.5 bg-primary-500 text-secondary-600 md:relative lg:h-28 lg:w-5 lg:rounded-none;
+    @apply text-light mx-1.5 bg-primary md:relative lg:h-28 lg:w-5 lg:rounded-none;
     @apply max-sm:absolute max-sm:bottom-0 max-sm:translate-y-10 max-sm:transform;
   }
 
@@ -102,7 +102,7 @@ const responsiveOptions = ref({
   }
 
   .p-highlight > a {
-    @apply rounded-t-md !bg-primary-900;
+    @apply rounded-t-md !bg-primary;
   }
 
   .p-carousel-item {
