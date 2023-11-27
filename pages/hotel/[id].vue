@@ -31,6 +31,11 @@
     <HotelHero :images="hotel?.images" />
     <HotelContent :hotel="hotel!" />
     <HotelAmenities v-if="hotel?.amenities" :amenities="hotel?.amenities" />
+    <HotelSocialNetworks />
+    <HotelContactFooter
+      :startPrice="hotel?.start_price"
+      :end-price="hotel?.end_price"
+    />
   </div>
 </template>
 
