@@ -1,5 +1,5 @@
 <template>
-  <div class="relative my-8 flex w-full items-center gap-2 px-3 md:px-0">
+  <div class="relative my-8 flex w-full items-center gap-2">
     <div @submit.prevent="handleSubmit" class="p-inputgroup p-input-icon-right">
       <InputText
         id="search-input"

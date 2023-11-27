@@ -1,6 +1,6 @@
 <template>
   <div class="bg-primary">
-    <footer class="container mx-auto">
+    <footer class="container mx-auto px-3">
       <div class="flex flex-col items-center justify-center">
         <span class="text-light p-2 text-2xl font-bold">Hotel Swiss</span>
         <div class="text-light flex gap-4 p-2">

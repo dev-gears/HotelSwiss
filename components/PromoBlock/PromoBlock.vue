@@ -1,6 +1,8 @@
 <template>
   <div class="promo-block relative mx-auto">
-    <CommonBlockHeader title="Promo hotels" class="px-3 md:px-0" />
+    <div class="container mx-auto px-3">
+      <CommonBlockHeader title="Promo hotels" />
+    </div>
     <Swiper
       :modules="[SwiperAutoplay, SwiperNavigation]"
       :slidesPerView="1.5"
@@ -21,24 +23,22 @@
       <SwiperSlide v-for="hotel in hotels" :key="hotel.id">
         <Card :hotel="hotel" aspect="square" :showAmenities="false" />
       </SwiperSlide>
-      <div class="flex w-full items-center justify-center gap-3 max-lg:hidden">
+      <div
+        class="bg-light-100 absolute left-0 top-0 z-40 hidden h-full w-9 items-start justify-center lg:flex"
+      >
         <button
-          class="prev-slide-button flex h-[36px] w-[36px] items-center justify-center rounded-full bg-primary"
+          class="prev-slide-button flex w-5 items-center justify-center rounded"
         >
-          <img
-            class="translate-x-[-2px]"
-            src="~/assets/icons/prev-arrow.svg"
-            alt="previous arrow"
-          />
+          <img src="~/assets/icons/prev-arrow.svg" alt="previous arrow" />
         </button>
+      </div>
+      <div
+        class="bg-light-100 absolute right-0 top-0 z-40 hidden h-full w-9 items-start justify-center lg:flex"
+      >
         <button
-          class="next-slide-button flex h-[36px] w-[36px] items-center justify-center rounded-full bg-primary"
+          class="next-slide-button flex w-5 items-center justify-center rounded"
         >
-          <img
-            class="translate-x-[2px]"
-            src="~/assets/icons/next-arrow.svg"
-            alt="next arrow"
-          />
+          <img src="~/assets/icons/next-arrow.svg" alt="next arrow" />
         </button>
       </div>
     </Swiper>
@@ -71,8 +71,12 @@ const responsiveOptions = ref({
 .promo-block {
   @apply mb-5;
 
+  .swiper {
+    @apply md:container md:px-3 lg:px-10;
+  }
+
   .swiper-wrapper {
-    @apply px-3 md:px-0;
+    @apply px-3 pb-3 md:px-0;
   }
 
   .p-carousel-items-content {
@@ -111,6 +115,17 @@ const responsiveOptions = ref({
 
   [data-p-carousel-item-active="false"] .card {
     @apply max-sm:scale-[96%];
+  }
+
+  .prev-slide-button,
+  .next-slide-button {
+    height: calc(100% - 12px);
+    background-image: linear-gradient(
+      180deg,
+      rgba(53, 79, 82, 0.05) 0%,
+      rgba(53, 79, 82, 0.4) 53.65%,
+      rgba(53, 79, 82, 0.05) 100%
+    );
   }
 }
 </style>

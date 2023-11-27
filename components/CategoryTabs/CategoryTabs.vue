@@ -9,7 +9,7 @@
         </template>
         <CategoryTabsTabContent
           :id="0"
-          :name="`All hotels`"
+          :name="$t('CategoryTabs.allHotels')"
           :categorizedHotels="firstTabContent"
           :isLoading="false"
           :category="`all`"
@@ -62,7 +62,7 @@ const onTabChange = async (newIndex: number) => {
 };
 </script>
 
-<style>
+<style lang="pcss">
 .p-tabview-nav-btn {
   @apply shadow-none max-md:hidden;
 }
@@ -72,11 +72,15 @@ const onTabChange = async (newIndex: number) => {
 }
 
 .p-tabview-nav-container {
-  @apply !bg-light-100 border-light-100  relative top-0 z-50 border-b pb-3;
+  @apply border-light-100 !bg-light-100 sticky top-0 z-50 border-b;
+}
+
+.p-tabview-nav-content {
+  @apply py-3;
 }
 
 .p-tabview-nav {
-  @apply px-3 md:px-0;
+  @apply container mx-auto px-3;
 }
 
 .p-tabview-nav-next {
@@ -90,24 +94,26 @@ const onTabChange = async (newIndex: number) => {
 }
 
 .p-tabview-panels {
-  @apply bg-light-100 lg:px-0;
+  @apply bg-light-100 px-0;
 }
 
 ul[role="tablist"] {
   @apply bg-light-100 flex gap-3;
 
-  li,
+  li {
+    @apply rounded-[10px] font-robotoRegular;
+  }
+
   a {
-    @apply text-light rounded-[10px] bg-primary;
+    @apply text-light  rounded-[10px] bg-primary shadow-cardImage;
+  }
+
+  a[aria-selected="true"] {
+    @apply bg-light text-primary;
   }
 
   a {
     @apply h-full;
-  }
-
-  .p-highlight,
-  .p-highlight a {
-    @apply bg-primary;
   }
 }
 </style>

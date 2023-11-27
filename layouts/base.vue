@@ -2,12 +2,10 @@
   <div class="flex min-h-screen flex-col justify-between">
     <div>
       <Header />
-      <div class="container mx-auto">
+      <div class="container mx-auto px-3">
         <Search />
       </div>
-      <div class="container mx-auto">
-        <slot />
-      </div>
+      <slot />
     </div>
     <Footer />
   </div>

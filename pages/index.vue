@@ -31,7 +31,6 @@
   <div v-else>
     <PromoBlock
       v-if="firstScreenData?.promo_hotels"
-      class="promo-block"
       :hotels="firstScreenData.promo_hotels"
     />
     <CategoryTabs
@@ -49,9 +48,3 @@ definePageMeta({
 const { data: firstScreenData, pending } =
   await useHotelApiData("/first-screen");
 </script>
-
-<style>
-.container {
-  @apply max-w-full px-0 md:max-w-screen-md md:px-3 lg:max-w-screen-lg lg:px-3 xl:max-w-screen-xl;
-}
-</style>

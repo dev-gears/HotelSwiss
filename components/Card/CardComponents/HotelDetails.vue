@@ -1,6 +1,6 @@
 <template>
-  <div class="flex w-full">
-    <div :class="` ${showAmenities ? 'w-3/5' : 'w-full'}`">
+  <div class="flex w-full gap-2">
+    <div :class="`${showAmenities ? 'flex-1' : 'w-full'}`">
       <p class="hotel-desc text-light font-robotoRegular text-xs">
         {{ description || "Description not available" }}
       </p>
@@ -8,12 +8,12 @@
 
     <div
       v-if="showAmenities"
-      class="border-light w-2/5 border-l-2 border-dashed pl-3.5"
+      class="border-light w-[92px] border-l-2 border-dashed pl-2"
     >
       <p class="text-light mb-1 font-robotoRegular text-xs">
         {{ $t("HotelDetails.includedAmenities") + ":" }}
       </p>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-1.5">
         <div
           v-for="amenity in limitedAmenities"
           :key="amenity.amenity.id"
