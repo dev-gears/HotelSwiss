@@ -14,13 +14,13 @@
       />
     </div>
     <div v-else class="flex h-[400px] items-center justify-center">
-      No hotels found
+      {{ $t("TabContent.noHotelsFound") }}
     </div>
 
     <Button
       icon="pi pi-refresh"
       class="mx-auto mt-3 border px-3 py-2"
-      label="Load more"
+      :label="$t('TabContent.loadMore')"
     />
   </div>
 </template>

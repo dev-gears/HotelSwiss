@@ -3,7 +3,8 @@
     <button
       ref="button"
       @click="toggleOverlayPanel"
-      class="flex items-center justify-center rounded-[10px] rounded-br-none bg-languageSwitcher-primary px-3 py-1"
+      :style="buttonStyle"
+      class="flex items-center justify-center rounded-[10px] rounded-bl-none rounded-br-none px-3 py-1"
     >
       <img :src="currentIcon" class="h-8 w-9" :alt="currentLanguage" />
     </button>
@@ -12,11 +13,12 @@
       ref="overlayPanel"
       :dismissable="true"
       :showCloseIcon="false"
-      class="w-[330px] rounded-[10px] rounded-tr-none bg-languageSwitcher-primary text-white"
+      @hide="onOverlayHide"
+      class="text-languageSwitcher-text mt-[2px] w-[330px] rounded-[10px] rounded-tr-none bg-languageSwitcher-active"
     >
-      <ul class="m-0 list-none p-0 font-patuaOne">
-        <li class="mb-2 border-b px-2 py-2 text-lg font-medium">
-          {{ $t("selectLanguage") }}
+      <ul class="m-0 list-none p-0 font-robotoRegular">
+        <li class="bottom-border-item mb-2 border-b px-2 py-2 text-xl">
+          {{ $t("LanguageButton.selectLanguage") }}
         </li>
         <li
           v-for="(name, code) in languageNames"
@@ -24,7 +26,7 @@
           @click="() => changeLanguage(code)"
           :class="[
             'flex cursor-pointer items-center justify-between rounded-[10px] px-2 py-1 text-lg hover:bg-opacity-90',
-            currentLanguage === code ? 'bg-languageSwitcher-active' : '',
+            currentLanguage === code ? 'bg-languageSwitcher-selected' : '',
           ]"
         >
           {{ name }}
@@ -36,6 +38,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import { useI18n } from "vue-i18n";
 import { useLanguageStore } from "@/store/language";
 import OverlayPanel from "primevue/overlaypanel";
 
@@ -63,10 +67,11 @@ const icons: Record<LanguageCode, string> = {
   it: itaIcon,
   fr: freIcon,
 };
-
 const currentIcon = computed(() => icons[currentLanguage.value]);
+const isOverlayPanelOpen = ref(false);
 
 const toggleOverlayPanel = (event: MouseEvent) => {
+  isOverlayPanelOpen.value = !isOverlayPanelOpen.value;
   overlayPanel.value?.toggle(event);
 };
 
@@ -74,7 +79,12 @@ const changeLanguage = (code: LanguageCode) => {
   locale.value = code;
   languageStore.setLanguage(code);
   currentLanguage.value = code;
+  isOverlayPanelOpen.value = false;
   overlayPanel.value?.hide();
+};
+
+const onOverlayHide = () => {
+  isOverlayPanelOpen.value = false;
 };
 
 const handleScroll = () => {
@@ -83,6 +93,7 @@ const handleScroll = () => {
     languageSwitcherRef.value &&
     !isElementVisible(languageSwitcherRef.value)
   ) {
+    isOverlayPanelOpen.value = false;
     overlayPanel.value.hide();
   }
 };
@@ -105,10 +116,18 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
+
+const buttonStyle = computed(() => ({
+  backgroundColor: isOverlayPanelOpen.value ? "#26393B" : "#354F52",
+}));
 </script>
 
 <style>
 .p-overlaypanel-content {
   padding: 1rem;
+}
+
+.bottom-border-item {
+  border-color: rgba(255, 255, 255, 0.5);
 }
 </style>

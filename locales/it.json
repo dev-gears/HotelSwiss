@@ -1,4 +1,27 @@
 {
-  "selectLanguage": "Seleziona lingua",
-  "aboutUs": "Riguardo a noi"
+  "LanguageButton": {
+    "selectLanguage": "Seleziona lingua"
+  },
+  "HotelDetails": {
+    "includedAmenities": "Incluso"
+  },
+  "TabContent": {
+    "noHotelsFound": "Nessun hotel trovato",
+    "loadMore": "Carica altro"
+  },
+  "CategoryTabs": {
+    "allHotels": "Tutti gli hotel"
+  },
+  "BlockHeader": {
+    "viewAll": "Vedi tutto"
+  },
+  "Content": {
+    "class": "Classe"
+  },
+  "Amenities": {
+    "title": "Cosa offriamo"
+  },
+  "Search": {
+    "filters": "Filtri"
+  }
 }
