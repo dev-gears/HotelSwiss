@@ -44,7 +44,6 @@ const props = defineProps<{
   }>;
 }>();
 
-// Display only 5 amenities initially
 const visibleAmenities = ref<Array<{ amenity: Amenity }>>(
   props.amenities.slice(0, 5),
 );
@@ -52,7 +51,6 @@ const visibleAmenities = ref<Array<{ amenity: Amenity }>>(
 const shouldShowLoadMoreButton = ref<boolean>(props.amenities.length > 5);
 
 const loadMore = () => {
-  // Increase the number of visible amenities by 5
   const endIndex = props.amenities.length;
   visibleAmenities.value = props.amenities.slice(0, endIndex);
 
@@ -60,5 +58,3 @@ const loadMore = () => {
   shouldShowLoadMoreButton.value = false;
 };
 </script>
-
-<!-- {{ $t("Amenities.title") }} -->

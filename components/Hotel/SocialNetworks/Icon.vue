@@ -1,9 +1,5 @@
 <template>
-  <a
-    class="flex items-center justify-center p-2"
-    :href="`${link}`"
-    target="_blank"
-  >
+  <a class="flex items-center justify-center p-2" :href="`${link}`">
     <i :class="`pi pi-${icon} text-3xl text-primary-300`"></i>
   </a>
 </template>

@@ -1,10 +1,9 @@
 <template>
-  <div class="container mx-auto mb-20 bg-lightBackground p-7">
+  <div class="container mx-auto mb-14 bg-lightBackground p-7">
     <h2 class="font-robotoRegular text-3xl text-primary">Visit us also on</h2>
     <div class="mt-5 flex items-center justify-around">
       <HotelSocialNetworksIcon
-        v-for="(socialNetwork, index) in socialNetworks"
-        :key="index"
+        v-for="socialNetwork in socialNetworks"
         :icon="socialNetwork.icon"
         :link="socialNetwork.link"
       />
