@@ -3,7 +3,9 @@
     <TabView :scrollable="true" @update:activeIndex="onTabChange">
       <TabPanel>
         <template #header>
-          <div class="whitespace-nowrap">All hotels</div>
+          <div class="whitespace-nowrap">
+            {{ $t("CategoryTabs.allHotels") }}
+          </div>
         </template>
         <CategoryTabsTabContent
           :id="0"

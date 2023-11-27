@@ -93,8 +93,10 @@ export default {
           primary: "#26393B",
         },
         languageSwitcher: {
-          primary: "#26393B",
-          active: "#1A2729",
+          text: "#F8F8F8",
+          inactive: "#354F52",
+          active: "#26393B",
+          selected: "#1A2729",
         },
         icons: "rgb(107 114 129)",
         backgroundColor: "#f2f2f2",

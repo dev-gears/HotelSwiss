@@ -29,7 +29,7 @@
     showHeader
   >
     <template #header>
-      <h3 class="text-primary-100">Filters</h3>
+      <h3 class="text-primary-100">{{ $t("Search.filters") }}</h3>
     </template>
     <template #default>
       <SearchFiltersCantons />

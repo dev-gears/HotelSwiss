@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto mt-3 bg-primary p-7">
-    <h2 class="font-robotoRegular text-xl">What we offer</h2>
+    <h2 class="font-robotoRegular text-xl">{{ $t("Amenities.title") }}</h2>
 
     <div class="mt-5 flex flex-col flex-wrap gap-3">
       <div

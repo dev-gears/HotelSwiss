@@ -11,9 +11,9 @@
       class="amenities-section w-2/5 border-l-2 border-dashed border-white pl-3.5"
     >
       <p class="included-text mb-1 font-robotoRegular text-xs text-white">
-        Included:
+        {{ $t("HotelDetails.includedAmenities") + ":" }}
       </p>
-      <div class="icons flex flex-wrap items-center gap-2">
+      <div class="icons flex items-center gap-2">
         <div
           v-for="amenity in limitedAmenities"
           :key="amenity.amenity.id"

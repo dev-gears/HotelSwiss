@@ -23,7 +23,7 @@
       <div
         class="flex flex-1 flex-col items-center justify-center font-patuaOne text-xl"
       >
-        Class
+        {{ $t("Content.class") }}
         <CommonStars :stars="hotel?.stars" />
       </div>
       <div
