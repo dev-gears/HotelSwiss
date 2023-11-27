@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto mt-3 bg-primary p-7">
+  <div class="bg-light container mx-auto mt-3 p-7">
     <h2 class="font-robotoRegular text-xl">{{ $t("Amenities.title") }}</h2>
 
     <div class="mt-5 flex flex-col flex-wrap gap-3">
@@ -8,7 +8,7 @@
         v-for="(data, index) in visibleAmenities"
         :key="data.amenity.id"
       >
-        <div class="mr-3 h-14 w-14 rounded-md bg-primary-500 p-2">
+        <div class="mr-3 h-14 w-14 rounded-md bg-primary p-2">
           <img
             :src="backendUrl + data.amenity?.image?.renditions.thumbnail"
             :alt="data.amenity?.name"
@@ -24,7 +24,7 @@
       <button
         v-if="shouldShowLoadMoreButton"
         @click="loadMore"
-        class="mt-3 rounded-lg border-2 border-primary-300 bg-lightBackground py-2 text-primary-300"
+        class="bg-light mt-3 rounded-lg border-2 border-primary-200 py-2 text-primary-200"
       >
         Load More
       </button>

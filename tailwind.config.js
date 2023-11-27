@@ -1,5 +1,17 @@
 export default {
   theme: {
+    colors: {
+      light: {
+        DEFAULT: "#f8f8f8", // svetliji-text
+        100: "#f2f2f2",
+      },
+      primary: {
+        DEFAULT: "#354f52",
+        100: "#26393B",
+        200: "#1A2729", // tamniji-text
+      },
+    },
+
     extend: {
       keyframes: {
         shimmer: {
@@ -27,80 +39,6 @@ export default {
       aspectRatio: {
         default: "330 / 228",
         square: "1 / 1",
-      },
-      colors: {
-        primary: {
-          DEFAULT: "#354f52",
-          100: "#0a0f10",
-          200: "#151f20",
-          300: "#1f2e30",
-          400: "#2a3e40",
-          500: "#354f52",
-          600: "#527a7e",
-          700: "#76a1a6",
-          800: "#a4c0c3",
-          900: "#d1e0e1",
-        },
-        secondary: {
-          DEFAULT: "#E9EEEE",
-          100: "#b3c3c5",
-          200: "#c2d0d2",
-          300: "#d1dcdc",
-          400: "#e0e8e8",
-          500: "#E9EEEE",
-          600: "#edf1f1",
-          700: "#f1f4f4",
-          800: "#f5f7f7",
-          900: "#f9fbfb",
-        },
-        tertiary: {
-          DEFAULT: "#52796f",
-          100: "#111816",
-          200: "#21312d",
-          300: "#324943",
-          400: "#426159",
-          500: "#52796f",
-          600: "#6d9c90",
-          700: "#92b5ac",
-          800: "#b6cdc8",
-          900: "#dbe6e3",
-        },
-        quaternary: {
-          DEFAULT: "#2f3e46",
-          100: "#090c0e",
-          200: "#13191c",
-          300: "#1c252a",
-          400: "#263238",
-          500: "#2f3e46",
-          600: "#4e6876",
-          700: "#7290a1",
-          800: "#a1b5c0",
-          900: "#d0dae0",
-        },
-        quinary: {
-          DEFAULT: "#84a98c",
-          100: "#19241b",
-          200: "#314736",
-          300: "#4a6b51",
-          400: "#638e6c",
-          500: "#84a98c",
-          600: "#9cbaa3",
-          700: "#b5ccba",
-          800: "#ceddd1",
-          900: "#e6eee8",
-        },
-        title: {
-          primary: "#26393B",
-        },
-        languageSwitcher: {
-          text: "#F8F8F8",
-          inactive: "#354F52",
-          active: "#26393B",
-          selected: "#1A2729",
-        },
-        icons: "rgb(107 114 129)",
-        backgroundColor: "#f2f2f2",
-        lightBackground: "#f8f8f8",
       },
     },
   },

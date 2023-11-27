@@ -6,6 +6,6 @@
 
 <style>
 html {
-  @apply bg-backgroundColor;
+  @apply bg-light-100;
 }
 </style>

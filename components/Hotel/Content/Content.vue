@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex w-full flex-col gap-3 bg-primary p-7 text-secondary-800 lg:mt-5"
-  >
+  <div class="text-light flex w-full flex-col gap-3 bg-primary p-7 lg:mt-5">
     <h2 class="font-patuaOne text-3xl">
       {{ hotel?.title }}
     </h2>
@@ -10,7 +8,7 @@
     </p>
 
     <div
-      class="relative flex w-full items-center justify-around rounded-[10px] border border-secondary px-3 py-4"
+      class="border-light relative flex w-full items-center justify-around rounded-[10px] border px-3 py-4"
     >
       <div
         class="flex h-14 w-1/3 items-center justify-center bg-contain bg-center bg-no-repeat"

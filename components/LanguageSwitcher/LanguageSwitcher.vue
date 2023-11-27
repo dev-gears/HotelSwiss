@@ -14,7 +14,7 @@
       :dismissable="true"
       :showCloseIcon="false"
       @hide="onOverlayHide"
-      class="text-languageSwitcher-text mt-[2px] w-[330px] rounded-[10px] rounded-tr-none bg-languageSwitcher-active"
+      class="text-light mt-[2px] w-[330px] rounded-[10px] rounded-tr-none bg-primary-100"
     >
       <ul class="m-0 list-none p-0 font-robotoRegular">
         <li class="bottom-border-item mb-2 border-b px-2 py-2 text-xl">
@@ -26,7 +26,7 @@
           @click="() => changeLanguage(code)"
           :class="[
             'flex cursor-pointer items-center justify-between rounded-[10px] px-2 py-1 text-lg hover:bg-opacity-90',
-            currentLanguage === code ? 'bg-languageSwitcher-selected' : '',
+            currentLanguage === code ? 'bg-primary-200' : '',
           ]"
         >
           {{ name }}

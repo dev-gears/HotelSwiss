@@ -72,7 +72,7 @@ const onTabChange = async (newIndex: number) => {
 }
 
 .p-tabview-nav-container {
-  @apply relative sticky top-0 z-50 border-b border-gray-200 !bg-backgroundColor pb-3;
+  @apply !bg-light-100 border-light-100  relative top-0 z-50 border-b pb-3;
 }
 
 .p-tabview-nav {
@@ -90,15 +90,15 @@ const onTabChange = async (newIndex: number) => {
 }
 
 .p-tabview-panels {
-  @apply bg-backgroundColor lg:px-0;
+  @apply bg-light-100 lg:px-0;
 }
 
 ul[role="tablist"] {
-  @apply flex gap-3 bg-backgroundColor;
+  @apply bg-light-100 flex gap-3;
 
   li,
   a {
-    @apply rounded-[10px] bg-primary text-secondary-500;
+    @apply text-light rounded-[10px] bg-primary;
   }
 
   a {
@@ -107,7 +107,7 @@ ul[role="tablist"] {
 
   .p-highlight,
   .p-highlight a {
-    @apply bg-tertiary;
+    @apply bg-primary;
   }
 }
 </style>

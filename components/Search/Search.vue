@@ -6,7 +6,7 @@
         placeholder="Search for a specific hotel"
         v-model="localSearchText"
         @keyup.enter="handleSubmit"
-        class="h-12 w-full rounded-l-xl bg-lightBackground px-2 shadow focus:shadow"
+        class="bg-light h-12 w-full rounded-l-xl px-2 text-primary-200 shadow focus:shadow"
       />
       <i
         @click="handleSubmit"
@@ -15,7 +15,7 @@
     </div>
     <Button
       icon="pi pi-sliders-h"
-      class="flex h-12 rounded-none rounded-br-xl bg-lightBackground px-6 shadow [&_span]:text-2xl [&_span]:!text-primary"
+      class="bg-light flex h-12 rounded-none rounded-br-xl px-6 shadow [&_span]:text-2xl [&_span]:!text-primary"
       @click="showFilters = true"
     />
   </div>
@@ -29,7 +29,7 @@
     showHeader
   >
     <template #header>
-      <h3 class="text-primary-100">{{ $t("Search.filters") }}</h3>
+      <h3 class="text-primary-200">{{ $t("Search.filters") }}</h3>
     </template>
     <template #default>
       <SearchFiltersCantons />
