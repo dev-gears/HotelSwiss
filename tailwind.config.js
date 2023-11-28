@@ -1,3 +1,5 @@
+// DEFAULT THEME: https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/config.full.js
+
 export default {
   theme: {
     colors: {
@@ -10,6 +12,11 @@ export default {
         100: "#26393B",
         200: "#1A2729", // tamniji-text
       },
+    },
+
+    fontFamily: {
+      patuaOne: "Patua One",
+      robotoRegular: "Roboto Regular",
     },
 
     extend: {
@@ -32,10 +39,7 @@ export default {
         cardImage: "2px 4px 4px 0px rgba(0, 0, 0, 0.25)",
         card: "1px 2px 4px 0 rgba(0, 0, 0, 0.4)",
       },
-      fontFamily: {
-        patuaOne: "Patua One",
-        robotoRegular: "Roboto Regular",
-      },
+
       aspectRatio: {
         default: "330 / 228",
         square: "1 / 1",

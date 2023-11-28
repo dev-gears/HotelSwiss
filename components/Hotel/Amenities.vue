@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-light container mx-auto mt-3 p-7">
+  <div class="container mx-auto mt-3 bg-light p-7">
     <h2 class="font-robotoRegular text-xl">{{ $t("Amenities.title") }}</h2>
 
     <div class="mt-5 flex flex-col flex-wrap gap-3">
@@ -24,7 +24,7 @@
       <Button
         v-if="shouldShowLoadMoreButton"
         @click="loadMore"
-        class="bg-light mt-3 rounded-lg border-2 border-primary-200 py-2 text-primary-200"
+        class="mt-3 rounded-lg border-2 border-primary-200 bg-light py-2 text-primary-200"
         :label="$t('common.loadMore')"
       />
     </div>
