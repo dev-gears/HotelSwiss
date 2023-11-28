@@ -1,13 +1,13 @@
 <template>
   <div
-    class="bg-light container fixed bottom-0 flex w-full items-center justify-between border-t-2 border-primary-100/40 px-7 py-4"
+    class="fixed bottom-0 flex w-full items-center justify-between border-t-2 border-primary-100/40 bg-light px-7 py-3 sm:container sm:static"
   >
     <div v-if="startPrice" class="flex flex-col justify-start">
-      <p class="font-patuaOne text-base text-primary-200">
+      <p class="font-patuaOne text-xl text-primary-200">
         {{ $t("ContactFooter.from") }}: <span>{{ startPrice }}</span
         >$
       </p>
-      <p class="font-patuaOne text-base text-primary-200">
+      <p class="font-robotoRegular text-base text-primary-200/50">
         {{ $t("ContactFooter.to") }}: <span>{{ endPrice }}$</span>
       </p>
     </div>
@@ -15,7 +15,7 @@
       <p>{{ $t("ContactFooter.priceNotAvailable") }}</p>
     </div>
     <div>
-      <Button class="text-light rounded-md bg-primary px-2 py-1 text-2xl">{{
+      <Button class="rounded-xl bg-primary px-4 py-2 text-xl text-light">{{
         $t("ContactFooter.contactHotel")
       }}</Button>
     </div>

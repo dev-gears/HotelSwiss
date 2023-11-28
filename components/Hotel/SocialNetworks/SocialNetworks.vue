@@ -1,21 +1,26 @@
 <template>
   <div
-    class="bg-light container mx-auto mb-14 border-t-2 border-primary-100/40 p-7"
+    class="container mx-auto mb-40 border-t-2 border-primary-100/40 bg-light-100 px-7 pt-8"
   >
-    <h2 class="font-robotoRegular text-3xl text-primary-200">
+    <h2 class="font-robotoRegular text-xl text-primary-200">
       {{ $t("SocialNetworks.visitUsAlsoOn") }}
     </h2>
-    <div class="mt-5 flex items-center justify-around">
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-6">
       <HotelSocialNetworksIcon
-        v-for="socialNetwork in socialNetworks"
-        :icon="socialNetwork.icon"
-        :link="socialNetwork.link"
+        v-for="socialLink in socialLinks"
+        :icon="socialLink.icon"
+        :link="socialLink.link"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { SocialLink } from "@/types/hotel";
+defineProps({
+  socialLinks: Array<SocialLink>,
+});
+
 const socialNetworks = [
   {
     name: "Website",
