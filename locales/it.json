@@ -1,6 +1,7 @@
 {
   "common": {
-    "loadMore": "Carica altro"
+    "loadMore": "Carica altro",
+    "viewAll": "Vedi tutto"
   },
   "LanguageButton": {
     "selectLanguage": "Seleziona lingua"
@@ -18,7 +19,8 @@
     "viewAll": "Vedi tutto"
   },
   "Content": {
-    "class": "Classe"
+    "class": "Classe",
+    "readMore": "Leggi di più"
   },
   "Amenities": {
     "title": "Cosa offriamo"

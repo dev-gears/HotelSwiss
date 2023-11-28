@@ -47,6 +47,12 @@ export interface Canton {
   image: Image;
 }
 
+export interface SocialLink {
+  name: string;
+  icon: string;
+  link: string;
+}
+
 export interface Hotel {
   id: ID;
   title: Title;
@@ -64,4 +70,5 @@ export interface Hotel {
   categories: Array<{ category: Category }>;
   amenities: Array<{ amenity: Amenity }>;
   images: Array<{ image: Image }>;
+  social_links: SocialLink[];
 }

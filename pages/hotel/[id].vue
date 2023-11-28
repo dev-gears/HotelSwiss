@@ -27,11 +27,11 @@
   </Head>
 
   <HotelSkeletonLoader v-if="pending" />
-  <div v-else>
+  <div v-else class="bg-light-100">
     <HotelHero :images="hotel?.images" />
     <HotelContent :hotel="hotel!" />
     <HotelAmenities v-if="hotel?.amenities" :amenities="hotel?.amenities" />
-    <HotelSocialNetworks />
+    <HotelSocialNetworks :socialLinks="hotel?.social_links" />
     <HotelContactFooter
       :startPrice="hotel?.start_price"
       :end-price="hotel?.end_price"
