@@ -6,7 +6,7 @@
     <div v-if="link">
       <NuxtLink
         :to="`${link}`"
-        class="whitespace-nowrap text-primary-200 underline hover:text-primary-200"
+        class="whitespace-nowrap font-robotoRegular text-sm text-primary-200 underline hover:text-primary-200"
       >
         {{ $t("BlockHeader.viewAll") }}
       </NuxtLink>

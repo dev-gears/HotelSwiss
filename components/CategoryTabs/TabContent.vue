@@ -20,7 +20,7 @@
     </div>
     <Button
       icon="pi pi-refresh"
-      class="mx-auto mt-3 border px-3 py-2"
+      class="mx-auto mt-3 border bg-primary px-3 py-2 font-robotoRegular text-sm text-light"
       :label="$t('common.loadMore')"
     />
   </div>
