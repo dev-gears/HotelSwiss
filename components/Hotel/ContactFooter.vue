@@ -4,20 +4,20 @@
   >
     <div v-if="startPrice" class="flex flex-col justify-start">
       <p class="font-patuaOne text-base text-primary-200">
-        From: <span>{{ startPrice }}</span
+        {{ $t("ContactFooter.from") }}: <span>{{ startPrice }}</span
         >$
       </p>
       <p class="font-patuaOne text-base text-primary-200">
-        To: <span>{{ endPrice }}$</span>
+        {{ $t("ContactFooter.to") }}: <span>{{ endPrice }}$</span>
       </p>
     </div>
     <div v-else>
-      <p>Price not available</p>
+      <p>{{ $t("ContactFooter.priceNotAvailable") }}</p>
     </div>
     <div>
-      <Button class="text-light rounded-md bg-primary px-2 py-1 text-2xl"
-        >Contact Hotel</Button
-      >
+      <Button class="text-light rounded-md bg-primary px-2 py-1 text-2xl">{{
+        $t("ContactFooter.contactHotel")
+      }}</Button>
     </div>
   </div>
 </template>

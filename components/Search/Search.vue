@@ -3,7 +3,7 @@
     <div @submit.prevent="handleSubmit" class="p-inputgroup p-input-icon-right">
       <InputText
         id="search-input"
-        placeholder="Search for a specific hotel"
+        :placeholder="$t('Search.searchForSpecificHotel')"
         v-model="localSearchText"
         @keyup.enter="handleSubmit"
         class="bg-light h-12 w-full rounded-l-xl px-2 text-primary-200 shadow focus:shadow"

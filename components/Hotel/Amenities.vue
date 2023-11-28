@@ -21,13 +21,12 @@
           </p>
         </div>
       </div>
-      <button
+      <Button
         v-if="shouldShowLoadMoreButton"
         @click="loadMore"
         class="bg-light mt-3 rounded-lg border-2 border-primary-200 py-2 text-primary-200"
-      >
-        Load More
-      </button>
+        :label="$t('common.loadMore')"
+      />
     </div>
   </div>
 </template>

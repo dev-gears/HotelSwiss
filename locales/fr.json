@@ -1,4 +1,7 @@
 {
+  "common": {
+    "loadMore": "Charger plus"
+  },
   "LanguageButton": {
     "selectLanguage": "Choisir la langue"
   },
@@ -6,8 +9,7 @@
     "includedAmenities": "Inclus"
   },
   "TabContent": {
-    "noHotelsFound": "Aucun hôtel trouvé",
-    "loadMore": "Charger plus"
+    "noHotelsFound": "Aucun hôtel trouvé"
   },
   "CategoryTabs": {
     "allHotels": "Tous les hôtels"
@@ -22,6 +24,19 @@
     "title": "Ce que nous offrons"
   },
   "Search": {
-    "filters": "Filtres"
+    "filters": "Filtres",
+    "searchForSpecificHotel": "Rechercher un hôtel spécifique"
+  },
+  "PromoBlock": {
+    "promoHotels": "Hôtels promotionnels"
+  },
+  "ContactFooter": {
+    "from": "De",
+    "to": "À",
+    "priceNotAvailable": "Prix non disponible",
+    "contactHotel": "Contacter l'hôtel"
+  },
+  "SocialNetworks": {
+    "visitUsAlsoOn": "Visitez-nous aussi sur"
   }
 }
