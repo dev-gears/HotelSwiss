@@ -21,7 +21,7 @@
     <Button
       icon="pi pi-refresh"
       class="mx-auto mt-3 border px-3 py-2"
-      :label="$t('TabContent.loadMore')"
+      :label="$t('common.loadMore')"
     />
   </div>
 </template>

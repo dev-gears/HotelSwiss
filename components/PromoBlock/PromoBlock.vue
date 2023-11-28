@@ -1,7 +1,7 @@
 <template>
   <div class="promo-block relative mx-auto">
     <div class="container mx-auto px-3">
-      <CommonBlockHeader title="Promo hotels" />
+      <CommonBlockHeader :title="$t('PromoBlock.promoHotels')" />
     </div>
     <Swiper
       :modules="[SwiperAutoplay, SwiperNavigation]"

@@ -1,4 +1,7 @@
 {
+  "common": {
+    "loadMore": "Load more"
+  },
   "LanguageButton": {
     "selectLanguage": "Select language"
   },
@@ -6,8 +9,7 @@
     "includedAmenities": "Included"
   },
   "TabContent": {
-    "noHotelsFound": "No hotels found",
-    "loadMore": "Load more"
+    "noHotelsFound": "No hotels found"
   },
   "CategoryTabs": {
     "allHotels": "All hotels"
@@ -22,6 +24,19 @@
     "title": "What we offer"
   },
   "Search": {
-    "filters": "Filters"
+    "filters": "Filters",
+    "searchForSpecificHotel": "Search for a specific hotel"
+  },
+  "PromoBlock": {
+    "promoHotels": "Promo hotels"
+  },
+  "ContactFooter": {
+    "from": "From",
+    "to": "To",
+    "priceNotAvailable": "Price not available",
+    "contactHotel": "Contact Hotel"
+  },
+  "SocialNetworks": {
+    "visitUsAlsoOn": "Visit us also on"
   }
 }

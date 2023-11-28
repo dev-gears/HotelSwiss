@@ -3,7 +3,7 @@
     class="bg-light container mx-auto mb-14 border-t-2 border-primary-100/40 p-7"
   >
     <h2 class="font-robotoRegular text-3xl text-primary-200">
-      Visit us also on
+      {{ $t("SocialNetworks.visitUsAlsoOn") }}
     </h2>
     <div class="mt-5 flex items-center justify-around">
       <HotelSocialNetworksIcon
