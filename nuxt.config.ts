@@ -48,7 +48,7 @@ export default defineNuxtConfig({
       },
     },
   },
-  plugins: ["~/plugins/primevue.js"],
+  plugins: ["~/plugins/primevue.js", "~/plugins/languageState.js"],
   pages: true,
   swiper: {
     prefix: "Swiper",
