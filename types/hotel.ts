@@ -47,6 +47,10 @@ export interface Canton {
   image: Image;
 }
 
+export interface CantonWrapper {
+  canton: Canton;
+}
+
 export interface SocialLink {
   name: string;
   icon: string;

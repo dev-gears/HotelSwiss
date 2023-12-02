@@ -1,131 +1,37 @@
 <template>
-  <div class="flex flex-wrap">
-    <div v-for="canton in cantons" class="h-16 w-1/4 p-1 text-center text-xs">
+  <div class="py-6">
+    <h3 class="font-robotoRegular text-xl text-primary-200">Cantons</h3>
+    <p class="font-robotoRegular text-sm text-primary-200">
+      Lorem ipsum dolor sit amet consectetur. Id non pellentesque pellentesque.
+    </p>
+    <div class="flex flex-wrap items-start justify-start gap-2.5 pt-5">
       <div
-        :style="{ 'background-image': `url(${canton.image})` }"
-        class="flex h-full w-full items-center justify-center border border-primary"
+        v-for="canton in cantons"
+        :key="'canton' + canton?.id"
+        :class="backgroundColor"
+        class="flex h-20 min-w-[80px] max-w-[80px] items-center justify-center rounded-2xl border border-primary/20 bg-contain bg-center bg-no-repeat text-center"
+        :style="`background-image: url('${backendUrl}${canton?.image?.renditions?.thumbnail}');`"
       >
-        {{ canton.name }}
+        <span class="font font-robotoRegular text-sm text-primary-200">
+          {{ canton?.name }}
+        </span>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const cantons = [
-  {
-    id: 1,
-    name: "Valais",
-    image:
-      "<https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg>",
-  },
-  {
-    id: 2,
-    name: "Vaud",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 3,
-    name: "Geneva",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 4,
-    name: "Bern",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 5,
-    name: "Zurich",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 6,
-    name: "Graubünden",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 7,
-    name: "Ticino",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 8,
-    name: "Lucerne",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 9,
-    name: "Basel-Stadt",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 10,
-    name: "Aargau",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 11,
-    name: "St. Gallen",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 12,
-    name: "Thurgau",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 13,
-    name: "Grisons",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 14,
-    name: "Neuchâtel",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 15,
-    name: "Schwyz",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 16,
-    name: "Solothurn",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 17,
-    name: "Zug",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 18,
-    name: "Fribourg",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-  {
-    id: 19,
-    name: "Appenzell Ausserrhoden",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/026/266/804/non_2x/switzerland-map-swiss-map-3d-color-map-vector.jpg",
-  },
-];
+import { Canton } from "@/types/hotel";
+
+const runtimeConfig = useRuntimeConfig();
+const backendUrl = runtimeConfig.public.backendUrl;
+
+const { cantons } = defineProps<{
+  cantons: Array<Canton>;
+}>();
+let backgroundColor = "bg-light-100";
+
+const selectCanton = (canton: Canton) => {
+  console.log(canton);
+};
 </script>
