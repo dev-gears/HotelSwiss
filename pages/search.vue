@@ -1,18 +1,22 @@
 <template>
   <div>
-    <CommonBlockHeader
-      :title="`Search results for: ${route.query.value}`"
-      class="mb-5 border-b border-primary py-3 font-robotoRegular"
-    />
-    <SkeletonLoadersSearchSkeleton v-if="isLoading" />
-    <div>
-      <CommonGridSection
-        v-if="searchedHotels?.value.length"
-        :hotels="searchedHotels.value"
+    <div class="container mx-auto">
+      <CommonBlockHeader
+        :title="`Search results for: ${route.query.value}`"
+        class="mb-5 border-b border-primary py-3 font-robotoRegular"
       />
-      <div v-else class="flex h-[50vh] items-center justify-center">
-        <h1 class="text-2xl text-primary-100">No results found</h1>
-      </div>
+      <ClientOnly>
+        <SkeletonLoadersSearchSkeleton v-if="isLoading" />
+        <div>
+          <CommonGridSection
+            v-if="searchedHotels?.value.length"
+            :hotels="searchedHotels.value"
+          />
+          <div v-else class="flex h-[50vh] items-center justify-center">
+            <h1 class="text-2xl text-primary-100">No results found</h1>
+          </div>
+        </div>
+      </ClientOnly>
     </div>
   </div>
 </template>
