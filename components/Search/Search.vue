@@ -6,7 +6,7 @@
         :placeholder="$t('Search.searchForSpecificHotel')"
         v-model="localSearchText"
         @keyup.enter="handleSubmit"
-        class="bg-light h-12 w-full rounded-l-xl px-2 text-primary-200 shadow focus:shadow"
+        class="h-12 w-full rounded-l-xl bg-light px-2 text-primary-200 shadow focus:shadow"
       />
       <i
         @click="handleSubmit"
@@ -15,7 +15,7 @@
     </div>
     <Button
       icon="pi pi-sliders-h"
-      class="bg-light flex h-12 rounded-none rounded-br-xl px-6 shadow [&_span]:text-2xl [&_span]:!text-primary"
+      class="flex h-12 rounded-none rounded-br-xl bg-light px-6 shadow [&_span]:text-2xl [&_span]:!text-primary"
       @click="showFilters = true"
     />
   </div>
@@ -42,9 +42,10 @@ import { ref } from "vue";
 
 const localSearchText = ref("");
 const showFilters = ref(false);
+const router = useRouter();
 
 const handleSubmit = async () => {
-  await navigateTo({
+  await router.push({
     path: "/search",
     query: { value: localSearchText.value, filters: [""] },
   });

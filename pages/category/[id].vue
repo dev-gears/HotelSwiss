@@ -6,7 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import { useFetchData } from "@/composables/useFetchData";
 import { useRoute } from "vue-router";
 definePageMeta({
   layout: "base",
