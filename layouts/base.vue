@@ -3,7 +3,7 @@
     <div>
       <Header />
       <div class="container mx-auto px-3">
-        <Search />
+        <SearchSection />
       </div>
       <slot />
     </div>
