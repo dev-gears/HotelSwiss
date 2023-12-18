@@ -76,3 +76,13 @@ export interface Hotel {
   images: Array<{ image: Image }>;
   social_links: SocialLink[];
 }
+
+export interface Filters {
+  cantons: string[];
+  priceRange: {
+    from: number;
+    to: number;
+  };
+  amenities: string[];
+  stars: string | null;
+}
