@@ -28,6 +28,7 @@ defineProps({
   },
 });
 
+const emit = defineEmits(["handleSubmit"]);
 const localSearchText = ref("");
 const router = useRouter();
 
@@ -36,5 +37,6 @@ const handleSubmit = async () => {
     path: "/search",
     query: { value: localSearchText.value, filters: [""] },
   });
+  emit("handleSubmit");
 };
 </script>

@@ -4,16 +4,6 @@
     <p class="font-robotoRegular text-sm text-primary-200">
       Lorem ipsum dolor sit amet consectetur. Id non pellentesque pellentesque.
     </p>
-    <div class="mb-10 pt-5">
-      <img src="~/assets/images/PriceRangeChart.svg" alt="" />
-      <Slider
-        inputId="slider"
-        @change="changedPriceRange"
-        range
-        v-model="sliderPrice"
-        class="w-14rem"
-      />
-    </div>
     <div class="flex justify-between bg-primary-100">
       <InputNumber
         v-model="minPriceInput"
@@ -35,21 +25,29 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const props = defineProps({
+const emit = defineEmits(["update:modelValue", "register-clear"]);
+
+const { minPrice, maxPrice } = defineProps({
   minPrice: Number,
   maxPrice: Number,
 });
 
-const { minPrice, maxPrice } = props;
-let minPriceInput = ref(minPrice);
-let maxPriceInput = ref(maxPrice);
-let sliderPrice = ref([minPrice, maxPrice]);
+const minPriceInput: Ref<number | undefined> = ref(minPrice);
+const maxPriceInput: Ref<number | undefined> = ref(maxPrice);
 
-console.log(minPrice, maxPrice);
+onMounted(() => {
+  emit("register-clear", clearInputs);
+});
 
-const changedPriceRange = () => {
-  console.log(sliderPrice.value);
+const clearInputs = () => {
+  minPriceInput.value = minPrice;
+  maxPriceInput.value = maxPrice;
 };
-</script>
 
-<style scoped></style>
+watchEffect(() => {
+  emit("update:modelValue", {
+    from: minPriceInput.value,
+    to: maxPriceInput.value,
+  });
+});
+</script>

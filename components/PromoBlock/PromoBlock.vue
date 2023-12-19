@@ -4,11 +4,13 @@
       <CommonBlockHeader :title="$t('PromoBlock.promoHotels')" />
     </div>
     <Swiper
+      class="flex"
       :modules="[SwiperAutoplay, SwiperNavigation]"
       :slidesPerView="1.5"
       :centeredSlides="false"
       :spaceBetween="16"
       :autoHeight="false"
+      :lazyPreloadPrevNext="3"
       :loop="false"
       :navigation="{
         nextEl: '.next-slide-button',
@@ -24,7 +26,7 @@
         <Card :hotel="hotel" aspect="square" :showAmenities="false" />
       </SwiperSlide>
       <div
-        class="bg-light-100 absolute left-0 top-0 z-40 hidden h-full w-9 items-start justify-center lg:flex"
+        class="absolute left-0 top-0 z-40 hidden h-full w-9 items-start justify-center bg-light-100 lg:flex"
       >
         <button
           class="prev-slide-button flex w-5 items-center justify-center rounded"
@@ -33,7 +35,7 @@
         </button>
       </div>
       <div
-        class="bg-light-100 absolute right-0 top-0 z-40 hidden h-full w-9 items-start justify-center lg:flex"
+        class="absolute right-0 top-0 z-40 hidden h-full w-9 items-start justify-center bg-light-100 lg:flex"
       >
         <button
           class="next-slide-button flex w-5 items-center justify-center rounded"
@@ -89,7 +91,7 @@ const responsiveOptions = ref({
 
   .p-carousel-next.p-link,
   .p-carousel-prev.p-link {
-    @apply text-light mx-1.5 bg-primary md:relative lg:h-28 lg:w-5 lg:rounded-none;
+    @apply mx-1.5 bg-primary text-light md:relative lg:h-28 lg:w-5 lg:rounded-none;
     @apply max-sm:absolute max-sm:bottom-0 max-sm:translate-y-10 max-sm:transform;
   }
 
