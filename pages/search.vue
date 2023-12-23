@@ -11,6 +11,8 @@
           <CommonGridSection
             v-if="searchedHotels?.value.length"
             :hotels="searchedHotels.value"
+            :nextUrl="nextUrl"
+            :bindIntersection="true"
           />
           <div v-else class="flex h-[50vh] items-center justify-center">
             <h1 class="text-2xl text-primary-100">No results found</h1>
@@ -32,6 +34,7 @@ definePageMeta({
 const route = useRoute();
 const searchedHotels = reactive({ value: [] as Hotel[] });
 const isLoading = ref(false);
+const nextUrl = ref(null);
 
 /**
  * Fetches hotels from the API by search query params
@@ -43,7 +46,8 @@ const handleSearch = async () => {
     isLoading.value = true;
     searchedHotels.value = [];
     const data = await useHotelApiData(`/hotels?search=${route.query.value}`);
-    searchedHotels.value = toRef(data.data.value);
+    searchedHotels.value = toRef(data.data.value.results);
+    nextUrl.value = toRef(data.data.value.next);
   } catch (error) {
     console.log(error);
   } finally {

@@ -11,8 +11,10 @@
           :id="0"
           :name="$t('CategoryTabs.allHotels')"
           :categorizedHotels="firstTabContent"
+          :nextUrl="null"
           :isLoading="false"
           :category="`all`"
+          :activeTab="activeTab === 0"
         />
       </TabPanel>
       <TabPanel v-for="(tab, index) in categories" :key="index">
@@ -25,8 +27,10 @@
           :id="tab.id"
           :name="tab.name"
           :categorizedHotels="categorizedHotels"
+          :nextUrl="nextUrl"
           :isLoading="isLoading"
           :category="tab.id.toString()"
+          :activeTab="activeTab === index"
         />
       </TabPanel>
     </TabView>
@@ -35,7 +39,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Category } from "types/hotel";
+import { Category, Hotel } from "@/types/hotel";
 
 const { categories, firstTabContent } = defineProps({
   categories: {
@@ -43,22 +47,32 @@ const { categories, firstTabContent } = defineProps({
     required: true,
   },
   firstTabContent: {
-    type: Array,
+    type: Array<Hotel>,
     required: true,
   },
 });
 
-let isLoading = ref(false);
-let categorizedHotels = ref([]);
+const isLoading = ref(false);
+const categorizedHotels = ref([]);
+const nextUrl = ref(null);
+const activeTab = ref(0);
 
 const onTabChange = async (newIndex: number) => {
   if (newIndex !== 0) {
-    const { data: hotels, pending } = useHotelApiData(
-      `/hotels?category_id=${categories[newIndex - 1].id.toString()}`,
-    );
-    categorizedHotels = hotels;
-    isLoading = pending;
+    try {
+      isLoading.value = true;
+      const { data: hotels } = await useHotelApiData(
+        `/hotels?category_id=${categories[newIndex - 1].id.toString()}`,
+      );
+      categorizedHotels.value = hotels.value.results;
+      nextUrl.value = hotels.value.next;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      isLoading.value = false;
+    }
   }
+  activeTab.value = newIndex;
 };
 </script>
 
@@ -72,7 +86,7 @@ const onTabChange = async (newIndex: number) => {
 }
 
 .p-tabview-nav-container {
-  @apply border-light-100 !bg-light-100 sticky top-0 z-50 border-b;
+  @apply sticky top-0 z-50 border-b border-light-100 !bg-light-100;
 }
 
 .p-tabview-nav-content {
@@ -98,14 +112,14 @@ const onTabChange = async (newIndex: number) => {
 }
 
 ul[role="tablist"] {
-  @apply bg-light-100 flex gap-3;
+  @apply flex gap-3 bg-light-100;
 
   li {
     @apply rounded-[10px] font-robotoRegular;
   }
 
   a {
-    @apply text-light  rounded-[10px] bg-primary shadow-cardImage;
+    @apply rounded-[10px]  bg-primary text-light shadow-cardImage;
   }
 
   a[aria-selected="true"] {
