@@ -1,7 +1,11 @@
 <template>
   <div class="max-sm:px-4">
     <CommonBlockHeader :title="`Category:`" />
-    <CommonGridSection :hotels="categorizedHotels" />
+    <CommonGridSection
+      :hotels="data.results"
+      :nextUrl="data.next"
+      :bindIntersection="true"
+    />
   </div>
 </template>
 
@@ -12,7 +16,5 @@ definePageMeta({
 });
 
 const route = useRoute();
-const { data: categorizedHotels } = useHotelApiData(
-  `/hotels?category_id=${route.params.id}`,
-);
+const { data } = useHotelApiData(`/hotels?category_id=${route.params.id}`);
 </script>

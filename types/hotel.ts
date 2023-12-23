@@ -86,3 +86,16 @@ export interface Filters {
   amenities: string[];
   stars: string | null;
 }
+export interface HotelListWithPagination {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Array<Hotel>;
+}
+
+export interface FirstScreen {
+  promo_hotels: Hotel[];
+  categories: Category[];
+  all_hotels: Hotel[];
+  filters: Filters;
+}
