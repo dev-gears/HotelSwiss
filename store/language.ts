@@ -5,8 +5,17 @@ export const useLanguageStore = defineStore("language", {
     currentLanguage: "en",
   }),
   actions: {
-    setLanguage(newLang: string) {
-      this.currentLanguage = newLang;
+    setLanguage(newLanguage: string) {
+      this.currentLanguage = newLanguage;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("language", newLanguage);
+      }
+    },
+    initializeLanguage() {
+      if (typeof window !== "undefined") {
+        const savedLanguage = localStorage.getItem("language") || "en";
+        this.setLanguage(savedLanguage);
+      }
     },
   },
 });
