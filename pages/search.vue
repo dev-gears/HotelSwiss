@@ -48,8 +48,6 @@ const { filters, searchValue } = filtersStore;
  */
 const handleSearch = async () => {
   try {
-    console.log("handleSearch");
-
     isLoading.value = true;
     searchedHotels.value = [];
     const queryParams = new URLSearchParams();
@@ -74,11 +72,6 @@ const handleSearch = async () => {
     }
 
     if (filters.amenities.length) {
-      console.log("filters.amenities", filters.amenities);
-      // queryParams.append(
-      //   "amenities",
-      //   filters.amenities.map((amenity: Amenity) => amenity).join(","),
-      // );
       filters.amenities.forEach((amenity: Amenity) => {
         queryParams.append("amenities", amenity.toString());
       });
@@ -87,8 +80,6 @@ const handleSearch = async () => {
     if (filters.stars) {
       queryParams.append("stars", filters.stars);
     }
-
-    console.log("queryParams", queryParams.toString());
 
     const data = await useHotelApiData(`/hotels?${queryParams.toString()}`, {
       cache: false,

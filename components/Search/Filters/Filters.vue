@@ -90,13 +90,6 @@ const submitSearch = () => {
 };
 
 const updateFilters = () => {
-  console.log("updateFilters", {
-    cantons: localCantons.value,
-    priceRange: localPriceRange.value,
-    amenities: localAmenities.value,
-    stars: localStars.value,
-  });
-
   emit("update-filters", {
     cantons: localCantons.value,
     priceRange: localPriceRange.value,
