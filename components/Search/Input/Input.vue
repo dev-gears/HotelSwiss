@@ -4,6 +4,7 @@
       :id="id"
       :placeholder="$t('Search.searchForSpecificHotel')"
       v-model="localSearchText"
+      @input="onInput"
       @keyup.enter="handleSubmit"
       :class="customClassInput"
     />
@@ -16,6 +17,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useFiltersStore } from "@/store/filters";
 
 defineProps({
   id: {
@@ -28,15 +30,25 @@ defineProps({
   },
 });
 
-const emit = defineEmits(["handleSubmit"]);
+const emit = defineEmits(["handleSubmit", "update:modelValue"]);
 const localSearchText = ref("");
-const router = useRouter();
+const route = useRoute();
+
+const filtersStore = useFiltersStore();
+
+onMounted(() => {
+  localSearchText.value = filtersStore.searchValue;
+});
+
+const onInput = (event: Event) => {
+  emit("update:modelValue", (event?.target as HTMLInputElement)?.value);
+};
 
 const handleSubmit = async () => {
-  await router.push({
-    path: "/search",
-    query: { value: localSearchText.value, filters: [""] },
-  });
+  filtersStore.setSearchValue(localSearchText.value);
+  if (route.name !== "search") {
+    await navigateTo({ path: "/search" });
+  }
   emit("handleSubmit");
 };
 </script>

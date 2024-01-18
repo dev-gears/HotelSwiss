@@ -13,8 +13,9 @@
   <SearchFilters
     v-model:visible="showFilters"
     :filters="firstScreenData?.filters"
-    @clear-filters="clearFilters"
-    @update-filters="updateFilters"
+    @submitSearch="showFilters = false"
+    @clearFilters="clearFilters"
+    @updateFilters="updateFilters"
   />
 </template>
 
@@ -23,6 +24,7 @@ import { ref } from "vue";
 import { useFiltersStore } from "@/store/filters";
 import { Filters } from "@/types/hotel";
 
+const route = useRoute();
 const filtersStore = useFiltersStore();
 
 const showFilters = ref(false);
@@ -38,13 +40,13 @@ const clearFilters = () => {
  * Update the filters in the store
  * @param newFilters
  */
-const updateFilters = (newFilters: Filters) => {
-  filtersStore.updateFilters(
-    newFilters.cantons,
-    newFilters.priceRange,
-    newFilters.amenities,
-    newFilters.stars,
-  );
+const updateFilters = async (newFilters: Filters) => {
+  showFilters.value = false;
+  filtersStore.updateFilters(newFilters);
+
+  if (route.name !== "search") {
+    await navigateTo(`/search`);
+  }
 };
 
 const { data: firstScreenData } = await useHotelApiData("/first-screen");
