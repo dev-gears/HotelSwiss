@@ -99,3 +99,13 @@ export interface FirstScreen {
   all_hotels: Hotel[];
   filters: Filters;
 }
+
+export interface Filters {
+  cantons: string[];
+  priceRange: {
+    from: number;
+    to: number;
+  };
+  amenities: string[];
+  stars: string | null;
+}
