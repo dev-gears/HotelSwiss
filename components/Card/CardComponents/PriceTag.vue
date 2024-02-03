@@ -2,7 +2,7 @@
   <div
     class="absolute left-2.5 top-2.5 rounded-[10px] bg-primary px-3 py-1.5 shadow-cardImage"
   >
-    <p class="text-light font-patuaOne text-sm">
+    <p class="font-patuaOne text-sm text-light">
       {{ startPrice || "-" }}$ / {{ endPrice || "-" }}$
     </p>
   </div>

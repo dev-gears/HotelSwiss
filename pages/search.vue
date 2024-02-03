@@ -2,7 +2,7 @@
   <div>
     <div class="container mx-auto">
       <CommonBlockHeader
-        :title="`Search results for: ${searchValue}`"
+        :title="`Search results for: ${searchedTerm}`"
         class="mb-5 border-b border-primary py-3 font-robotoRegular"
       />
       <ClientOnly>
@@ -27,27 +27,26 @@
 import { useRoute } from "vue-router";
 import { Hotel, Canton, Amenity } from "types/hotel";
 import { useFiltersStore } from "@/store/filters";
-import { storeToRefs } from "pinia";
 
 definePageMeta({
   layout: "base",
 });
 
-const route = useRoute();
 const searchedHotels = reactive({ value: [] as Hotel[] });
 const isLoading = ref(false);
 const nextUrl = ref(null);
+const searchedTerm = ref("");
 
 // Get filters from the store and add them to the query params
 const filtersStore = useFiltersStore();
-
-const { filters, searchValue } = filtersStore;
 
 /**
  * Fetches hotels from the API by search query params
  */
 const handleSearch = async () => {
   try {
+    const { filters, searchValue } = filtersStore;
+    searchedTerm.value = searchValue;
     isLoading.value = true;
     searchedHotels.value = [];
     const queryParams = new URLSearchParams();
@@ -63,12 +62,12 @@ const handleSearch = async () => {
       );
     }
 
-    if (filters.priceRange.from) {
-      queryParams.append("min_price", filters.priceRange.from.toString());
+    if (filters.price_range.from !== undefined) {
+      queryParams.append("min_price", filters.price_range.from.toString());
     }
 
-    if (filters.priceRange.to) {
-      queryParams.append("max_price", filters.priceRange.to.toString());
+    if (filters.price_range.to !== undefined) {
+      queryParams.append("max_price", filters.price_range.to.toString());
     }
 
     if (filters.amenities.length) {
@@ -81,8 +80,9 @@ const handleSearch = async () => {
       queryParams.append("stars", filters.stars);
     }
 
+    console.log(queryParams.toString(), searchValue);
     const data = await useHotelApiData(`/hotels?${queryParams.toString()}`, {
-      cache: false,
+      cache: true,
     });
     searchedHotels.value = toRef(data.data.value.results);
   } catch (error) {
@@ -95,8 +95,10 @@ const handleSearch = async () => {
 let unsubscribe: () => void;
 
 onMounted(() => {
+  handleSearch()
   unsubscribe = filtersStore.$onAction(({ name, after }) => {
-    if (name === "updateFilters") {
+    console.log(name);
+    if (name === "updateFilters" || name === "setSearchValue") {
       after(() => {
         handleSearch();
       });

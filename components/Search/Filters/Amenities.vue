@@ -44,10 +44,8 @@ const {
   shouldShowLoadMoreButton,
 } = useLoadMore(props.amenities, 5);
 
-// Create a reactive object to store the selected state of each amenity
 const selectedAmenities = ref<Record<number, boolean>>({});
 
-// Whenever an amenity's selected state changes, update modelValue and emit the change
 watchEffect(() => {
   const selectedIds = Object.entries(selectedAmenities.value)
     .filter(([id, selected]) => selected)
@@ -55,7 +53,6 @@ watchEffect(() => {
   emit("update:modelValue", selectedIds);
 });
 
-// Initialize selectedAmenities based on modelValue
 props?.modelValue?.forEach((id) => {
   if (!id) return;
   selectedAmenities.value[id] = true;

@@ -1,17 +1,12 @@
 import { defineStore } from "pinia";
 import { Filters } from "@/types/hotel";
 
-interface PriceRange {
-  from: number;
-  to: number;
-}
-
 export const useFiltersStore = defineStore({
   id: "filters",
   state: () => ({
     filters: {
       cantons: [],
-      priceRange: { from: 0, to: 0 },
+      price_range: { from: undefined, to: undefined },
       amenities: [],
       stars: null,
     },

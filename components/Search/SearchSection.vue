@@ -26,7 +26,6 @@ import { Filters } from "@/types/hotel";
 
 const route = useRoute();
 const filtersStore = useFiltersStore();
-
 const showFilters = ref(false);
 
 /**
