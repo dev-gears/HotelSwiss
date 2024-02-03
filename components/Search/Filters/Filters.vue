@@ -30,8 +30,8 @@
       />
       <SearchFiltersPriceRange
         v-model="localPriceRange"
-        :minPrice="filters?.priceRange?.from"
-        :maxPrice="filters?.priceRange?.to"
+        :minPrice="filters?.price_range?.from"
+        :maxPrice="filters?.price_range?.to"
       />
       <SearchFiltersAmenities
         v-model="localAmenities"
@@ -62,11 +62,12 @@ import { Canton, Amenity } from "@/types/hotel";
 const { filters } = defineProps<{
   filters: {
     cantons: Array<Canton>;
-    priceRange: { from: number; to: number };
+    price_range: { from: number | undefined; to: number | undefined};
     amenities: Array<Amenity>;
     stars: string;
   };
 }>();
+
 
 const emit = defineEmits(["clear-filters", "update-filters", "submit-search"]);
 const filtersStore = useFiltersStore();
@@ -92,7 +93,7 @@ const submitSearch = () => {
 const updateFilters = () => {
   emit("update-filters", {
     cantons: localCantons.value,
-    priceRange: localPriceRange.value,
+    price_range: localPriceRange.value,
     amenities: localAmenities.value,
     stars: localStars.value,
   });

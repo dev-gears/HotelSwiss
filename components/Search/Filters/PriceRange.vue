@@ -13,7 +13,7 @@
         }"
         v-model="minPriceInput"
         inputId="min"
-        @update="updatePriceRange"
+        @update:modelValue="updatePriceRange"
         :min="minPrice"
         :max="maxPrice"
       />
@@ -24,7 +24,7 @@
           input: 'w-full rounded-md p-2 bg-light-100 border border-primary/20',
         }"
         v-model="maxPriceInput"
-        @update="updatePriceRange"
+        @update:modelValue="updatePriceRange"
         inputId="max"
         :min="minPrice"
         :max="maxPrice"
@@ -34,13 +34,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { PropType, Ref, ref } from "vue";
+import { useFiltersStore } from "@/store/filters";
 
 const emit = defineEmits(["update:modelValue"]);
+const filtersStore = useFiltersStore();
 
 const { minPrice, maxPrice } = defineProps({
-  minPrice: Number,
-  maxPrice: Number,
+  minPrice: {
+    type: Number as PropType<number | undefined>,
+    required: true,
+  },
+  maxPrice: {
+    type: Number as PropType<number | undefined>,
+    required: true,
+  },
+});
+
+onMounted(() => {
+  if (filtersStore.filters.price_range.from) {
+    minPriceInput.value = filtersStore.filters.price_range.from;
+    maxPriceInput.value = filtersStore.filters.price_range.to;
+  }
 });
 
 const minPriceInput: Ref<number | undefined> = ref(minPrice);

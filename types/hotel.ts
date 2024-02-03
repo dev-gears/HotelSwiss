@@ -80,8 +80,8 @@ export interface Hotel {
 export interface Filters {
   cantons: string[];
   priceRange: {
-    from: number;
-    to: number;
+    from: number | undefined;
+    to: number | undefined;
   };
   amenities: string[];
   stars: string | null;
@@ -100,12 +100,3 @@ export interface FirstScreen {
   filters: Filters;
 }
 
-export interface Filters {
-  cantons: string[];
-  priceRange: {
-    from: number;
-    to: number;
-  };
-  amenities: string[];
-  stars: string | null;
-}
