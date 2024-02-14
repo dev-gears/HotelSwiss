@@ -11,8 +11,8 @@
           :id="0"
           :name="$t('CategoryTabs.allHotels')"
           :categorizedHotels="firstTabContent"
-          :nextUrl="null"
-          :isLoading="false"
+          :nextUrl="nextUrl"
+          :isLoading="isLoading"
           :category="`all`"
           :activeTab="activeTab === 0"
         />
@@ -41,17 +41,14 @@
 import { ref } from "vue";
 import { Category, Hotel } from "@/types/hotel";
 
-const { categories, firstTabContent } = defineProps({
+const { categories } = defineProps({
   categories: {
     type: Array<Category>,
     required: true,
   },
-  firstTabContent: {
-    type: Array<Hotel>,
-    required: true,
-  },
 });
 
+const firstTabContent = ref([]);
 const isLoading = ref(false);
 const categorizedHotels = ref([]);
 const nextUrl = ref(null);
@@ -74,6 +71,19 @@ const onTabChange = async (newIndex: number) => {
   }
   activeTab.value = newIndex;
 };
+
+const getFirstTabContent = async () => {
+  try {
+    const { data: hotels, pending } = await useHotelApiData("/hotels");
+    firstTabContent.value = hotels.value.results;
+    nextUrl.value = hotels.value.next;
+    isLoading.value = pending.value;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+getFirstTabContent();
 </script>
 
 <style lang="pcss">

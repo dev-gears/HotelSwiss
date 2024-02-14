@@ -6,50 +6,65 @@
       :hotel="hotel"
       :showAmenities="true"
     />
-    <div v-if="false" ref="end"></div>
-    <!-- v-if value - bindIntersection after API change -->
+    <div ref="end"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from "vue";
+import { onMounted, onUnmounted, ref, watch, reactive } from "vue";
 import { Hotel } from "types/hotel";
-
-const { hotels, nextUrl } = defineProps<{
+const props = defineProps<{
   hotels: Array<Hotel>;
   nextUrl: string | null;
-  bindIntersection: boolean;
 }>();
 
+const state = reactive({
+  hotels: props.hotels,
+  nextUrl: props.nextUrl,
+  loading: false,
+});
+
+const end = ref<HTMLElement | null>(null);
+
 let observer: IntersectionObserver | null = null;
-const end = ref(null);
+
+const fetchMoreHotels = async () => {
+  if (state.nextUrl && !state.loading) {
+    state.loading = true;
+    const { data: newData } = await useHotelApiData(state.nextUrl);
+    console.log(newData.value.results);
+
+    state.hotels.push(...newData.value.results);
+    state.nextUrl = newData.value.nextUrl;
+    state.loading = false;
+  }
+};
 
 onMounted(() => {
-  if (!nextUrl) return;
-  observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting && nextUrl) {
-      const { data: hotels, pending } = useHotelApiData(nextUrl);
-    }
-  });
+  observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting && state.nextUrl) {
+        fetchMoreHotels();
+      }
+    },
+    {
+      rootMargin: "100px",
+    },
+  );
 
-  if (end?.value) {
+  if (end.value) {
     observer.observe(end.value);
   }
 });
 
 onUnmounted(() => {
-  if (observer) {
-    observer.disconnect();
-  }
+  if (observer) observer.disconnect();
 });
 
-watch(hotels, () => {
-  if (observer) {
-    observer.disconnect();
-  }
-
-  if (end.value) {
-    observer?.observe(end.value);
-  }
-});
+watch(
+  () => props.nextUrl,
+  (newUrl) => {
+    state.nextUrl = newUrl;
+  },
+);
 </script>

@@ -36,7 +36,6 @@
     <CategoryTabs
       v-if="firstScreenData?.categories"
       :categories="firstScreenData.categories"
-      :firstTabContent="firstScreenData.all_hotels"
     />
   </div>
 </template>

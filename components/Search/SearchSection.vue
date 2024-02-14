@@ -12,7 +12,7 @@
   </div>
   <SearchFilters
     v-model:visible="showFilters"
-    :filters="firstScreenData?.filters"
+    :filters="filters"
     @submitSearch="showFilters = false"
     @clearFilters="clearFilters"
     @updateFilters="updateFilters"
@@ -48,5 +48,5 @@ const updateFilters = async (newFilters: Filters) => {
   }
 };
 
-const { data: firstScreenData } = await useHotelApiData("/first-screen");
+const { data: filters } = await useHotelApiData("/filters");
 </script>

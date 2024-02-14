@@ -24,7 +24,6 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from "vue-router";
 import { Hotel, Canton, Amenity } from "types/hotel";
 import { useFiltersStore } from "@/store/filters";
 
@@ -95,7 +94,7 @@ const handleSearch = async () => {
 let unsubscribe: () => void;
 
 onMounted(() => {
-  handleSearch()
+  handleSearch();
   unsubscribe = filtersStore.$onAction(({ name, after }) => {
     console.log(name);
     if (name === "updateFilters" || name === "setSearchValue") {
