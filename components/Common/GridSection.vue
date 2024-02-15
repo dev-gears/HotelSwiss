@@ -1,12 +1,15 @@
 <template>
-  <div class="flex flex-col gap-4 md:grid md:grid-cols-3 lg:grid-cols-4">
-    <Card
-      v-for="(hotel, index) in hotels"
-      :key="hotel.id"
-      :hotel="hotel"
-      :showAmenities="true"
-    />
-    <div ref="end"></div>
+  <div class="flex flex-col items-center justify-center gap-6">
+    <div class="flex flex-col gap-4 md:grid md:grid-cols-3 lg:grid-cols-4">
+      <Card
+        v-for="(hotel, index) in hotels"
+        :key="hotel.id"
+        :hotel="hotel"
+        :showAmenities="true"
+      />
+      <div ref="end"></div>
+    </div>
+    <ProgressSpinner v-if="state.loading" />
   </div>
 </template>
 
@@ -32,7 +35,6 @@ const fetchMoreHotels = async () => {
   if (state.nextUrl && !state.loading) {
     state.loading = true;
     const { data: newData } = await useHotelApiData(state.nextUrl);
-    console.log(newData.value.results);
 
     state.hotels.push(...newData.value.results);
     state.nextUrl = newData.value.nextUrl;
