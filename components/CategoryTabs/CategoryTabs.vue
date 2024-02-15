@@ -49,7 +49,7 @@ const { categories } = defineProps({
 });
 
 const firstTabContent = ref([]);
-const isLoading = ref(false);
+const isLoading = ref(true);
 const categorizedHotels = ref([]);
 const nextUrl = ref(null);
 const activeTab = ref(0);

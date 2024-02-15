@@ -27,7 +27,7 @@
     <Meta name="twitter:image" :content="``" />
   </Head>
 
-  <SkeletonLoadersLandingSkeleton v-if="pending" />
+  <SkeletonLoadersLandingSkeleton v-if="isLoading" />
   <div v-else>
     <PromoBlock
       v-if="firstScreenData?.promo_hotels"
@@ -41,9 +41,21 @@
 </template>
 
 <script setup lang="ts">
+import { FirstScreen } from "types/hotel";
+
 definePageMeta({
   layout: "base",
 });
-const { data: firstScreenData, pending } =
-  await useHotelApiData("/first-screen");
+
+let firstScreenData = reactive({} as any);
+const isLoading = ref(true);
+
+onBeforeMount(async () => {
+  const result = await useHotelApiData("/first-screen");
+  firstScreenData = result.data;
+  isLoading.value = false;
+});
+
+// const { data: firstScreenData, pending: isLoading } =
+//   await useHotelApiData("/first-screen");
 </script>

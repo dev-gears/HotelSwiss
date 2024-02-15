@@ -1,12 +1,14 @@
 <template>
-  <div class="relative my-8 flex w-full items-center gap-2">
+  <div
+    class="relative my-8 flex w-full items-center justify-center gap-2 [&_>div]:flex [&_>div]:w-full [&_>div]:bg-light"
+  >
     <SearchInput
       customClassInput="h-12 w-full rounded-l-xl bg-light px-2 text-primary-200 shadow focus:shadow"
       id="searchInput"
     />
     <Button
       icon="pi pi-sliders-h"
-      class="flex h-12 rounded-none rounded-br-xl bg-light px-6 shadow [&_span]:text-2xl [&_span]:!text-primary"
+      class="flex h-12 items-center justify-center rounded-none rounded-br-xl bg-light px-6 shadow [&_span]:text-2xl [&_span]:!text-primary"
       @click="showFilters = true"
     />
   </div>

@@ -12,7 +12,6 @@
             v-if="searchedHotels?.value.length"
             :hotels="searchedHotels.value"
             :nextUrl="nextUrl"
-            :bindIntersection="true"
           />
           <div v-else class="flex h-[50vh] items-center justify-center">
             <h1 class="text-2xl text-primary-100">No results found</h1>
@@ -78,12 +77,11 @@ const handleSearch = async () => {
     if (filters.stars) {
       queryParams.append("stars", filters.stars);
     }
-
-    console.log(queryParams.toString(), searchValue);
     const data = await useHotelApiData(`/hotels?${queryParams.toString()}`, {
       cache: true,
     });
     searchedHotels.value = toRef(data.data.value.results);
+    nextUrl.value = data.data.value.next;
   } catch (error) {
     console.log(error);
   } finally {
@@ -96,7 +94,6 @@ let unsubscribe: () => void;
 onMounted(() => {
   handleSearch();
   unsubscribe = filtersStore.$onAction(({ name, after }) => {
-    console.log(name);
     if (name === "updateFilters" || name === "setSearchValue") {
       after(() => {
         handleSearch();

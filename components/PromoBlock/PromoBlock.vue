@@ -4,7 +4,7 @@
       <CommonBlockHeader :title="$t('PromoBlock.promoHotels')" />
     </div>
     <Swiper
-      class="flex"
+      class="flex max-h-[650px] md:max-h-[500px] lg:max-h-[400px] xl:max-h-[500px]"
       :modules="[SwiperAutoplay, SwiperNavigation]"
       :slidesPerView="1.5"
       :centeredSlides="false"
