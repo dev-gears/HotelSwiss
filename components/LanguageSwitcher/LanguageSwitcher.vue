@@ -14,7 +14,7 @@
       :dismissable="true"
       :showCloseIcon="false"
       @hide="onOverlayHide"
-      class="text-light mt-[2px] w-[330px] rounded-[10px] rounded-tr-none bg-primary-100"
+      class="mt-[2px] w-[330px] rounded-[10px] rounded-tr-none bg-primary-100 text-light"
     >
       <ul class="m-0 list-none p-0 font-robotoRegular">
         <li class="bottom-border-item mb-2 border-b px-2 py-2 text-xl">
@@ -38,11 +38,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useLanguageStore } from "@/store/language";
 import OverlayPanel from "primevue/overlaypanel";
-
 import engIcon from "@/assets/images/language/eng.svg";
 import gerIcon from "@/assets/images/language/ger.svg";
 import itaIcon from "@/assets/images/language/ita.svg";
@@ -52,8 +51,6 @@ type LanguageCode = "en" | "de" | "it" | "fr";
 
 const { locale } = useI18n();
 const languageStore = useLanguageStore();
-const overlayPanel = ref<InstanceType<typeof OverlayPanel> | null>(null);
-const languageSwitcherRef = ref<HTMLElement | null>(null);
 const currentLanguage = ref<LanguageCode>("en");
 const languageNames: Record<LanguageCode, string> = {
   en: "English",
@@ -61,13 +58,18 @@ const languageNames: Record<LanguageCode, string> = {
   it: "Italiano",
   fr: "Français",
 };
+
 const icons: Record<LanguageCode, string> = {
   en: engIcon,
   de: gerIcon,
   it: itaIcon,
   fr: freIcon,
 };
+
 const currentIcon = computed(() => icons[currentLanguage.value]);
+
+const overlayPanel = ref<InstanceType<typeof OverlayPanel> | null>(null);
+const languageSwitcherRef = ref<HTMLElement | null>(null);
 const isOverlayPanelOpen = ref(false);
 
 const toggleOverlayPanel = (event: MouseEvent) => {
@@ -78,7 +80,7 @@ const toggleOverlayPanel = (event: MouseEvent) => {
 const changeLanguage = (code: LanguageCode) => {
   locale.value = code;
   languageStore.setLanguage(code);
-  currentLanguage.value = code;
+  currentLanguage.value = code as LanguageCode;
   isOverlayPanelOpen.value = false;
   overlayPanel.value?.hide();
 };
@@ -111,11 +113,20 @@ const isElementVisible = (el: HTMLElement) => {
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
+  currentLanguage.value = languageStore.currentLanguage as LanguageCode;
+  locale.value = languageStore.currentLanguage;
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
+
+watch(
+  () => languageStore.currentLanguage,
+  (newLang) => {
+    locale.value = newLang;
+  },
+);
 
 const buttonStyle = computed(() => ({
   backgroundColor: isOverlayPanelOpen.value ? "#26393B" : "#354F52",
