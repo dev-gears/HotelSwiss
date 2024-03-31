@@ -41,9 +41,7 @@ export default defineNuxtConfig({
   apiParty: {
     endpoints: {
       hotelApi: {
-        url:
-          process.env.BASE_URL! + process.env.API_PATH! ||
-          "http://localhost:3000/api",
+        url: process.env.BASE_URL! + process.env.API_PATH!,
         headers: headerAuth,
       },
     },

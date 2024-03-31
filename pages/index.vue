@@ -41,21 +41,14 @@
 </template>
 
 <script setup lang="ts">
-import type { FirstScreen } from "@/types/hotel";
-
 definePageMeta({
   layout: "base",
 });
 
-let firstScreenData = reactive({} as any);
-const isLoading = ref(true);
-
-onBeforeMount(async () => {
-  const result = await useHotelApiData("/first-screen");
-  firstScreenData = result.data;
-  isLoading.value = false;
-});
-
-// const { data: firstScreenData, pending: isLoading } =
-//   await useHotelApiData("/first-screen");
+const { data: firstScreenData, pending: isLoading } = await useHotelApiData(
+  "/first-screen",
+  {
+    server: false,
+  },
+);
 </script>
