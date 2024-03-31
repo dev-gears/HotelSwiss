@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-import { Hotel } from "@/types/hotel";
+import type { Hotel } from "@/types/hotel";
 import PriceTag from "./CardComponents/PriceTag.vue";
 import ImageLink from "./CardComponents/ImageLink.vue";
 import HotelTitle from "./CardComponents/HotelTitle.vue";

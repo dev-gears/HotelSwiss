@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { Hotel, Canton, Amenity } from "types/hotel";
+import type { Hotel, Canton, Amenity } from "@/types/hotel";
 import { useFiltersStore } from "@/store/filters";
 
 definePageMeta({

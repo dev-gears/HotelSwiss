@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { ImageWrapper } from "@/types/hotel";
+import type { ImageWrapper } from "@/types/hotel";
 const { images } = defineProps({
   images: {
     type: Array<ImageWrapper>,

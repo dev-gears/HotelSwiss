@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { SocialLink } from "@/types/hotel";
+import type { SocialLink } from "@/types/hotel";
 defineProps({
   socialLinks: Array<SocialLink>,
 });

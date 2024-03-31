@@ -16,7 +16,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Hotel } from "@/types/hotel";
+import type { Hotel } from "@/types/hotel";
 defineProps<{
   id: number;
   name: string;

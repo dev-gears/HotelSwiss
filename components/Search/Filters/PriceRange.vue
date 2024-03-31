@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, Ref, ref } from "vue";
+import { type PropType, type Ref, ref } from "vue";
 import { useFiltersStore } from "@/store/filters";
 
 const emit = defineEmits(["update:modelValue"]);

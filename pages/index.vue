@@ -33,15 +33,15 @@
       v-if="firstScreenData?.promo_hotels"
       :hotels="firstScreenData.promo_hotels"
     />
-    <CategoryTabs
-      v-if="firstScreenData?.categories"
-      :categories="firstScreenData.categories"
-    />
   </div>
+  <CategoryTabs
+    v-if="firstScreenData?.categories"
+    :categories="firstScreenData.categories"
+  />
 </template>
 
 <script setup lang="ts">
-import { FirstScreen } from "types/hotel";
+import type { FirstScreen } from "@/types/hotel";
 
 definePageMeta({
   layout: "base",

@@ -55,7 +55,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { Hotel } from "@/types/hotel";
+import type { Hotel } from "@/types/hotel";
 const runtimeConfig = useRuntimeConfig();
 const backendUrl = runtimeConfig.public.backendUrl;
 const props = defineProps<{

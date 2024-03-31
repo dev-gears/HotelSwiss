@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { Filters } from "@/types/hotel";
+import type { Filters } from "@/types/hotel";
 
 export const useFiltersStore = defineStore({
   id: "filters",

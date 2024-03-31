@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useFiltersStore } from "@/store/filters";
-import { Filters } from "@/types/hotel";
+import type { Filters } from "@/types/hotel";
 
 const route = useRoute();
 const filtersStore = useFiltersStore();

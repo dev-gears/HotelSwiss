@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { Canton } from "@/types/hotel";
+import type { Canton } from "@/types/hotel";
 import { ref, watchEffect } from "vue";
 import { useLoadMore } from "@/composables/useLoadMore";
 

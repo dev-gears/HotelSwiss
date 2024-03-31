@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { Amenity } from "@/types/hotel";
+import type { Amenity } from "@/types/hotel";
 import { useLoadMore } from "@/composables/useLoadMore";
 
 const runtimeConfig = useRuntimeConfig();

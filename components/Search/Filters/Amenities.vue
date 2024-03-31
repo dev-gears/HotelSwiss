@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmits, ref, watchEffect } from "vue";
-import { Amenity } from "@/types/hotel";
+import type { Amenity } from "@/types/hotel";
 import { useLoadMore } from "@/composables/useLoadMore";
 
 const props = defineProps({

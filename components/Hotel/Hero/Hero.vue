@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import useDeviceType from "@/composables/useDeviceType";
-import { ImageWrapper } from "types/hotel";
+import type { ImageWrapper } from "@/types/hotel";
 
 const { images } = defineProps({
   images: {

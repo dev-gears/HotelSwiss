@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Category, Hotel } from "@/types/hotel";
+import type { Category, Hotel } from "@/types/hotel";
 
 const { categories } = defineProps({
   categories: {

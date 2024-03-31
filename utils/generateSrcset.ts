@@ -1,4 +1,4 @@
-import { ImageRenditions } from "@/types/hotel";
+import type { ImageRenditions } from "@/types/hotel";
 
 export const generateSrcset = (renditions: ImageRenditions): string => {
   const runtimeConfig = useRuntimeConfig();

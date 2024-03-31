@@ -57,17 +57,16 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useFiltersStore } from "@/store/filters";
-import { Canton, Amenity } from "@/types/hotel";
+import type { Canton, Amenity } from "@/types/hotel";
 
 const { filters } = defineProps<{
   filters: {
     cantons: Array<Canton>;
-    price_range: { from: number | undefined; to: number | undefined};
+    price_range: { from: number | undefined; to: number | undefined };
     amenities: Array<Amenity>;
     stars: string;
   };
 }>();
-
 
 const emit = defineEmits(["clear-filters", "update-filters", "submit-search"]);
 const filtersStore = useFiltersStore();

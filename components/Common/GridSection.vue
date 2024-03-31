@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch, reactive } from "vue";
-import { Hotel } from "types/hotel";
+import type { Hotel } from "@/types/hotel";
 const props = defineProps<{
   hotels: Array<Hotel>;
   nextUrl: string | null;
