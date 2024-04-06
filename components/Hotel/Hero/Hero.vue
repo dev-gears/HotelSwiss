@@ -1,14 +1,14 @@
 <template>
   <div class="relative w-full">
     <CommonBackButton class="absolute left-4 top-4" />
-    <div v-if="images?.length">
+    <div v-if="images?.length && images[0]?.image?.url">
       <HotelHeroCarousel v-if="deviceType !== 'desktop'" :images="images" />
       <HotelHeroCollage v-else :images="images" />
     </div>
     <div v-else>
       <Image
-        src="/images/placeholder.png"
-        class="hero-image mt-5 h-96 w-full rounded object-cover lg:h-full"
+        src="/placeholder.jpg"
+        class="hero-image mt-5 h-96 w-full rounded object-cover grayscale lg:h-full"
       />
     </div>
   </div>

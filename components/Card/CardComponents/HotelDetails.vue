@@ -1,23 +1,24 @@
 <template>
   <div class="flex w-full gap-2">
     <div :class="`${showAmenities ? 'flex-1' : 'w-full'}`">
-      <p class="hotel-desc text-light font-robotoRegular text-xs">
+      <p class="hotel-desc font-robotoRegular text-xs text-light">
         {{ description || "Description not available" }}
       </p>
     </div>
 
     <div
       v-if="showAmenities"
-      class="border-light w-[92px] border-l-2 border-dashed pl-2"
+      class="w-[92px] border-l-2 border-dashed border-light pl-2"
     >
-      <p class="text-light mb-1 font-robotoRegular text-xs">
+      <p class="mb-1 font-robotoRegular text-xs text-light">
         {{ $t("HotelDetails.includedAmenities") + ":" }}
       </p>
       <div class="flex items-center gap-1.5">
         <div
+          class="transition-duration-500 mock-icon transition-all ease-in-out"
+          v-animateonscroll="{ enterClass: 'fadein' }"
           v-for="amenity in limitedAmenities"
           :key="amenity.amenity.id"
-          class="mock-icon"
         >
           <img
             v-if="amenity.amenity.image && amenity.amenity.image.url"

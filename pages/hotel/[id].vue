@@ -15,7 +15,7 @@
       property="og:description"
       :content="`Every info you need if staying at ${hotel?.title}`"
     />
-    <Meta property="og:image" :content="hotel?.images[0].image.url" />
+    <Meta property="og:image" :content="hotel?.images[0]?.image?.url" />
 
     <Meta name="twitter:card" content="summary_large_image" />
     <Meta name="twitter:title" :content="hotel?.title" />
@@ -23,15 +23,18 @@
       name="twitter:description"
       :content="`Every info you need if staying at ${hotel?.title}`"
     />
-    <Meta name="twitter:image" :content="hotel?.images[0].image.url" />
+    <Meta name="twitter:image" :content="hotel?.images[0]?.image?.url" />
   </Head>
 
   <HotelSkeletonLoader v-if="pending" />
   <div v-else class="bg-light-100">
     <HotelHero :images="hotel?.images" />
-    <HotelContent :hotel="hotel!" />
+    <HotelContent v-if="hotel" :hotel="hotel" />
     <HotelAmenities v-if="hotel?.amenities" :amenities="hotel?.amenities" />
-    <HotelSocialNetworks :socialLinks="hotel?.social_links" />
+    <HotelSocialNetworks
+      v-if="hotel?.social_links"
+      :socialLinks="hotel.social_links"
+    />
     <HotelContactFooter
       :startPrice="hotel?.start_price"
       :end-price="hotel?.end_price"

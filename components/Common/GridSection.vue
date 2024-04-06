@@ -34,11 +34,15 @@ let observer: IntersectionObserver | null = null;
 const fetchMoreHotels = async () => {
   if (state.nextUrl && !state.loading) {
     state.loading = true;
-    const { data: newData } = await useHotelApiData(state.nextUrl);
-
-    state.hotels.push(...newData.value.results);
-    state.nextUrl = newData.value.nextUrl;
-    state.loading = false;
+    try {
+      const data = await $hotelApi(state.nextUrl);
+      state.hotels.push(...data.results);
+      state.nextUrl = data.nextUrl;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      state.loading = false;
+    }
   }
 };
 
@@ -70,3 +74,19 @@ watch(
   },
 );
 </script>
+
+<style scoped>
+@keyframes slidedown-icon {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(20px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+</style>
