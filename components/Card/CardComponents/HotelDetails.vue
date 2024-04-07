@@ -1,5 +1,8 @@
 <template>
-  <div class="flex w-full gap-2">
+  <div
+    v-if="limitedAmenities.length || description !== 'nan'"
+    class="flex w-full gap-2"
+  >
     <div :class="`${showAmenities ? 'flex-1' : 'w-full'}`">
       <p class="hotel-desc font-robotoRegular text-xs text-light">
         {{ description || "Description not available" }}
@@ -7,7 +10,7 @@
     </div>
 
     <div
-      v-if="showAmenities"
+      v-if="showAmenities && limitedAmenities.length"
       class="w-[92px] border-l-2 border-dashed border-light pl-2"
     >
       <p class="mb-1 font-robotoRegular text-xs text-light">

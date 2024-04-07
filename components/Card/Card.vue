@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="hotel"
-    class="card relative w-full overflow-hidden rounded-[10px] bg-primary shadow-card"
+    class="card relative w-full overflow-hidden rounded-[10px] bg-primary shadow-card group-[.promo-block]:min-h-[380px]"
   >
     <div :class="getAspectRatioClass(aspect)" class="relative w-full">
       <PriceTag :startPrice="hotel.start_price" :endPrice="hotel.end_price" />

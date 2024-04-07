@@ -1,6 +1,6 @@
 <template>
   <Head>
-    <Title>{{ title }}</Title>
+    <Title>{{ title || Global.DEFAULT_PAGE_TITLE }}</Title>
     <Meta
       v-for="(content, name) in metaTags"
       :key="name"

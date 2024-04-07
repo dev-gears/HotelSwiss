@@ -1,5 +1,5 @@
 <template>
-  <div class="promo-block relative mx-auto">
+  <div class="promo-block group relative mx-auto">
     <div class="container mx-auto px-3">
       <CommonBlockHeader :title="$t('PromoBlock.promoHotels')" />
     </div>
@@ -17,10 +17,6 @@
         prevEl: '.prev-slide-button',
       }"
       :breakpoints="responsiveOptions"
-      :autoplay="{
-        delay: 4000,
-        disableOnInteraction: true,
-      }"
     >
       <SwiperSlide v-for="hotel in hotels" :key="hotel.id">
         <Card :hotel="hotel" aspect="square" :showAmenities="false" />
