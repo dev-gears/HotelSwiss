@@ -78,12 +78,12 @@ export interface Hotel {
 }
 
 export interface Filters {
-  cantons: string[];
-  priceRange: {
+  cantons: Canton[];
+  price_range: {
     from: number | undefined;
     to: number | undefined;
   };
-  amenities: string[];
+  amenities: Amenity[];
   stars: string | null;
 }
 export interface HotelListWithPagination {
@@ -99,4 +99,3 @@ export interface FirstScreen {
   all_hotels: Hotel[];
   filters: Filters;
 }
-

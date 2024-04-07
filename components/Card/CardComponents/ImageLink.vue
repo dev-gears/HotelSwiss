@@ -13,7 +13,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   hotelId: number;
-  imageUrl: string;
+  imageUrl: string | undefined;
   title: string;
   backendUrl: string;
 }>();
@@ -21,7 +21,14 @@ const props = defineProps<{
 const imageUrl = ref(props.imageUrl);
 const imageRef = ref<HTMLImageElement | null>(null);
 
-const handleError = () => {
+/**
+ * Handle image loading error
+ * Replace the image with a placeholder image
+ * Add object-contain class to the image
+ * Remove object-cover class from the image
+ * @returns void
+ */
+const handleError = (): void => {
   imageRef.value?.setAttribute("src", "/placeholder.jpg");
   imageRef.value?.classList.add("object-contain");
   imageRef.value?.classList.remove("object-cover");

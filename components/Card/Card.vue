@@ -51,6 +51,11 @@ const { hotel, aspect = "default", showAmenities } = props;
 const runtimeConfig = useRuntimeConfig();
 const backendUrl = runtimeConfig.public.backendUrl;
 
+/**
+ * Get aspect ratio class based on the aspect prop
+ * @param {string} aspect - Aspect ratio
+ * @returns {string} Aspect ratio class
+ */
 const getAspectRatioClass = (aspect: string): string => {
   const aspectClassMap: Record<string, string> = {
     default: "aspect-default",

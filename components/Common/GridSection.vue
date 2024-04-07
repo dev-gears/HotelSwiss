@@ -31,7 +31,11 @@ const end = ref<HTMLElement | null>(null);
 
 let observer: IntersectionObserver | null = null;
 
-const fetchMoreHotels = async () => {
+/**
+ * Fetch more hotels when the end of the list is reached
+ * @returns {Promise<void>}
+ */
+const fetchMoreHotels = async (): Promise<void> => {
   if (state.nextUrl && !state.loading) {
     state.loading = true;
     try {
@@ -46,6 +50,10 @@ const fetchMoreHotels = async () => {
   }
 };
 
+/**
+ * Intersection observer to fetch more hotels
+ * when the end of the list is reached
+ */
 onMounted(() => {
   observer = new IntersectionObserver(
     (entries) => {
@@ -63,10 +71,17 @@ onMounted(() => {
   }
 });
 
+/**
+ * Disconnect the observer when the component is unmounted
+ */
 onUnmounted(() => {
   if (observer) observer.disconnect();
 });
 
+/**
+ * Watch for changes in the nextUrl prop
+ * Update the nextUrl in the state
+ */
 watch(
   () => props.nextUrl,
   (newUrl) => {

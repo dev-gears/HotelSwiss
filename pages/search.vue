@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Hotel, Canton, Amenity } from "@/types/hotel";
+import type { Hotel, Canton, Amenity, Filters } from "@/types/hotel";
 import { useFiltersStore } from "@/store/filters";
 
 definePageMeta({
@@ -43,7 +43,9 @@ const filtersStore = useFiltersStore();
  */
 const handleSearch = async () => {
   try {
-    const { filters, searchValue } = filtersStore;
+    const filters: Filters = filtersStore.filters;
+    const searchValue = filtersStore.searchValue;
+
     searchedTerm.value = searchValue;
     isLoading.value = true;
     searchedHotels.value = [];

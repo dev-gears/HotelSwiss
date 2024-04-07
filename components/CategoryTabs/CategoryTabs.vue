@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import type { Category, Hotel } from "@/types/hotel";
+import type { Category } from "@/types/hotel";
 
 const { categories } = defineProps({
   categories: {
@@ -54,7 +54,12 @@ const categorizedHotels = ref([]);
 const nextUrl = ref(null);
 const activeTab = ref(0);
 
-const onTabChange = async (newIndex: number) => {
+/**
+ * On tab change, fetch hotels based on the category i
+ * @param {number} newIndex - New tab index
+ * @returns {Promise<void>}
+ */
+const onTabChange = async (newIndex: number): Promise<void> => {
   if (newIndex !== 0) {
     try {
       isLoading.value = true;
@@ -72,7 +77,11 @@ const onTabChange = async (newIndex: number) => {
   activeTab.value = newIndex;
 };
 
-const getFirstTabContent = async () => {
+/**
+ * Fetch hotels for the first tab
+ * @returns {Promise<void>}
+ */
+const getFirstTabContent = async (): Promise<void> => {
   try {
     const { data: hotels, pending } = await useHotelApiData("/hotels");
     firstTabContent.value = hotels.value.results;

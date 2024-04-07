@@ -2,6 +2,7 @@
   <a
     class="flex items-center justify-center rounded bg-primary p-2"
     :href="link"
+    target="_blank"
   >
     <i :class="`pi pi-${icon} text-4xl text-light`"></i>
   </a>

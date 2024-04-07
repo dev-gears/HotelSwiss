@@ -1,7 +1,6 @@
 <template>
   <div class="container mx-auto px-3 max-sm:px-4">
-    <CommonBlockHeader :title="`Category:`" />
-
+    <CommonBlockHeader :title="`Canton:`" />
     <SkeletonLoadersTabContentSkeleton v-if="isLoading" />
     <CommonGridSection
       v-else
@@ -20,17 +19,7 @@ definePageMeta({
 
 const route = useRoute();
 
-/**
- * Fetch hotels based on the category id
- * If the id is "all", fetch all hotels
- * Otherwise, fetch hotels based on the category id
- */
-const fetchUrl = () => {
-  if (route.params.id === "all") {
-    return `/hotels`;
-  } else {
-    return `/hotels?category_id=${route.params.id}`;
-  }
-};
-const { data, pending: isLoading } = useHotelApiData(fetchUrl);
+const { data, pending: isLoading } = useHotelApiData(
+  `/hotels?canton_id=${route.params.id}`,
+);
 </script>

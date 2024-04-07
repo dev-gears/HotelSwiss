@@ -78,17 +78,32 @@ const localAmenities = ref([]);
 const localStars = ref(null);
 const searchValue = ref("");
 
+/**
+ * Clear filters from the store
+ * Emits clear-filters event to parent component
+ * @returns {void}
+ */
 const clearFilters = () => {
   filtersStore.clearFilters();
   emit("clear-filters");
 };
 
+/**
+ * Submit search
+ * Emits submit-search event to parent component
+ * @returns {void}
+ */
 const submitSearch = () => {
   updateFilters();
   filtersStore.setSearchValue(searchValue.value);
   emit("submit-search");
 };
 
+/**
+ * Update filters in the store
+ * Emits update-filters event to parent component
+ * @returns {void}
+ */
 const updateFilters = () => {
   emit("update-filters", {
     cantons: localCantons.value,
