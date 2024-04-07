@@ -1,30 +1,10 @@
 <template>
-  <Head>
-    <Title>{{ hotel?.title }}</Title>
-    <Meta
-      name="description"
-      :content="`Every info you need if staying at ${hotel?.title}`"
-    />
-
-    <Meta
-      property="og:url"
-      :content="`https://hotelswiss.ch/hotel/${hotel?.id}`"
-    />
-    <Meta property="og:title" :content="hotel?.title" />
-    <Meta
-      property="og:description"
-      :content="`Every info you need if staying at ${hotel?.title}`"
-    />
-    <Meta property="og:image" :content="hotel?.images[0]?.image?.url" />
-
-    <Meta name="twitter:card" content="summary_large_image" />
-    <Meta name="twitter:title" :content="hotel?.title" />
-    <Meta
-      name="twitter:description"
-      :content="`Every info you need if staying at ${hotel?.title}`"
-    />
-    <Meta name="twitter:image" :content="hotel?.images[0]?.image?.url" />
-  </Head>
+  <CommonHead
+    :title="hotel?.title ?? 'Default Hotel Title'"
+    :description="`Every info you need if staying at ${hotel?.title}`"
+    :imageUrl="hotel?.images[0]?.image?.url ?? 'default-image-url.jpg'"
+    :url="`https://hotelswiss.ch/hotel/${hotel?.id}`"
+  />
 
   <HotelSkeletonLoader v-if="pending" />
   <div v-else class="bg-light-100">
@@ -33,11 +13,11 @@
     <HotelAmenities v-if="hotel?.amenities" :amenities="hotel?.amenities" />
     <HotelSocialNetworks
       v-if="hotel?.social_links"
-      :socialLinks="hotel.social_links"
+      :socialLinks="hotel?.social_links"
     />
     <HotelContactFooter
       :startPrice="hotel?.start_price"
-      :end-price="hotel?.end_price"
+      :endPrice="hotel?.end_price"
     />
   </div>
 </template>

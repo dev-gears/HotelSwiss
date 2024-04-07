@@ -1,31 +1,9 @@
 <template>
-  <Head>
-    <Title>HotelSwiss: Hotel promoting platform</Title>
-    <Meta
-      name="description"
-      :content="`HotelSwiss: Promoting and connecting you with the best hotels Switzerland has to offer.`"
-    />
-    <Meta property="og:url" :content="`https://hotelswiss.ch`" />
-    <Meta
-      property="og:title"
-      :content="`HotelSwiss: Hotel promoting platform`"
-    />
-    <Meta
-      property="og:description"
-      :content="`HotelSwiss: Promoting and connecting you with the best hotels Switzerland has to offer.`"
-    />
-    <Meta property="og:image" :content="``" />
-    <Meta name="twitter:card" content="summary_large_image" />
-    <Meta
-      name="twitter:title"
-      :content="`HotelSwiss: Hotel promoting platform`"
-    />
-    <Meta
-      name="twitter:description"
-      :content="`HotelSwiss: Promoting and connecting you with the best hotels Switzerland has to offer.`"
-    />
-    <Meta name="twitter:image" :content="``" />
-  </Head>
+  <CommonHead
+    title="Hotel Swiss: Discover Luxury"
+    description="Explore the finest luxury hotels in Switzerland with Hotel Swiss."
+    url="https://hotelswiss.ch"
+  />
 
   <SkeletonLoadersLandingSkeleton v-if="isLoading" />
   <div v-else>

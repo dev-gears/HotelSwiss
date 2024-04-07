@@ -5,7 +5,12 @@
     </h2>
     <div v-if="link">
       <NuxtLink
-        :to="`${link}`"
+        :to="{
+          path: link,
+          query: {
+            title: title,
+          },
+        }"
         class="whitespace-nowrap font-robotoRegular text-sm text-primary-200 underline hover:text-primary-200"
       >
         {{ $t("BlockHeader.viewAll") }}
@@ -17,6 +22,6 @@
 <script setup lang="ts">
 defineProps({
   title: String,
-  link: [String, Number],
+  link: [String],
 });
 </script>

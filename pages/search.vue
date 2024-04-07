@@ -82,8 +82,8 @@ const handleSearch = async () => {
     const data = await useHotelApiData(`/hotels?${queryParams.toString()}`, {
       cache: true,
     });
-    searchedHotels.value = toRef(data.data.value.results);
-    nextUrl.value = data.data.value.next;
+    searchedHotels.value = toRef(data?.data?.value?.results);
+    nextUrl.value = data?.data?.value?.next;
   } catch (error) {
     console.log(error);
   } finally {

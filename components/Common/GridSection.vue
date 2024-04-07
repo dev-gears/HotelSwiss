@@ -7,8 +7,8 @@
         :hotel="hotel"
         :showAmenities="true"
       />
-      <div ref="end"></div>
     </div>
+    <div id="observed-item" ref="end"></div>
     <ProgressSpinner v-if="state.loading" />
   </div>
 </template>
@@ -41,7 +41,7 @@ const fetchMoreHotels = async (): Promise<void> => {
     try {
       const data = await $hotelApi(state.nextUrl);
       state.hotels.push(...data.results);
-      state.nextUrl = data.nextUrl;
+      state.nextUrl = data.next;
     } catch (error) {
       console.error(error);
     } finally {
@@ -77,17 +77,6 @@ onMounted(() => {
 onUnmounted(() => {
   if (observer) observer.disconnect();
 });
-
-/**
- * Watch for changes in the nextUrl prop
- * Update the nextUrl in the state
- */
-watch(
-  () => props.nextUrl,
-  (newUrl) => {
-    state.nextUrl = newUrl;
-  },
-);
 </script>
 
 <style scoped>

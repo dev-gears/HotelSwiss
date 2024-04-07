@@ -16,7 +16,7 @@
         'bg-light bottom-0 border-t border-primary/30 px-6 flex justify-between',
     }"
   >
-    <template #default>
+    <template #default v-if="filters">
       <SearchInput
         v-model="searchValue"
         @handleSubmit="submitSearch"

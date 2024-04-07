@@ -1,6 +1,11 @@
 <template>
+  <CommonHead
+    :title="`Category: ${title}`"
+    :description="`Hotels in ${title} category, Switzerland`"
+    :url="`/category/${route.params.id}`"
+  />
   <div class="container mx-auto px-3 max-sm:px-4">
-    <CommonBlockHeader :title="`Category:`" />
+    <CommonBlockHeader v-if="title" :title="`Category: ${title}`" />
 
     <SkeletonLoadersTabContentSkeleton v-if="isLoading" />
     <CommonGridSection
@@ -19,6 +24,7 @@ definePageMeta({
 });
 
 const route = useRoute();
+const title = ref(route.query.title as string);
 
 /**
  * Fetch hotels based on the category id

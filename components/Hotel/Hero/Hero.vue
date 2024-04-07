@@ -7,7 +7,7 @@
     </div>
     <div v-else>
       <Image
-        src="/placeholder.jpg"
+        :src="Global.PLACEHOLDER_IMAGE_URL"
         class="hero-image mt-5 h-96 w-full rounded object-cover grayscale lg:h-full"
       />
     </div>
@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import useDeviceType from "@/composables/useDeviceType";
 import type { ImageWrapper } from "@/types/hotel";
+import { Global } from "@/enums/Global";
 
 const { images } = defineProps({
   images: {

@@ -16,7 +16,10 @@
       class="relative mb-5 flex w-full items-center justify-around rounded-[10px] border border-light px-3 py-4"
     >
       <NuxtLink
-        :to="`/canton/${hotel?.canton?.id}`"
+        :to="{
+          path: `/canton/${hotel?.canton?.id}`,
+          query: { title: hotel?.canton?.name },
+        }"
         class="flex h-14 w-1/3 cursor-pointer items-center justify-center bg-contain bg-center bg-no-repeat"
         :style="`background-image: url(${backendUrl}${hotel?.canton?.image?.renditions?.thumbnail});`"
       >
@@ -36,7 +39,10 @@
       </NuxtLink>
 
       <NuxtLink
-        :to="`/category/${hotel.categories[0]?.category?.id}`"
+        :to="{
+          path: `/category/${hotel?.categories[0]?.category?.id}`,
+          query: { title: hotel?.categories[0]?.category?.name },
+        }"
         class="h-full w-1/3 cursor-pointer text-center font-robotoRegular text-lg font-normal text-light"
         v-if="hotel?.categories[0]"
       >
