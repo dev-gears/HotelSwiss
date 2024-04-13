@@ -1,7 +1,8 @@
 {
-  "common": {
+  "Common": {
     "loadMore": "Load more",
-    "viewAll": "View all"
+    "viewAll": "View all",
+    "optional": "optional"
   },
   "LanguageButton": {
     "selectLanguage": "Select language"
@@ -40,5 +41,16 @@
   },
   "SocialNetworks": {
     "visitUsAlsoOn": "Visit us also on"
+  },
+  "ContactForm": {
+    "title": "Contact us",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "phone": "Phone",
+    "submit": "Send",
+    "date": "Date",
+    "leavingDate": "Leaving date",
+    "arrivalDate": "Arrival date"
   }
 }

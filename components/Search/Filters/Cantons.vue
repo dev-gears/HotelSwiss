@@ -21,7 +21,7 @@
         v-if="shouldShowLoadMoreButton"
         @click="loadMore"
         class="bg-white p-2 text-primary-200 underline"
-        :label="$t('common.viewAll')"
+        :label="$t('Common.viewAll')"
       />
     </div>
   </div>

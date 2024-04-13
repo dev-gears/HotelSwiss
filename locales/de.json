@@ -1,7 +1,8 @@
 {
   "common": {
     "loadMore": "Mehr laden",
-    "viewAll": "Alle anzeigen"
+    "viewAll": "Alle anzeigen",
+    "optional": "Optional"
   },
   "LanguageButton": {
     "selectLanguage": "Sprache auswählen"
@@ -40,5 +41,16 @@
   },
   "SocialNetworks": {
     "visitUsAlsoOn": "Besuchen Sie uns auch auf"
+  },
+  "ContactForm": {
+    "title": "Kontaktieren Sie uns",
+    "name": "Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "message": "Nachricht",
+    "submit": "Absenden",
+    "date": "Datum",
+    "leavingDate": "Abreisedatum",
+    "arrivalDate": "Ankunftsdatum"
   }
 }

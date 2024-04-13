@@ -12,6 +12,8 @@ import Password from "primevue/password";
 import Checkbox from "primevue/checkbox";
 import OverlayPanel from "primevue/overlaypanel";
 import Slider from "primevue/slider";
+import Calendar from "primevue/calendar";
+import DeferredContent from "primevue/deferredcontent";
 import ProgressSpinner from "primevue/progressspinner";
 import AnimateOnScroll from "primevue/animateonscroll";
 
@@ -30,5 +32,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("OverlayPanel", OverlayPanel);
   nuxtApp.vueApp.component("Slider", Slider);
   nuxtApp.vueApp.component("ProgressSpinner", ProgressSpinner);
+  nuxtApp.vueApp.component("Calendar", Calendar);
+  nuxtApp.vueApp.component("DeferredContent", DeferredContent);
   nuxtApp.vueApp.directive("animateonscroll", AnimateOnScroll);
 });

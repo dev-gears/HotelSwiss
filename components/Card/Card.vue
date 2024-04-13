@@ -1,33 +1,35 @@
 <template>
-  <div
-    v-if="hotel"
-    class="card relative w-full overflow-hidden rounded-[10px] bg-primary shadow-card group-[.promo-block]:min-h-[380px]"
-  >
-    <div :class="getAspectRatioClass(aspect)" class="relative w-full">
-      <PriceTag :startPrice="hotel.start_price" :endPrice="hotel.end_price" />
-      <ImageLink
-        :hotelId="hotel.id"
-        :imageUrl="hotel?.images[0]?.image?.renditions[400]"
-        :title="hotel.title"
-        :backendUrl="backendUrl"
-      />
+  <DeferredContent>
+    <div
+      v-if="hotel"
+      class="card relative w-full overflow-hidden rounded-[10px] bg-primary shadow-card group-[.promo-block]:min-h-[380px]"
+    >
+      <div :class="getAspectRatioClass(aspect)" class="relative w-full">
+        <PriceTag :startPrice="hotel.start_price" :endPrice="hotel.end_price" />
+        <ImageLink
+          :hotelId="hotel.id"
+          :imageUrl="hotel?.images[0]?.image?.renditions[400]"
+          :title="hotel.title"
+          :backendUrl="backendUrl"
+        />
+      </div>
+      <CommonBackdrop class="p-2">
+        <HotelTitle :hotelId="hotel.id" :title="hotel.title" />
+        <RatingStars :stars="hotel.stars" />
+        <Location
+          :hotelId="hotel.id"
+          :address="hotel.address"
+          :city="hotel.city"
+        />
+        <HotelDetails
+          :description="hotel.description"
+          :amenities="hotel.amenities"
+          :backendUrl="backendUrl"
+          :showAmenities="showAmenities"
+        />
+      </CommonBackdrop>
     </div>
-    <CommonBackdrop class="p-2">
-      <HotelTitle :hotelId="hotel.id" :title="hotel.title" />
-      <RatingStars :stars="hotel.stars" />
-      <Location
-        :hotelId="hotel.id"
-        :address="hotel.address"
-        :city="hotel.city"
-      />
-      <HotelDetails
-        :description="hotel.description"
-        :amenities="hotel.amenities"
-        :backendUrl="backendUrl"
-        :showAmenities="showAmenities"
-      />
-    </CommonBackdrop>
-  </div>
+  </DeferredContent>
 </template>
 
 <script setup lang="ts">

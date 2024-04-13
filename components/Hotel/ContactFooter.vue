@@ -15,11 +15,15 @@
       <p>{{ $t("ContactFooter.priceNotAvailable") }}</p>
     </div>
     <div>
-      <Button class="rounded-xl bg-primary px-4 py-2 text-xl text-light">{{
-        $t("ContactFooter.contactHotel")
-      }}</Button>
+      <Button
+        class="rounded-xl bg-primary px-4 py-2 text-xl text-light"
+        @click="formVisible = true"
+      >
+        {{ $t("ContactFooter.contactHotel") }}
+      </Button>
     </div>
   </div>
+  <ContactForm v-model:visible="formVisible" />
 </template>
 
 <script setup lang="ts">
@@ -27,4 +31,6 @@ defineProps({
   startPrice: String,
   endPrice: String,
 });
+
+const formVisible = ref(false);
 </script>
