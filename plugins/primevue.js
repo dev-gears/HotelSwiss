@@ -13,6 +13,7 @@ import Checkbox from "primevue/checkbox";
 import OverlayPanel from "primevue/overlaypanel";
 import Slider from "primevue/slider";
 import Calendar from "primevue/calendar";
+import Textarea from "primevue/textarea";
 import DeferredContent from "primevue/deferredcontent";
 import ProgressSpinner from "primevue/progressspinner";
 import AnimateOnScroll from "primevue/animateonscroll";
@@ -33,6 +34,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("Slider", Slider);
   nuxtApp.vueApp.component("ProgressSpinner", ProgressSpinner);
   nuxtApp.vueApp.component("Calendar", Calendar);
+  nuxtApp.vueApp.component("Textarea", Textarea);
   nuxtApp.vueApp.component("DeferredContent", DeferredContent);
   nuxtApp.vueApp.directive("animateonscroll", AnimateOnScroll);
 });

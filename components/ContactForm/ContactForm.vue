@@ -91,16 +91,21 @@
           {{ $t("ContactForm.message") }}:
           <span class="text-[red]">*</span>
         </label>
-        <InputText
+        <Textarea
           id="message"
-          class="p-inputgroup h-12 w-full rounded-xl bg-light px-2 text-primary-200 shadow focus:shadow"
+          rows="4"
+          class="p-inputgroup w-full rounded-xl bg-light p-2 text-primary-200 shadow focus:shadow"
           v-model="message"
           label="Message"
-          placeholder="Enter your message"
+          :placeholder="$t('ContactForm.message')"
           required
         />
       </div>
-      <Button type="submit">{{ $t("ContactForm.submit") }}</Button>
+      <Button
+        class="flex justify-center rounded-xl bg-primary px-4 py-2 text-lg text-light"
+        type="submit"
+        >{{ $t("ContactForm.submit") }}</Button
+      >
     </form>
   </Dialog>
 </template>
