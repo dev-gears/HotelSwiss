@@ -24,14 +24,19 @@
     @clearFilters="clearFilters"
     @updateFilters="updateFilters"
   />
-  <div v-if="filtersCount">
+  <div
+    v-if="filtersCount && route.name === 'search'"
+    class="mb-3 border-b border-primary-200"
+  >
     <div v-if="filtersStore.filters.cantons.length">
-      <div class="mb-2 flex gap-1">
-        <Badge
+      <div class="mb-2 flex flex-wrap gap-1">
+        <Chip
           v-for="canton in filtersStore.filters.cantons"
           :key="canton.id"
-          :value="`${canton.name} X`"
-          class="bg-primary"
+          removable
+          icon="pi pi-sliders-h"
+          :label="canton.name"
+          class="hover:bg-danger cursor-pointer bg-primary text-light"
           @click="removeCanton(canton)"
         />
       </div>

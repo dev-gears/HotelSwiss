@@ -2,7 +2,7 @@
   <div class="container mx-auto flex flex-col gap-3 bg-primary px-7 text-light">
     <h2 class="mt-5 font-patuaOne text-2xl">{{ hotel?.title }}</h2>
     <div>
-      <p class="font-robotoRegular text-sm">
+      <p v-if="displayDescription !== 'nan'" class="font-robotoRegular text-sm">
         {{ displayDescription }}
       </p>
       <Button
@@ -13,14 +13,14 @@
       />
     </div>
     <div
-      class="relative mb-5 flex w-full items-center justify-around rounded-[10px] border border-light px-3 py-4"
+      class="relative mb-5 flex w-full items-center justify-center rounded-[10px] border border-light px-3 py-4"
     >
       <NuxtLink
         :to="{
           path: `/canton/${hotel?.canton?.id}`,
           query: { title: hotel?.canton?.name },
         }"
-        class="relative flex h-14 w-1/3 cursor-pointer items-center justify-center bg-contain bg-center bg-no-repeat"
+        class="relative flex h-14 w-1/3 cursor-pointer items-center justify-center border-r"
       >
         <img
           class="absolute inset-0 h-full w-full p-2"
@@ -34,7 +34,7 @@
 
       <NuxtLink
         :to="`/search?`"
-        class="flex h-full w-1/3 cursor-pointer flex-col items-center justify-center border-x px-2 font-patuaOne text-xl"
+        class="flex h-full w-1/3 cursor-pointer flex-col items-center justify-center px-2 font-patuaOne text-xl"
       >
         <p>
           {{ $t("Content.class") }}
@@ -47,7 +47,7 @@
           path: `/category/${hotel?.categories[0]?.category?.id}`,
           query: { title: hotel?.categories[0]?.category?.name },
         }"
-        class="h-full w-1/3 cursor-pointer text-center font-robotoRegular text-lg font-normal text-light"
+        class="flex h-14 w-1/3 cursor-pointer items-center justify-center border-l text-center font-robotoRegular text-lg font-normal text-light"
         v-if="hotel?.categories[0]"
       >
         {{ hotel?.categories[0]?.category?.name }}

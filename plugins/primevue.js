@@ -16,6 +16,7 @@ import Calendar from "primevue/calendar";
 import Textarea from "primevue/textarea";
 import Badge from "primevue/badge";
 import ScrollTop from "primevue/scrolltop";
+import Chip from "primevue/chip";
 import BadgeDirective from "primevue/badgedirective";
 import DeferredContent from "primevue/deferredcontent";
 import ProgressSpinner from "primevue/progressspinner";
@@ -39,6 +40,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("Calendar", Calendar);
   nuxtApp.vueApp.component("Textarea", Textarea);
   nuxtApp.vueApp.component("Badge", Badge);
+  nuxtApp.vueApp.component("Chip", Chip);
   nuxtApp.vueApp.component("ScrollTop", ScrollTop);
   nuxtApp.vueApp.component("DeferredContent", DeferredContent);
   nuxtApp.vueApp.directive("animateonscroll", AnimateOnScroll);

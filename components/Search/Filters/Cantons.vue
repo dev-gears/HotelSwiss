@@ -8,11 +8,14 @@
       <div
         v-for="canton in visibleCantons"
         :key="'canton' + canton?.id"
-        class="flex h-20 min-w-[80px] max-w-[80px] cursor-pointer items-center justify-center rounded-2xl border border-primary/20 bg-light bg-50 bg-center bg-no-repeat text-center font-robotoRegular text-sm text-primary-200 shadow"
+        class="relative flex h-20 min-w-[80px] max-w-[80px] cursor-pointer items-center justify-center rounded-2xl border border-primary/20 bg-light text-center font-robotoRegular text-sm text-primary-200 shadow"
         :class="{ selected: isSelected(canton) }"
-        :style="`background-image: url('${backendUrl}${canton?.image?.renditions?.thumbnail}');`"
         @click="addOrRemoveCanton(canton)"
       >
+        <div
+          class="absolute h-12 w-12 rounded-full bg-cover bg-center bg-no-repeat"
+          :style="`background-image: url('${backendUrl}${canton?.image?.renditions?.thumbnail}');`"
+        ></div>
         {{ canton?.name }}
       </div>
     </div>

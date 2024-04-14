@@ -12,6 +12,9 @@ export default {
         100: "#26393B",
         200: "#1A2729", // tamniji-text
       },
+      danger: {
+        DEFAULT: "#970000",
+      },
     },
 
     fontFamily: {
