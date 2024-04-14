@@ -1,6 +1,7 @@
 <template>
   <NuxtLoadingIndicator />
   <NuxtLayout>
+    <ScrollTop class="bg-primary" />
     <NuxtPage />
   </NuxtLayout>
 </template>

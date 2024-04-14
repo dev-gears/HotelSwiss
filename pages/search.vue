@@ -1,23 +1,22 @@
 <template>
   <div>
-    <div class="container mx-auto">
+    <div class="container mx-auto px-3 max-sm:px-4">
       <CommonBlockHeader
+        v-if="searchedTerm"
         :title="`Search results for: ${searchedTerm}`"
         class="mb-5 border-b border-primary py-3 font-robotoRegular"
       />
-      <ClientOnly>
-        <SkeletonLoadersSearchSkeleton v-if="isLoading" />
-        <div>
-          <CommonGridSection
-            v-if="searchedHotels?.value.length"
-            :hotels="searchedHotels.value"
-            :nextUrl="nextUrl"
-          />
-          <div v-else class="flex h-[50vh] items-center justify-center">
-            <h1 class="text-2xl text-primary-100">No results found</h1>
-          </div>
+      <SkeletonLoadersSearchSkeleton v-if="isLoading" />
+      <div>
+        <CommonGridSection
+          v-if="searchedHotels?.value?.length"
+          :hotels="searchedHotels?.value"
+          :nextUrl="nextUrl"
+        />
+        <div v-else class="flex h-[50vh] items-center justify-center">
+          <h1 class="text-2xl text-primary-100">No results found</h1>
         </div>
-      </ClientOnly>
+      </div>
     </div>
   </div>
 </template>

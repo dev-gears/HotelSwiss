@@ -57,25 +57,23 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useFiltersStore } from "@/store/filters";
-import type { Canton, Amenity } from "@/types/hotel";
+import type { Canton, Amenity, Filters, PriceRange } from "@/types/hotel";
 
-const { filters } = defineProps<{
+const { filters } = defineProps({
   filters: {
-    cantons: Array<Canton>;
-    price_range: { from: number | undefined; to: number | undefined };
-    amenities: Array<Amenity>;
-    stars: string;
-  };
-}>();
+    type: Object as PropType<Filters>,
+    required: true,
+  },
+});
 
 const emit = defineEmits(["clear-filters", "update-filters", "submit-search"]);
 const filtersStore = useFiltersStore();
 
 const showFilters = ref(false);
-const localCantons = ref([]);
-const localPriceRange = ref({ from: 0, to: 0 });
-const localAmenities = ref([]);
-const localStars = ref(null);
+const localCantons = ref([]) as Ref<Canton[]>;
+const localPriceRange = ref({ from: 0, to: 0 }) as Ref<PriceRange>;
+const localAmenities = ref([]) as Ref<Amenity[]>;
+const localStars = ref(null) as Ref<string | null>;
 const searchValue = ref("");
 
 /**
@@ -112,4 +110,25 @@ const updateFilters = () => {
     stars: localStars.value,
   });
 };
+
+let unsubscribe: () => void;
+
+onMounted(() => {
+  unsubscribe = filtersStore.$onAction(({ name, after }) => {
+    if (name === "updateFilters" || name === "setSearchValue") {
+      after(() => {
+        searchValue.value = filtersStore.searchValue;
+        localCantons.value = filtersStore.filters.cantons;
+        localAmenities.value = filtersStore.filters.amenities;
+        localStars.value = filtersStore.filters.stars;
+      });
+    }
+  });
+});
+
+onUnmounted(() => {
+  if (unsubscribe) {
+    unsubscribe();
+  }
+});
 </script>

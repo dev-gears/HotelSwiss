@@ -68,7 +68,7 @@ const {
   visibleItems: visibleCantons,
   shouldShowLoadMoreButton,
   loadMore,
-} = useLoadMore(cantons, 3);
+} = useLoadMore(cantons, 9);
 
 watchEffect(() => {
   emit("update:modelValue", selectedCantons.value);

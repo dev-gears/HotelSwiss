@@ -10,7 +10,7 @@
     />
     <i
       @click="handleSubmit"
-      class="pi pi-search right-0 top-2 !flex h-12 w-12 cursor-pointer items-center justify-center text-xl"
+      class="pi pi-search right-0 top-2 z-[2] !flex h-12 w-12 cursor-pointer items-center justify-center text-xl"
     ></i>
   </div>
 </template>

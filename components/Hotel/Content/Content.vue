@@ -20,9 +20,13 @@
           path: `/canton/${hotel?.canton?.id}`,
           query: { title: hotel?.canton?.name },
         }"
-        class="flex h-14 w-1/3 cursor-pointer items-center justify-center bg-contain bg-center bg-no-repeat"
-        :style="`background-image: url(${backendUrl}${hotel?.canton?.image?.renditions?.thumbnail});`"
+        class="relative flex h-14 w-1/3 cursor-pointer items-center justify-center bg-contain bg-center bg-no-repeat"
       >
+        <img
+          class="absolute inset-0 h-full w-full p-2"
+          :src="backendUrl + hotel?.canton?.image?.renditions?.thumbnail"
+          alt="canton image"
+        />
         <p class="font-robotoRegular text-lg text-light">
           {{ hotel?.canton.name }}
         </p>

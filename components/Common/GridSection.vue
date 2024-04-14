@@ -1,11 +1,14 @@
 <template>
   <div class="flex flex-col items-center justify-center gap-6">
-    <div class="flex flex-col gap-4 md:grid md:grid-cols-3 lg:grid-cols-4">
+    <div
+      class="flex w-full flex-col gap-4 md:grid md:grid-cols-3 lg:grid-cols-4"
+    >
       <Card
         v-for="(hotel, index) in hotels"
         :key="hotel.id"
         :hotel="hotel"
         :showAmenities="true"
+        class="w-[-webkit-fill-available]"
       />
     </div>
     <div id="observed-item" ref="end"></div>

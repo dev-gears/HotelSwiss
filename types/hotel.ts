@@ -28,6 +28,11 @@ export interface ImageWrapper {
   image: Image;
 }
 
+export interface PriceRange {
+  from: number | undefined;
+  to: number | undefined;
+}
+
 export interface Amenity {
   id: ID;
   name: Name;
@@ -45,6 +50,10 @@ export interface Canton {
   id: ID;
   name: Name;
   image: Image;
+}
+
+export interface CategoryWrapper {
+  category: Category;
 }
 
 export interface CantonWrapper {
@@ -79,10 +88,7 @@ export interface Hotel {
 
 export interface Filters {
   cantons: Canton[];
-  price_range: {
-    from: number | undefined;
-    to: number | undefined;
-  };
+  price_range: PriceRange;
   amenities: Amenity[];
   stars: string | null;
 }

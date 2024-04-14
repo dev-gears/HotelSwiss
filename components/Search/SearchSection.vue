@@ -11,6 +11,11 @@
       class="flex h-12 items-center justify-center rounded-none rounded-br-xl bg-light px-6 shadow [&_span]:text-2xl [&_span]:!text-primary"
       @click="showFilters = true"
     />
+    <Badge
+      v-if="filtersCount"
+      :value="filtersCount"
+      class="absolute -right-2 -top-2 bg-primary"
+    />
   </div>
   <SearchFilters
     v-model:visible="showFilters"
@@ -19,6 +24,19 @@
     @clearFilters="clearFilters"
     @updateFilters="updateFilters"
   />
+  <div v-if="filtersCount">
+    <div v-if="filtersStore.filters.cantons.length">
+      <div class="mb-2 flex gap-1">
+        <Badge
+          v-for="canton in filtersStore.filters.cantons"
+          :key="canton.id"
+          :value="`${canton.name} X`"
+          class="bg-primary"
+          @click="removeCanton(canton)"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -29,12 +47,24 @@ import type { Filters } from "@/types/hotel";
 const route = useRoute();
 const filtersStore = useFiltersStore();
 const showFilters = ref(false);
+const filtersCount = ref(0);
 
 /**
  * Clear the filters in the store
  */
 const clearFilters = () => {
   filtersStore.clearFilters();
+};
+
+/**
+ * Remove a canton from the filters in the store
+ * @param canton
+ */
+const removeCanton = (canton: { id: number; name: string }) => {
+  const newCantons = filtersStore.filters.cantons.filter(
+    (c) => c.id !== canton.id,
+  );
+  filtersStore.updateFilters({ cantons: newCantons });
 };
 
 /**
@@ -49,6 +79,24 @@ const updateFilters = async (newFilters: Filters) => {
     await navigateTo(`/search`);
   }
 };
+
+let unsubscribe: () => void;
+
+onMounted(() => {
+  unsubscribe = filtersStore.$onAction(({ name, after }) => {
+    if (name === "updateFilters") {
+      after(() => {
+        filtersCount.value = filtersStore.selectedFiltersCount;
+      });
+    }
+  });
+});
+
+onUnmounted(() => {
+  if (unsubscribe) {
+    unsubscribe();
+  }
+});
 
 const { data: filters } = await useHotelApiData("/filters");
 </script>
