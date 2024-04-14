@@ -90,7 +90,7 @@ export interface Filters {
   cantons: Canton[];
   price_range: PriceRange;
   amenities: Amenity[];
-  stars: string | null;
+  stars: string;
 }
 export interface HotelListWithPagination {
   count: number;

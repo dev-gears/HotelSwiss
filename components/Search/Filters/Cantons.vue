@@ -8,7 +8,7 @@
       <div
         v-for="canton in visibleCantons"
         :key="'canton' + canton?.id"
-        class="relative flex h-20 min-w-[80px] max-w-[80px] cursor-pointer items-center justify-center rounded-2xl border border-primary/20 bg-light text-center font-robotoRegular text-sm text-primary-200 shadow"
+        class="shadow-filters relative flex h-20 min-w-[80px] max-w-[80px] cursor-pointer items-center justify-center rounded-2xl bg-light text-center font-robotoRegular text-sm text-primary-200"
         :class="{ selected: isSelected(canton) }"
         @click="addOrRemoveCanton(canton)"
       >

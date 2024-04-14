@@ -73,7 +73,7 @@ const showFilters = ref(false);
 const localCantons = ref([]) as Ref<Canton[]>;
 const localPriceRange = ref({ from: 0, to: 0 }) as Ref<PriceRange>;
 const localAmenities = ref([]) as Ref<Amenity[]>;
-const localStars = ref(null) as Ref<string | null>;
+const localStars = ref("") as Ref<string>;
 const searchValue = ref("");
 
 /**

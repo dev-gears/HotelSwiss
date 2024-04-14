@@ -41,6 +41,15 @@
         />
       </div>
     </div>
+    <div v-if="filtersStore.filters.stars">
+      <Chip
+        removable
+        icon="pi pi-star"
+        :label="filtersStore.filters.stars"
+        class="hover:bg-danger mb-2 cursor-pointer bg-primary text-light"
+        @click="removeStars"
+      />
+    </div>
   </div>
 </template>
 
@@ -70,6 +79,10 @@ const removeCanton = (canton: { id: number; name: string }) => {
     (c) => c.id !== canton.id,
   );
   filtersStore.updateFilters({ cantons: newCantons });
+};
+
+const removeStars = () => {
+  filtersStore.updateFilters({ stars: "" });
 };
 
 /**
