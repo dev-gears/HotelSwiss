@@ -61,11 +61,17 @@ const handleSearch = async () => {
       );
     }
 
-    if (filters.price_range.from !== undefined) {
+    if (
+      filters.price_range.from !== undefined &&
+      filters.price_range.from !== null
+    ) {
       queryParams.append("min_price", filters.price_range.from.toString());
     }
 
-    if (filters.price_range.to !== undefined) {
+    if (
+      filters.price_range.to !== undefined &&
+      filters.price_range.to !== null
+    ) {
       queryParams.append("max_price", filters.price_range.to.toString());
     }
 
@@ -78,6 +84,7 @@ const handleSearch = async () => {
     if (filters.stars) {
       queryParams.append("stars", filters.stars);
     }
+
     const data = await useHotelApiData(`/hotels?${queryParams.toString()}`, {
       cache: true,
     });

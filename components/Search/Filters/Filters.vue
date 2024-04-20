@@ -34,6 +34,7 @@
         :maxPrice="filters?.price_range?.to"
       />
       <SearchFiltersAmenities
+        v-if="filters.amenities.length"
         v-model="localAmenities"
         :amenities="filters.amenities"
       />

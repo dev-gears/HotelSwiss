@@ -14,8 +14,6 @@
         v-model="minPriceInput"
         inputId="min"
         @update:modelValue="updatePriceRange"
-        :min="minPrice"
-        :max="maxPrice"
       />
       <hr class="w-1/4 border-primary/20" />
       <InputNumber
@@ -26,8 +24,6 @@
         v-model="maxPriceInput"
         @update:modelValue="updatePriceRange"
         inputId="max"
-        :min="minPrice"
-        :max="maxPrice"
       />
     </div>
   </div>
@@ -40,7 +36,7 @@ import { useFiltersStore } from "@/store/filters";
 const emit = defineEmits(["update:modelValue"]);
 const filtersStore = useFiltersStore();
 
-const { minPrice, maxPrice } = defineProps({
+defineProps({
   minPrice: {
     type: Number as PropType<number | undefined>,
     required: true,
@@ -51,19 +47,12 @@ const { minPrice, maxPrice } = defineProps({
   },
 });
 
-onMounted(() => {
-  if (filtersStore.filters.price_range.from) {
-    minPriceInput.value = filtersStore.filters.price_range.from;
-    maxPriceInput.value = filtersStore.filters.price_range.to;
-  }
-});
-
-const minPriceInput: Ref<number | undefined> = ref(minPrice);
-const maxPriceInput: Ref<number | undefined> = ref(maxPrice);
+const minPriceInput = ref(filtersStore.filters.price_range.from);
+const maxPriceInput = ref(filtersStore.filters.price_range.to);
 
 const updatePriceRange = () => {
   emit("update:modelValue", {
-    from: minPriceInput.value,
+    from: minPriceInput.value ?? 0,
     to: maxPriceInput.value,
   });
 };

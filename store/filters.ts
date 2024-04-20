@@ -13,7 +13,7 @@ export const useFiltersStore = defineStore({
       cantons: [],
       price_range: { from: undefined, to: undefined },
       amenities: [],
-      stars: null,
+      stars: "",
     },
     searchValue: "",
   }),
