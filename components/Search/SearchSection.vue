@@ -36,7 +36,7 @@
           removable
           icon="pi pi-sliders-h"
           :label="canton.name"
-          class="hover:bg-danger cursor-pointer bg-primary text-light"
+          class="cursor-pointer bg-primary text-light hover:bg-danger"
           @click="removeCanton(canton)"
         />
       </div>
@@ -46,7 +46,7 @@
         removable
         icon="pi pi-star"
         :label="filtersStore.filters.stars"
-        class="hover:bg-danger mb-2 cursor-pointer bg-primary text-light"
+        class="mb-2 cursor-pointer bg-primary text-light hover:bg-danger"
         @click="removeStars"
       />
     </div>
