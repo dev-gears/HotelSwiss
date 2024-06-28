@@ -10,7 +10,10 @@
   <div v-else class="bg-light-100">
     <HotelHero :images="hotel?.images" />
     <HotelContent v-if="hotel" :hotel="hotel" />
-    <HotelAmenities v-if="hotel?.amenities" :amenities="hotel?.amenities" />
+    <HotelAmenities
+      v-if="hotel?.amenities?.length"
+      :amenities="hotel?.amenities"
+    />
     <HotelSocialNetworks
       v-if="hotel?.social_links"
       :socialLinks="hotel?.social_links"
