@@ -18,8 +18,7 @@
         }"
       >
         <img
-          :src="backendUrl + image.image.url"
-          :srcset="generateSrcset(image.image.renditions)"
+          :src="backendUrl + image.url"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
           alt="image"
           class="hero-image h-96 w-full object-cover [&_img]:lg:h-[500px]"
@@ -30,11 +29,11 @@
 </template>
 
 <script setup lang="ts">
-import type { ImageRenditions, ImageWrapper } from "@/types/hotel";
+import type { ImageRenditions, Image } from "@/types/hotel";
 import { generateSrcset } from "@/utils/generateSrcset";
 defineProps({
   images: {
-    type: Array<ImageWrapper>,
+    type: Array<Image>,
     required: true,
   },
 });

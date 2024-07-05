@@ -1,7 +1,7 @@
 <template>
   <div class="container relative w-full">
     <CommonBackButton class="absolute left-4 top-4" />
-    <div v-if="images?.length && images[0]?.image?.url">
+    <div v-if="images?.length && images[0]?.url">
       <HotelHeroCarousel v-if="deviceType !== 'desktop'" :images="images" />
       <HotelHeroCollage v-else :images="images" />
     </div>
@@ -16,12 +16,12 @@
 
 <script setup lang="ts">
 import useDeviceType from "@/composables/useDeviceType";
-import type { ImageWrapper } from "@/types/hotel";
+import type { Image } from "@/types/hotel";
 import { Global } from "@/enums/Global";
 
 const { images } = defineProps({
   images: {
-    type: Array<ImageWrapper>,
+    type: Array<Image>,
   },
 });
 

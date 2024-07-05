@@ -21,11 +21,7 @@ export interface Image {
   url: URL;
   width: Width;
   height: Height;
-  renditions: ImageRenditions;
-}
-
-export interface ImageWrapper {
-  image: Image;
+  original: URL;
 }
 
 export interface PriceRange {
