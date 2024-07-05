@@ -82,7 +82,7 @@ export interface Hotel {
   end_price: string;
   categories: Array<{ category: Category }>;
   amenities: Array<{ amenity: Amenity }>;
-  images: Array<{ image: Image }>;
+  images: Array<Image>;
   social_links: SocialLink[];
 }
 
