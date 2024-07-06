@@ -23,6 +23,7 @@ import ProgressSpinner from "primevue/progressspinner";
 import AnimateOnScroll from "primevue/animateonscroll";
 import Toast from "primevue/toast";
 import ToastService from 'primevue/toastservice';
+import Galleria from "primevue/galleria";
 
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(PrimeVue);
@@ -47,6 +48,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component("ScrollTop", ScrollTop);
     nuxtApp.vueApp.component("DeferredContent", DeferredContent);
     nuxtApp.vueApp.component("Toast", Toast);
+    nuxtApp.vueApp.component("Galleria", Galleria);
     nuxtApp.vueApp.directive("animateonscroll", AnimateOnScroll);
     nuxtApp.vueApp.directive("badge", BadgeDirective);
 

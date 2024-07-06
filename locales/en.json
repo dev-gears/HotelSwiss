@@ -28,7 +28,8 @@
   },
   "Search": {
     "filters": "Filters",
-    "searchForSpecificHotel": "Search for a specific hotel"
+    "searchForSpecificHotel": "Search for a specific hotel",
+    "noResults": "No results found"
   },
   "PromoBlock": {
     "promoHotels": "Promo hotels"

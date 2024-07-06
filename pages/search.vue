@@ -7,14 +7,16 @@
         class="mb-5 border-b border-primary py-3 font-robotoRegular"
       />
       <SkeletonLoadersSearchSkeleton v-if="isLoading" />
-      <div>
+      <div v-else>
         <CommonGridSection
           v-if="searchedHotels?.value?.length"
           :hotels="searchedHotels?.value"
           :nextUrl="nextUrl"
         />
         <div v-else class="flex h-[50vh] items-center justify-center">
-          <h1 class="text-2xl text-primary-100">No results found</h1>
+          <h1 class="text-2xl text-primary-100">
+            {{ $t("Search.noResults") }}
+          </h1>
         </div>
       </div>
     </div>
