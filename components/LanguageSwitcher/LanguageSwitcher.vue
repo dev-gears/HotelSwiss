@@ -14,11 +14,11 @@
       :dismissable="true"
       :showCloseIcon="false"
       @hide="onOverlayHide"
-      class="text-light mt-[2px] w-[330px] rounded-[10px] rounded-tr-none bg-primary-100"
+      class="mt-[2px] w-[330px] rounded-[10px] rounded-tr-none bg-primary-100 text-light"
     >
       <ul class="m-0 list-none p-0 font-robotoRegular">
         <li class="bottom-border-item mb-2 border-b px-2 py-2 text-xl">
-          {{ $t("LanguageButton.selectLanguage") }}
+          {{ t("LanguageButton.selectLanguage") }}
         </li>
         <li
           v-for="(name, code) in languageNames"
@@ -40,8 +40,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
-import { useLanguageStore } from "@/store/language";
 import OverlayPanel from "primevue/overlaypanel";
+import { useLanguageStore } from "@/store/language";
 
 import engIcon from "@/assets/images/language/eng.svg";
 import gerIcon from "@/assets/images/language/ger.svg";
@@ -50,73 +50,99 @@ import freIcon from "@/assets/images/language/fre.svg";
 
 type LanguageCode = "en" | "de" | "it" | "fr";
 
-const { locale } = useI18n();
+const { t, locale } = useI18n();
 const languageStore = useLanguageStore();
 const overlayPanel = ref<InstanceType<typeof OverlayPanel> | null>(null);
 const languageSwitcherRef = ref<HTMLElement | null>(null);
-const currentLanguage = ref<LanguageCode>("en");
+const isOverlayPanelOpen = ref(false);
+
 const languageNames: Record<LanguageCode, string> = {
   en: "English",
   de: "Deutsch",
   it: "Italiano",
   fr: "Français",
 };
+
 const icons: Record<LanguageCode, string> = {
   en: engIcon,
   de: gerIcon,
   it: itaIcon,
   fr: freIcon,
 };
-const currentIcon = computed(() => icons[currentLanguage.value]);
-const isOverlayPanelOpen = ref(false);
 
+const currentLanguage = computed(() => locale.value as LanguageCode);
+const currentIcon = computed(() => icons[currentLanguage.value]);
+
+/**
+ * Toggle the overlay panel visibility
+ */
 const toggleOverlayPanel = (event: MouseEvent) => {
   isOverlayPanelOpen.value = !isOverlayPanelOpen.value;
   overlayPanel.value?.toggle(event);
 };
 
+/**
+ * Change the language and save it to the store
+ */
 const changeLanguage = (code: LanguageCode) => {
   locale.value = code;
   languageStore.setLanguage(code);
-  currentLanguage.value = code;
   isOverlayPanelOpen.value = false;
   overlayPanel.value?.hide();
 };
 
+let observer: IntersectionObserver | null = null;
+
+/**
+ * Hide the overlay panel when it is closed
+ * and stop observing the language switcher element
+ */
 const onOverlayHide = () => {
   isOverlayPanelOpen.value = false;
-};
-
-const handleScroll = () => {
-  if (
-    overlayPanel.value &&
-    languageSwitcherRef.value &&
-    !isElementVisible(languageSwitcherRef.value)
-  ) {
-    isOverlayPanelOpen.value = false;
-    overlayPanel.value.hide();
+  if (observer && languageSwitcherRef.value) {
+    observer.unobserve(languageSwitcherRef.value);
   }
 };
 
-const isElementVisible = (el: HTMLElement) => {
-  const rect = el.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
+/**
+ * Handle the intersection observer callback
+ * to close the overlay panel when the user scrolls
+ */
+const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) {
+      isOverlayPanelOpen.value = false;
+      overlayPanel.value?.hide();
+    }
+  });
 };
 
+/**
+ * Create an intersection observer to close the overlay panel
+ * when the user scrolls
+ */
 onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
+  if (languageSwitcherRef.value) {
+    observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.1,
+    });
+    observer.observe(languageSwitcherRef.value);
+  }
 });
 
+/**
+ * Stop observing the language switcher element
+ * when the component is unmounted
+ */
 onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
+  if (observer && languageSwitcherRef.value) {
+    observer.unobserve(languageSwitcherRef.value);
+  }
 });
 
+/**
+ * Style the button based on the overlay panel visibility
+ */
 const buttonStyle = computed(() => ({
   backgroundColor: isOverlayPanelOpen.value ? "#26393B" : "#354F52",
 }));
