@@ -1,8 +1,8 @@
 <template>
-  <div class="border-t-2 border-primary-100/40 bg-light">
-    <div
-      class="container fixed bottom-0 mx-auto flex w-full items-center justify-between px-7 py-3 sm:static"
-    >
+  <div
+    class="fixed bottom-0 w-full border-t-2 border-primary-100/40 bg-light sm:static"
+  >
+    <div class="container mx-auto flex items-center justify-between px-7 py-3">
       <div v-if="startPrice" class="flex flex-col justify-start">
         <p class="font-patuaOne text-xl text-primary-200">
           {{ $t("ContactFooter.from") }}: <span>{{ startPrice }}</span
