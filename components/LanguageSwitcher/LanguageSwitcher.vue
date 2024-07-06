@@ -79,6 +79,12 @@ const currentIcon = computed(() => icons[currentLanguage.value]);
 const toggleOverlayPanel = (event: MouseEvent) => {
   isOverlayPanelOpen.value = !isOverlayPanelOpen.value;
   overlayPanel.value?.toggle(event);
+  if (languageSwitcherRef.value) {
+    observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.1,
+    });
+    observer.observe(languageSwitcherRef.value);
+  }
 };
 
 /**
@@ -116,19 +122,6 @@ const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     }
   });
 };
-
-/**
- * Create an intersection observer to close the overlay panel
- * when the user scrolls
- */
-onMounted(() => {
-  if (languageSwitcherRef.value) {
-    observer = new IntersectionObserver(handleIntersection, {
-      threshold: 0.1,
-    });
-    observer.observe(languageSwitcherRef.value);
-  }
-});
 
 /**
  * Stop observing the language switcher element
