@@ -17,11 +17,27 @@
       </div>
       <div>
         <Button
+          v-if="paid"
           class="rounded-xl bg-primary px-4 py-2 text-xl text-light"
           @click="formVisible = true"
-        >
-          {{ $t("ContactFooter.contactHotel") }}
-        </Button>
+          :label="$t('ContactFooter.contactHotel')"
+        />
+        <div v-else>
+          <Toast
+            :pt="{
+              root: 'max-md:w-9/12',
+              text: 'flex align-center',
+              content: 'max-md:p-4 flex items-center',
+              detail: 'max-md:m-0',
+              icon: 'max-md:w-6 max-md:h-6',
+            }"
+          />
+          <Button
+            class="rounded-xl bg-primary/30 px-4 py-2 text-xl text-primary"
+            :label="$t('ContactFooter.contactHotel')"
+            @click="onShowToast"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -29,9 +45,27 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from "primevue/usetoast";
+
+const toast = useToast();
+const { t } = useI18n();
+
+/**
+ * Show toast message
+ * @returns void
+ */
+const onShowToast = () => {
+  toast.add({
+    severity: "info",
+    summary: t("ContactFooter.info"),
+    life: 3000,
+  });
+};
+
 defineProps({
   startPrice: String,
   endPrice: String,
+  paid: Boolean,
 });
 
 const formVisible = ref(false);

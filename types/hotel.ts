@@ -80,6 +80,7 @@ export interface Hotel {
   amenities: Array<{ amenity: Amenity }>;
   images: Array<Image>;
   social_links: SocialLink[];
+  paid: boolean;
 }
 
 export interface Filters {

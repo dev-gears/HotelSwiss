@@ -21,6 +21,7 @@
     <HotelContactFooter
       :startPrice="hotel?.start_price"
       :endPrice="hotel?.end_price"
+      :paid="hotel?.paid"
     />
   </div>
 </template>
