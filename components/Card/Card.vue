@@ -11,7 +11,7 @@
         />
         <CardComponentsImageLink
           :hotelId="hotel.id"
-          :imageUrl="hotel?.images[0]?.url"
+          :imageUrl="hotel?.images[0]?.renditions?.thumbnail"
           :title="hotel.title"
           :backendUrl="backendUrl"
         />

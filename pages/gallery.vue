@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-light-100 p-4">
     <CommonBackButton class="sticky top-2 mb-4" />
     <div class="container relative mx-auto">
-      <div class="card flex justify-center">
+      <div class="flex justify-center rounded-md bg-primary-100/10">
         <Galleria
           v-model:activeIndex="activeIndex"
           v-model:visible="displayCustom"
@@ -60,7 +60,7 @@
                 loading="lazy"
                 ref="image"
                 class="h-full object-contain transition-all"
-                :src="backendUrl + slotProps.item.original"
+                :src="backendUrl + slotProps.item.url"
                 :alt="slotProps.item.alt"
                 :style="imageStyle"
               />
@@ -70,19 +70,36 @@
             <img
               loading="lazy"
               class="mx-3 hidden md:visible"
-              :src="backendUrl + slotProps.item.url"
+              :src="
+                backendUrl +
+                (slotProps.item.renditions?.thumbnail
+                  ? slotProps.item.renditions.thumbnail
+                  : slotProps.item.url)
+              "
               :alt="slotProps.item.alt"
             />
           </template>
         </Galleria>
 
-        <div v-if="parsedImages" class="grid grid-cols-1 gap-4 md:grid-cols-4">
-          <div v-for="(image, index) of parsedImages" :key="index">
+        <div
+          v-if="parsedImages.length"
+          class="grid w-full grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        >
+          <div
+            v-for="(image, index) of parsedImages"
+            :key="index"
+            class="flex items-center justify-center overflow-hidden rounded-md"
+          >
             <img
               loading="lazy"
-              :src="backendUrl + image.url"
+              class="w-full cursor-pointer object-cover transition-all hover:scale-105 hover:brightness-75"
+              :src="
+                backendUrl +
+                (image.renditions?.thumbnail
+                  ? image.renditions.thumbnail
+                  : image.url)
+              "
               :alt="image.alt"
-              style="cursor: pointer"
               @click="imageClick(index)"
             />
           </div>

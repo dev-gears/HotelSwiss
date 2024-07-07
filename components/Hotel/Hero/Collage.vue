@@ -3,7 +3,7 @@
     <div class="lg:col-span-3">
       <NuxtLink :to="getLink(0)">
         <Image
-          :src="backendUrl + images[0].original"
+          :src="backendUrl + images[0].url"
           class="hero-image h-96 w-full object-cover transition-all hover:brightness-75 [&_img]:aspect-video [&_img]:rounded"
         />
       </NuxtLink>
@@ -13,7 +13,7 @@
       <div v-for="(data, index) in images.slice(1, 4)" :key="data.id">
         <NuxtLink :to="getLink(index + 1)">
           <Image
-            :src="backendUrl + data.url"
+            :src="backendUrl + data.renditions.thumbnail"
             class="hero-image h-96 w-full object-cover transition-all hover:brightness-75 [&_img]:!aspect-video [&_img]:!h-full [&_img]:rounded [&_img]:object-cover"
           />
         </NuxtLink>

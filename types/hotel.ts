@@ -19,6 +19,9 @@ export interface Image {
   id: ID;
   title: Title;
   url: URL;
+  renditions: {
+    thumbnail: URL;
+  };
   width: Width;
   height: Height;
   original: URL;
