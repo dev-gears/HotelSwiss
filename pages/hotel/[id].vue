@@ -18,6 +18,7 @@
       v-if="hotel?.social_links"
       :socialLinks="hotel?.social_links"
     />
+    <Map :address="`${hotel?.address}, ${hotel?.zip} ${hotel?.city}`" />
     <HotelContactFooter
       :startPrice="hotel?.start_price"
       :endPrice="hotel?.end_price"

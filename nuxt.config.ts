@@ -26,12 +26,20 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
-  modules: ["@nuxtjs/tailwindcss", "nuxt-api-party", "nuxt-swiper", "@pinia/nuxt", [
-    "@nuxtjs/i18n",
-    {
-      vueI18n: "./i18n.config.ts",
-    },
-  ], "@nuxt/image"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "nuxt-api-party",
+    "nuxt-swiper",
+    "@pinia/nuxt",
+    [
+      "@nuxtjs/i18n",
+      {
+        vueI18n: "./i18n.config.ts",
+      },
+    ],
+    "@nuxt/image",
+    "@nuxtjs/leaflet",
+  ],
   apiParty: {
     endpoints: {
       hotelApi: {
