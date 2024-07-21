@@ -18,7 +18,7 @@
         }"
       >
         <img
-          :src="backendUrl + image.renditions.thumbnail"
+          :src="backendUrl + (image.renditions.thumbnail || image.url)"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
           alt="image"
           class="hero-image h-96 w-full object-cover [&_img]:lg:h-[500px]"

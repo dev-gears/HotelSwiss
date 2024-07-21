@@ -1,6 +1,12 @@
 <template>
   <div>
-    <TabView :scrollable="true" @update:activeIndex="onTabChange">
+    <TabView
+      :scrollable="true"
+      @update:activeIndex="onTabChange"
+      :pt="{
+        navContainer: 'border-b-2 border-primary-100/40',
+      }"
+    >
       <TabPanel>
         <template #header>
           <div class="whitespace-nowrap">

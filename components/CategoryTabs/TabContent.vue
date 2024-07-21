@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center border-b-2 border-primary-100/40">
+  <div class="flex flex-col items-center">
     <div class="container mx-auto px-3">
       <CommonBlockHeader :title="name" :link="`category/${category}`" />
       <SkeletonLoadersTabContentSkeleton v-if="isLoading" />

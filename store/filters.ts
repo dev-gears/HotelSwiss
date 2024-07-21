@@ -6,17 +6,19 @@ interface State {
   searchValue: string;
 }
 
+const getInitialState = (): State => ({
+  filters: {
+    cantons: [],
+    price_range: { from: undefined, to: undefined },
+    amenities: [],
+    stars: "",
+  },
+  searchValue: "",
+});
+
 export const useFiltersStore = defineStore({
   id: "filters",
-  state: (): State => ({
-    filters: {
-      cantons: [],
-      price_range: { from: undefined, to: undefined },
-      amenities: [],
-      stars: "",
-    },
-    searchValue: "",
-  }),
+  state: getInitialState,
   actions: {
     updateFilters(newFilters: Partial<Filters>) {
       this.$patch((state) => {
@@ -24,7 +26,9 @@ export const useFiltersStore = defineStore({
       });
     },
     clearFilters() {
-      this.$reset();
+      this.$patch((state) => {
+        Object.assign(state.filters, getInitialState().filters);
+      });
     },
     setSearchValue(searchValue: string) {
       this.searchValue = searchValue;

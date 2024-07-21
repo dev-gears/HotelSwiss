@@ -5,6 +5,7 @@
     <SearchInput
       customClassInput="h-12 w-full rounded-l-xl bg-light px-2 text-primary-200 shadow focus:shadow"
       id="searchInput"
+      @update:modelValue="filtersStore.setSearchValue"
     />
     <Button
       icon="pi pi-sliders-h"
@@ -102,7 +103,7 @@ let unsubscribe: () => void;
 
 onMounted(() => {
   unsubscribe = filtersStore.$onAction(({ name, after }) => {
-    if (name === "updateFilters") {
+    if (name === "updateFilters" || name === "clearFilters") {
       after(() => {
         filtersCount.value = filtersStore.selectedFiltersCount;
       });

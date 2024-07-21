@@ -56,7 +56,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { useFiltersStore } from "@/store/filters";
 import type { Canton, Amenity, Filters, PriceRange } from "@/types/hotel";
 
@@ -80,11 +79,24 @@ const searchValue = ref("");
 /**
  * Clear filters from the store
  * Emits clear-filters event to parent component
+ * Closes the filters dialog and updates filters *
  * @returns {void}
  */
 const clearFilters = () => {
   filtersStore.clearFilters();
-  emit("clear-filters");
+  clearLocalFilters();
+  updateFilters();
+};
+
+/**
+ * Clear local filters
+ * @returns {void}
+ */
+const clearLocalFilters = () => {
+  localCantons.value = [];
+  localPriceRange.value = { from: 0, to: 0 };
+  localAmenities.value = [];
+  localStars.value = "";
 };
 
 /**
@@ -116,7 +128,7 @@ let unsubscribe: () => void;
 
 onMounted(() => {
   unsubscribe = filtersStore.$onAction(({ name, after }) => {
-    if (name === "updateFilters" || name === "setSearchValue") {
+    if (name === "updateFilters") {
       after(() => {
         searchValue.value = filtersStore.searchValue;
         localCantons.value = filtersStore.filters.cantons;

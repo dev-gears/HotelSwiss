@@ -104,7 +104,7 @@ let unsubscribe: () => void;
 onMounted(() => {
   handleSearch();
   unsubscribe = filtersStore.$onAction(({ name, after }) => {
-    if (name === "updateFilters" || name === "setSearchValue") {
+    if (name === "updateFilters") {
       after(() => {
         handleSearch();
       });

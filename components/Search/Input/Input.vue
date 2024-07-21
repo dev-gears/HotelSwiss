@@ -40,11 +40,19 @@ onMounted(() => {
   localSearchText.value = filtersStore.searchValue;
 });
 
+/**
+ * Update the search value
+ * @param event
+ */
 const onInput = (event: Event) => {
   emit("update:modelValue", (event?.target as HTMLInputElement)?.value);
 };
 
-const handleSubmit = async () => {
+/**
+ * Handle the form submission
+ * @returns {Promise<void>}
+ */
+const handleSubmit = async (): Promise<void> => {
   filtersStore.setSearchValue(localSearchText.value);
   if (route.name !== "search") {
     await navigateTo({ path: "/search" });
