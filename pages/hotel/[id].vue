@@ -7,18 +7,25 @@
   />
 
   <HotelSkeletonLoader v-if="pending" />
-  <div v-else class="bg-light-100">
-    <HotelHero :images="hotel?.images" />
-    <HotelContent v-if="hotel" :hotel="hotel" />
+  <div v-else class="flex flex-col bg-light-100 max-sm:pb-32">
+    <div>
+      <HotelHero :images="hotel?.images" />
+      <HotelContent v-if="hotel" :hotel="hotel" />
+    </div>
     <HotelAmenities
       v-if="hotel?.amenities?.length"
       :amenities="hotel?.amenities"
+      class="pt-3"
     />
     <HotelSocialNetworks
       v-if="hotel?.social_links"
       :socialLinks="hotel?.social_links"
+      class="pt-3"
     />
-    <Map :address="`${hotel?.address}, ${hotel?.zip} ${hotel?.city}`" />
+    <Map
+      :address="`${hotel?.address}, ${hotel?.zip} ${hotel?.city}`"
+      class="pt-3"
+    />
     <HotelContactFooter
       :startPrice="hotel?.start_price"
       :endPrice="hotel?.end_price"

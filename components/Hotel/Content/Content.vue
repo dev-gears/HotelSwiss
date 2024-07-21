@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto flex flex-col gap-3 bg-primary px-7 text-light">
-    <h2 class="mt-5 font-patuaOne text-2xl">{{ hotel?.title }}</h2>
+    <h1 class="mt-5 font-patuaOne text-2xl">{{ hotel?.title }}</h1>
     <div>
       <p v-if="displayDescription !== 'nan'" class="font-robotoRegular text-sm">
         {{ displayDescription }}
@@ -32,15 +32,14 @@
         </p>
       </NuxtLink>
 
-      <NuxtLink
-        :to="`/search?`"
+      <div
         class="flex h-full w-1/3 cursor-pointer flex-col items-center justify-center px-2 font-patuaOne text-xl"
       >
         <p>
           {{ $t("Content.class") }}
         </p>
         <CommonStars :stars="hotel?.stars" />
-      </NuxtLink>
+      </div>
 
       <NuxtLink
         :to="{

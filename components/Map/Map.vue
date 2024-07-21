@@ -1,25 +1,33 @@
 <template>
-  <div class="h-[400px] w-[800px]">
-    <LMap
-      ref="map"
-      :zoom="10"
-      :center="searchedLocation"
-      :use-global-leaflet="false"
-      @ready="onMapReady"
-    >
-      <LTileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        layer-type="base"
-        name="OpenStreetMap"
-      />
-      <LMarker
-        v-if="searchedLocation"
-        :lat-lng="searchedLocation"
-        :draggable="false"
-      >
-        <LPopup> {{ searchedLocationLabel }}</LPopup>
-      </LMarker>
-    </LMap>
+  <div class="container px-3">
+    <div class="flex flex-col gap-3">
+      <h2 class="font-robotoRegular text-xl text-primary-200">
+        {{ $t("Content.whereYouWillBe") }}
+      </h2>
+      <div class="mx-auto h-60 w-full rounded-lg shadow-md md:h-80 md:w-3/4">
+        <LMap
+          ref="map"
+          :zoom="10"
+          :center="searchedLocation"
+          :use-global-leaflet="false"
+          @ready="onMapReady"
+        >
+          <LTileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            layer-type="base"
+            name="OpenStreetMap"
+          />
+          <LMarker
+            v-if="searchedLocation"
+            :lat-lng="searchedLocation"
+            :draggable="false"
+          >
+            <LIcon iconUrl="/map-pin.svg" :iconSize="[32, 37]"></LIcon>
+            <LPopup> {{ searchedLocationLabel }}</LPopup>
+          </LMarker>
+        </LMap>
+      </div>
+    </div>
   </div>
 </template>
 

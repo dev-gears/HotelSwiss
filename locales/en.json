@@ -21,7 +21,8 @@
   },
   "Content": {
     "class": "Class",
-    "readMore": "Read more"
+    "readMore": "Read more",
+    "whereYouWillBe": "Where you will be"
   },
   "Amenities": {
     "title": "What we offer"
