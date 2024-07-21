@@ -6,6 +6,7 @@
       customClassInput="h-12 w-full rounded-l-xl bg-light px-2 text-primary-200 shadow focus:shadow"
       id="searchInput"
       @update:modelValue="filtersStore.setSearchValue"
+      @handleSubmit="updateFilters"
     />
     <Button
       icon="pi pi-sliders-h"
@@ -82,6 +83,9 @@ const removeCanton = (canton: { id: number; name: string }) => {
   filtersStore.updateFilters({ cantons: newCantons });
 };
 
+/**
+ * Remove the stars from the filters in the store
+ */
 const removeStars = () => {
   filtersStore.updateFilters({ stars: "" });
 };
@@ -101,6 +105,11 @@ const updateFilters = async (newFilters: Filters) => {
 
 let unsubscribe: () => void;
 
+/**
+ * Subscribe to the filters store to update the filters count
+ * when the filters are updated or cleared
+ * @returns {void}
+ */
 onMounted(() => {
   unsubscribe = filtersStore.$onAction(({ name, after }) => {
     if (name === "updateFilters" || name === "clearFilters") {
