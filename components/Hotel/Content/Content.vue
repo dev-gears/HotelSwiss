@@ -24,7 +24,7 @@
       >
         <img
           class="absolute inset-0 h-full w-full p-2"
-          :src="backendUrl + hotel?.canton?.image?.renditions?.thumbnail"
+          :src="backendUrl + hotel?.canton?.image?.url"
           alt="canton image"
         />
         <p class="font-robotoRegular text-lg text-light">

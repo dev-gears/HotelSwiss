@@ -13,9 +13,9 @@
         @click="addOrRemoveCanton(canton)"
       >
         <div
-          v-if="canton?.image?.renditions?.thumbnail"
+          v-if="canton?.image?.url"
           class="absolute h-12 w-12 rounded-full bg-cover bg-center bg-no-repeat"
-          :style="`background-image: url('${backendUrl}${canton?.image?.renditions?.thumbnail}');`"
+          :style="`background-image: url('${backendUrl}${canton?.image?.url}');`"
         ></div>
         {{ canton?.name }}
       </div>
