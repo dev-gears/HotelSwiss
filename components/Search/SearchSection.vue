@@ -1,22 +1,31 @@
 <template>
-  <div
-    class="relative my-8 flex w-full items-center justify-center gap-2 [&_>div]:flex [&_>div]:w-full [&_>div]:bg-light"
-  >
-    <SearchInput
-      customClassInput="h-12 w-full rounded-l-xl bg-light px-2 text-primary-200 shadow focus:shadow"
-      id="searchInput"
-      @update:modelValue="filtersStore.setSearchValue"
-      @handleSubmit="updateFilters"
+  <div class="relative my-8 flex w-full items-center justify-center gap-2">
+    <Button
+      @click="showFilters = true"
+      v-ripple
+      :label="$t('Search.searchForSpecificHotel')"
+      :pt="{
+        root: 'h-12 !flex !justify-between !px-3 w-full overflow-hidden !rounded-l-xl !bg-light px-2 text-primary-200 shadow focus:shadow',
+        icon: 'text-primary-200 !text-lg',
+      }"
+      icon="pi pi-search"
+      iconPos="right"
     />
     <Button
+      v-ripple
       icon="pi pi-sliders-h"
-      class="flex h-12 items-center justify-center rounded-none rounded-br-xl bg-light px-6 shadow [&_span]:text-2xl [&_span]:!text-primary"
+      :pt="{
+        root: 'h-12 items-center justify-center rounded-none !rounded-br-xl !bg-light !px-4 shadow',
+        icon: 'text-primary-200 !text-lg',
+      }"
       @click="showFilters = true"
     />
     <Badge
-      v-if="filtersCount"
+      v-if="filtersCount !== '0'"
       :value="filtersCount"
-      class="absolute -right-2 -top-2 bg-primary"
+      :pt="{
+        root: 'absolute !w-5 !h-5 -right-2 text-md -top-2 !bg-primary !rounded-full !text-light',
+      }"
     />
   </div>
   <SearchFilters
@@ -28,7 +37,7 @@
   />
   <div
     v-if="filtersCount && route.name === 'search'"
-    class="mb-3 border-b border-primary-200"
+    class="mb-3 border-b border-primary/30 px-3 pb-3"
   >
     <div v-if="filtersStore.filters.cantons.length">
       <div class="mb-2 flex flex-wrap gap-1">
@@ -38,19 +47,26 @@
           removable
           icon="pi pi-sliders-h"
           :label="canton.name"
-          class="cursor-pointer bg-primary text-light hover:bg-danger"
+          :pt="{
+            root: 'cursor-pointer !flex !gap-2 !px-3 !py-2 !rounded-xl !bg-primary !text-light hover:!bg-danger',
+          }"
           @click="removeCanton(canton)"
         />
       </div>
     </div>
-    <div v-if="filtersStore.filters.stars">
-      <Chip
-        removable
-        icon="pi pi-star"
-        :label="filtersStore.filters.stars"
-        class="mb-2 cursor-pointer bg-primary text-light hover:bg-danger"
-        @click="removeStars"
-      />
+
+    <div class="mb-2 flex flex-wrap gap-1">
+      <div v-if="filtersStore.filters.stars">
+        <Chip
+          removable
+          icon="pi pi-star"
+          :label="filtersStore.filters.stars"
+          :pt="{
+            root: 'cursor-pointer !flex !gap-2 !px-3 !py-2 !rounded-xl !bg-primary !text-light hover:!bg-danger',
+          }"
+          @click="removeStars"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -63,7 +79,7 @@ import type { Filters } from "@/types/hotel";
 const route = useRoute();
 const filtersStore = useFiltersStore();
 const showFilters = ref(false);
-const filtersCount = ref(0);
+const filtersCount = ref("0");
 
 /**
  * Clear the filters in the store
@@ -114,7 +130,7 @@ onMounted(() => {
   unsubscribe = filtersStore.$onAction(({ name, after }) => {
     if (name === "updateFilters" || name === "clearFilters") {
       after(() => {
-        filtersCount.value = filtersStore.selectedFiltersCount;
+        filtersCount.value = filtersStore.selectedFiltersCount.toString();
       });
     }
   });
@@ -126,5 +142,5 @@ onUnmounted(() => {
   }
 });
 
-const { data: filters } = await useHotelApiData("/filters");
+const { data: filters } = (await useHotelApiData("/filters")) as any;
 </script>

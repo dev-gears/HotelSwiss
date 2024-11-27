@@ -1,32 +1,30 @@
 <template>
-  <DeferredContent>
-    <div
-      v-if="hotel"
-      class="card relative h-full w-full overflow-hidden rounded-[10px] bg-primary shadow-card group-[.promo-block]:min-h-[350px]"
-    >
-      <div :class="getAspectRatioClass(aspect)" class="relative w-full">
-        <CardComponentsPriceTag
-          :startPrice="hotel.start_price"
-          :endPrice="hotel.end_price"
-        />
-        <CardComponentsImageLink
-          :hotelId="hotel.id"
-          :imageUrl="hotel?.images[0]?.renditions?.thumbnail"
-          :title="hotel.title"
-          :backendUrl="backendUrl"
-        />
-      </div>
-      <CardComponentsCommonBackdrop class="p-2">
-        <CardComponentsHotelTitle :hotelId="hotel.id" :title="hotel.title" />
-        <CardComponentsRatingStars :stars="hotel.stars" />
-        <CardComponentsLocation
-          :hotelId="hotel.id"
-          :address="hotel.address"
-          :city="hotel.city"
-        />
-      </CardComponentsCommonBackdrop>
+  <div
+    v-if="hotel"
+    class="card relative h-full w-full overflow-hidden rounded-[10px] bg-primary shadow-card group-[.promo-block]:min-h-[350px]"
+  >
+    <div :class="getAspectRatioClass(aspect)" class="relative w-full">
+      <CardComponentsPriceTag
+        :startPrice="hotel.start_price"
+        :endPrice="hotel.end_price"
+      />
+      <CardComponentsImageLink
+        :hotelId="hotel.id"
+        :imageUrl="hotel?.images[0]?.renditions?.thumbnail"
+        :title="hotel.title"
+        :backendUrl="backendUrl"
+      />
     </div>
-  </DeferredContent>
+    <CardComponentsCommonBackdrop class="p-2">
+      <CardComponentsHotelTitle :hotelId="hotel.id" :title="hotel.title" />
+      <CardComponentsRatingStars :stars="hotel.stars" />
+      <CardComponentsLocation
+        :hotelId="hotel.id"
+        :address="hotel.address"
+        :city="hotel.city"
+      />
+    </CardComponentsCommonBackdrop>
+  </div>
 </template>
 
 <script setup lang="ts">

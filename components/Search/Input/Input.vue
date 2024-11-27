@@ -1,17 +1,32 @@
 <template>
-  <div @submit.prevent="handleSubmit" class="p-inputgroup p-input-icon-right">
-    <InputText
-      :id="id"
-      :placeholder="$t('Search.searchForSpecificHotel')"
-      v-model="localSearchText"
-      @input="onInput"
-      @keyup.enter="handleSubmit"
-      :class="customClassInput"
-    />
-    <i
-      @click="handleSubmit"
-      class="pi pi-search right-0 top-2 z-[2] !flex h-12 w-12 cursor-pointer items-center justify-center text-xl"
-    ></i>
+  <div class="border-b border-primary/30 px-3 pb-5">
+    <InputGroup
+      :pt="{
+        root: '!h-12 w-full container mx-auto w-full !rounded-xl border border-primary/30 bg-light-100 text-primary-200 shadow-sm',
+      }"
+    >
+      <InputText
+        :id="id"
+        v-ripple
+        :class="customClassInput"
+        :placeholder="$t('Search.searchForSpecificHotel')"
+        v-model="localSearchText"
+        :pt="{
+          root: 'w-full !rounded-xl bg-light-100 px-2 text-primary-200',
+        }"
+        @input="onInput"
+        @keyup.enter="handleSubmit"
+      />
+      <Button
+        v-ripple
+        @click="handleSubmit"
+        icon="pi pi-search"
+        severity="warn"
+        :pt="{
+          root: 'h-12 items-center justify-center !px-4',
+        }"
+      />
+    </InputGroup>
   </div>
 </template>
 

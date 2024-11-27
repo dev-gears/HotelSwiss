@@ -1,129 +1,70 @@
-<template>
-  <Dialog
-    dismissableMask
-    closable
-    v-model:visible="formVisible"
-    modal
-    blockScroll
-    :ptOptions="{ mergeSections: false }"
-    :pt="{
-      root: 'bg-light-100 h-full w-full fixed bottom-0 left-0 rounded-t-3xl',
-      header:
-        'bg-light-100 z-50 border-b border-primary/30 rounded-t-3xl fixed w-full flex justify-end items-center py-2 px-6',
-      content:
-        'bg-light-100 pt-20 rounded-t-3xl px-7 overflow-y-scroll flex flex-col gap-6',
-      footer:
-        'bg-light-100 bottom-0 border-t border-primary/30 px-6 flex justify-between',
-    }"
-  >
-    <h1>{{ $t("ContactForm.title") }}</h1>
-    <form class="flex flex-col gap-3" @submit="submitForm">
-      <div class="flex flex-col gap-2">
-        <label for="name" class="text-sm text-primary-200">
-          {{ $t("ContactForm.name") }}:
-          <span class="text-[red]">*</span>
-        </label>
-        <InputText
-          id="name"
-          class="p-inputgroup h-12 w-full rounded-xl bg-light px-2 text-primary-200 shadow focus:shadow"
-          v-model="name"
-          label="Name"
-          placeholder="Enter your name"
-          required
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label for="email" class="text-sm text-primary-200">
-          {{ $t("ContactForm.email") }}:
-          <span class="text-[red]">*</span>
-        </label>
-        <InputText
-          id="email"
-          class="p-inputgroup h-12 w-full rounded-xl bg-light px-2 text-primary-200 shadow focus:shadow"
-          v-model="email"
-          label="Email"
-          placeholder="Enter your email"
-          type="email"
-          required
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label for="phone" class="text-sm text-primary-200">
-          {{ $t("ContactForm.phone") }}:
-          <span class="text-primary-200/30">({{ $t("Common.optional") }})</span>
-        </label>
-        <InputText
-          id="phone"
-          class="p-inputgroup h-12 w-full rounded-xl bg-light px-2 text-primary-200 shadow focus:shadow"
-          v-model="phone"
-          label="Phone"
-          placeholder="Enter your phone number"
-          type="tel"
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label>
-          {{ $t("ContactForm.date") }}:
-          <span class="text-primary-200/30">({{ $t("Common.optional") }})</span>
-        </label>
-        <div class="flex gap-4">
-          <Calendar
-            class="p-inputgroup p-input-icon-right h-12 w-full rounded-xl bg-light px-2 text-primary-200 shadow focus:shadow"
-            v-model="arrivalDate"
-            showIcon
-            :placeholder="$t('ContactForm.arrivalDate')"
-            iconDisplay="input"
-            :pt="{
-              dropdownButton: 'bg-primary',
-            }"
-          />
-          <Calendar
-            class="p-inputgroup p-input-icon-right h-12 w-full rounded-xl bg-light px-2 text-primary-200 shadow focus:shadow"
-            v-model="leavingDate"
-            showIcon
-            :placeholder="$t('ContactForm.leavingDate')"
-            iconDisplay="input"
-          />
-        </div>
-      </div>
-      <div class="flex flex-col gap-2">
-        <label for="message" class="text-sm text-primary-200">
-          {{ $t("ContactForm.message") }}:
-          <span class="text-[red]">*</span>
-        </label>
-        <Textarea
-          id="message"
-          rows="4"
-          class="p-inputgroup w-full rounded-xl bg-light p-2 text-primary-200 shadow focus:shadow"
-          v-model="message"
-          label="Message"
-          :placeholder="$t('ContactForm.message')"
-          required
-        />
-      </div>
-      <Button
-        class="flex justify-center rounded-xl bg-primary px-4 py-2 text-lg text-light"
-        type="submit"
-        >{{ $t("ContactForm.submit") }}</Button
-      >
-    </form>
-  </Dialog>
-</template>
-
 <script setup lang="ts">
-import { ref } from "vue";
-
-const formVisible = ref(false);
+import { ref, computed } from "vue";
+import InputText from "primevue/inputtext";
+import Textarea from "primevue/textarea";
+import Button from "primevue/button";
+import InputGroup from "primevue/inputgroup";
 
 const name = ref("");
 const email = ref("");
 const message = ref("");
 const phone = ref("");
-const arrivalDate = ref("");
-const leavingDate = ref("");
+const arrivalDate = ref<Date | null>(null);
+const leavingDate = ref<Date | null>(null);
+
+const errors = ref({
+  name: "",
+  email: "",
+  message: "",
+});
+
+const isFormValid = computed(() => {
+  return (
+    name.value.trim() !== "" &&
+    email.value.trim() !== "" &&
+    validateEmail(email.value) &&
+    message.value.trim() !== ""
+  );
+});
+
+const validateEmail = (email: string): boolean => {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+};
 
 const submitForm = (e: Event) => {
   e.preventDefault();
+
+  errors.value = {
+    name: "",
+    email: "",
+    message: "",
+  };
+
+  let valid = true;
+
+  if (name.value.trim() === "") {
+    errors.value.name = "Name is required.";
+    valid = false;
+  }
+
+  if (email.value.trim() === "") {
+    errors.value.email = "Email is required.";
+    valid = false;
+  } else if (!validateEmail(email.value)) {
+    errors.value.email = "Please enter a valid email address.";
+    valid = false;
+  }
+
+  if (message.value.trim() === "") {
+    errors.value.message = "Message is required.";
+    valid = false;
+  }
+
+  if (!valid) {
+    return;
+  }
+
   const formData = {
     name: name.value,
     email: email.value,
@@ -133,7 +74,139 @@ const submitForm = (e: Event) => {
     leavingDate: leavingDate.value,
   };
   console.log("Form submitted", formData);
+
+  name.value = "";
+  email.value = "";
+  message.value = "";
+  phone.value = "";
+  arrivalDate.value = null;
+  leavingDate.value = null;
 };
 </script>
 
-<style scoped></style>
+<template>
+  <div class="font-robotoRegular">
+    <h1 class="mb-5 text-xl font-bold leading-6">
+      {{ $t("ContactForm.title") }}
+    </h1>
+    <form class="flex flex-col gap-3" @submit="submitForm">
+      <div class="flex flex-col gap-2">
+        <label for="name" class="text-sm text-primary-200">
+          {{ $t("ContactForm.name") }}:
+          <span class="text-[red]">*</span>
+        </label>
+        <InputText
+          id="name"
+          v-model="name"
+          placeholder="Enter your name"
+          required
+          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow"
+        />
+        <span v-if="errors.name" class="text-red-500 text-sm">{{
+          errors.name
+        }}</span>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="email" class="text-sm text-primary-200">
+          {{ $t("ContactForm.email") }}:
+          <span class="text-[red]">*</span>
+        </label>
+        <InputText
+          id="email"
+          v-model="email"
+          type="email"
+          placeholder="Enter your email"
+          required
+          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow"
+        />
+        <span v-if="errors.email" class="text-red-500 text-sm">{{
+          errors.email
+        }}</span>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="phone" class="text-sm text-primary-200">
+          {{ $t("ContactForm.phone") }}:
+          <span class="text-primary-200/30">({{ $t("Common.optional") }})</span>
+        </label>
+        <InputText
+          id="phone"
+          v-model="phone"
+          type="tel"
+          placeholder="Enter your phone number"
+          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="text-sm text-primary-200">
+          {{ $t("ContactForm.date") }}:
+          <span class="text-primary-200/30">({{ $t("Common.optional") }})</span>
+        </label>
+        <div class="flex gap-4">
+          <InputGroup
+            class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !text-primary-200 !shadow sm:w-auto"
+          >
+            <DatePicker
+              :pt="{
+                dropdown: '!bg-primary !rounded-r-xl text-light',
+                daycell: 'p-0',
+              }"
+              dateFormat="dd/mm/yy"
+              v-model="arrivalDate"
+              :placeholder="$t('ContactForm.arrivalDate')"
+              :show-icon="true"
+            />
+          </InputGroup>
+
+          <InputGroup
+            class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !text-primary-200 !shadow sm:w-auto"
+          >
+            <DatePicker
+              :pt="{
+                dropdown: '!bg-primary !rounded-r-xl text-light',
+                daycell: 'p-0',
+              }"
+              v-model="leavingDate"
+              :placeholder="$t('ContactForm.leavingDate')"
+              :show-icon="true"
+            />
+          </InputGroup>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="message" class="text-sm text-primary-200">
+          {{ $t("ContactForm.message") }}:
+          <span class="text-[red]">*</span>
+        </label>
+        <Textarea
+          id="message"
+          v-model="message"
+          :placeholder="$t('ContactForm.message')"
+          required
+          rows="5"
+          class="!focus:shadow !h-auto w-full !rounded-xl !bg-light-100 !px-2 !py-4 !text-primary-200 !shadow"
+        />
+        <span v-if="errors.message" class="text-red-500 text-sm">{{
+          errors.message
+        }}</span>
+      </div>
+
+      <Button
+        :label="$t('ContactForm.submit')"
+        type="submit"
+        :pt="{
+          root: '!rounded-xl !bg-primary !px-4 !py-2 !text-xl !text-light',
+        }"
+      />
+    </form>
+  </div>
+</template>
+
+<style>
+.p-datepicker-input {
+  @apply !bg-light-100 pl-2 !text-primary-200;
+}
+</style>

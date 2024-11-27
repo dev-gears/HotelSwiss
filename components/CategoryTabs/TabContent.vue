@@ -2,7 +2,9 @@
   <div class="flex flex-col items-center">
     <div class="container mx-auto px-3">
       <CommonBlockHeader :title="name" :link="`category/${category}`" />
-      <SkeletonLoadersTabContentSkeleton v-if="isLoading" />
+      <SkeletonLoadersTabContentSkeleton
+        v-if="isLoading && !categorizedHotels.length"
+      />
       <CommonGridSection
         v-else-if="categorizedHotels?.length"
         :hotels="categorizedHotels"

@@ -1,201 +1,299 @@
 <template>
-  <div class="min-h-screen bg-light-100 p-4">
-    <CommonBackButton class="sticky top-2 mb-4" />
-    <div class="container relative mx-auto">
-      <div class="flex justify-center rounded-md bg-primary-100/10">
-        <Galleria
-          v-model:activeIndex="activeIndex"
-          v-model:visible="displayCustom"
-          :value="parsedImages"
-          :responsiveOptions="responsiveOptions"
-          :fullScreen="true"
-          :showThumbnails="true"
-          :showThumbnailNavigators="true"
-          @update:visible="resetImageStyle"
-          :pt="{
-            root: 'h-full w-full',
-            mask: 'onClose',
-            thumbnail: 'pointer-events-none',
-            closeIcon:
-              'fill-current text-light z-50 bg-primary-100/90 w-10 h-10 p-2 rounded-md top-4 absolute right-4',
-            thumbnailContainer:
-              'fixed h-1/6 md:h-auto flex justify-end bottom-0 right-0 left-0 w-full p-4 max-md:bg-[transparent] max-md:absolute',
-            nextThumbnailButton: 'bg-primary-100/90 text-light',
-            previousThumbnailButton: 'bg-primary-100/90 text-light',
-            itemWrapper: 'h-full w-full',
-            content: 'h-full',
-          }"
-        >
-          <template #header>
-            <div class="absolute top-4 flex justify-center gap-4 px-4">
-              <Button
-                @click="onRotateLeft"
-                size="large"
-                class="z-50 h-10 w-10 -rotate-90 rounded-md bg-primary-100/90 text-light"
-                icon="pi pi-replay"
-              />
-              <Button
-                @click="onRotateRight"
-                size="large"
-                class="z-50 h-10 w-10 rotate-90 rounded-md bg-primary-100/90 text-light"
-                icon="pi pi-refresh"
-              />
-              <Button
-                @click="onZoomIn"
-                size="large"
-                class="z-50 h-10 w-10 rounded-md bg-primary-100/90 text-light"
-                icon="pi pi-search-plus"
-              />
-              <Button
-                @click="onZoomOut"
-                size="large"
-                class="z-50 h-10 w-10 rounded-md bg-primary-100/90 text-light"
-                icon="pi pi-search-minus"
-              />
-            </div>
-          </template>
-          <template #item="slotProps">
-            <div class="h-4/5 overflow-scroll px-1">
-              <img
-                loading="lazy"
-                ref="image"
-                class="h-full object-contain transition-all"
-                :src="backendUrl + slotProps.item.url"
-                :alt="slotProps.item.alt"
-                :style="imageStyle"
-              />
-            </div>
-          </template>
-          <template #thumbnail="slotProps">
-            <img
-              loading="lazy"
-              class="mx-3 hidden md:visible"
-              :src="
-                backendUrl +
-                (slotProps.item.renditions?.thumbnail
-                  ? slotProps.item.renditions.thumbnail
-                  : slotProps.item.url)
-              "
-              :alt="slotProps.item.alt"
-            />
-          </template>
-        </Galleria>
-
+  <CommonHead
+    :title="validatedHotelTitle ?? 'Default Hotel Title'"
+    :description="`Every info you need if staying at ${validatedHotelTitle}`"
+    :imageUrl="parsedImages[0]?.url ?? 'default-image-url.jpg'"
+    :url="`https://hotelswiss.ch/hotel/${hotelId}`"
+  />
+  <div class="relative bg-light-100 p-4 pt-2">
+    <CommonBackButton class="!sticky top-2 mb-4" />
+    <div class="container mx-auto">
+      <div
+        class="grid grid-cols-1 justify-center gap-3 rounded-md bg-primary-100/10 p-3 md:grid-cols-2 lg:grid-cols-3"
+      >
         <div
-          v-if="parsedImages.length"
-          class="grid w-full grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          v-for="(image, index) in parsedImages"
+          :key="index"
+          class="flex justify-center"
         >
-          <div
-            v-for="(image, index) of parsedImages"
-            :key="index"
-            class="flex items-center justify-center overflow-hidden rounded-md"
-          >
-            <img
-              loading="lazy"
-              class="w-full cursor-pointer object-cover transition-all hover:scale-105 hover:brightness-75"
-              :src="
-                backendUrl +
-                (image.renditions?.thumbnail
-                  ? image.renditions.thumbnail
-                  : image.url)
-              "
-              :alt="image.alt"
-              @click="imageClick(index)"
-            />
-          </div>
+          <Image
+            v-ripple
+            @click="openImageModal(index)"
+            :pt="{
+              root: 'flex items-center justify-center cursor-pointer hover:brightness-75',
+            }"
+            :src="image.renditions.thumbnail ?? image.url"
+          />
         </div>
       </div>
     </div>
   </div>
+
+  <Dialog
+    @touchstart="handleTouchStart"
+    @touchend="handleTouchEnd"
+    closable
+    :dismissableMask="true"
+    :modal="true"
+    :showHeader="false"
+    v-model:visible="showImageModal"
+    :pt="{
+      root: 'bg-primary-100/90 w-[90%] max-md:w-full max-md:h-full flex items-center justify-center',
+      content: 'p-6 max-md:px-0',
+    }"
+  >
+    <div class="flex h-full w-full items-center justify-center">
+      <button @click="closeImageModal" class="absolute right-6 top-6">
+        <i class="pi pi-times text-light"></i>
+      </button>
+      <div
+        class="transition-all"
+        ref="imageWrapper"
+        @dblclick="handleDoubleTap"
+      >
+        <Image
+          ref="imageWrapper"
+          :src="parsedImages[activeImageIndex].url"
+          :class="['max-h-[60vh] max-w-full object-contain', fadeInClass]"
+          :key="activeImageIndex"
+          :pt="{
+            root: 'h-[60vh] w-full flex items-center justify-center overflow-hidden',
+            image: 'max-h-[60vh] max-w-full object-contain animate-fade-in',
+          }"
+        />
+      </div>
+
+      <button
+        class="absolute left-4 hidden md:block"
+        @click="showPreviousImage"
+        v-if="parsedImages.length > 1"
+      >
+        <i
+          class="pi pi-angle-left light-ripple rounded-full bg-primary p-2 text-light shadow-md"
+          v-ripple
+        ></i>
+      </button>
+      <button
+        class="absolute right-4 hidden md:block"
+        @click="showNextImage"
+        v-if="parsedImages.length > 1"
+      >
+        <i
+          class="pi pi-angle-right rounded-full bg-primary p-2 text-light shadow-md"
+          v-ripple
+        ></i>
+      </button>
+    </div>
+    <div class="w-full">
+      <p
+        class="absolute bottom-6 left-6 rounded-full bg-primary p-2 text-center text-sm text-light shadow-md"
+      >
+        {{ activeImageIndex + 1 }} / {{ parsedImages.length }}
+      </p>
+
+      <button class="absolute bottom-6 right-6 md:block" @click="rotateLeft">
+        <i
+          class="pi pi-replay rounded-full bg-primary p-2 text-light shadow-md"
+          v-ripple
+        ></i>
+      </button>
+      <button class="absolute bottom-6 right-20 md:block" @click="rotateRight">
+        <i
+          class="pi pi-refresh rounded-full bg-primary p-2 text-light shadow-md"
+          v-ripple
+        ></i>
+      </button>
+    </div>
+  </Dialog>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from "vue";
+import { useRoute } from "vue-router";
+
 definePageMeta({
   layout: "single",
 });
-import { ref, computed } from "vue";
-import { useRoute } from "vue-router";
-import { useRuntimeConfig } from "nuxt/app";
-import Galleria from "primevue/galleria";
-import Button from "primevue/button";
 
 const router = useRoute();
-const runtimeConfig = useRuntimeConfig();
-const backendUrl = runtimeConfig.public.backendUrl;
-const { images } = router.query;
+const { images, hotelId, hotelTitle } = router.query;
+const validatedHotelTitle = (hotelTitle + " images") as string;
+
 const parsedImages = JSON.parse(images as string);
 
-const activeIndex = ref(0);
-const displayCustom = ref(false);
-
-const responsiveOptions = ref([
-  { breakpoint: "1024px", numVisible: 5 },
-  { breakpoint: "768px", numVisible: 2 },
-]);
-
-const image = ref<null | HTMLImageElement>(null);
-const rotation = ref(0);
-const scale = ref(1);
+const activeImageIndex = ref(0);
+const showImageModal = ref(false);
+const imageWrapper = ref(null) as Ref<HTMLImageElement | null>;
+const activeImageRotation = ref(0);
+const imageZoomedIn = ref(false);
 
 /**
- * Image style
- * @returns object
+ * Opens the image modal and sets the active image index.
+ * @param index - The index of the image to display in the modal.
  */
-const imageStyle = computed(() => ({
-  transform: `rotate(${rotation.value}deg) scale(${scale.value})`,
-  transition: "transform 0.5s",
-}));
+const openImageModal = (index: number): void => {
+  activeImageIndex.value = index;
+  showImageModal.value = true;
+};
 
 /**
- * Reset image style
- * @returns void
+ * Closes the image modal.
  */
-const resetImageStyle = () => {
-  if (image.value) {
-    rotation.value = 0;
-    scale.value = 1;
+const closeImageModal = (): void => {
+  showImageModal.value = false;
+};
+
+/**
+ * Shows the next image in the gallery. Loops to the first image if at the end.
+ */
+const showNextImage = (): void => {
+  activeImageIndex.value = (activeImageIndex.value + 1) % parsedImages.length;
+};
+
+/**
+ * Shows the previous image in the gallery. Loops to the last image if at the beginning.
+ */
+const showPreviousImage = (): void => {
+  activeImageIndex.value =
+    (activeImageIndex.value - 1 + parsedImages.length) % parsedImages.length;
+};
+
+/**
+ * Rotates the image left by 90 degrees.
+ */
+const rotateLeft = (): void => {
+  if (imageWrapper.value) {
+    activeImageRotation.value = (activeImageRotation.value - 90) % 360;
+    imageWrapper.value.style.transform = `rotate(${activeImageRotation.value}deg)`;
   }
 };
 
 /**
- * Rotate image to right
- * @returns void
+ * Rotates the image right by 90 degrees.
  */
-const onRotateRight = () => {
-  rotation.value = rotation.value + 90;
+const rotateRight = (): void => {
+  if (imageWrapper.value) {
+    activeImageRotation.value = (activeImageRotation.value + 90) % 360;
+    imageWrapper.value.style.transform = `rotate(${activeImageRotation.value}deg)`;
+  }
+};
+
+const fadeInClass = ref("animate-fade-in");
+
+/**
+ * Watches for changes in the active image index and applies a fade-in animation.
+ */
+watch(activeImageIndex, () => {
+  activeImageRotation.value = 0; // Reset rotation for the new image
+  if (imageWrapper.value) {
+    imageWrapper.value.style.transform = "rotate(0deg)";
+  }
+  fadeInClass.value = "";
+  nextTick(() => {
+    fadeInClass.value = "animate-fade-in";
+  });
+});
+
+let touchStartX = 0;
+let touchEndX = 0;
+let touchStartY = 0;
+let touchEndY = 0;
+let isPinching = false;
+
+/**
+ * Handles the start of a touch event. Tracks initial touch coordinates and detects pinch gestures.
+ * @param e - The touch event.
+ */
+const handleTouchStart = (e: TouchEvent): void => {
+  if (e.touches.length > 1) {
+    isPinching = true;
+    return;
+  }
+
+  isPinching = false;
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
 };
 
 /**
- * Rotate image to left
- * @returns void
+ * Handles the end of a touch event. Tracks final touch coordinates and triggers swipe detection.
+ * @param e - The touch event.
  */
-const onRotateLeft = () => {
-  rotation.value = rotation.value - 90;
+const handleTouchEnd = (e: TouchEvent): void => {
+  if (isPinching) {
+    return;
+  }
+
+  touchEndX = e.changedTouches[0].clientX;
+  touchEndY = e.changedTouches[0].clientY;
+  handleSwipe();
+};
+
+const handleDoubleTap = (): void => {
+  if (imageWrapper.value) {
+    imageZoomedIn.value = !imageZoomedIn.value;
+    imageWrapper.value.style.transform = imageZoomedIn.value
+      ? "scale(2)"
+      : "scale(1)";
+  }
 };
 
 /**
- * Zoom in image
- * @returns void
+ * Determines the direction of a swipe gesture and triggers the appropriate action.
  */
-const onZoomIn = () => {
-  scale.value += 0.4;
+const handleSwipe = (): void => {
+  if (imageZoomedIn.value) return;
+  const swipeThreshold = 50;
+  const horizontalSwipeDistance = touchStartX - touchEndX;
+  const verticalSwipeDistance = touchStartY - touchEndY;
+
+  if (Math.abs(horizontalSwipeDistance) > Math.abs(verticalSwipeDistance)) {
+    if (horizontalSwipeDistance > swipeThreshold) {
+      showNextImage();
+    } else if (horizontalSwipeDistance < -swipeThreshold) {
+      showPreviousImage();
+    }
+  } else if (verticalSwipeDistance > swipeThreshold) {
+    // Optional: Handle upward swipe if needed
+  } else if (verticalSwipeDistance < -swipeThreshold) {
+    closeImageModal();
+  }
 };
 
 /**
- * Zoom out image
- * @returns void
+ * Adds a keydown event listener to navigate images using arrow keys when the modal is open.
  */
-const onZoomOut = () => {
-  scale.value = Math.max(0.4, 1);
-};
+onMounted(() => {
+  window.addEventListener("keydown", (e) => {
+    if (showImageModal.value) {
+      if (e.key === "ArrowLeft") {
+        showPreviousImage();
+      } else if (e.key === "ArrowRight") {
+        showNextImage();
+      }
+    }
+  });
+});
 
 /**
- * Image click
- * @param index number
- * @returns void
+ * Removes the keydown event listener when the component is unmounted.
  */
-const imageClick = (index: number) => {
-  activeIndex.value = index;
-  displayCustom.value = true;
-};
+onUnmounted(() => {
+  window.removeEventListener("keydown", () => {});
+});
 </script>
+
+<style scoped>
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style>

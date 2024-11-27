@@ -7,8 +7,14 @@ export default {
         },
         colors: {
             light: {
-                DEFAULT: "#f8f8f8", // svetliji-text
+                DEFAULT: "#ffffff", // svetliji-text
                 100: "#f2f2f2",
+            },
+            dark: {
+                DEFAULT: "#1f1f1f", // tamniji-text
+                100: "#2a2a2a",
+                200: "#1a1a1a",
+                300: "#0a0a0a",
             },
             primary: {
                 DEFAULT: "#354f52",
@@ -37,6 +43,8 @@ export default {
             },
             backgroundImage: {
                 "shimmer-gradient": "linear-gradient(90deg, #f0f0f0, #e0e0e0, #f0f0f0)",
+                "previous-gradient": "linear-gradient(90deg, #f2f2f2 0%, #f2f2f2 70%, transparent 100%)",
+                "next-gradient": "linear-gradient(90deg, transparent 0%, #f2f2f2 30%, #f2f2f2 100%)",
             },
             backgroundSize: {
                 "200%": "200% 100%",

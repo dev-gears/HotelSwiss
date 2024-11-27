@@ -13,13 +13,17 @@
         }"
         class="whitespace-nowrap font-robotoRegular text-sm text-primary-200 underline hover:text-primary-200"
       >
-        {{ $t("BlockHeader.viewAll") }}
+        {{ t("BlockHeader.viewAll") }}
       </NuxtLink>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
 defineProps({
   title: String,
   link: [String],

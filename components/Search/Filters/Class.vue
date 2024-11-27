@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container mx-auto px-3 pb-7">
     <h3 class="font-robotoRegular text-xl text-primary-200">Hotel Class</h3>
     <p class="my-3 font-robotoRegular text-sm text-primary-200">
       Select a hotel class to filter your search results. You can choose from 1
@@ -7,9 +7,10 @@
     </p>
     <div class="mx-auto flex items-center justify-between md:w-2/4">
       <div
+        v-ripple
         v-for="hotelClass in classes"
         :key="hotelClass"
-        class="shadow-filters relative flex cursor-pointer items-center justify-center rounded-lg bg-light px-4 py-2.5 text-center font-robotoRegular text-sm capitalize text-primary-200"
+        class="relative flex cursor-pointer items-center justify-center rounded-lg bg-light px-4 py-2.5 text-center font-robotoRegular text-sm capitalize text-primary-200 shadow-filters"
         :class="{ selected: selectedClass === hotelClass }"
         @click="addOrRemoveClass(hotelClass)"
       >

@@ -18,13 +18,19 @@
       }"
       :breakpoints="responsiveOptions"
     >
-      <SwiperSlide v-for="hotel in hotels" :key="hotel.id">
+      <SwiperSlide
+        ref="swiperSlide"
+        :style="slideStyle"
+        v-for="hotel in hotels"
+        :key="hotel.id"
+      >
         <Card :hotel="hotel" aspect="square" :showAmenities="false" />
       </SwiperSlide>
       <div
         class="absolute left-0 top-0 z-40 hidden h-full w-9 items-start justify-center bg-light-100 lg:flex"
       >
         <button
+          v-ripple
           class="prev-slide-button flex w-5 items-center justify-center rounded"
         >
           <img src="~/assets/icons/prev-arrow.svg" alt="previous arrow" />
@@ -34,6 +40,7 @@
         class="absolute right-0 top-0 z-40 hidden h-full w-9 items-start justify-center bg-light-100 lg:flex"
       >
         <button
+          v-ripple
           class="next-slide-button flex w-5 items-center justify-center rounded"
         >
           <img src="~/assets/icons/next-arrow.svg" alt="next arrow" />
@@ -44,9 +51,10 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import Card from "../Card/Card.vue";
 
-defineProps({
+const props = defineProps({
   hotels: {
     type: Array,
     required: true,
@@ -62,6 +70,17 @@ const responsiveOptions = ref({
     slidesPerView: 4,
     centeredSlides: false,
   },
+});
+
+/**
+ * Inline style for the slide.
+ * This is added to prevent content mismatch before the component is mounted.
+ * Since the content is rendered server-side.
+ */
+const slideStyle = ref("max-width: 250px; margin-right: 15px;");
+
+onMounted(() => {
+  slideStyle.value = "";
 });
 </script>
 

@@ -1,51 +1,245 @@
 <template>
-  <div>
-    <TabView
-      :scrollable="true"
-      @update:activeIndex="onTabChange"
+  <div ref="tabWrapper">
+    <Tabs
+      scrollable
+      :value="0"
+      @update:value="onTabChange"
       :pt="{
-        navContainer: 'border-b-2 border-primary-100/40',
+        root: 'container mx-auto !bg-light-100 !border-none',
+        tabList: '',
       }"
     >
-      <TabPanel>
-        <template #header>
+      <TabList
+        :pt="{
+          root: 'container mx-auto !border-none !sticky !top-0 z-10 pr-3',
+          tabList: '!border-none flex gap-3 py-2 px-3 !bg-light-100',
+          content: '',
+          activeBar: '!bg-primary',
+          prevButton:
+            '!bg-previous-gradient !border-none rounded-l-md overflow-hidden shadow-none',
+          nextButton:
+            '!bg-next-gradient !border-none rounded-r-md overflow-hidden shadow-none',
+        }"
+      >
+        <Tab
+          :key="0"
+          :pt="{
+            root: '!border-none !rounded-xl !px-4 !py-2 shadow-cardImage !bg-light',
+          }"
+          :value="0"
+        >
           <div class="whitespace-nowrap">
             {{ $t("CategoryTabs.allHotels") }}
           </div>
-        </template>
-        <CategoryTabsTabContent
-          :id="0"
-          :name="$t('CategoryTabs.allHotels')"
-          :categorizedHotels="firstTabContent"
-          :nextUrl="nextUrl"
-          :isLoading="isLoading"
-          :category="`all`"
-          :activeTab="activeTab === 0"
-        />
-      </TabPanel>
-      <TabPanel v-for="(tab, index) in categories" :key="index">
-        <template #header>
+        </Tab>
+        <Tab
+          v-for="(tab, index) in mockCategories"
+          :key="index + 1"
+          :pt="{
+            root: '!border-none !rounded-xl !px-4 !py-2 shadow-cardImage !bg-[#fff]',
+            activeBar: '!bg-primary-500',
+          }"
+          :value="tab.id.toString()"
+        >
           <div class="whitespace-nowrap">
             {{ tab.name }}
           </div>
-        </template>
-        <CategoryTabsTabContent
-          :id="tab.id"
-          :name="tab.name"
-          :categorizedHotels="categorizedHotels"
-          :nextUrl="nextUrl"
-          :isLoading="isLoading"
-          :category="tab.id.toString()"
-          :activeTab="activeTab === index"
-        />
-      </TabPanel>
-    </TabView>
+        </Tab>
+      </TabList>
+      <TabPanels
+        :pt="{
+          root: '!bg-light-100',
+        }"
+      >
+        <TabPanel :value="0">
+          <CategoryTabsTabContent
+            :id="0"
+            :name="$t('CategoryTabs.allHotels')"
+            :categorizedHotels="firstTabContent"
+            :nextUrl="nextUrl"
+            :isLoading="isLoading"
+            :category="`all`"
+            :activeTab="activeTab === 0"
+          />
+        </TabPanel>
+        <TabPanel
+          v-for="(tab, index) in categories"
+          :key="index"
+          :value="tab.id.toString()"
+        >
+          <CategoryTabsTabContent
+            :id="tab.id"
+            :name="tab.name"
+            :categorizedHotels="categorizedHotels"
+            :nextUrl="nextUrl"
+            :isLoading="isLoading"
+            :category="tab.id.toString()"
+            :activeTab="activeTab === index"
+          />
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import type { Category } from "@/types/hotel";
+
+const mockCategories: Category[] = [
+  {
+    id: 1,
+    name: "Category 1",
+  },
+  {
+    id: 2,
+    name: "Category 2",
+  },
+  {
+    id: 3,
+    name: "Category 3",
+  },
+  {
+    id: 4,
+    name: "Category 4",
+  },
+  {
+    id: 5,
+    name: "Category 5",
+  },
+  {
+    id: 6,
+    name: "Category 6",
+  },
+  {
+    id: 7,
+    name: "Category 7",
+  },
+  {
+    id: 8,
+    name: "Category 8",
+  },
+  {
+    id: 9,
+    name: "Category 9",
+  },
+  {
+    id: 10,
+    name: "Category 10",
+  },
+  {
+    id: 11,
+    name: "Category 11",
+  },
+  {
+    id: 12,
+    name: "Category 12",
+  },
+  {
+    id: 13,
+    name: "Category 13",
+  },
+  {
+    id: 14,
+    name: "Category 14",
+  },
+  {
+    id: 15,
+    name: "Category 15",
+  },
+  {
+    id: 16,
+    name: "Category 16",
+  },
+  {
+    id: 17,
+    name: "Category 17",
+  },
+  {
+    id: 18,
+    name: "Category 18",
+  },
+  {
+    id: 19,
+    name: "Category 19",
+  },
+  {
+    id: 20,
+    name: "Category 20",
+  },
+  {
+    id: 21,
+    name: "Category 21",
+  },
+  {
+    id: 22,
+    name: "Category 22",
+  },
+  {
+    id: 23,
+    name: "Category 23",
+  },
+  {
+    id: 24,
+    name: "Category 24",
+  },
+  {
+    id: 25,
+    name: "Category 25",
+  },
+  {
+    id: 26,
+    name: "Category 26",
+  },
+  {
+    id: 27,
+    name: "Category 27",
+  },
+  {
+    id: 28,
+    name: "Category 28",
+  },
+  {
+    id: 29,
+    name: "Category 29",
+  },
+  {
+    id: 30,
+    name: "Category 30",
+  },
+  {
+    id: 31,
+    name: "Category 31",
+  },
+  {
+    id: 32,
+    name: "Category 32",
+  },
+  {
+    id: 33,
+    name: "Category 33",
+  },
+  {
+    id: 34,
+    name: "Category 34",
+  },
+  {
+    id: 35,
+    name: "Category 35",
+  },
+  {
+    id: 36,
+    name: "Category 36",
+  },
+  {
+    id: 37,
+    name: "Category 37",
+  },
+  {
+    id: 38,
+    name: "Category 38",
+  },
+];
 
 const { categories } = defineProps({
   categories: {
@@ -59,6 +253,7 @@ const isLoading = ref(true);
 const categorizedHotels = ref([]);
 const nextUrl = ref(null);
 const activeTab = ref(0);
+const tabWrapper = useTemplateRef("tabWrapper");
 
 /**
  * On tab change, fetch hotels based on the category i
@@ -66,21 +261,27 @@ const activeTab = ref(0);
  * @returns {Promise<void>}
  */
 const onTabChange = async (newIndex: number): Promise<void> => {
+  scrollToTabs();
   if (newIndex !== 0) {
     try {
       isLoading.value = true;
-      const { data: hotels } = await useHotelApiData(
+      const response = (await $hotelApi(
         `/hotels?category_id=${categories[newIndex - 1].id.toString()}`,
-      );
-      categorizedHotels.value = hotels.value.results;
-      nextUrl.value = hotels.value.next;
+      )) as any;
+      categorizedHotels.value = response.results;
+      nextUrl.value = response.next;
     } catch (error) {
       console.log(error);
     } finally {
       isLoading.value = false;
     }
   }
+
   activeTab.value = newIndex;
+};
+
+const scrollToTabs = () => {
+  tabWrapper?.value?.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
 /**
@@ -89,12 +290,14 @@ const onTabChange = async (newIndex: number): Promise<void> => {
  */
 const getFirstTabContent = async (): Promise<void> => {
   try {
-    const { data: hotels, pending } = await useHotelApiData("/hotels");
-    firstTabContent.value = hotels.value.results;
-    nextUrl.value = hotels.value.next;
-    isLoading.value = pending.value;
+    isLoading.value = true;
+    const response = (await $hotelApi("/hotels")) as any;
+    firstTabContent.value = response.results;
+    nextUrl.value = response.next;
   } catch (error) {
     console.log(error);
+  } finally {
+    isLoading.value = false;
   }
 };
 
@@ -102,57 +305,7 @@ getFirstTabContent();
 </script>
 
 <style lang="pcss">
-.p-tabview-nav-btn {
-  @apply shadow-none max-md:hidden;
-}
-
-.p-tabview-ink-bar {
-  @apply hidden;
-}
-
-.p-tabview-nav-container {
-  @apply sticky top-0 z-50 border-b border-light-100 !bg-light-100;
-}
-
-.p-tabview-nav-content {
-  @apply py-3;
-}
-
-.p-tabview-nav {
-  @apply container mx-auto px-3;
-}
-
-.p-tabview-nav-next {
-  background: linear-gradient(90deg, transparent 0%, #f2f2f2 30%, #f2f2f2 100%);
-  @apply shadow-none;
-}
-
-.p-tabview-nav-prev {
-  background: linear-gradient(90deg, #f2f2f2 0%, #f2f2f2 70%, transparent 100%);
-  @apply shadow-none;
-}
-
-.p-tabview-panels {
-  @apply bg-light-100 px-0;
-}
-
-ul[role="tablist"] {
-  @apply flex gap-3 bg-light-100;
-
-  li {
-    @apply rounded-[10px] font-robotoRegular;
-  }
-
-  a {
-    @apply rounded-[10px]  bg-primary text-light shadow-cardImage;
-  }
-
-  a[aria-selected="true"] {
-    @apply bg-light text-primary;
-  }
-
-  a {
-    @apply h-full;
-  }
+.p-tab-active {
+  @apply !bg-primary !text-light !transition-all !duration-500;
 }
 </style>

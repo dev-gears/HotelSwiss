@@ -5,13 +5,11 @@
     url="https://hotelswiss.ch"
   />
 
-  <SkeletonLoadersLandingSkeleton v-if="isLoading" />
-  <div v-else>
-    <PromoBlock
-      v-if="firstScreenData?.promo_hotels"
-      :hotels="firstScreenData.promo_hotels"
-    />
-  </div>
+  <PromoBlock
+    class="min-h-[350px]"
+    v-if="firstScreenData?.promo_hotels"
+    :hotels="firstScreenData.promo_hotels"
+  />
   <CategoryTabs
     v-if="firstScreenData?.categories"
     :categories="firstScreenData.categories"
@@ -23,10 +21,15 @@ definePageMeta({
   layout: "base",
 });
 
-const { data: firstScreenData, pending: isLoading } = await useHotelApiData(
-  "/first-screen",
-  {
-    server: false,
-  },
-);
+const { data: firstScreenData } = useHotelApiData("/first-screen") as any;
 </script>
+
+<style>
+* {
+  --p-ripple-background: #6cc5cf;
+}
+
+.light-ripple {
+  --p-ripple-background: #f5f5f5 !important;
+}
+</style>

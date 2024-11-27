@@ -1,6 +1,10 @@
 <template>
-  <div class="container mx-auto flex flex-col gap-3 bg-primary px-7 text-light">
-    <h1 class="mt-5 font-patuaOne text-2xl">{{ hotel?.title }}</h1>
+  <div
+    class="flex flex-col gap-3 bg-primary text-light max-md:px-5 max-md:py-6 md:bg-light-100 md:text-dark"
+  >
+    <h1 class="container mx-auto block font-patuaOne text-2xl md:hidden">
+      {{ hotel?.title }}
+    </h1>
     <div>
       <p v-if="displayDescription !== 'nan'" class="font-robotoRegular text-sm">
         {{ displayDescription }}
@@ -13,7 +17,7 @@
       />
     </div>
     <div
-      class="relative mb-5 flex w-full items-center justify-center rounded-[10px] border border-light px-3 py-4"
+      class="relative mb-5 flex w-full items-center justify-center rounded-[10px] border border-light px-3 py-4 md:border-dark"
     >
       <NuxtLink
         :to="{
@@ -23,11 +27,11 @@
         class="relative flex h-14 w-1/3 cursor-pointer items-center justify-center border-r"
       >
         <img
-          class="absolute inset-0 h-full w-full p-2"
+          class="absolute inset-0 h-full w-full p-2 md:brightness-50"
           :src="backendUrl + hotel?.canton?.image?.url"
           alt="canton image"
         />
-        <p class="font-robotoRegular text-lg text-light">
+        <p class="font-robotoRegular text-lg text-light md:text-dark">
           {{ hotel?.canton.name }}
         </p>
       </NuxtLink>
@@ -38,7 +42,7 @@
         <p>
           {{ $t("Content.class") }}
         </p>
-        <CommonStars :stars="hotel?.stars" />
+        <CommonStars class="[&_img]:invert" :stars="hotel?.stars" />
       </div>
 
       <NuxtLink
@@ -46,7 +50,7 @@
           path: `/category/${hotel?.categories[0]?.category?.id}`,
           query: { title: hotel?.categories[0]?.category?.name },
         }"
-        class="flex h-14 w-1/3 cursor-pointer items-center justify-center border-l text-center font-robotoRegular text-lg font-normal text-light"
+        class="flex h-14 w-1/3 cursor-pointer items-center justify-center border-l text-center font-robotoRegular text-lg font-normal text-light md:text-dark"
         v-if="hotel?.categories[0]"
       >
         {{ hotel?.categories[0]?.category?.name }}
@@ -59,7 +63,7 @@
 import { ref, computed } from "vue";
 import type { Hotel } from "@/types/hotel";
 const runtimeConfig = useRuntimeConfig();
-const NUMBER_OF_CHARACTERS = 200;
+const NUMBER_OF_CHARACTERS = 500;
 const props = defineProps<{
   hotel: Hotel;
 }>();
@@ -86,6 +90,10 @@ const displayDescription = computed(() => {
     : `${description.substring(0, NUMBER_OF_CHARACTERS)}...`;
 });
 
+/**
+ * Check if the description is longer than a set number of characters
+ * @returns {boolean} Is long description
+ */
 const isLongDescription = computed(
   () => props.hotel.description.length > NUMBER_OF_CHARACTERS,
 );

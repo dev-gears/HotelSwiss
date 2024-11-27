@@ -1,32 +1,35 @@
 <template>
-  <div class="grid border-b border-primary/30 pb-6">
-    <h3 class="font-robotoRegular text-xl text-primary-200">Cantons</h3>
-    <p class="font-robotoRegular text-sm text-primary-200">
-      Select one or more cantons from the list below.
-    </p>
-    <div class="flex flex-wrap items-start justify-center gap-2.5 pt-3">
-      <div
-        v-for="canton in visibleCantons"
-        :key="'canton' + canton?.id"
-        class="relative flex h-20 min-w-[80px] max-w-[80px] cursor-pointer items-center justify-center rounded-2xl bg-light text-center font-robotoRegular text-sm text-primary-200 shadow-filters"
-        :class="{ selected: isSelected(canton) }"
-        @click="addOrRemoveCanton(canton)"
-      >
+  <div class="grid border-b border-primary/30 px-3 pb-6">
+    <div class="container mx-auto">
+      <h3 class="font-robotoRegular text-xl text-primary-200">Cantons</h3>
+      <p class="font-robotoRegular text-sm text-primary-200">
+        Select one or more cantons from the list below.
+      </p>
+      <div class="flex flex-wrap items-start justify-center gap-2.5 pt-3">
         <div
-          v-if="canton?.image?.url"
-          class="absolute h-12 w-12 rounded-full bg-cover bg-center bg-no-repeat"
-          :style="`background-image: url('${backendUrl}${canton?.image?.url}');`"
-        ></div>
-        {{ canton?.name }}
+          v-for="canton in visibleCantons"
+          :key="'canton' + canton?.id"
+          v-ripple
+          class="ripple-box relative flex h-20 min-w-[80px] max-w-[80px] cursor-pointer items-center justify-center rounded-2xl bg-light text-center font-robotoRegular text-sm text-primary-200 shadow-filters"
+          :class="{ selected: isSelected(canton) }"
+          @click="addOrRemoveCanton(canton)"
+        >
+          <div
+            v-if="canton?.image?.url"
+            class="absolute h-12 w-12 rounded-full bg-cover bg-center bg-no-repeat"
+            :style="`background-image: url('${backendUrl}${canton?.image?.url}');`"
+          ></div>
+          {{ canton?.name }}
+        </div>
       </div>
-    </div>
-    <div class="flex items-center justify-center">
-      <Button
-        v-if="shouldShowLoadMoreButton"
-        @click="loadMore"
-        class="bg-white p-2 text-primary-200 underline"
-        :label="$t('Common.viewAll')"
-      />
+      <div class="flex items-center justify-center">
+        <Button
+          v-if="shouldShowLoadMoreButton"
+          @click="loadMore"
+          class="bg-white p-2 text-primary-200 underline"
+          :label="$t('Common.viewAll')"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -81,6 +84,6 @@ watchEffect(() => {
 
 <style>
 .selected {
-  @apply bg-primary text-light;
+  @apply bg-primary text-light transition-colors duration-500;
 }
 </style>

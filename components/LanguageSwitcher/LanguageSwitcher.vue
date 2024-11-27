@@ -1,6 +1,7 @@
 <template>
   <div class="relative z-10 inline-block text-left" ref="languageSwitcherRef">
     <button
+      v-ripple
       ref="button"
       @click="toggleOverlayPanel"
       :style="buttonStyle"
@@ -9,36 +10,37 @@
       <img :src="currentIcon" class="h-8 w-9" :alt="currentLanguage" />
     </button>
 
-    <OverlayPanel
+    <Popover
       ref="overlayPanel"
       :dismissable="true"
       :showCloseIcon="false"
       @hide="onOverlayHide"
       class="mt-[2px] w-[330px] rounded-[10px] rounded-tr-none bg-primary-100 text-light"
     >
-      <ul class="m-0 list-none p-0 font-robotoRegular">
-        <li class="bottom-border-item mb-2 border-b px-2 py-2 text-xl">
+      <div class="m-0 list-none p-0 font-robotoRegular">
+        <h2 class="bottom-border-item mb-2 border-b px-2 py-2 text-xl">
           {{ t("LanguageButton.selectLanguage") }}
-        </li>
-        <li
+        </h2>
+        <button
+          v-ripple
           v-for="(name, code) in languageNames"
           :key="code"
           @click="() => changeLanguage(code)"
           :class="[
-            'flex cursor-pointer items-center justify-between rounded-[10px] px-2 py-1 text-lg hover:bg-opacity-90',
+            'flex w-full cursor-pointer items-center justify-between rounded-[10px] px-2 py-1 text-lg hover:bg-opacity-90',
             currentLanguage === code ? 'bg-primary-200' : '',
           ]"
         >
           {{ name }}
           <img :src="icons[code]" class="ml-2 h-9 w-9" :alt="name" />
-        </li>
-      </ul>
-    </OverlayPanel>
+        </button>
+      </div>
+    </Popover>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, computed, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 import OverlayPanel from "primevue/overlaypanel";
 import { useLanguageStore } from "@/store/language";

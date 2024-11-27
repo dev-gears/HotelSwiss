@@ -1,28 +1,30 @@
 <template>
-  <div class="flex flex-col gap-2">
-    <h3 class="font-robotoRegular text-xl text-primary-200">Amenities</h3>
-    <div v-for="amenity in visibleAmenities" :key="amenity.id">
-      <div class="flex items-center gap-3">
-        <Checkbox
-          binary
-          :pt="{
-            root: 'text-primary-200 w-6 h-6',
-            input: 'w-full h-full border border-primary/30 rounded-sm',
-            icon: 'bg-primary w-full h-full rounded-sm p-1',
-          }"
-          :inputId="amenity.id.toString()"
-          v-model="selectedAmenities[amenity.id]"
-        />
-        <label :for="amenity.id.toString()">{{ amenity.name }}</label>
+  <div class="flex flex-col gap-2 px-3">
+    <div class="container mx-auto">
+      <h3 class="font-robotoRegular text-xl text-primary-200">Amenities</h3>
+      <div v-for="amenity in visibleAmenities" :key="amenity.id">
+        <div class="flex items-center gap-3">
+          <Checkbox
+            binary
+            :pt="{
+              root: 'text-primary-200 w-6 h-6',
+              input: 'w-full h-full border border-primary/30 rounded-sm',
+              icon: 'bg-primary w-full h-full rounded-sm p-1',
+            }"
+            :inputId="amenity.id.toString()"
+            v-model="selectedAmenities[amenity.id]"
+          />
+          <label :for="amenity.id.toString()">{{ amenity.name }}</label>
+        </div>
       </div>
-    </div>
 
-    <Button
-      v-if="shouldShowLoadMoreButton"
-      @click="loadMore"
-      class="bg-white p-2 text-primary-200 underline"
-      :label="$t('Common.viewAll')"
-    />
+      <Button
+        v-if="shouldShowLoadMoreButton"
+        @click="loadMore"
+        class="bg-white p-2 text-primary-200 underline"
+        :label="$t('Common.viewAll')"
+      />
+    </div>
   </div>
 </template>
 

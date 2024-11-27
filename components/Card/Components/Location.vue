@@ -1,5 +1,5 @@
 <template>
-  <p class="mb-1.5 font-robotoRegular text-sm text-light/60">
+  <div class="mb-1.5 font-robotoRegular text-sm text-light/60">
     <div class="flex flex-wrap">
       <img
         class="mr-1.5"
@@ -10,7 +10,7 @@
       <span class="mr-1" v-if="address && city">, </span>
       <span class="whitespace-nowrap" v-if="city">{{ city }}</span>
     </div>
-  </p>
+  </div>
 </template>
 
 <script setup lang="ts">

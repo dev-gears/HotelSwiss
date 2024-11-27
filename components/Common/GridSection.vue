@@ -4,21 +4,25 @@
       class="flex w-full flex-col gap-4 md:grid md:grid-cols-3 lg:grid-cols-4"
     >
       <Card
-        v-for="(hotel, index) in hotels"
+        v-for="hotel in hotels"
         :key="hotel.id"
         :hotel="hotel"
         :showAmenities="true"
         class="w-[-webkit-fill-available]"
       />
     </div>
+    <div class="card flex justify-center" v-if="state.loading">
+      <CommonLoader />
+    </div>
     <div id="observed-item" ref="end"></div>
-    <ProgressSpinner v-if="state.loading" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch, reactive } from "vue";
+import { onMounted, onUnmounted, ref, reactive } from "vue";
 import type { Hotel } from "@/types/hotel";
+import Card from "@/components/Card/Card.vue";
+
 const props = defineProps<{
   hotels: Array<Hotel>;
   nextUrl: string | null;
@@ -42,7 +46,10 @@ const fetchMoreHotels = async (): Promise<void> => {
   if (state.nextUrl && !state.loading) {
     state.loading = true;
     try {
-      const data = await $hotelApi(state.nextUrl);
+      const data = (await $hotelApi(state.nextUrl)) as {
+        results: Hotel[];
+        next: string | null;
+      };
       state.hotels.push(...data.results);
       state.nextUrl = data.next;
     } catch (error) {
@@ -68,17 +75,11 @@ onMounted(() => {
       rootMargin: "300px",
     },
   );
-
-  if (end.value) {
-    observer.observe(end.value);
-  }
+  observer.observe(end.value!);
 });
 
-/**
- * Disconnect the observer when the component is unmounted
- */
 onUnmounted(() => {
-  if (observer) observer.disconnect();
+  observer?.disconnect();
 });
 </script>
 

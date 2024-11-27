@@ -1,27 +1,23 @@
 <template>
-  <Dialog
-    dismissableMask
-    closable
+  <Drawer
     v-model:visible="showFilters"
-    modal
-    blockScroll
-    :ptOptions="{ mergeSections: false }"
+    position="bottom"
+    :blockScroll="true"
     :pt="{
-      root: 'bg-primary h-full w-full fixed bottom-0 left-0 rounded-t-3xl',
+      root: 'bg-primary h-full w-full fixed bottom-0 left-0 rounded-t-3xl transition-all !h-[90%]',
       header:
-        'bg-light z-50 border-b border-primary/30 rounded-t-3xl fixed w-full flex justify-end items-center py-2 px-6',
+        'bg-light z-50 border-b border-primary/30 rounded-t-3xl fixed w-full flex !justify-end items-center !py-2 !px-6',
       content:
-        'bg-light pt-20 rounded-t-3xl px-7 overflow-y-scroll flex flex-col gap-6',
+        'bg-light !pt-20 rounded-t-3xl overflow-y-scroll flex flex-col gap-6',
       footer:
-        'bg-light bottom-0 border-t border-primary/30 px-6 flex justify-between',
+        'bg-light bottom-0 border-t border-primary/30 !py-2 !px-6 flex justify-between',
+      mask: 'bg-primary/50 !transition-all',
     }"
   >
     <template #default v-if="filters">
       <SearchInput
         v-model="searchValue"
         @handleSubmit="submitSearch"
-        customClassInput="h-12 w-full rounded-xl border border-primary/30 bg-light-100 px-2 text-primary-200 shadow-sm"
-        class="border-b border-primary/30 pb-5"
         id="searchInputFilter"
       />
       <SearchFiltersCantons
@@ -42,17 +38,21 @@
     </template>
     <template #footer>
       <Button
+        v-ripple
         label="Clear filters"
         class="bg-white p-2 text-primary-200 underline"
         @click="clearFilters"
       />
       <Button
+        v-ripple
         label="Search hotels"
-        class="bg-primary p-2 text-light-100"
+        :pt="{
+          root: '!rounded-lg !bg-primary !p-2 !text-light-100',
+        }"
         @click="updateFilters"
       />
     </template>
-  </Dialog>
+  </Drawer>
 </template>
 
 <script setup lang="ts">

@@ -87,13 +87,13 @@ const handleSearch = async () => {
       queryParams.append("stars", filters.stars);
     }
 
-    const data = await useHotelApiData(`/hotels?${queryParams.toString()}`, {
+    const data = (await useHotelApiData(`/hotels?${queryParams.toString()}`, {
       cache: true,
-    });
+    })) as any;
     searchedHotels.value = toRef(data?.data?.value?.results);
     nextUrl.value = data?.data?.value?.next;
   } catch (error) {
-    console.log(error);
+    console.warn(error);
   } finally {
     isLoading.value = false;
   }
