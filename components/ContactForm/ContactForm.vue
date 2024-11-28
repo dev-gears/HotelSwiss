@@ -1,89 +1,3 @@
-<script setup lang="ts">
-import { ref, computed } from "vue";
-import InputText from "primevue/inputtext";
-import Textarea from "primevue/textarea";
-import Button from "primevue/button";
-import InputGroup from "primevue/inputgroup";
-
-const name = ref("");
-const email = ref("");
-const message = ref("");
-const phone = ref("");
-const arrivalDate = ref<Date | null>(null);
-const leavingDate = ref<Date | null>(null);
-
-const errors = ref({
-  name: "",
-  email: "",
-  message: "",
-});
-
-const isFormValid = computed(() => {
-  return (
-    name.value.trim() !== "" &&
-    email.value.trim() !== "" &&
-    validateEmail(email.value) &&
-    message.value.trim() !== ""
-  );
-});
-
-const validateEmail = (email: string): boolean => {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
-};
-
-const submitForm = (e: Event) => {
-  e.preventDefault();
-
-  errors.value = {
-    name: "",
-    email: "",
-    message: "",
-  };
-
-  let valid = true;
-
-  if (name.value.trim() === "") {
-    errors.value.name = "Name is required.";
-    valid = false;
-  }
-
-  if (email.value.trim() === "") {
-    errors.value.email = "Email is required.";
-    valid = false;
-  } else if (!validateEmail(email.value)) {
-    errors.value.email = "Please enter a valid email address.";
-    valid = false;
-  }
-
-  if (message.value.trim() === "") {
-    errors.value.message = "Message is required.";
-    valid = false;
-  }
-
-  if (!valid) {
-    return;
-  }
-
-  const formData = {
-    name: name.value,
-    email: email.value,
-    message: message.value,
-    phone: phone.value,
-    arrivalDate: arrivalDate.value,
-    leavingDate: leavingDate.value,
-  };
-  console.log("Form submitted", formData);
-
-  name.value = "";
-  email.value = "";
-  message.value = "";
-  phone.value = "";
-  arrivalDate.value = null;
-  leavingDate.value = null;
-};
-</script>
-
 <template>
   <div class="font-robotoRegular">
     <h1 class="mb-5 text-xl font-bold leading-6">
@@ -144,36 +58,22 @@ const submitForm = (e: Event) => {
           {{ $t("ContactForm.date") }}:
           <span class="text-primary-200/30">({{ $t("Common.optional") }})</span>
         </label>
-        <div class="flex gap-4">
-          <InputGroup
-            class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !text-primary-200 !shadow sm:w-auto"
-          >
-            <DatePicker
-              :pt="{
-                dropdown: '!bg-primary !rounded-r-xl text-light',
-                daycell: 'p-0',
-              }"
-              dateFormat="dd/mm/yy"
-              v-model="arrivalDate"
-              :placeholder="$t('ContactForm.arrivalDate')"
-              :show-icon="true"
-            />
-          </InputGroup>
-
-          <InputGroup
-            class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !text-primary-200 !shadow sm:w-auto"
-          >
-            <DatePicker
-              :pt="{
-                dropdown: '!bg-primary !rounded-r-xl text-light',
-                daycell: 'p-0',
-              }"
-              v-model="leavingDate"
-              :placeholder="$t('ContactForm.leavingDate')"
-              :show-icon="true"
-            />
-          </InputGroup>
-        </div>
+        <InputGroup
+          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !text-primary-200 !shadow sm:w-auto"
+        >
+          <DatePicker
+            :pt="{
+              dropdown: '!bg-primary !rounded-r-xl text-light',
+              panel: 'border !border-primary-200',
+              daycell: 'p-0',
+            }"
+            selectionMode="range"
+            dateFormat="dd/mm/yy"
+            v-model="date"
+            :placeholder="$t('ContactForm.date')"
+            :show-icon="true"
+          />
+        </InputGroup>
       </div>
 
       <div class="flex flex-col gap-2">
@@ -204,6 +104,89 @@ const submitForm = (e: Event) => {
     </form>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ref, computed } from "vue";
+import InputText from "primevue/inputtext";
+import Textarea from "primevue/textarea";
+import Button from "primevue/button";
+import InputGroup from "primevue/inputgroup";
+
+const name = ref("");
+const email = ref("");
+const message = ref("");
+const phone = ref("");
+const date = ref<Date | null>(null);
+
+const errors = ref({
+  name: "",
+  email: "",
+  message: "",
+});
+
+const isFormValid = computed(() => {
+  return (
+    name.value.trim() !== "" &&
+    email.value.trim() !== "" &&
+    validateEmail(email.value) &&
+    message.value.trim() !== ""
+  );
+});
+
+const validateEmail = (email: string): boolean => {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+};
+
+const submitForm = (e: Event) => {
+  e.preventDefault();
+
+  errors.value = {
+    name: "",
+    email: "",
+    message: "",
+  };
+
+  let valid = true;
+
+  if (name.value.trim() === "") {
+    errors.value.name = "Name is required.";
+    valid = false;
+  }
+
+  if (email.value.trim() === "") {
+    errors.value.email = "Email is required.";
+    valid = false;
+  } else if (!validateEmail(email.value)) {
+    errors.value.email = "Please enter a valid email address.";
+    valid = false;
+  }
+
+  if (message.value.trim() === "") {
+    errors.value.message = "Message is required.";
+    valid = false;
+  }
+
+  if (!valid) {
+    return;
+  }
+
+  const formData = {
+    name: name.value,
+    email: email.value,
+    message: message.value,
+    phone: phone.value,
+    date: date.value,
+  };
+  console.log("Form submitted", formData);
+
+  name.value = "";
+  email.value = "";
+  message.value = "";
+  phone.value = "";
+  date.value = null;
+};
+</script>
 
 <style>
 .p-datepicker-input {

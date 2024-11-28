@@ -75,6 +75,8 @@ export default defineNuxtConfig({
 
   pages: true,
 
+  plugins: ["@/plugins/gesture.ts"],
+
   swiper: {
     prefix: "Swiper",
     styleLang: "css",

@@ -53,8 +53,6 @@
     "message": "Message",
     "phone": "Phone",
     "submit": "Send",
-    "date": "Date",
-    "leavingDate": "Leaving date",
-    "arrivalDate": "Arrival date"
+    "date": "Date"
   }
 }

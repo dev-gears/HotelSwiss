@@ -30,8 +30,6 @@
   </div>
 
   <Dialog
-    @touchstart="handleTouchStart"
-    @touchend="handleTouchEnd"
     closable
     :dismissableMask="true"
     :modal="true"
@@ -42,7 +40,16 @@
       content: 'p-6 max-md:px-0',
     }"
   >
-    <div class="flex h-full w-full items-center justify-center">
+    <div
+      class="flex h-full w-full items-center justify-center"
+      v-gesture="{
+        onSwipeLeft: showNextImage,
+        onSwipeRight: showPreviousImage,
+        onSwipeDown: closeImageModal,
+        onPinchIn: handlePinchIn,
+        onPinchOut: handlePinchOut,
+      }"
+    >
       <button @click="closeImageModal" class="absolute right-6 top-6">
         <i class="pi pi-times text-light"></i>
       </button>
@@ -108,7 +115,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, nextTick, watch } from "vue";
 import { useRoute } from "vue-router";
 
 definePageMeta({
@@ -178,6 +185,38 @@ const rotateRight = (): void => {
   }
 };
 
+/**
+ * Handles pinch-in gesture.
+ */
+const handlePinchIn = (): void => {
+  if (imageWrapper.value) {
+    console.log("Pinch in detected!");
+    imageWrapper.value.style.transform = `scale(1) rotate(${activeImageRotation.value}deg)`;
+  }
+};
+
+/**
+ * Handles pinch-out gesture.
+ */
+const handlePinchOut = (): void => {
+  if (imageWrapper.value) {
+    console.log("Pinch out detected!");
+    imageWrapper.value.style.transform = `scale(2) rotate(${activeImageRotation.value}deg)`;
+  }
+};
+
+/**
+ * Handles double-tap to zoom.
+ */
+const handleDoubleTap = (): void => {
+  if (imageWrapper.value) {
+    imageZoomedIn.value = !imageZoomedIn.value;
+    imageWrapper.value.style.transform = imageZoomedIn.value
+      ? `scale(2) rotate(${activeImageRotation.value}deg)`
+      : `scale(1) rotate(${activeImageRotation.value}deg)`;
+  }
+};
+
 const fadeInClass = ref("animate-fade-in");
 
 /**
@@ -193,72 +232,6 @@ watch(activeImageIndex, () => {
     fadeInClass.value = "animate-fade-in";
   });
 });
-
-let touchStartX = 0;
-let touchEndX = 0;
-let touchStartY = 0;
-let touchEndY = 0;
-let isPinching = false;
-
-/**
- * Handles the start of a touch event. Tracks initial touch coordinates and detects pinch gestures.
- * @param e - The touch event.
- */
-const handleTouchStart = (e: TouchEvent): void => {
-  if (e.touches.length > 1) {
-    isPinching = true;
-    return;
-  }
-
-  isPinching = false;
-  touchStartX = e.touches[0].clientX;
-  touchStartY = e.touches[0].clientY;
-};
-
-/**
- * Handles the end of a touch event. Tracks final touch coordinates and triggers swipe detection.
- * @param e - The touch event.
- */
-const handleTouchEnd = (e: TouchEvent): void => {
-  if (isPinching) {
-    return;
-  }
-
-  touchEndX = e.changedTouches[0].clientX;
-  touchEndY = e.changedTouches[0].clientY;
-  handleSwipe();
-};
-
-const handleDoubleTap = (): void => {
-  if (imageWrapper.value) {
-    imageZoomedIn.value = !imageZoomedIn.value;
-    imageWrapper.value.style.transform = imageZoomedIn.value
-      ? "scale(2)"
-      : "scale(1)";
-  }
-};
-
-/**
- * Determines the direction of a swipe gesture and triggers the appropriate action.
- */
-const handleSwipe = (): void => {
-  if (imageZoomedIn.value) return;
-  const swipeThreshold = 50;
-  const horizontalSwipeDistance = touchStartX - touchEndX;
-  const verticalSwipeDistance = touchStartY - touchEndY;
-
-  if (Math.abs(horizontalSwipeDistance) > Math.abs(verticalSwipeDistance)) {
-    if (horizontalSwipeDistance > swipeThreshold) {
-      showNextImage();
-    } else if (horizontalSwipeDistance < -swipeThreshold) {
-      showPreviousImage();
-    }
-  } else if (verticalSwipeDistance > swipeThreshold) {
-    // Optional: Handle upward swipe if needed
-  } else if (verticalSwipeDistance < -swipeThreshold) {
-    closeImageModal();
-  }
-};
 
 /**
  * Adds a keydown event listener to navigate images using arrow keys when the modal is open.
