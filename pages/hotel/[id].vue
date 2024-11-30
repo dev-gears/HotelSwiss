@@ -35,6 +35,10 @@
             :rooms="hotel?.rooms"
             class="pt-3"
           />
+          <Map
+            :address="`${hotel?.address}, ${hotel?.zip} ${hotel?.city}`"
+            class="pt-3"
+          />
         </div>
         <div>
           <ContactForm
