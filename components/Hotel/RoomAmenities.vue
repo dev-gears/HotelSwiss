@@ -1,27 +1,26 @@
 <template>
   <div class="container px-3">
-    <div class="border-b border-primary-100/40 bg-light-100 py-8">
-      <h2 class="font-robotoRegular text-xl text-primary-200">
-        {{ $t("Amenities.title") }}
-      </h2>
-
-      <div class="mt-5 flex flex-col flex-wrap gap-3">
+    <div class="border-b border-primary-100/40 bg-light-100 pb-8 pt-3">
+      <div class="flex flex-col flex-wrap gap-3">
+        <h2 class="font-robotoRegular text-xl text-primary-200">
+          {{ $t("Amenities.title") }}:
+        </h2>
         <div
-          class="flex items-center justify-center"
+          class="flex items-center justify-center px-3"
           v-for="data in visibleAmenities"
           :key="data.amenity.id"
         >
           <div class="mr-3 rounded-md bg-primary p-1">
             <img
-              :src="backendUrl + data.amenity?.image?.renditions.thumbnail"
+              :src="backendUrl + data.amenity?.image?.url"
               :alt="data.amenity?.name"
               class="h-8 w-8"
             />
           </div>
           <div class="w-full">
-            <p class="font-robotoRegular text-sm text-primary-200">
+            <h3 class="font-robotoRegular text-lg font-bold text-primary-200">
               {{ data.amenity?.name }}
-            </p>
+            </h3>
           </div>
         </div>
         <Button

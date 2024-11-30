@@ -65,6 +65,17 @@ export interface SocialLink {
   link: string;
 }
 
+export interface Room {
+  type: string;
+  value: {
+    name: string;
+    max_occupants: number;
+    amenities: number[];
+    images: Image[];
+  };
+  id: ID;
+}
+
 export interface Hotel {
   id: ID;
   title: Title;
@@ -84,6 +95,7 @@ export interface Hotel {
   images: Array<Image>;
   social_links: SocialLink[];
   paid: boolean;
+  rooms: Room[];
 }
 
 export interface Filters {

@@ -6,10 +6,11 @@
         :title="`Search results for: ${searchedTerm}`"
         class="mb-5 border-b border-primary py-3 font-robotoRegular"
       />
-      <SkeletonLoadersSearchSkeleton v-if="isLoading" />
+      <SkeletonLoadersGridSkeleton v-if="isLoading" />
       <div v-else>
         <CommonGridSection
           v-if="searchedHotels?.value?.length"
+          :initialRequestUrl="requestString"
           :hotels="searchedHotels?.value"
           :nextUrl="nextUrl"
         />
@@ -35,6 +36,7 @@ const searchedHotels = reactive({ value: [] as Hotel[] });
 const isLoading = ref(false);
 const nextUrl = ref(null);
 const searchedTerm = ref("");
+const requestString = ref("");
 
 // Get filters from the store and add them to the query params
 const filtersStore = useFiltersStore();
@@ -86,8 +88,9 @@ const handleSearch = async () => {
     if (filters.stars) {
       queryParams.append("stars", filters.stars);
     }
+    requestString.value = `/hotels?${queryParams.toString()}`;
 
-    const data = (await useHotelApiData(`/hotels?${queryParams.toString()}`, {
+    const data = (await useHotelApiData(requestString.value, {
       cache: true,
     })) as any;
     searchedHotels.value = toRef(data?.data?.value?.results);

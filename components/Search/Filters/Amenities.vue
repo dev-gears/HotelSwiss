@@ -3,7 +3,7 @@
     <div class="container mx-auto">
       <h3 class="font-robotoRegular text-xl text-primary-200">Amenities</h3>
       <div v-for="amenity in visibleAmenities" :key="amenity.id">
-        <div class="flex items-center gap-3">
+        <div class="my-3 flex items-center gap-3">
           <Checkbox
             binary
             :pt="{
@@ -14,7 +14,9 @@
             :inputId="amenity.id.toString()"
             v-model="selectedAmenities[amenity.id]"
           />
-          <label :for="amenity.id.toString()">{{ amenity.name }}</label>
+          <label class="cursor-pointer" :for="amenity.id.toString()">{{
+            amenity.name
+          }}</label>
         </div>
       </div>
 

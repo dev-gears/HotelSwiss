@@ -5,7 +5,7 @@
       v-ripple
       :label="$t('Search.searchForSpecificHotel')"
       :pt="{
-        root: 'h-12 !flex !justify-between !px-3 w-full overflow-hidden !rounded-l-xl !bg-light px-2 text-primary-200 shadow focus:shadow',
+        root: 'h-12 !flex !justify-between !px-3 w-full overflow-hidden !rounded-l-xl !rounded-r-none !bg-light px-2 text-primary-200 shadow focus:shadow',
         icon: 'text-primary-200 !text-lg',
       }"
       icon="pi pi-search"

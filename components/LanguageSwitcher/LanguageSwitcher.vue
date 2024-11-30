@@ -59,8 +59,8 @@ const languageSwitcherRef = ref<HTMLElement | null>(null);
 const isOverlayPanelOpen = ref(false);
 
 const languageNames: Record<LanguageCode, string> = {
-  en: "English",
   de: "Deutsch",
+  en: "English",
   it: "Italiano",
   fr: "Français",
 };

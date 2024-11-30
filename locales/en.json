@@ -2,7 +2,13 @@
   "Common": {
     "loadMore": "Load more",
     "viewAll": "View all",
-    "optional": "optional"
+    "optional": "optional",
+    "recommended": "Recommended",
+    "sortBy": "Sort by",
+    "priceHighToLow": "Price high to low",
+    "priceLowToHigh": "Price low to high",
+    "ratingHighToLow": "Rating high to low",
+    "ratingLowToHigh": "Rating low to high"
   },
   "LanguageButton": {
     "selectLanguage": "Select language"
@@ -24,8 +30,14 @@
     "readMore": "Read more",
     "whereYouWillBe": "Where you will be"
   },
+  "HotelAmenities": {
+    "title": "Hotel offers"
+  },
   "Amenities": {
-    "title": "What we offer"
+    "title": "Room amenities"
+  },
+  "Rooms": {
+    "title": "Room types"
   },
   "Search": {
     "filters": "Filters",

@@ -57,6 +57,7 @@
             :name="$t('CategoryTabs.allHotels')"
             :categorizedHotels="firstTabContent"
             :nextUrl="nextUrl"
+            :initialRequestUrl="`/hotels`"
             :isLoading="isLoading"
             :category="`all`"
             :activeTab="activeTab === 0"
@@ -72,6 +73,7 @@
             :name="tab.name"
             :categorizedHotels="categorizedHotels"
             :nextUrl="nextUrl"
+            :initialRequestUrl="requestUrlForTab"
             :isLoading="isLoading"
             :category="tab.id.toString()"
             :activeTab="activeTab === index"
@@ -251,9 +253,10 @@ const { categories } = defineProps({
 const firstTabContent = ref([]);
 const isLoading = ref(true);
 const categorizedHotels = ref([]);
-const nextUrl = ref(null);
+const nextUrl = ref("");
 const activeTab = ref(0);
 const tabWrapper = useTemplateRef("tabWrapper");
+const requestUrlForTab = ref("");
 
 /**
  * On tab change, fetch hotels based on the category i
@@ -264,10 +267,10 @@ const onTabChange = async (newIndex: number): Promise<void> => {
   scrollToTabs();
   if (newIndex !== 0) {
     try {
+      const requestUrl = `/hotels?category_id=${categories[newIndex - 1].id.toString()}`;
+      requestUrlForTab.value = requestUrl;
       isLoading.value = true;
-      const response = (await $hotelApi(
-        `/hotels?category_id=${categories[newIndex - 1].id.toString()}`,
-      )) as any;
+      const response = (await $hotelApi(requestUrl)) as any;
       categorizedHotels.value = response.results;
       nextUrl.value = response.next;
     } catch (error) {

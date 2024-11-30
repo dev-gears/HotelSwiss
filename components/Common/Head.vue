@@ -1,6 +1,7 @@
 <template>
   <Head>
     <Title>{{ title || Global.DEFAULT_PAGE_TITLE }}</Title>
+
     <Meta
       v-for="(content, name) in metaTags"
       :key="name"
@@ -26,6 +27,10 @@
 <script setup lang="ts">
 import { MetaTagNames } from "@/enums/HeadData";
 import { Global } from "@/enums/Global";
+import { useLanguageStore } from "~/store/language";
+
+const storeLang = useLanguageStore();
+const currentLanguage = storeLang.currentLanguage;
 
 const props = defineProps({
   title: String,

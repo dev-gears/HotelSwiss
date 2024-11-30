@@ -1,11 +1,11 @@
 <template>
   <div class="container px-3">
-    <div class="border-b border-primary-100/40 bg-light-100 py-8">
+    <div class="border-b border-primary-100/40 bg-light-100 pb-6 pt-3">
       <h2 class="font-robotoRegular text-xl text-primary-200">
-        {{ $t("SocialNetworks.visitUsAlsoOn") }}
+        {{ $t("SocialNetworks.visitUsAlsoOn") }}:
       </h2>
       <div
-        class="mt-6 flex w-full flex-wrap items-center justify-center gap-6 md:justify-start"
+        class="mt-6 flex w-full flex-wrap items-center justify-center gap-6 px-3 md:justify-start"
       >
         <HotelSocialNetworksIcon
           v-for="socialLink in socialLinks"

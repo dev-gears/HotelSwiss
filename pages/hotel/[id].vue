@@ -30,6 +30,11 @@
             :socialLinks="hotel?.social_links"
             class="pt-3"
           />
+          <HotelRooms
+            v-if="hotel?.rooms?.length"
+            :rooms="hotel?.rooms"
+            class="pt-3"
+          />
         </div>
         <div>
           <ContactForm

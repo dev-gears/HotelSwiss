@@ -190,7 +190,6 @@ const rotateRight = (): void => {
  */
 const handlePinchIn = (): void => {
   if (imageWrapper.value) {
-    console.log("Pinch in detected!");
     imageWrapper.value.style.transform = `scale(1) rotate(${activeImageRotation.value}deg)`;
   }
 };
@@ -200,7 +199,6 @@ const handlePinchIn = (): void => {
  */
 const handlePinchOut = (): void => {
   if (imageWrapper.value) {
-    console.log("Pinch out detected!");
     imageWrapper.value.style.transform = `scale(2) rotate(${activeImageRotation.value}deg)`;
   }
 };
