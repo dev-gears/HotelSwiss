@@ -73,6 +73,16 @@ export default defineNuxtConfig({
     },
   },
 
+  i18n: {
+    locales: [
+      { code: "en", iso: "en-US" },
+      { code: "fr", iso: "fr-FR" },
+      { code: "de", iso: "de-DE" },
+      { code: "it", iso: "it-IT" },
+    ],
+    defaultLocale: "en",
+  },
+
   pages: true,
 
   plugins: ["@/plugins/gesture.ts"],
@@ -86,4 +96,8 @@ export default defineNuxtConfig({
   css: ["primeicons/primeicons.css", "assets/css/fonts.css"],
 
   compatibilityDate: "2024-10-06",
+
+  site: {
+    hostname: "https://localhost:3000",
+  },
 });

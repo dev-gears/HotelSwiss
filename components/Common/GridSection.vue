@@ -10,6 +10,8 @@
       />
 
       <Popover
+        @hide="popoverVisible = false"
+        @show="popoverVisible = true"
         ref="sortPopover"
         :pt="{
           root: 'rounded-xl !rounded-tr-none bg-light shadow',
@@ -103,7 +105,6 @@ const popoverVisible = ref(false);
  */
 const togglePopover = (event: Event) => {
   sortPopover.value?.toggle(event);
-  popoverVisible.value = !popoverVisible.value;
 };
 
 /**
@@ -112,7 +113,6 @@ const togglePopover = (event: Event) => {
 const changeSortBy = (option: SortByOption) => {
   sortedBy.value = option.label;
   sortPopover.value?.hide();
-  popoverVisible.value = false;
 
   // Placeholder for the API request
   fetchSortedHotels();
