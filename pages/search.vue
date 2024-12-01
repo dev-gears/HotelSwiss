@@ -4,7 +4,7 @@
       <CommonBlockHeader
         v-if="searchedTerm"
         :title="`Search results for: ${searchedTerm}`"
-        class="mb-5 border-b border-primary py-3 font-robotoRegular"
+        class="mb-5 border-b border-primary/30 py-3 font-robotoRegular"
       />
       <SkeletonLoadersGridSkeleton v-if="isLoading" />
       <div v-else>

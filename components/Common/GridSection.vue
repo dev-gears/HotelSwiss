@@ -5,7 +5,7 @@
         type="button"
         :label="sortedBy ? sortedBy : $t('Common.sortBy')"
         @click="togglePopover"
-        class="flex justify-between rounded-xl rounded-tr-none bg-light px-3 py-2 text-primary-200 shadow focus:shadow"
+        class="flex justify-between rounded-xl rounded-tr-none bg-light px-3 py-2 text-primary shadow focus:shadow"
         :icon="popoverVisible ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"
       />
 

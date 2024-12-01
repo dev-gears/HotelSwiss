@@ -5,8 +5,8 @@
       v-ripple
       :label="$t('Search.searchForSpecificHotel')"
       :pt="{
-        root: 'h-12 !flex !justify-between !px-3 w-full overflow-hidden !rounded-l-xl !rounded-r-none !bg-light px-2 text-primary-200 shadow focus:shadow',
-        icon: 'text-primary-200 !text-lg',
+        root: 'h-12 !flex !justify-between !px-3 w-full overflow-hidden !rounded-l-xl !rounded-r-none !bg-light px-2 text-primary/80 shadow focus:shadow',
+        icon: 'text-primary/80 !text-lg',
       }"
       icon="pi pi-search"
       iconPos="right"
@@ -36,7 +36,7 @@
     @updateFilters="updateFilters"
   />
   <div
-    v-if="filtersCount && route.name === 'search'"
+    v-if="+filtersCount && route.name === 'search'"
     class="mb-3 border-b border-primary/30 px-3 pb-3"
   >
     <div v-if="filtersStore.filters.cantons.length">

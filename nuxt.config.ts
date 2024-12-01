@@ -73,15 +73,15 @@ export default defineNuxtConfig({
     },
   },
 
-  i18n: {
-    locales: [
-      { code: "en", iso: "en-US" },
-      { code: "fr", iso: "fr-FR" },
-      { code: "de", iso: "de-DE" },
-      { code: "it", iso: "it-IT" },
-    ],
-    defaultLocale: "en",
-  },
+  //   i18n: {
+  //     locales: [
+  //       { code: "en", iso: "en-US" },
+  //       { code: "fr", iso: "fr-FR" },
+  //       { code: "de", iso: "de-DE" },
+  //       { code: "it", iso: "it-IT" },
+  //     ],
+  //     defaultLocale: "en",
+  //   },
 
   pages: true,
 

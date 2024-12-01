@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center">
-    <div class="container mx-auto px-3">
+    <div class="container mx-auto max-md:px-3">
       <CommonBlockHeader :title="name" :link="`category/${category}`" />
       <GridSkeleton v-if="isLoading && !categorizedHotels?.length" />
       <CommonGridSection
