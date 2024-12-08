@@ -2,13 +2,13 @@
   "Common": {
     "loadMore": "Load more",
     "viewAll": "View all",
-    "optional": "optional",
+    "optional": "Optional",
     "recommended": "Recommended",
     "sortBy": "Sort by",
-    "priceHighToLow": "Price high to low",
-    "priceLowToHigh": "Price low to high",
-    "ratingHighToLow": "Rating high to low",
-    "ratingLowToHigh": "Rating low to high"
+    "priceHighToLow": "Price: High to Low",
+    "priceLowToHigh": "Price: Low to High",
+    "ratingHighToLow": "Rating: High to Low",
+    "ratingLowToHigh": "Rating: Low to High"
   },
   "LanguageButton": {
     "selectLanguage": "Select language"
@@ -40,10 +40,31 @@
     "title": "Room types"
   },
   "Search": {
-    "filters": "Filters",
+    "filters": {
+        "clearFilters": "Clear filters",
+        "searchHotels": "Search hotels"
+    },
     "searchForSpecificHotel": "Search for a specific hotel",
-    "noResults": "No results found"
-  },
+    "amenities": {
+        "title": "Amenities"
+    },
+    "priceRange": {
+        "title": "Price Range",
+        "description": "Adjust the price range to suit your budget. You can set both a minimum and maximum price.",
+        "min": "Minimum Price",
+        "max": "Maximum Price"
+    },
+    "hotelClass": {
+        "title": "Hotel Class",
+        "description": "Select a hotel class to filter your search results. You can choose from 1 to 5 stars, or select 'all' to include all classes in your search.",
+        "all": "All"
+    },
+    "cantons": {
+        "title": "Cantons",
+        "description": "Select one or more cantons from the list below."
+    }
+}
+,
   "PromoBlock": {
     "promoHotels": "Promo hotels"
   },
@@ -60,11 +81,34 @@
   },
   "ContactForm": {
     "title": "Contact us",
-    "name": "Name",
-    "email": "Email",
-    "message": "Message",
-    "phone": "Phone",
-    "submit": "Send",
-    "date": "Date"
-  }
+    "fields": {
+        "name": {
+            "label": "Name",
+            "placeholder": "Enter your name",
+            "error": "Name is required"
+        },
+        "email": {
+            "label": "Email",
+            "placeholder": "Enter your email",
+            "error": "Email is required",
+            "invalid": "Please enter a valid email address"
+        },
+        "message": {
+            "label": "Message",
+            "placeholder": "Type your message",
+            "error": "Message is required"
+        },
+        "phone": {
+            "label": "Phone",
+            "placeholder": "Enter your phone"
+        },
+        "date": {
+            "label": "Date",
+            "placeholder": "Select the date"
+        }
+    },
+    "buttons": {
+        "submit": "Send"
+    }
+}
 }

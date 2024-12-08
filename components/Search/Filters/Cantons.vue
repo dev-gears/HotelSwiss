@@ -1,9 +1,9 @@
 <template>
   <div class="grid border-b border-primary/30 px-3 pb-6">
     <div class="container mx-auto">
-      <h3 class="font-robotoRegular text-xl text-primary-200">Cantons</h3>
+      <h3 class="font-robotoRegular text-xl text-primary-200">{{ $t('Search.cantons.title') }}</h3>
       <p class="font-robotoRegular text-sm text-primary-200">
-        Select one or more cantons from the list below.
+        {{ $t('Search.cantons.description') }}
       </p>
       <div class="flex flex-wrap items-start justify-center gap-2.5 pt-3">
         <div

@@ -39,13 +39,13 @@
     <template #footer>
       <Button
         v-ripple
-        label="Clear filters"
+        :label="$t('Search.filters.clearFilters')"
         class="bg-white p-2 text-primary-200 underline"
         @click="clearFilters"
       />
       <Button
         v-ripple
-        label="Search hotels"
+        :label="$t('Search.filters.searchHotels')"
         :pt="{
           root: '!rounded-lg !bg-primary !p-2 !text-light-100',
         }"
@@ -58,6 +58,7 @@
 <script setup lang="ts">
 import { useFiltersStore } from "@/store/filters";
 import type { Canton, Amenity, Filters, PriceRange } from "@/types/hotel";
+import { ref, onMounted, onUnmounted } from "vue";
 
 const { filters } = defineProps({
   filters: {

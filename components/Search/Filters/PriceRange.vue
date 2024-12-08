@@ -1,10 +1,9 @@
 <template>
   <div class="border-b border-primary/30 px-3 pb-6">
     <div class="container mx-auto">
-      <h3 class="font-robotoRegular text-xl text-primary-200">Price Range</h3>
+      <h3 class="font-robotoRegular text-xl text-primary-200">{{ $t('Search.priceRange.title') }}</h3>
       <p class="font-robotoRegular text-sm text-primary-200">
-        Adjust the price range to suit your budget. You can set both a minimum
-        and maximum price.
+        {{ $t('Search.priceRange.description') }}
       </p>
       <div
         class="grid w-full grid-cols-3 items-center justify-between gap-3 pt-3"
@@ -16,6 +15,7 @@
           }"
           v-model="minPriceInput"
           inputId="min"
+          :placeholder="$t('Search.priceRange.min')"
           @update:modelValue="updatePriceRange"
         />
         <hr class="border-primary/20" />
@@ -25,8 +25,9 @@
             root: '!w-full [&_input]:!w-full rounded-md p-2 bg-light-100 border border-primary/20',
           }"
           v-model="maxPriceInput"
-          @update:modelValue="updatePriceRange"
           inputId="max"
+          :placeholder="$t('Search.priceRange.max')"
+          @update:modelValue="updatePriceRange"
         />
       </div>
     </div>

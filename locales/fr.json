@@ -1,9 +1,15 @@
 {
-  "common": {
-    "loadMore": "Charger plus",
+  "Common": {
+    "loadMore": "Afficher plus",
     "viewAll": "Voir tout",
-    "optional": "optionnel"
-  },
+    "optional": "Facultatif",
+    "recommended": "Recommandé",
+    "sortBy": "Trier par",
+    "priceHighToLow": "Prix : Du plus élevé au plus bas",
+    "priceLowToHigh": "Prix : Du plus bas au plus élevé",
+    "ratingHighToLow": "Note : De la plus haute à la plus basse",
+    "ratingLowToHigh": "Note : De la plus basse à la plus haute"
+},
   "LanguageButton": {
     "selectLanguage": "Choisir la langue"
   },
@@ -21,15 +27,38 @@
   },
   "Content": {
     "class": "Classe",
-    "checkIn": "En savoir plus"
-  },
+    "readMore": "En savoir plus",
+    "whereYouWillBe": "Voici où vous serez"
+},
   "Amenities": {
     "title": "Ce que nous offrons"
   },
   "Search": {
-    "filters": "Filtres",
-    "searchForSpecificHotel": "Rechercher un hôtel spécifique"
-  },
+    "filters": {
+        "clearFilters": "Effacer les filtres",
+        "searchHotels": "Rechercher des hôtels"
+    },
+    "searchForSpecificHotel": "Rechercher un hôtel spécifique",
+    "amenities": {
+        "title": "Équipements"
+    },
+    "priceRange": {
+        "title": "Fourchette de prix",
+        "description": "Ajustez la fourchette de prix selon votre budget. Vous pouvez définir un prix minimum et maximum.",
+        "min": "Prix minimum",
+        "max": "Prix maximum"
+    },
+    "hotelClass": {
+        "title": "Classe de l'hôtel",
+        "description": "Sélectionnez une classe d'hôtel pour affiner vos résultats de recherche. Vous pouvez choisir de 1 à 5 étoiles ou sélectionner 'Tous' pour inclure toutes les classes.",
+        "all": "Tous"
+    },
+    "cantons": {
+        "title": "Cantons",
+        "description": "Sélectionnez un ou plusieurs cantons dans la liste ci-dessous."
+    }
+}
+,
   "PromoBlock": {
     "promoHotels": "Hôtels promotionnels"
   },
@@ -44,13 +73,35 @@
   },
   "ContactForm": {
     "title": "Contactez-nous",
-    "name": "Nom",
-    "email": "Courriel",
-    "message": "Message",
-    "phone": "Téléphone",
-    "submit": "Soumettre",
-    "date": "Date",
-    "leavingDate": "Date de départ",
-    "arrivingDate": "Date d'arrivée"
-  }
+    "fields": {
+        "name": {
+            "label": "Nom",
+            "placeholder": "Entrez votre nom",
+            "error": "Le nom est requis"
+        },
+        "email": {
+            "label": "E-mail",
+            "placeholder": "Entrez votre e-mail",
+            "error": "L'e-mail est requis",
+            "invalid": "Veuillez entrer une adresse e-mail valide"
+        },
+        "message": {
+            "label": "Message",
+            "placeholder": "Tapez votre message",
+            "error": "Le message est requis"
+        },
+        "phone": {
+            "label": "Téléphone",
+            "placeholder": "Entrez votre téléphone"
+        },
+        "date": {
+            "label": "Date",
+            "placeholder": "Sélectionnez la date"
+        }
+    },
+    "buttons": {
+        "submit": "Envoyer"
+    }
+}
+
 }

@@ -6,56 +6,56 @@
     <form class="flex flex-col gap-3" @submit="submitForm">
       <div class="flex flex-col gap-2">
         <label for="name" class="text-sm text-primary-200">
-          {{ $t("ContactForm.name") }}:
+          {{ $t("ContactForm.fields.name.label") }}:
           <span class="text-[red]">*</span>
         </label>
         <InputText
           id="name"
           v-model="name"
-          placeholder="Enter your name"
+          :placeholder="$t('ContactForm.fields.name.placeholder')"
           required
           class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow"
         />
         <span v-if="errors.name" class="text-red-500 text-sm">{{
-          errors.name
+          $t('ContactForm.fields.name.error')
         }}</span>
       </div>
 
       <div class="flex flex-col gap-2">
         <label for="email" class="text-sm text-primary-200">
-          {{ $t("ContactForm.email") }}:
+          {{ $t("ContactForm.fields.email.label") }}:
           <span class="text-[red]">*</span>
         </label>
         <InputText
           id="email"
           v-model="email"
           type="email"
-          placeholder="Enter your email"
+          :placeholder="$t('ContactForm.fields.email.placeholder')"
           required
           class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow"
         />
         <span v-if="errors.email" class="text-red-500 text-sm">{{
-          errors.email
+          $t('ContactForm.fields.email.error')
         }}</span>
       </div>
 
       <div class="flex flex-col gap-2">
         <label for="phone" class="text-sm text-primary-200">
-          {{ $t("ContactForm.phone") }}:
+          {{ $t("ContactForm.fields.phone.label") }}:
           <span class="text-primary-200/30">({{ $t("Common.optional") }})</span>
         </label>
         <InputText
           id="phone"
           v-model="phone"
           type="tel"
-          placeholder="Enter your phone number"
+          :placeholder="$t('ContactForm.fields.phone.placeholder')"
           class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow"
         />
       </div>
 
       <div class="flex flex-col gap-2">
         <label class="text-sm text-primary-200">
-          {{ $t("ContactForm.date") }}:
+          {{ $t("ContactForm.fields.date.label") }}:
           <span class="text-primary-200/30">({{ $t("Common.optional") }})</span>
         </label>
         <InputGroup
@@ -70,7 +70,7 @@
             selectionMode="range"
             dateFormat="dd/mm/yy"
             v-model="date"
-            :placeholder="$t('ContactForm.date')"
+            :placeholder="$t('ContactForm.fields.date.placeholder')"
             :show-icon="true"
           />
         </InputGroup>
@@ -78,24 +78,24 @@
 
       <div class="flex flex-col gap-2">
         <label for="message" class="text-sm text-primary-200">
-          {{ $t("ContactForm.message") }}:
+          {{ $t("ContactForm.fields.message.label") }}:
           <span class="text-[red]">*</span>
         </label>
         <Textarea
           id="message"
           v-model="message"
-          :placeholder="$t('ContactForm.message')"
+          :placeholder="$t('ContactForm.fields.message.placeholder')"
           required
           rows="5"
           class="!focus:shadow !h-auto w-full !rounded-xl !bg-light-100 !px-2 !py-4 !text-primary-200 !shadow"
         />
         <span v-if="errors.message" class="text-red-500 text-sm">{{
-          errors.message
+          $t('ContactForm.fields.message.error')
         }}</span>
       </div>
 
       <Button
-        :label="$t('ContactForm.submit')"
+        :label="$t('ContactForm.buttons.submit')"
         type="submit"
         :pt="{
           root: '!rounded-xl !bg-primary !px-4 !py-2 !text-xl !text-light',
@@ -105,18 +105,21 @@
   </div>
 </template>
 
+
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import Button from "primevue/button";
 import InputGroup from "primevue/inputgroup";
+import { useI18n } from "vue-i18n";
 
 const name = ref("");
 const email = ref("");
 const message = ref("");
 const phone = ref("");
 const date = ref<Date | null>(null);
+const { t: $t } = useI18n();
 
 const errors = ref({
   name: "",
@@ -150,26 +153,26 @@ const submitForm = (e: Event) => {
   let valid = true;
 
   if (name.value.trim() === "") {
-    errors.value.name = "Name is required.";
-    valid = false;
-  }
+  errors.value.name = $t("ContactForm.fields.name.error"); 
+  valid = false;
+}
 
-  if (email.value.trim() === "") {
-    errors.value.email = "Email is required.";
-    valid = false;
-  } else if (!validateEmail(email.value)) {
-    errors.value.email = "Please enter a valid email address.";
-    valid = false;
-  }
+if (email.value.trim() === "") {
+  errors.value.email = $t("ContactForm.fields.email.error"); 
+  valid = false;
+} else if (!validateEmail(email.value)) {
+  errors.value.email = $t("ContactForm.fields.email.invalid"); 
+  valid = false;
+}
 
-  if (message.value.trim() === "") {
-    errors.value.message = "Message is required.";
-    valid = false;
-  }
+if (message.value.trim() === "") {
+  errors.value.message = $t("ContactForm.fields.message.error"); 
+  valid = false;
+}
 
-  if (!valid) {
-    return;
-  }
+if (!valid) {
+  return;
+}
 
   const formData = {
     name: name.value,

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-2 px-3">
     <div class="container mx-auto">
-      <h3 class="font-robotoRegular text-xl text-primary-200">Amenities</h3>
+      <h3 class="font-robotoRegular text-xl text-primary-200">{{ $t('Search.amenities.title') }}</h3>
       <div v-for="amenity in visibleAmenities" :key="amenity.id">
         <div class="my-3 flex items-center gap-3">
           <Checkbox
@@ -35,10 +35,10 @@ import { defineProps, defineEmits, ref, watchEffect } from "vue";
 import type { Amenity } from "@/types/hotel";
 import { useLoadMore } from "@/composables/useLoadMore";
 
-const props = defineProps({
-  modelValue: Array,
-  amenities: Array<Amenity>,
-});
+const props = defineProps<{
+  modelValue: number[]; 
+  amenities: Amenity[];
+}>();
 
 const emit = defineEmits(["update:modelValue"]);
 
@@ -57,8 +57,8 @@ watchEffect(() => {
   emit("update:modelValue", selectedIds);
 });
 
-props?.modelValue?.forEach((id) => {
-  if (!id) return;
-  selectedAmenities.value[id] = true;
+props.modelValue.forEach((id) => {
+  if (!id) return; 
+  selectedAmenities.value[id] = true; 
 });
 </script>

@@ -1,8 +1,14 @@
 {
-  "common": {
-    "loadMore": "Mehr laden",
+  "Common": {
+    "loadMore": "Mehr anzeigen",
     "viewAll": "Alle anzeigen",
-    "optional": "Optional"
+    "optional": "Optional",
+    "recommended": "Empfohlen",
+    "sortBy": "Sortieren nach",
+    "priceHighToLow": "Preis: Höchster zuerst",
+    "priceLowToHigh": "Preis: Niedrigster zuerst",
+    "ratingHighToLow": "Bewertung: Höchste zuerst",
+    "ratingLowToHigh": "Bewertung: Niedrigste zuerst"
   },
   "LanguageButton": {
     "selectLanguage": "Sprache auswählen"
@@ -21,15 +27,38 @@
   },
   "Content": {
     "class": "Klasse",
-    "readMore": "Mehr lesen"
-  },
+    "readMore": "Mehr erfahren",
+    "whereYouWillBe": "Hier werden Sie sein"
+},
   "Amenities": {
     "title": "Was wir bieten"
   },
   "Search": {
-    "filters": "Filter",
-    "searchForSpecificHotel": "Suchen Sie nach einem bestimmten Hotel"
-  },
+    "filters": {
+        "clearFilters": "Filter zurücksetzen",
+        "searchHotels": "Hotels suchen"
+    },
+    "searchForSpecificHotel": "Nach einem bestimmten Hotel suchen",
+    "amenities": {
+        "title": "Annehmlichkeiten"
+    },
+    "priceRange": {
+        "title": "Preisspanne",
+        "description": "Passen Sie die Preisspanne an Ihr Budget an. Sie können sowohl einen Mindest- als auch einen Höchstpreis festlegen.",
+        "min": "Mindestpreis",
+        "max": "Höchstpreis"
+    },
+    "hotelClass": {
+        "title": "Hotelkategorie",
+        "description": "Wählen Sie eine Hotelkategorie, um Ihre Suchergebnisse zu filtern. Sie können zwischen 1 bis 5 Sternen wählen oder 'Alle' auswählen, um alle Kategorien einzuschließen.",
+        "all": "Alle"
+    },
+    "cantons": {
+        "title": "Kantone",
+        "description": "Wählen Sie einen oder mehrere Kantone aus der Liste unten aus."
+    }
+}
+,
   "PromoBlock": {
     "promoHotels": "Aktionshotels"
   },
@@ -43,14 +72,37 @@
     "visitUsAlsoOn": "Besuchen Sie uns auch auf"
   },
   "ContactForm": {
-    "title": "Kontaktieren Sie uns",
-    "name": "Name",
-    "email": "E-Mail",
-    "phone": "Telefon",
-    "message": "Nachricht",
-    "submit": "Absenden",
-    "date": "Datum",
-    "leavingDate": "Abreisedatum",
-    "arrivalDate": "Ankunftsdatum"
-  }
+    "title": "Kontakt",
+    "fields": {
+        "name": {
+            "label": "Name",
+            "placeholder": "Name eingeben",
+            "error": "Name erforderlich"
+        },
+        "email": {
+            "label": "E-Mail",
+            "placeholder": "E-Mail eingeben",
+            "error": "E-Mail erforderlich",
+            "invalid": "Gültige E-Mail eingeben"
+        },
+        "message": {
+            "label": "Nachricht",
+            "placeholder": "Nachricht eingeben",
+            "error": "Nachricht erforderlich"
+        },
+        "phone": {
+            "label": "Telefon",
+            "placeholder": "Telefonnummer"
+        },
+        "date": {
+            "label": "Datum",
+            "placeholder": "Datum wählen"
+        }
+    },
+    "buttons": {
+        "submit": "Senden"
+    }
+}
+
+
 }
