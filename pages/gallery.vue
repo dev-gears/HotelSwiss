@@ -117,16 +117,18 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, nextTick, watch } from "vue";
 import { useRoute } from "vue-router";
+import { useHotelStore } from "@/store/hotelStore";
 
 definePageMeta({
   layout: "single",
 });
 
 const router = useRoute();
-const { images, hotelId, hotelTitle } = router.query;
+const hotelStore = useHotelStore();
+const { hotelId, hotelTitle } = router.query;
 const validatedHotelTitle = (hotelTitle + " images") as string;
 
-const parsedImages = JSON.parse(images as string);
+const parsedImages = hotelStore.images;
 
 const activeImageIndex = ref(0);
 const showImageModal = ref(false);

@@ -1,12 +1,14 @@
 <template>
-  <div class="grid grid-cols-1 gap-4 lg:mt-5 lg:grid-cols-4">
+  <div
+    class="grid grid-cols-1 gap-4 lg:mt-5 lg:grid-cols-4"
+    @click="emit('openGallery')"
+  >
     <div class="lg:col-span-2">
-      <NuxtLink :to="getLink(0)">
-        <Image
-          :src="images[0].url"
-          class="hero-image h-96 w-full object-cover transition-all hover:brightness-75 [&_img]:aspect-video [&_img]:rounded"
-        />
-      </NuxtLink>
+      <Image
+        @click="emit('openGallery')"
+        :src="images[0].url"
+        class="hero-image h-96 w-full object-cover transition-all hover:brightness-75 [&_img]:aspect-video [&_img]:rounded"
+      />
     </div>
 
     <div
@@ -14,12 +16,11 @@
     >
       <template v-for="(data, index) in parsedImagesForCollage">
         <div :key="data.id" v-if="data?.renditions?.thumbnail">
-          <NuxtLink :to="getLink(index + 1)">
-            <Image
-              :src="data.renditions.thumbnail"
-              class="hero-image h-96 w-full object-cover transition-all hover:brightness-75 [&_img]:!aspect-video [&_img]:!h-full [&_img]:rounded [&_img]:object-cover"
-            />
-          </NuxtLink>
+          <Image
+            @click="emit('openGallery')"
+            :src="data.renditions.thumbnail"
+            class="hero-image h-96 w-full object-cover transition-all hover:brightness-75 [&_img]:!aspect-video [&_img]:!h-full [&_img]:rounded [&_img]:object-cover"
+          />
         </div>
       </template>
     </div>
@@ -28,7 +29,8 @@
 
 <script setup lang="ts">
 import type { Image } from "@/types/hotel";
-const { images, hotelId, hotelTitle } = defineProps({
+
+const props = defineProps({
   images: {
     type: Array<Image>,
     required: true,
@@ -44,8 +46,10 @@ const { images, hotelId, hotelTitle } = defineProps({
   },
 });
 
+const emit = defineEmits(["openGallery"]);
+
 const parsedImagesForCollage = computed(() => {
-  const imagesWithThumbnail = images?.filter(
+  const imagesWithThumbnail = props.images?.filter(
     (image) => image.renditions.thumbnail,
   );
   return imagesWithThumbnail?.slice(1, 5);
@@ -54,9 +58,9 @@ const parsedImagesForCollage = computed(() => {
 const getLink = (index: number) => ({
   name: "gallery",
   query: {
-    images: JSON.stringify(images),
-    hotelId: hotelId,
-    hotelTitle: hotelTitle,
+    images: JSON.stringify(props.images),
+    hotelId: props.hotelId,
+    hotelTitle: props.hotelTitle,
     index,
   },
 });

@@ -13,6 +13,7 @@
         :images="parsedImagesWithFullPath"
         :hotelId="hotelId"
         :hotelTitle="hotelTitle"
+        @openGallery="showGallery = true"
       />
     </div>
     <div v-else>
@@ -21,6 +22,10 @@
         class="hero-image mt-5 h-96 w-full rounded object-cover grayscale lg:h-full"
       />
     </div>
+    <HotelHeroGallery
+      v-model:visible="showGallery"
+      :images="parsedImagesWithFullPath ?? null"
+    />
   </div>
 </template>
 
@@ -28,6 +33,7 @@
 import useDeviceType from "@/composables/useDeviceType";
 import type { Image } from "@/types/hotel";
 import { Global } from "@/enums/Global";
+import HotelHeroGallery from "./Gallery.vue";
 
 const { images } = defineProps({
   images: {
@@ -41,7 +47,13 @@ const { images } = defineProps({
     type: String,
     required: false,
   },
+  openImageModal: {
+    type: Function,
+    required: false,
+  },
 });
+
+const showGallery = ref(false);
 
 const runtimeConfig = useRuntimeConfig();
 const backendUrl = runtimeConfig.public.backendUrl;

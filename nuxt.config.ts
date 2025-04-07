@@ -73,15 +73,39 @@ export default defineNuxtConfig({
     },
   },
 
-  //   i18n: {
-  //     locales: [
-  //       { code: "en", iso: "en-US" },
-  //       { code: "fr", iso: "fr-FR" },
-  //       { code: "de", iso: "de-DE" },
-  //       { code: "it", iso: "it-IT" },
-  //     ],
-  //     defaultLocale: "en",
-  //   },
+  sitemap: {
+    exclude: ["/gallery"],
+  },
+
+  site: {
+    url: "https://localhost:3000",
+    name: "Hotel Swiss",
+    description: "The best hotel in the world",
+
+    social: {
+      twitter: "@hotel_swiss",
+    },
+
+    sitemap: {
+      hostname: "https://localhost:3000",
+    },
+
+    image: {
+      url: "https://localhost:3000/logo.png",
+      alt: "Hotel Swiss",
+    },
+  },
+
+  i18n: {
+    baseUrl: "http://localhost:3000",
+    defaultLocale: "en",
+    locales: [
+      { code: "en", language: "en-US" },
+      { code: "fr", language: "fr-FR" },
+      { code: "de", language: "de-DE" },
+      { code: "it", language: "it-IT" },
+    ],
+  },
 
   pages: true,
 
@@ -96,8 +120,4 @@ export default defineNuxtConfig({
   css: ["primeicons/primeicons.css", "assets/css/fonts.css"],
 
   compatibilityDate: "2024-10-06",
-
-  site: {
-    hostname: "https://localhost:3000",
-  },
 });

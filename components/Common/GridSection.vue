@@ -1,49 +1,52 @@
 <template>
-  <div class="flex flex-col items-center justify-center gap-4">
-    <div class="card flex w-full justify-end">
-      <Button
-        type="button"
-        :label="sortedBy ? sortedBy : $t('Common.sortBy')"
-        @click="togglePopover"
-        class="flex justify-between rounded-xl rounded-tr-none bg-light px-3 py-2 text-primary shadow focus:shadow"
-        :icon="popoverVisible ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"
-      />
+  <div>
+    <SkeletonLoadersGridSkeleton v-if="state.gridLoading" :items="8" />
+    <div v-else class="flex flex-col items-center justify-center gap-4">
+      <div class="card flex w-full justify-end">
+        <Button
+          type="button"
+          :label="sortedBy ? sortedBy : $t('Common.sortBy')"
+          @click="togglePopover"
+          class="flex justify-between rounded-xl rounded-tr-none bg-light px-3 py-2 text-primary shadow focus:shadow"
+          :icon="popoverVisible ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"
+        />
 
-      <Popover
-        @hide="popoverVisible = false"
-        @show="popoverVisible = true"
-        ref="sortPopover"
-        :pt="{
-          root: 'rounded-xl !rounded-tr-none bg-light shadow',
-          content:
-            'flex justify-between !rounded-xl !rounded-tr-none bg-light px-3 py-2 text-primary-200 shadow focus:shadow',
-        }"
-      >
-        <div class="flex flex-col divide-y">
-          <div
-            v-for="(option, index) in sortByOptions"
-            :key="option.label + index"
-            class="cursor-pointer !border-y-primary-100/15 p-2 transition-all hover:bg-light-100"
-            @click="changeSortBy(option)"
-          >
-            {{ option.label }}
+        <Popover
+          @hide="popoverVisible = false"
+          @show="popoverVisible = true"
+          ref="sortPopover"
+          :pt="{
+            root: 'rounded-xl !rounded-tr-none bg-light shadow',
+            content:
+              'flex justify-between !rounded-xl !rounded-tr-none bg-light px-3 py-2 text-primary-200 shadow focus:shadow',
+          }"
+        >
+          <div class="flex flex-col divide-y">
+            <div
+              v-for="(option, index) in sortByOptions"
+              :key="option.label + index"
+              class="cursor-pointer !border-y-primary-100/15 p-2 transition-all hover:bg-light-100"
+              @click="changeSortBy(option)"
+            >
+              {{ option.label }}
+            </div>
           </div>
-        </div>
-      </Popover>
-    </div>
-    <div
-      class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-    >
-      <Card
-        v-for="hotel in state.hotels"
-        :key="hotel.id"
-        :hotel="hotel"
-        :showAmenities="true"
-        class="mx-auto w-full max-w-[400px]"
-      />
-    </div>
-    <div class="card flex justify-center" v-if="state.loading">
-      <CommonLoader />
+        </Popover>
+      </div>
+      <div
+        class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <Card
+          v-for="hotel in state.hotels"
+          :key="hotel.id"
+          :hotel="hotel"
+          :showAmenities="true"
+          class="mx-auto w-full max-w-[400px]"
+        />
+      </div>
+      <div class="card flex justify-center" v-if="state.paginationLoading">
+        <CommonLoader />
+      </div>
     </div>
     <div id="observed-item" ref="end"></div>
   </div>
@@ -63,35 +66,42 @@ const props = defineProps<{
 const state = reactive({
   hotels: props.hotels,
   nextUrl: props.nextUrl,
-  loading: false,
+  paginationLoading: false,
+  gridLoading: false,
 });
 
 const { t } = useI18n();
 
-type SortByOption = {
-  searchQuery: string;
+type SearchParamOption = {
+  paramKey: string;
+  paramValue: string;
   label: string;
 };
 
 const sortByOptions = [
   {
-    searchQuery: "recommended",
+    paramKey: "ordering",
+    paramValue: "recommended",
     label: t("Common.recommended"),
   },
   {
-    searchQuery: "price",
+    paramKey: "ordering",
+    paramValue: "price",
     label: t("Common.priceLowToHigh"),
   },
   {
-    searchQuery: "-price",
+    paramKey: "ordering",
+    paramValue: "-price",
     label: t("Common.priceHighToLow"),
   },
   {
-    searchQuery: "rating",
+    paramKey: "ordering",
+    paramValue: "stars",
     label: t("Common.ratingLowToHigh"),
   },
   {
-    searchQuery: "-rating",
+    paramKey: "ordering",
+    paramValue: "-stars",
     label: t("Common.ratingHighToLow"),
   },
 ];
@@ -110,26 +120,41 @@ const togglePopover = (event: Event) => {
 /**
  * Handle sort option selection
  */
-const changeSortBy = (option: SortByOption) => {
+const changeSortBy = (option: SearchParamOption) => {
   sortedBy.value = option.label;
   sortPopover.value?.hide();
 
-  // Placeholder for the API request
-  fetchSortedHotels();
+  fetchSortedHotels(option.paramKey, option.paramValue);
 };
 
 /**
- * Fetch hotels based on selected sort option
+ * Fetch hotels based on the selected search params
  */
-const fetchSortedHotels = async (): Promise<void> => {
+const fetchSortedHotels = async (
+  paramKey: string,
+  paramValue: string,
+): Promise<void> => {
   try {
-    state.loading = true;
-    console.log(`Fetching hotels sorted by ${sortedBy.value}`); // WIP: Replace with actual API call
-    // Add your API request logic here
+    unbindObserver(end.value!);
+    state.gridLoading = true;
+
+    const params = new URLSearchParams({
+      [paramKey]: paramValue,
+    });
+    const data = (await $hotelApi(
+      `${props.initialRequestUrl}?${params.toString()}`,
+    )) as {
+      results: Hotel[];
+      next: string | null;
+    };
+
+    state.hotels = data.results;
+    state.nextUrl = data.next;
   } catch (error) {
     console.error("Error fetching sorted hotels:", error);
   } finally {
-    state.loading = false;
+    bindObserver(end.value!);
+    state.gridLoading = false;
   }
 };
 
@@ -141,28 +166,25 @@ let observer: IntersectionObserver | null = null;
  * Fetch more hotels when the end of the list is reached
  */
 const fetchMoreHotels = async (): Promise<void> => {
-  if (state.nextUrl && !state.loading) {
-    state.loading = true;
+  if (state.nextUrl && !state.paginationLoading) {
+    state.paginationLoading = true;
     try {
       const data = (await $hotelApi(state.nextUrl)) as {
         results: Hotel[];
         next: string | null;
       };
+
       state.hotels.push(...data.results);
       state.nextUrl = data.next;
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching more hotels:", error);
     } finally {
-      state.loading = false;
+      state.paginationLoading = false;
     }
   }
 };
 
-/**
- * Intersection observer to fetch more hotels
- * when the end of the list is reached
- */
-onMounted(() => {
+const bindObserver = (el: HTMLElement) => {
   observer = new IntersectionObserver(
     (entries) => {
       if (entries[0].isIntersecting && state.nextUrl) {
@@ -173,11 +195,25 @@ onMounted(() => {
       rootMargin: "300px",
     },
   );
-  observer.observe(end.value!);
+  observer.observe(el);
+};
+
+const unbindObserver = (el: HTMLElement) => {
+  observer?.disconnect();
+
+  observer = null;
+};
+
+/**
+ * Intersection observer to fetch more hotels
+ * when the end of the list is reached
+ */
+onMounted(() => {
+  bindObserver(end.value!);
 });
 
 onUnmounted(() => {
-  observer?.disconnect();
+  unbindObserver(end.value!);
 });
 </script>
 

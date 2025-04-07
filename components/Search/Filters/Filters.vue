@@ -73,7 +73,7 @@ const filtersStore = useFiltersStore();
 const showFilters = ref(false);
 const localCantons = ref([]) as Ref<Canton[]>;
 const localPriceRange = ref({ from: 0, to: 0 }) as Ref<PriceRange>;
-const localAmenities = ref([]) as Ref<Amenity[]>;
+const localAmenities = ref([]) as Ref<number[]>;
 const localStars = ref("") as Ref<string>;
 const searchValue = ref("");
 
@@ -133,7 +133,7 @@ onMounted(() => {
       after(() => {
         searchValue.value = filtersStore.searchValue;
         localCantons.value = filtersStore.filters.cantons;
-        localAmenities.value = filtersStore.filters.amenities;
+        localAmenities.value = filtersStore.filters.amenities.map((a) => a.id);
         localStars.value = filtersStore.filters.stars;
       });
     }

@@ -13,8 +13,21 @@
 </template>
 
 <style>
+:root {
+  --p-primary-color: #354f52;
+  --p-focus-ring-shadow: transparent;
+}
+
+.dark {
+  --p-primary-color: #26393b;
+}
+
 html {
-  @apply bg-light-100;
+  @apply bg-light-100 dark:bg-dark-100;
+}
+
+body {
+  @apply bg-light-100 dark:bg-dark-100;
 }
 
 *::-webkit-scrollbar {
@@ -24,10 +37,5 @@ html {
 * {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-:root {
-  --p-primary-color: #354f52;
-  --p-focus-ring-shadow: transparent;
 }
 </style>

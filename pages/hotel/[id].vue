@@ -13,6 +13,7 @@
         :images="hotel?.images"
         :hotelId="hotel?.id"
         :hotelTitle="hotel?.title"
+        @openImageModal="openImageModal"
       />
       <h1 class="container mx-auto hidden font-patuaOne text-2xl md:block">
         {{ hotel?.title }}
@@ -52,11 +53,19 @@
       :endPrice="hotel?.end_price"
     />
   </div>
+  <GalleryDrawer
+    :visible="showImageModal"
+    :images="hotel?.images ?? null"
+    @update:visible="showImageModal = $event"
+  />
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import { useRoute } from "vue-router";
-import type { Hotel } from "~/types/hotel";
+import { useHotelStore } from "@/store/hotelStore";
+import type { Hotel } from "@/types/hotel";
+import GalleryDrawer from "@/components/Hotel/Hero/Gallery.vue";
 
 definePageMeta({
   layout: "single",
@@ -66,9 +75,18 @@ const route = useRoute();
 const pending = ref(true);
 const hotel = ref(null) as Ref<Hotel | null>;
 
+const hotelStore = useHotelStore();
+const showImageModal = ref(false);
+
+const openImageModal = () => {
+  showImageModal.value = true;
+};
+
 try {
   const response = await useHotelApiData(`hotels/${route.params.id}`);
   hotel.value = response.data.value as Hotel;
+  hotelStore.setHotel(hotel.value);
+  hotelStore.setImages(hotel.value.images);
 } catch (error) {
   console.error(error);
 } finally {
