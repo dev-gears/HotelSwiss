@@ -1,29 +1,47 @@
-import { ref, watch, onMounted } from "vue";
+import { ref, watch } from "vue";
+
+// Create a shared state that persists across component instances
+const isDark = ref(false);
+let isInitialized = false;
 
 export const useDarkMode = () => {
-  const isDark = ref(false);
+  const initializeTheme = () => {
+    if (isInitialized) return;
 
-  onMounted(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       isDark.value = savedTheme === "dark";
     } else {
       isDark.value = window.matchMedia("(prefers-color-scheme: dark)").matches;
     }
-  });
+    updateTheme(isDark.value);
+    isInitialized = true;
+  };
 
-  watch(
-    isDark,
-    (newValue) => {
-      localStorage.setItem("theme", newValue ? "dark" : "light");
-      document.documentElement.classList.toggle("dark", newValue);
-    },
-    { immediate: true },
-  );
+  const updateTheme = (dark: boolean) => {
+    if (!process.client) return;
+
+    const root = document.documentElement;
+    if (dark) {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  };
 
   const toggleDarkMode = () => {
-    isDark.value = !isDark.value; 
+    isDark.value = !isDark.value;
+    updateTheme(isDark.value);
   };
+
+  // Initialize theme only on client side
+  if (process.client) {
+    initializeTheme();
+
+    // Watch for changes and update theme
+    watch(isDark, updateTheme);
+  }
 
   return {
     isDark,

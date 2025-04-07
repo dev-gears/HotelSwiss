@@ -7,7 +7,7 @@
   />
 
   <HotelSkeletonLoader v-if="pending" />
-  <div v-else class="flex flex-col bg-light-100 max-sm:pb-32">
+  <div v-else class="flex flex-col bg-light-100 dark:bg-dark-100 max-sm:pb-32">
     <div class="flex flex-col md:gap-5">
       <HotelHero
         :images="hotel?.images"
@@ -15,7 +15,9 @@
         :hotelTitle="hotel?.title"
         @openImageModal="openImageModal"
       />
-      <h1 class="container mx-auto hidden font-patuaOne text-2xl md:block">
+      <h1
+        class="container mx-auto hidden font-patuaOne text-2xl text-dark dark:text-light md:block"
+      >
         {{ hotel?.title }}
       </h1>
       <div class="container mx-auto mb-6 grid-cols-[2fr,1fr] gap-6 md:grid">
@@ -43,7 +45,7 @@
         </div>
         <div>
           <ContactForm
-            class="sticky top-3 rounded-2xl bg-light p-8 shadow-filters max-md:hidden"
+            class="sticky top-3 rounded-2xl bg-light p-8 shadow-filters dark:bg-dark-200 dark:shadow-dark-200/20 max-md:hidden"
           />
         </div>
       </div>

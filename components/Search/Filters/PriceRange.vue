@@ -1,9 +1,11 @@
 <template>
-  <div class="border-b border-primary/30 px-3 pb-6">
+  <div class="border-b border-primary/30 px-3 pb-6 dark:border-primary-100/30">
     <div class="container mx-auto">
-      <h3 class="font-robotoRegular text-xl text-primary-200">{{ $t('Search.priceRange.title') }}</h3>
-      <p class="font-robotoRegular text-sm text-primary-200">
-        {{ $t('Search.priceRange.description') }}
+      <h3 class="font-robotoRegular text-xl text-primary-200 dark:text-light">
+        {{ $t("Search.priceRange.title") }}
+      </h3>
+      <p class="font-robotoRegular text-sm text-primary-200 dark:text-light/80">
+        {{ $t("Search.priceRange.description") }}
       </p>
       <div
         class="grid w-full grid-cols-3 items-center justify-between gap-3 pt-3"
@@ -11,18 +13,18 @@
         <InputNumber
           v-ripple
           :pt="{
-            root: '!w-full [&_input]:!w-full rounded-md p-2 !bg-light-100 border border-primary/20',
+            root: '!w-full [&_input]:!w-full rounded-md p-2 !bg-light-100 dark:!bg-dark-200 border border-primary/20 dark:border-primary-100/20 text-primary-200 dark:text-light [&_input]:text-primary-200 dark:[&_input]:text-light',
           }"
           v-model="minPriceInput"
           inputId="min"
           :placeholder="$t('Search.priceRange.min')"
           @update:modelValue="updatePriceRange"
         />
-        <hr class="border-primary/20" />
+        <hr class="border-primary/20 dark:border-primary-100/20" />
         <InputNumber
           v-ripple
           :pt="{
-            root: '!w-full [&_input]:!w-full rounded-md p-2 bg-light-100 border border-primary/20',
+            root: '!w-full [&_input]:!w-full rounded-md p-2 bg-light-100 dark:bg-dark-200 border border-primary/20 dark:border-primary-100/20 text-primary-200 dark:text-light [&_input]:text-primary-200 dark:[&_input]:text-light',
           }"
           v-model="maxPriceInput"
           inputId="max"

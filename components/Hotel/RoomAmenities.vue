@@ -1,6 +1,8 @@
 <template>
   <div class="container px-3">
-    <div class="border-b border-primary-100/40 bg-light-100 pb-8 pt-3">
+    <div
+      class="border-b border-primary-100/40 bg-light-100 pb-8 pt-3 dark:border-light/10 dark:bg-dark-100"
+    >
       <div class="flex flex-col flex-wrap gap-3">
         <h2 class="font-robotoRegular text-xl text-primary-200">
           {{ $t("Amenities.title") }}:
@@ -10,7 +12,7 @@
           v-for="data in visibleAmenities"
           :key="data.amenity.id"
         >
-          <div class="mr-3 rounded-md bg-primary p-1">
+          <div class="mr-3 rounded-md bg-primary p-1 dark:bg-primary-200">
             <img
               :src="backendUrl + data.amenity?.image?.url"
               :alt="data.amenity?.name"
@@ -26,7 +28,7 @@
         <Button
           v-if="shouldShowLoadMoreButton"
           @click="loadMore"
-          class="mt-6 rounded border border-primary-200 bg-light-100 py-3.5 text-primary-200"
+          class="hover:bg-light-200 mt-6 rounded border border-primary-200 bg-light-100 py-3.5 text-primary-200 transition-colors dark:bg-dark-200 dark:hover:bg-dark-100"
           :label="$t('Common.viewAll')"
         />
       </div>

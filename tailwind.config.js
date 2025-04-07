@@ -5,6 +5,10 @@ export default {
   theme: {
     container: {
       center: true,
+      padding: {
+        DEFAULT: '0',
+        md: '1rem',
+      },
     },
     colors: {
       light: {
@@ -12,10 +16,11 @@ export default {
         100: "#f2f2f2",
       },
       dark: {
-        DEFAULT: "#1f1f1f", // tamniji-text
-        100: "#2a2a2a",
-        200: "#1a1a1a",
-        300: "#0a0a0a",
+        DEFAULT: "#1a2426", // Darker variant of your primary color
+        100: "#212e30", // Slightly lighter
+        200: "#1a2426", // Base dark
+        300: "#151d1f", // Deeper dark
+        400: "#10181a", // Even deeper dark
       },
       primary: {
         DEFAULT: "#354f52",
@@ -33,22 +38,13 @@ export default {
     },
 
     extend: {
-      keyframes: {
-        shimmer: {
-          "0%": { "background-position": "-200% 0" },
-          "100%": { "background-position": "200% 0" },
-        },
-      },
-      animation: {
-        shimmer: "shimmer 1.5s infinite",
-      },
       backgroundImage: {
-        "shimmer-gradient": "linear-gradient(90deg, #f0f0f0, #e0e0e0, #f0f0f0)",
         "previous-gradient": "linear-gradient(90deg, #f2f2f2 0%, #f2f2f2 70%, transparent 100%)",
         "next-gradient": "linear-gradient(90deg, transparent 0%, #f2f2f2 30%, #f2f2f2 100%)",
+        "dark-previous-gradient": "linear-gradient(90deg, #212e30 0%, #212e30 70%, transparent 100%)",
+        "dark-next-gradient": "linear-gradient(90deg, transparent 0%, #212e30 30%, #212e30 100%)",
       },
       backgroundSize: {
-        "200%": "200% 100%",
         50: "50px",
       },
       boxShadow: {

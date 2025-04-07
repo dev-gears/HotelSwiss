@@ -27,23 +27,31 @@
         <Card :hotel="hotel" aspect="square" :showAmenities="false" />
       </SwiperSlide>
       <div
-        class="absolute left-0 top-0 z-40 hidden h-full w-9 items-start justify-center bg-light-100 lg:flex"
+        class="absolute left-0 top-0 z-40 hidden h-full w-9 items-center justify-center bg-light-100 dark:bg-dark-200 lg:flex"
       >
         <button
           v-ripple
           class="prev-slide-button flex w-5 items-center justify-center rounded"
         >
-          <img src="~/assets/icons/prev-arrow.svg" alt="previous arrow" />
+          <img
+            src="~/assets/icons/prev-arrow.svg"
+            alt="previous arrow"
+            class="dark:opacity-80 dark:invert"
+          />
         </button>
       </div>
       <div
-        class="absolute right-0 top-0 z-40 hidden h-full w-9 items-start justify-center bg-light-100 lg:flex"
+        class="absolute right-0 top-0 z-40 hidden h-full w-9 items-center justify-center bg-light-100 dark:bg-dark-200 lg:flex"
       >
         <button
           v-ripple
           class="next-slide-button flex w-5 items-center justify-center rounded"
         >
-          <img src="~/assets/icons/next-arrow.svg" alt="next arrow" />
+          <img
+            src="~/assets/icons/next-arrow.svg"
+            alt="next arrow"
+            class="dark:opacity-80 dark:invert"
+          />
         </button>
       </div>
     </Swiper>
@@ -106,7 +114,7 @@ onMounted(() => {
 
   .p-carousel-next.p-link,
   .p-carousel-prev.p-link {
-    @apply mx-1.5 bg-primary text-light md:relative lg:h-28 lg:w-5 lg:rounded-none;
+    @apply mx-1.5 bg-primary text-light dark:bg-primary-200 md:relative lg:h-28 lg:w-5 lg:rounded-none;
     @apply max-sm:absolute max-sm:bottom-0 max-sm:translate-y-10 max-sm:transform;
   }
 
@@ -123,7 +131,7 @@ onMounted(() => {
   }
 
   .p-highlight > a {
-    @apply rounded-t-md !bg-primary;
+    @apply rounded-t-md !bg-primary dark:!bg-primary;
   }
 
   .p-carousel-item {
@@ -143,6 +151,15 @@ onMounted(() => {
       rgba(53, 79, 82, 0.4) 53.65%,
       rgba(53, 79, 82, 0.05) 100%
     );
+
+    @media (prefers-color-scheme: dark) {
+      background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.2) 53.65%,
+        rgba(255, 255, 255, 0.05) 100%
+      );
+    }
   }
 }
 </style>

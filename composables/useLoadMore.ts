@@ -1,14 +1,18 @@
-import { ref, Ref } from "vue";
+import { ref } from "vue";
+import type { Ref } from "vue";
 
 /**
  * Load more items
- * @param items
- * @param initialVisibleCount
- * @returns
+ * @param items Array of items to load
+ * @param initialVisibleCount Initial number of items to show
+ * @returns Object containing visible items, load more button state, and load more function
  */
-export const useLoadMore = (items: any, initialVisibleCount: number) => {
-  const visibleItems = ref(items.slice(0, initialVisibleCount));
-  const shouldShowLoadMoreButton: Ref<boolean> = ref(
+export const useLoadMore = <T extends Record<string, any>>(
+  items: T[],
+  initialVisibleCount: number,
+) => {
+  const visibleItems = ref<T[]>(items.slice(0, initialVisibleCount));
+  const shouldShowLoadMoreButton = ref<boolean>(
     items.length > initialVisibleCount,
   );
 

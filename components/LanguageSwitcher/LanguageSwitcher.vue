@@ -14,6 +14,18 @@
       ref="overlayPanel"
       :dismissable="true"
       :showCloseIcon="false"
+      :pt="{
+        root: {
+          class:
+            '!mt-[2px] !w-[330px] !rounded-[10px] !rounded-tr-none !bg-primary-100 !text-light !p-3',
+        },
+        content: {
+          class: 'p-0',
+        },
+        header: {
+          class: 'hidden',
+        },
+      }"
       @hide="onOverlayHide"
       class="mt-[2px] w-[330px] rounded-[10px] rounded-tr-none bg-primary-100 text-light"
     >

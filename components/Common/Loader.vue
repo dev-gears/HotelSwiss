@@ -1,5 +1,5 @@
 <template>
-  <div class="loader">
+  <div class="loader" :class="{ dark: isDark }">
     <span></span>
     <span></span>
     <span></span>
@@ -9,7 +9,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useDarkMode } from "@/composables/useDarkMode";
+
+const { isDark } = useDarkMode();
+</script>
 
 <style scoped>
 .loader {
@@ -20,6 +24,10 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 5px;
+}
+
+.loader.dark {
+  --color: #26393b;
 }
 
 .loader span {

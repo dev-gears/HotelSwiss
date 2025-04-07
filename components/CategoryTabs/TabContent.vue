@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center bg-light-100 dark:bg-dark-100">
     <div class="container mx-auto max-md:px-3">
       <CommonBlockHeader :title="name" :link="`category/${category}`" />
       <GridSkeleton v-if="isLoading && !categorizedHotels?.length" />
@@ -10,7 +10,10 @@
         :initialRequestUrl="initialRequestUrl"
         :bindIntersection="activeTab"
       />
-      <div v-else class="flex h-[400px] items-center justify-center">
+      <div
+        v-else
+        class="flex h-[400px] items-center justify-center text-primary-200 dark:text-light"
+      >
         {{ $t("TabContent.noHotelsFound") }}
       </div>
     </div>

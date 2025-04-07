@@ -1,3 +1,4 @@
+import { defineNuxtConfig } from "nuxt/config";
 import Lara from "@primevue/themes/lara";
 
 const headerAuth = {
@@ -17,6 +18,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       backendUrl: process.env.BASE_URL || "http://localhost:3000",
+      siteUrl: process.env.SITE_URL || "http://localhost:3000",
     },
   },
 
@@ -33,27 +35,22 @@ export default defineNuxtConfig({
     "nuxt-api-party",
     "nuxt-swiper",
     "@pinia/nuxt",
-    [
-      "@nuxtjs/i18n",
-      {
-        vueI18n: "./i18n.config.ts",
-      },
-    ],
+    "@nuxtjs/i18n",
     "@nuxt/image",
     "@nuxtjs/leaflet",
     "@nuxtjs/sitemap",
     "@primevue/nuxt-module",
   ],
   primevue: {
+    usePrimeVue: true,
     options: {
-      autoImport: true,
       ripple: true,
       inputVariant: "filled",
       theme: {
         preset: Lara,
         options: {
           prefix: "p",
-          darkModeSelector: ".dark-mode",
+          darkModeSelector: ".dark",
           cssLayer: true,
         },
       },
@@ -78,7 +75,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: "https://localhost:3000",
+    url: process.env.SITE_URL || "https://localhost:3000",
     name: "Hotel Swiss",
     description: "The best hotel in the world",
 
@@ -87,24 +84,35 @@ export default defineNuxtConfig({
     },
 
     sitemap: {
-      hostname: "https://localhost:3000",
+      hostname: process.env.SITE_URL || "https://localhost:3000",
     },
 
     image: {
-      url: "https://localhost:3000/logo.png",
+      url: process.env.SITE_URL
+        ? `${process.env.SITE_URL}/logo.png`
+        : "https://localhost:3000/logo.png",
       alt: "Hotel Swiss",
     },
   },
 
   i18n: {
-    baseUrl: "http://localhost:3000",
+    strategy: "prefix_except_default",
     defaultLocale: "en",
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_redirected",
+      redirectOn: "root",
+    },
+    baseUrl: process.env.SITE_URL || "http://localhost:3000",
     locales: [
-      { code: "en", language: "en-US" },
-      { code: "fr", language: "fr-FR" },
-      { code: "de", language: "de-DE" },
-      { code: "it", language: "it-IT" },
+      { code: "en", iso: "en-US", file: "en.json" },
+      { code: "fr", iso: "fr-FR", file: "fr.json" },
+      { code: "de", iso: "de-DE", file: "de.json" },
+      { code: "it", iso: "it-IT", file: "it.json" },
     ],
+    lazy: true,
+    langDir: "locales",
+    vueI18n: "./i18n.config.ts",
   },
 
   pages: true,

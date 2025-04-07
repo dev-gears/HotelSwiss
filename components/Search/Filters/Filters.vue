@@ -4,14 +4,16 @@
     position="bottom"
     :blockScroll="true"
     :pt="{
-      root: 'bg-primary h-full w-full fixed bottom-0 left-0 rounded-t-3xl transition-all !h-[90%]',
+      root: 'bg-primary dark:bg-primary-200 h-full w-full fixed bottom-0 left-0 rounded-t-3xl transition-all !h-[90%] shadow-xl dark:shadow-primary-200/20',
       header:
-        'bg-light z-50 border-b border-primary/30 rounded-t-3xl fixed w-full flex !justify-end items-center !py-2 !px-6',
+        'bg-light dark:bg-dark-100 z-50 border-b border-primary/30 dark:border-primary-200/20 rounded-t-3xl fixed w-full flex !justify-end items-center !py-2 !px-6 shadow-sm dark:shadow-primary-200/10',
       content:
-        'bg-light !pt-20 rounded-t-3xl overflow-y-scroll flex flex-col gap-6',
+        'bg-light dark:bg-dark-100 !pt-20 rounded-t-3xl overflow-y-scroll flex flex-col gap-6 scrollbar-thin scrollbar-thumb-primary/20 dark:scrollbar-thumb-primary-200/20 scrollbar-track-transparent',
       footer:
-        'bg-light bottom-0 border-t border-primary/30 !py-2 !px-6 flex justify-between',
-      mask: 'bg-primary/50 !transition-all',
+        'bg-light dark:bg-dark-100 bottom-0 border-t border-primary/30 dark:border-primary-200/20 !py-2 !px-6 flex justify-between shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] dark:shadow-primary-200/10',
+      mask: 'bg-primary/50 dark:bg-dark/70 backdrop-blur-[2px] !transition-all',
+      closeButton:
+        'text-primary-200 dark:text-light hover:opacity-80 transition-opacity',
     }"
   >
     <template #default v-if="filters">
@@ -40,14 +42,14 @@
       <Button
         v-ripple
         :label="$t('Search.filters.clearFilters')"
-        class="bg-white p-2 text-primary-200 underline"
+        class="bg-white p-2 text-primary-200 underline shadow-sm transition-all hover:bg-light-100 hover:shadow-md dark:bg-dark-200 dark:text-light dark:shadow-primary-200/20 dark:hover:bg-dark-100"
         @click="clearFilters"
       />
       <Button
         v-ripple
         :label="$t('Search.filters.searchHotels')"
         :pt="{
-          root: '!rounded-lg !bg-primary !p-2 !text-light-100',
+          root: '!rounded-lg !bg-primary dark:!bg-primary !p-2 !text-light shadow-md dark:shadow-primary-200/20 transition-all hover:opacity-90 dark:hover:opacity-90',
         }"
         @click="updateFilters"
       />

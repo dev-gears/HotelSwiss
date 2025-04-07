@@ -7,18 +7,18 @@
     :pt="{
       root: 'bg-primary h-full w-full fixed bottom-0 left-0 rounded-t-3xl transition-all !h-[90%]',
       header:
-        'bg-light z-50 border-b border-primary/30 rounded-t-3xl fixed w-full flex !justify-end items-center !py-2 !px-6',
+        'bg-light dark:bg-dark-100 z-50 border-b border-primary/30 dark:border-light/10 rounded-t-3xl fixed w-full flex !justify-end items-center !py-2 !px-6',
       content:
-        'bg-light !pt-20 rounded-t-3xl overflow-y-scroll flex flex-col gap-6',
+        'bg-light dark:bg-dark-100 !pt-20 rounded-t-3xl overflow-y-scroll flex flex-col gap-6',
       footer:
-        'bg-light bottom-0 border-t border-primary/30 !py-2 !px-6 flex justify-between',
+        'bg-light dark:bg-dark-100 bottom-0 border-t border-primary/30 dark:border-light/10 !py-2 !px-6 flex justify-between',
       mask: 'bg-primary/50 !transition-all',
     }"
   >
     <template #default>
       <div class="container mx-auto">
         <div
-          class="grid grid-cols-1 justify-center gap-3 rounded-md bg-primary-100/10 p-3 md:grid-cols-2 lg:grid-cols-3"
+          class="grid grid-cols-1 justify-center gap-3 rounded-md bg-primary-100/10 p-3 dark:bg-dark-200/50 md:grid-cols-2 lg:grid-cols-3"
         >
           <div
             v-for="(image, index) in images"
@@ -29,9 +29,9 @@
               v-ripple
               @click="openImageModal(index)"
               :pt="{
-                root: 'flex items-center justify-center cursor-pointer hover:brightness-75',
+                root: 'flex items-center justify-center cursor-pointer hover:brightness-75 transition-all',
               }"
-              :src="image.renditions.thumbnail ?? image.url"
+              :src="String(image.renditions.thumbnail ?? image.url)"
             />
           </div>
         </div>
@@ -44,7 +44,7 @@
         :showHeader="false"
         v-model:visible="showImageModal"
         :pt="{
-          root: 'bg-primary-100/90 w-[90%] max-md:w-full max-md:h-full flex items-center justify-center',
+          root: 'bg-light-100/90 dark:bg-dark-100/90 w-[90%] max-md:w-full max-md:h-full flex items-center justify-center',
           content: 'p-6 max-md:px-0',
         }"
       >
@@ -59,7 +59,7 @@
           }"
         >
           <button @click="closeImageModal" class="absolute right-6 top-6">
-            <i class="pi pi-times text-light"></i>
+            <i class="pi pi-times text-dark dark:text-light"></i>
           </button>
           <div
             class="transition-all"
@@ -68,7 +68,7 @@
           >
             <Image
               ref="imageWrapper"
-              :src="images[activeImageIndex].url"
+              :src="String(images[activeImageIndex].url)"
               :class="['max-h-[60vh] max-w-full object-contain', fadeInClass]"
               :key="activeImageIndex"
               :pt="{
@@ -84,7 +84,7 @@
             v-if="images.length > 1"
           >
             <i
-              class="pi pi-angle-left light-ripple rounded-full bg-primary p-2 text-light shadow-md"
+              class="pi pi-angle-left light-ripple rounded-full bg-primary p-2 text-light shadow-md dark:bg-primary-200"
               v-ripple
             ></i>
           </button>
@@ -94,14 +94,14 @@
             v-if="images.length > 1"
           >
             <i
-              class="pi pi-angle-right rounded-full bg-primary p-2 text-light shadow-md"
+              class="pi pi-angle-right rounded-full bg-primary p-2 text-light shadow-md dark:bg-primary-200"
               v-ripple
             ></i>
           </button>
         </div>
         <div class="w-full">
           <p
-            class="absolute bottom-6 left-6 rounded-full bg-primary p-2 text-center text-sm text-light shadow-md"
+            class="absolute bottom-6 left-6 rounded-full bg-primary p-2 text-center text-sm text-light shadow-md dark:bg-primary-200"
           >
             {{ activeImageIndex + 1 }} / {{ images.length }}
           </p>
@@ -111,7 +111,7 @@
             @click="rotateLeft"
           >
             <i
-              class="pi pi-replay rounded-full bg-primary p-2 text-light shadow-md"
+              class="pi pi-replay rounded-full bg-primary p-2 text-light shadow-md dark:bg-primary-200"
               v-ripple
             ></i>
           </button>
@@ -120,7 +120,7 @@
             @click="rotateRight"
           >
             <i
-              class="pi pi-refresh rounded-full bg-primary p-2 text-light shadow-md"
+              class="pi pi-refresh rounded-full bg-primary p-2 text-light shadow-md dark:bg-primary-200"
               v-ripple
             ></i>
           </button>

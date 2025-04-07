@@ -5,8 +5,8 @@
       v-ripple
       :label="$t('Search.searchForSpecificHotel')"
       :pt="{
-        root: 'h-12 !flex !justify-between !px-3 w-full overflow-hidden !rounded-l-xl !rounded-r-none !bg-light px-2 text-primary/80 shadow focus:shadow',
-        icon: 'text-primary/80 !text-lg',
+        root: 'h-12 !flex !justify-between !px-3 w-full overflow-hidden !rounded-l-xl !rounded-r-none !bg-light dark:!bg-dark-400 px-2 text-primary/80 dark:hover:!text-light/90 dark:text-light/80 shadow focus:shadow dark:shadow-primary-100/10',
+        icon: 'text-primary/80 dark:text-light/80 !text-lg',
       }"
       icon="pi pi-search"
       iconPos="right"
@@ -15,8 +15,8 @@
       v-ripple
       icon="pi pi-sliders-h"
       :pt="{
-        root: 'h-12 items-center justify-center rounded-none !rounded-br-xl !bg-light !px-4 shadow',
-        icon: 'text-primary-200 !text-lg',
+        root: 'h-12 items-center justify-center rounded-none !rounded-br-xl !bg-light dark:!bg-dark-400 !px-4 shadow dark:shadow-primary-100/10',
+        icon: 'text-primary-200 dark:text-light/80 !text-lg',
       }"
       @click="showFilters = true"
     />
@@ -24,7 +24,7 @@
       v-if="filtersCount !== '0'"
       :value="filtersCount"
       :pt="{
-        root: 'absolute !w-5 !h-5 -right-2 text-md -top-2 !bg-primary !rounded-full !text-light',
+        root: 'absolute !w-5 !h-5 -right-2 text-md -top-2 !bg-primary dark:!bg-primary-100 !rounded-full !text-light',
       }"
     />
   </div>
@@ -37,7 +37,7 @@
   />
   <div
     v-if="+filtersCount && route.name === 'search'"
-    class="mb-3 border-b border-primary/30 px-3 pb-3"
+    class="mb-3 border-b border-primary/30 px-3 pb-3 dark:border-primary-100/30"
   >
     <div v-if="filtersStore.filters.cantons.length">
       <div class="mb-2 flex flex-wrap gap-1">
@@ -48,7 +48,7 @@
           icon="pi pi-sliders-h"
           :label="canton.name"
           :pt="{
-            root: 'cursor-pointer !flex !gap-2 !px-3 !py-2 !rounded-xl !bg-primary !text-light hover:!bg-danger',
+            root: 'cursor-pointer !flex !gap-2 !px-3 !py-2 !rounded-xl !bg-primary dark:!bg-primary-100 !text-light hover:!bg-danger dark:hover:!bg-danger-100',
           }"
           @click="removeCanton(canton)"
         />
@@ -62,7 +62,7 @@
           icon="pi pi-star"
           :label="filtersStore.filters.stars"
           :pt="{
-            root: 'cursor-pointer !flex !gap-2 !px-3 !py-2 !rounded-xl !bg-primary !text-light hover:!bg-danger',
+            root: 'cursor-pointer !flex !gap-2 !px-3 !py-2 !rounded-xl !bg-primary dark:!bg-primary-100 !text-light hover:!bg-danger dark:hover:!bg-danger-100',
           }"
           @click="removeStars"
         />

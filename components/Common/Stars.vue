@@ -5,6 +5,7 @@
       src="~/assets/icons/star.svg"
       :key="index"
       alt="hotel star"
+      class="dark:brightness-90"
     />
   </div>
 </template>

@@ -1,11 +1,11 @@
 <template>
   <div class="font-robotoRegular">
-    <h1 class="mb-5 text-xl font-bold leading-6">
+    <h1 class="mb-5 text-xl font-bold leading-6 text-dark dark:text-light">
       {{ $t("ContactForm.title") }}
     </h1>
     <form class="flex flex-col gap-3" @submit="submitForm">
       <div class="flex flex-col gap-2">
-        <label for="name" class="text-sm text-primary-200">
+        <label for="name" class="text-sm text-primary-200 dark:text-light/80">
           {{ $t("ContactForm.fields.name.label") }}:
           <span class="text-[red]">*</span>
         </label>
@@ -14,15 +14,15 @@
           v-model="name"
           :placeholder="$t('ContactForm.fields.name.placeholder')"
           required
-          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow"
+          class="!focus:shadow dark:!bg-dark-400 !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow dark:!text-light dark:!shadow-dark-200/20"
         />
         <span v-if="errors.name" class="text-red-500 text-sm">{{
-          $t('ContactForm.fields.name.error')
+          $t("ContactForm.fields.name.error")
         }}</span>
       </div>
 
       <div class="flex flex-col gap-2">
-        <label for="email" class="text-sm text-primary-200">
+        <label for="email" class="text-sm text-primary-200 dark:text-light/80">
           {{ $t("ContactForm.fields.email.label") }}:
           <span class="text-[red]">*</span>
         </label>
@@ -32,39 +32,45 @@
           type="email"
           :placeholder="$t('ContactForm.fields.email.placeholder')"
           required
-          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow"
+          class="!focus:shadow dark:!bg-dark-400 !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow dark:!text-light dark:!shadow-dark-200/20"
         />
         <span v-if="errors.email" class="text-red-500 text-sm">{{
-          $t('ContactForm.fields.email.error')
+          $t("ContactForm.fields.email.error")
         }}</span>
       </div>
 
       <div class="flex flex-col gap-2">
-        <label for="phone" class="text-sm text-primary-200">
+        <label for="phone" class="text-sm text-primary-200 dark:text-light/80">
           {{ $t("ContactForm.fields.phone.label") }}:
-          <span class="text-primary-200/30">({{ $t("Common.optional") }})</span>
+          <span class="text-primary-200/30 dark:text-light/30"
+            >({{ $t("Common.optional") }})</span
+          >
         </label>
         <InputText
           id="phone"
           v-model="phone"
           type="tel"
           :placeholder="$t('ContactForm.fields.phone.placeholder')"
-          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow"
+          class="!focus:shadow dark:!bg-dark-400 !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow dark:!text-light dark:!shadow-dark-200/20"
         />
       </div>
 
       <div class="flex flex-col gap-2">
-        <label class="text-sm text-primary-200">
+        <label class="text-sm text-primary-200 dark:text-light/80">
           {{ $t("ContactForm.fields.date.label") }}:
-          <span class="text-primary-200/30">({{ $t("Common.optional") }})</span>
+          <span class="text-primary-200/30 dark:text-light/30"
+            >({{ $t("Common.optional") }})</span
+          >
         </label>
         <InputGroup
-          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !text-primary-200 !shadow sm:w-auto"
+          class="!focus:shadow dark:!bg-dark-400 !h-12 w-full !rounded-xl !bg-light-100 !text-primary-200 !shadow dark:!text-light dark:!shadow-dark-200/20 sm:w-auto"
         >
           <DatePicker
             :pt="{
-              dropdown: '!bg-primary !rounded-r-xl text-light',
-              panel: 'border !border-primary-200',
+              dropdown:
+                '!bg-primary dark:!bg-primary-200 !rounded-r-xl text-light',
+              panel:
+                'border !border-primary-200 dark:!border-light/10 dark:!bg-dark-400',
               daycell: 'p-0',
             }"
             selectionMode="range"
@@ -77,7 +83,10 @@
       </div>
 
       <div class="flex flex-col gap-2">
-        <label for="message" class="text-sm text-primary-200">
+        <label
+          for="message"
+          class="text-sm text-primary-200 dark:text-light/80"
+        >
           {{ $t("ContactForm.fields.message.label") }}:
           <span class="text-[red]">*</span>
         </label>
@@ -87,10 +96,10 @@
           :placeholder="$t('ContactForm.fields.message.placeholder')"
           required
           rows="5"
-          class="!focus:shadow !h-auto w-full !rounded-xl !bg-light-100 !px-2 !py-4 !text-primary-200 !shadow"
+          class="!focus:shadow dark:!bg-dark-400 !h-auto w-full !rounded-xl !bg-light-100 !px-2 !py-4 !text-primary-200 !shadow dark:!text-light dark:!shadow-dark-200/20"
         />
         <span v-if="errors.message" class="text-red-500 text-sm">{{
-          $t('ContactForm.fields.message.error')
+          $t("ContactForm.fields.message.error")
         }}</span>
       </div>
 
@@ -98,13 +107,12 @@
         :label="$t('ContactForm.buttons.submit')"
         type="submit"
         :pt="{
-          root: '!rounded-xl !bg-primary !px-4 !py-2 !text-xl !text-light',
+          root: '!rounded-xl !bg-primary dark:!bg-primary-200 !px-4 !py-2 !text-xl !text-light hover:!bg-primary-200 dark:hover:!bg-primary-300',
         }"
       />
     </form>
   </div>
 </template>
-
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
@@ -153,26 +161,26 @@ const submitForm = (e: Event) => {
   let valid = true;
 
   if (name.value.trim() === "") {
-  errors.value.name = $t("ContactForm.fields.name.error"); 
-  valid = false;
-}
+    errors.value.name = $t("ContactForm.fields.name.error");
+    valid = false;
+  }
 
-if (email.value.trim() === "") {
-  errors.value.email = $t("ContactForm.fields.email.error"); 
-  valid = false;
-} else if (!validateEmail(email.value)) {
-  errors.value.email = $t("ContactForm.fields.email.invalid"); 
-  valid = false;
-}
+  if (email.value.trim() === "") {
+    errors.value.email = $t("ContactForm.fields.email.error");
+    valid = false;
+  } else if (!validateEmail(email.value)) {
+    errors.value.email = $t("ContactForm.fields.email.invalid");
+    valid = false;
+  }
 
-if (message.value.trim() === "") {
-  errors.value.message = $t("ContactForm.fields.message.error"); 
-  valid = false;
-}
+  if (message.value.trim() === "") {
+    errors.value.message = $t("ContactForm.fields.message.error");
+    valid = false;
+  }
 
-if (!valid) {
-  return;
-}
+  if (!valid) {
+    return;
+  }
 
   const formData = {
     name: name.value,
@@ -193,6 +201,6 @@ if (!valid) {
 
 <style>
 .p-datepicker-input {
-  @apply !bg-light-100 pl-2 !text-primary-200;
+  @apply !bg-light-100 pl-2 !text-primary-200 dark:!bg-dark-300 dark:!text-light;
 }
 </style>

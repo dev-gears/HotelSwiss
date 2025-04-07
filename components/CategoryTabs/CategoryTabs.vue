@@ -1,30 +1,31 @@
 <template>
-  <div ref="tabWrapper">
+  <div ref="tabWrapper" class="bg-light-100 dark:bg-dark-100">
     <Tabs
       scrollable
       :value="0"
       @update:value="onTabChange"
       :pt="{
-        root: 'container mx-auto !bg-light-100 !border-none',
+        root: 'container mx-auto !bg-light-100 dark:!bg-dark-100 !border-none',
         tabList: '',
       }"
     >
       <TabList
         :pt="{
           root: 'container mx-auto !border-none !sticky !top-0 z-10 pr-3',
-          tabList: '!border-none flex gap-3 py-2 px-3 !bg-light-100',
-          content: '',
-          activeBar: '!bg-primary',
+          tabList:
+            '!border-none flex gap-3 py-2 px-3 !bg-light-100 dark:!bg-dark-100',
+          content: '!bg-light-100 dark:!bg-dark-100',
+          activeBar: '!bg-primary dark:!bg-primary-100',
           prevButton:
-            '!bg-previous-gradient !border-none rounded-l-md overflow-hidden shadow-none',
+            '!bg-previous-gradient dark:!bg-dark-previous-gradient !border-none rounded-l-md overflow-hidden shadow-none text-primary-200 dark:text-light',
           nextButton:
-            '!bg-next-gradient !border-none rounded-r-md overflow-hidden shadow-none',
+            '!bg-next-gradient dark:!bg-dark-next-gradient !border-none rounded-r-md overflow-hidden shadow-none text-primary-200 dark:text-light',
         }"
       >
         <Tab
           :key="0"
           :pt="{
-            root: '!border-none !rounded-xl !px-4 !py-2 shadow-cardImage !bg-light',
+            root: '!border-none !rounded-xl !px-4 !py-2 shadow-cardImage !bg-light dark:!bg-dark-400 text-primary-200 dark:text-light',
           }"
           :value="0"
         >
@@ -36,8 +37,8 @@
           v-for="(tab, index) in mockCategories"
           :key="index + 1"
           :pt="{
-            root: '!border-none !rounded-xl !px-4 !py-2 shadow-cardImage !bg-[#fff]',
-            activeBar: '!bg-primary-500',
+            root: '!border-none !rounded-xl !px-4 !py-2 shadow-cardImage !bg-light dark:!bg-dark-400 text-primary-200 dark:text-light',
+            activeBar: '!bg-primary dark:!bg-primary-100',
           }"
           :value="tab.id.toString()"
         >
@@ -48,7 +49,7 @@
       </TabList>
       <TabPanels
         :pt="{
-          root: '!bg-light-100',
+          root: '!bg-light-100 dark:!bg-dark-100',
         }"
       >
         <TabPanel :value="0">
@@ -259,11 +260,12 @@ const tabWrapper = useTemplateRef("tabWrapper");
 const requestUrlForTab = ref("");
 
 /**
- * On tab change, fetch hotels based on the category i
- * @param {number} newIndex - New tab index
+ * On tab change, fetch hotels based on the category
+ * @param {string | number} value - New tab value
  * @returns {Promise<void>}
  */
-const onTabChange = async (newIndex: number): Promise<void> => {
+const onTabChange = async (value: string | number): Promise<void> => {
+  const newIndex = typeof value === "string" ? parseInt(value, 10) : value;
   scrollToTabs();
   if (newIndex !== 0) {
     try {
@@ -309,6 +311,6 @@ getFirstTabContent();
 
 <style lang="pcss">
 .p-tab-active {
-  @apply !bg-primary !text-light !transition-all !duration-500;
+  @apply !bg-primary !text-light !transition-all !duration-500 dark:!bg-primary-100;
 }
 </style>

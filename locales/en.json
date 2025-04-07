@@ -8,7 +8,8 @@
     "priceHighToLow": "Price: High to Low",
     "priceLowToHigh": "Price: Low to High",
     "ratingHighToLow": "Rating: High to Low",
-    "ratingLowToHigh": "Rating: Low to High"
+    "ratingLowToHigh": "Rating: Low to High",
+    "toggleTheme": "Toggle dark mode"
   },
   "LanguageButton": {
     "selectLanguage": "Select language"
@@ -41,30 +42,29 @@
   },
   "Search": {
     "filters": {
-        "clearFilters": "Clear filters",
-        "searchHotels": "Search hotels"
+      "clearFilters": "Clear filters",
+      "searchHotels": "Search hotels"
     },
     "searchForSpecificHotel": "Search for a specific hotel",
     "amenities": {
-        "title": "Amenities"
+      "title": "Amenities"
     },
     "priceRange": {
-        "title": "Price Range",
-        "description": "Adjust the price range to suit your budget. You can set both a minimum and maximum price.",
-        "min": "Minimum Price",
-        "max": "Maximum Price"
+      "title": "Price Range",
+      "description": "Filter hotels by price range",
+      "min": "Min price",
+      "max": "Max price"
     },
     "hotelClass": {
-        "title": "Hotel Class",
-        "description": "Select a hotel class to filter your search results. You can choose from 1 to 5 stars, or select 'all' to include all classes in your search.",
-        "all": "All"
+      "title": "Hotel Class",
+      "description": "Select a hotel class to filter your search results. You can choose from 1 to 5 stars, or select 'all' to include all classes in your search.",
+      "all": "All"
     },
     "cantons": {
-        "title": "Cantons",
-        "description": "Select one or more cantons from the list below."
+      "title": "Cantons",
+      "description": "Select one or more cantons from the list below."
     }
-}
-,
+  },
   "PromoBlock": {
     "promoHotels": "Promo hotels"
   },
@@ -80,35 +80,37 @@
     "visitUsAlsoOn": "Visit us also on"
   },
   "ContactForm": {
-    "title": "Contact us",
+    "title": "Contact Us",
     "fields": {
-        "name": {
-            "label": "Name",
-            "placeholder": "Enter your name",
-            "error": "Name is required"
-        },
-        "email": {
-            "label": "Email",
-            "placeholder": "Enter your email",
-            "error": "Email is required",
-            "invalid": "Please enter a valid email address"
-        },
-        "message": {
-            "label": "Message",
-            "placeholder": "Type your message",
-            "error": "Message is required"
-        },
-        "phone": {
-            "label": "Phone",
-            "placeholder": "Enter your phone"
-        },
-        "date": {
-            "label": "Date",
-            "placeholder": "Select the date"
-        }
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name",
+        "error": "Name is required"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email",
+        "error": "Please enter a valid email"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "Enter your phone number (optional)"
+      },
+      "date": {
+        "label": "Date",
+        "placeholder": "Select a date (optional)"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Enter your message",
+        "error": "Message is required"
+      }
     },
     "buttons": {
-        "submit": "Send"
+      "submit": "Send Message"
     }
-}
+  },
+  "Gallery": {
+    "title": "Gallery"
+  }
 }

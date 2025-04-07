@@ -8,8 +8,9 @@
     "priceHighToLow": "Prezzo: Dal più alto al più basso",
     "priceLowToHigh": "Prezzo: Dal più basso al più alto",
     "ratingHighToLow": "Valutazione: Dalla più alta alla più bassa",
-    "ratingLowToHigh": "Valutazione: Dalla più bassa alla più alta"
-},
+    "ratingLowToHigh": "Valutazione: Dalla più bassa alla più alta",
+    "toggleTheme": "Attiva/disattiva modalità scura"
+  },
   "LanguageButton": {
     "selectLanguage": "Seleziona lingua"
   },
@@ -29,36 +30,35 @@
     "class": "Classe",
     "readMore": "Leggi di più",
     "whereYouWillBe": "Ecco dove sarai"
-},
+  },
   "Amenities": {
     "title": "Cosa offriamo"
   },
   "Search": {
     "filters": {
-        "clearFilters": "Cancella filtri",
-        "searchHotels": "Cerca hotel"
+      "clearFilters": "Cancella filtri",
+      "searchHotels": "Cerca hotel"
     },
     "searchForSpecificHotel": "Cerca un hotel specifico",
     "amenities": {
-        "title": "Servizi"
+      "title": "Servizi"
     },
     "priceRange": {
-        "title": "Fascia di prezzo",
-        "description": "Regola la fascia di prezzo in base al tuo budget. Puoi impostare un prezzo minimo e massimo.",
-        "min": "Prezzo minimo",
-        "max": "Prezzo massimo"
+      "title": "Fascia di prezzo",
+      "description": "Regola la fascia di prezzo in base al tuo budget. Puoi impostare un prezzo minimo e massimo.",
+      "min": "Prezzo minimo",
+      "max": "Prezzo massimo"
     },
     "hotelClass": {
-        "title": "Categoria dell'hotel",
-        "description": "Seleziona una categoria di hotel per filtrare i risultati di ricerca. Puoi scegliere tra 1 e 5 stelle oppure selezionare 'Tutti' per includere tutte le categorie.",
-        "all": "Tutti"
+      "title": "Categoria dell'hotel",
+      "description": "Seleziona una categoria di hotel per filtrare i risultati di ricerca. Puoi scegliere tra 1 e 5 stelle oppure selezionare 'Tutti' per includere tutte le categorie.",
+      "all": "Tutti"
     },
     "cantons": {
-        "title": "Cantoni",
-        "description": "Seleziona uno o più cantoni dall'elenco qui sotto."
+      "title": "Cantoni",
+      "description": "Seleziona uno o più cantoni dall'elenco qui sotto."
     }
-}
-,
+  },
   "PromoBlock": {
     "promoHotels": "Hotel promozionali"
   },
@@ -74,34 +74,33 @@
   "ContactForm": {
     "title": "Contattaci",
     "fields": {
-        "name": {
-            "label": "Nome",
-            "placeholder": "Inserisci il tuo nome",
-            "error": "Il nome è obbligatorio"
-        },
-        "email": {
-            "label": "E-mail",
-            "placeholder": "Inserisci la tua e-mail",
-            "error": "L'e-mail è obbligatoria",
-            "invalid": "Inserisci un indirizzo e-mail valido"
-        },
-        "message": {
-            "label": "Messaggio",
-            "placeholder": "Scrivi il tuo messaggio",
-            "error": "Il messaggio è obbligatorio"
-        },
-        "phone": {
-            "label": "Telefono",
-            "placeholder": "Inserisci il tuo telefono"
-        },
-        "date": {
-            "label": "Data",
-            "placeholder": "Seleziona la data"
-        }
+      "name": {
+        "label": "Nome",
+        "placeholder": "Inserisci il tuo nome",
+        "error": "Il nome è obbligatorio"
+      },
+      "email": {
+        "label": "E-mail",
+        "placeholder": "Inserisci la tua e-mail",
+        "error": "L'e-mail è obbligatoria",
+        "invalid": "Inserisci un indirizzo e-mail valido"
+      },
+      "message": {
+        "label": "Messaggio",
+        "placeholder": "Scrivi il tuo messaggio",
+        "error": "Il messaggio è obbligatorio"
+      },
+      "phone": {
+        "label": "Telefono",
+        "placeholder": "Inserisci il tuo telefono"
+      },
+      "date": {
+        "label": "Data",
+        "placeholder": "Seleziona la data"
+      }
     },
     "buttons": {
-        "submit": "Invia"
+      "submit": "Invia"
     }
-}
-
+  }
 }

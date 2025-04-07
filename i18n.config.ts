@@ -6,6 +6,7 @@ import fr from "./locales/fr.json";
 export default defineI18nConfig(() => ({
   legacy: false,
   locale: "en",
+  fallbackLocale: "en",
   locales: ["en", "de", "it", "fr"],
   defaultLocale: "en",
   messages: {
