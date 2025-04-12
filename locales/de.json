@@ -9,7 +9,10 @@
     "priceLowToHigh": "Preis: Niedrigster zuerst",
     "ratingHighToLow": "Bewertung: Höchste zuerst",
     "ratingLowToHigh": "Bewertung: Niedrigste zuerst",
-    "toggleTheme": "Dunkelmodus umschalten"
+    "toggleTheme": "Dunkelmodus umschalten",
+    "from": "Ab",
+    "viewDetails": "Details ansehen",
+    "noResults": "Keine Ergebnisse gefunden"
   },
   "LanguageButton": {
     "selectLanguage": "Sprache auswählen"
@@ -31,8 +34,14 @@
     "readMore": "Mehr erfahren",
     "whereYouWillBe": "Hier werden Sie sein"
   },
+  "HotelAmenities": {
+    "title": "Hotelangebote"
+  },
   "Amenities": {
-    "title": "Was wir bieten"
+    "title": "Zimmerausstattung"
+  },
+  "Rooms": {
+    "title": "Zimmertypen"
   },
   "Search": {
     "filters": {
@@ -45,7 +54,7 @@
     },
     "priceRange": {
       "title": "Preisspanne",
-      "description": "Passen Sie die Preisspanne an Ihr Budget an. Sie können sowohl einen Mindest- als auch einen Höchstpreis festlegen.",
+      "description": "Filtern Sie Hotels nach Preisbereich",
       "min": "Mindestpreis",
       "max": "Höchstpreis"
     },
@@ -66,7 +75,9 @@
     "from": "Von",
     "to": "Bis",
     "priceNotAvailable": "Preis nicht verfügbar",
-    "contactHotel": "Hotel kontaktieren"
+    "contactHotel": "Hotel kontaktieren",
+    "info": "Hotel steht nicht für Kontakt zur Verfügung.",
+    "contactHotelInfo": "Dieses Hotel hat unseren Online-Service nicht abonniert. Sie können das Hotel direkt kontaktieren oder nach einem anderen verfügbaren Hotel in der Gegend suchen."
   },
   "SocialNetworks": {
     "visitUsAlsoOn": "Besuchen Sie uns auch auf"
@@ -82,25 +93,36 @@
       "email": {
         "label": "E-Mail",
         "placeholder": "E-Mail eingeben",
-        "error": "E-Mail erforderlich",
-        "invalid": "Gültige E-Mail eingeben"
+        "error": "Bitte geben Sie eine gültige E-Mail ein"
+      },
+      "phone": {
+        "label": "Telefon",
+        "placeholder": "Telefonnummer eingeben (optional)"
+      },
+      "date": {
+        "label": "Datum",
+        "placeholder": "Datum wählen (optional)"
       },
       "message": {
         "label": "Nachricht",
         "placeholder": "Nachricht eingeben",
         "error": "Nachricht erforderlich"
-      },
-      "phone": {
-        "label": "Telefon",
-        "placeholder": "Telefonnummer"
-      },
-      "date": {
-        "label": "Datum",
-        "placeholder": "Datum wählen"
       }
     },
     "buttons": {
-      "submit": "Senden"
+      "submit": "Nachricht senden"
     }
+  },
+  "Gallery": {
+    "title": "Galerie"
+  },
+  "Card": {
+    "imageOf": "Bild von {title}",
+    "priceRange": "{start} - {end}",
+    "priceFrom": "Ab {price}",
+    "priceUpTo": "Bis zu {price}",
+    "priceOnRequest": "Preis auf Anfrage",
+    "premium": "Premium",
+    "plusMoreItems": "+{count}"
   }
 }

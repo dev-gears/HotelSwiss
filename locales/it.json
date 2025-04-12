@@ -9,7 +9,10 @@
     "priceLowToHigh": "Prezzo: Dal più basso al più alto",
     "ratingHighToLow": "Valutazione: Dalla più alta alla più bassa",
     "ratingLowToHigh": "Valutazione: Dalla più bassa alla più alta",
-    "toggleTheme": "Attiva/disattiva modalità scura"
+    "toggleTheme": "Attiva/disattiva modalità scura",
+    "from": "Da",
+    "viewDetails": "Vedi dettagli",
+    "noResults": "Nessun risultato trovato"
   },
   "LanguageButton": {
     "selectLanguage": "Seleziona lingua"
@@ -31,8 +34,14 @@
     "readMore": "Leggi di più",
     "whereYouWillBe": "Ecco dove sarai"
   },
+  "HotelAmenities": {
+    "title": "Servizi dell'hotel"
+  },
   "Amenities": {
-    "title": "Cosa offriamo"
+    "title": "Servizi della camera"
+  },
+  "Rooms": {
+    "title": "Tipi di camere"
   },
   "Search": {
     "filters": {
@@ -45,7 +54,7 @@
     },
     "priceRange": {
       "title": "Fascia di prezzo",
-      "description": "Regola la fascia di prezzo in base al tuo budget. Puoi impostare un prezzo minimo e massimo.",
+      "description": "Filtra gli hotel per fascia di prezzo",
       "min": "Prezzo minimo",
       "max": "Prezzo massimo"
     },
@@ -66,7 +75,9 @@
     "from": "Da",
     "to": "A",
     "priceNotAvailable": "Prezzo non disponibile",
-    "contactHotel": "Contatta l'hotel"
+    "contactHotel": "Contatta l'hotel",
+    "info": "Hotel non disponibile per il contatto.",
+    "contactHotelInfo": "Questo hotel non è abbonato al nostro servizio online. Puoi contattare l'hotel direttamente o cercare un altro hotel disponibile nella zona."
   },
   "SocialNetworks": {
     "visitUsAlsoOn": "Visitateci anche su"
@@ -82,25 +93,36 @@
       "email": {
         "label": "E-mail",
         "placeholder": "Inserisci la tua e-mail",
-        "error": "L'e-mail è obbligatoria",
-        "invalid": "Inserisci un indirizzo e-mail valido"
+        "error": "Inserisci un indirizzo e-mail valido"
+      },
+      "phone": {
+        "label": "Telefono",
+        "placeholder": "Inserisci il tuo numero di telefono (facoltativo)"
+      },
+      "date": {
+        "label": "Data",
+        "placeholder": "Seleziona una data (facoltativo)"
       },
       "message": {
         "label": "Messaggio",
         "placeholder": "Scrivi il tuo messaggio",
         "error": "Il messaggio è obbligatorio"
-      },
-      "phone": {
-        "label": "Telefono",
-        "placeholder": "Inserisci il tuo telefono"
-      },
-      "date": {
-        "label": "Data",
-        "placeholder": "Seleziona la data"
       }
     },
     "buttons": {
-      "submit": "Invia"
+      "submit": "Invia messaggio"
     }
+  },
+  "Gallery": {
+    "title": "Galleria"
+  },
+  "Card": {
+    "imageOf": "Immagine di {title}",
+    "priceRange": "{start} - {end}",
+    "priceFrom": "Da {price}",
+    "priceUpTo": "Fino a {price}",
+    "priceOnRequest": "Prezzo su richiesta",
+    "premium": "Premium",
+    "plusMoreItems": "+{count}"
   }
 }

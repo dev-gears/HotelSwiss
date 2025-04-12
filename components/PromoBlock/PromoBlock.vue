@@ -1,10 +1,10 @@
 <template>
-  <div class="promo-block group relative mx-auto">
+  <div class="promo-block relative mx-auto">
     <div class="container mx-auto px-3">
       <CommonBlockHeader :title="$t('PromoBlock.promoHotels')" />
     </div>
     <Swiper
-      class="flex max-h-[650px] max-md:!pr-6 md:max-h-[500px] lg:max-h-[400px] xl:max-h-[500px]"
+      class="flex max-h-[750px] overflow-hidden rounded-xl max-md:!pr-6 md:max-h-[500px] lg:max-h-[400px] xl:max-h-[700px]"
       :modules="[SwiperAutoplay, SwiperNavigation]"
       :slidesPerView="1.5"
       :centeredSlides="false"
@@ -23,11 +23,12 @@
         :style="slideStyle"
         v-for="hotel in hotels"
         :key="hotel.id"
+        class="swiper-slide-card"
       >
         <Card :hotel="hotel" aspect="square" :showAmenities="false" />
       </SwiperSlide>
       <div
-        class="absolute left-0 top-0 z-40 hidden h-full w-9 items-center justify-center bg-light-100 dark:bg-dark-200 lg:flex"
+        class="absolute left-0 top-0 z-40 hidden h-full w-9 items-center justify-center rounded-xl bg-primary shadow dark:bg-dark-200 lg:flex"
       >
         <button
           v-ripple
@@ -41,7 +42,7 @@
         </button>
       </div>
       <div
-        class="absolute right-0 top-0 z-40 hidden h-full w-9 items-center justify-center bg-light-100 dark:bg-dark-200 lg:flex"
+        class="absolute right-0 top-0 z-40 hidden h-full w-9 items-center justify-center rounded-xl bg-primary shadow dark:bg-dark-200 lg:flex"
       >
         <button
           v-ripple
@@ -100,10 +101,6 @@ onMounted(() => {
     @apply md:container md:px-3 lg:px-10;
   }
 
-  .swiper-wrapper {
-    @apply px-3 pb-3 md:px-0;
-  }
-
   .p-carousel-items-content {
     @apply max-sm:px-9;
   }
@@ -135,7 +132,7 @@ onMounted(() => {
   }
 
   .p-carousel-item {
-    @apply flex items-center transition-all;
+    @apply flex items-center;
   }
 
   [data-p-carousel-item-active="false"] .card {

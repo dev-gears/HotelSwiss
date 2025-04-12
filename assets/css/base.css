@@ -1,0 +1,29 @@
+/* Base styles to prevent layout shift */
+img {
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Minimum heights for common components */
+.p-tabview-panels {
+  min-height: 500px;
+}
+
+.p-dataview {
+  min-height: 400px;
+}
+
+/* Skeleton loader base styles */
+.p-skeleton {
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Prevent content jump during dark mode transition */
+:root {
+  color-scheme: light dark;
+}
+
+/* Ensure smooth transitions */
+* {
+  transition: background-color 0.2s ease-in-out;
+}

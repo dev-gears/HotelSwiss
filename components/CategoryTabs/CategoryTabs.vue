@@ -34,7 +34,7 @@
           </div>
         </Tab>
         <Tab
-          v-for="(tab, index) in mockCategories"
+          v-for="(tab, index) in categories"
           :key="index + 1"
           :pt="{
             root: '!border-none !rounded-xl !px-4 !py-2 shadow-cardImage !bg-light dark:!bg-dark-400 text-primary-200 dark:text-light',
@@ -53,32 +53,42 @@
         }"
       >
         <TabPanel :value="0">
-          <CategoryTabsTabContent
-            :id="0"
-            :name="$t('CategoryTabs.allHotels')"
-            :categorizedHotels="firstTabContent"
-            :nextUrl="nextUrl"
-            :initialRequestUrl="`/hotels`"
-            :isLoading="isLoading"
-            :category="`all`"
-            :activeTab="activeTab === 0"
-          />
+          <div class="flex flex-col items-center bg-light-100 dark:bg-dark-100">
+            <div class="container mx-auto max-md:px-3">
+              <CommonBlockHeader
+                :title="$t('CategoryTabs.allHotels')"
+                link="category/all"
+              />
+              <CommonGridSection
+                :hotels="hotels"
+                :loading="loading || !initialized"
+                :loadingMore="loadingMore"
+                @sort="handleSort"
+                @loadMore="handleLoadMore"
+              />
+            </div>
+          </div>
         </TabPanel>
         <TabPanel
           v-for="(tab, index) in categories"
           :key="index"
           :value="tab.id.toString()"
         >
-          <CategoryTabsTabContent
-            :id="tab.id"
-            :name="tab.name"
-            :categorizedHotels="categorizedHotels"
-            :nextUrl="nextUrl"
-            :initialRequestUrl="requestUrlForTab"
-            :isLoading="isLoading"
-            :category="tab.id.toString()"
-            :activeTab="activeTab === index"
-          />
+          <div class="flex flex-col items-center bg-light-100 dark:bg-dark-100">
+            <div class="container mx-auto max-md:px-3">
+              <CommonBlockHeader
+                :title="tab.name"
+                :link="`category/${tab.id}`"
+              />
+              <CommonGridSection
+                :hotels="hotels"
+                :loading="loading || !initialized"
+                :loadingMore="loadingMore"
+                @sort="handleSort"
+                @loadMore="handleLoadMore"
+              />
+            </div>
+          </div>
         </TabPanel>
       </TabPanels>
     </Tabs>
@@ -86,227 +96,98 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import type { Category } from "@/types/hotel";
+import { ref, onMounted } from "vue";
+import type { Category, Hotel } from "@/types/hotel";
 
-const mockCategories: Category[] = [
-  {
-    id: 1,
-    name: "Category 1",
-  },
-  {
-    id: 2,
-    name: "Category 2",
-  },
-  {
-    id: 3,
-    name: "Category 3",
-  },
-  {
-    id: 4,
-    name: "Category 4",
-  },
-  {
-    id: 5,
-    name: "Category 5",
-  },
-  {
-    id: 6,
-    name: "Category 6",
-  },
-  {
-    id: 7,
-    name: "Category 7",
-  },
-  {
-    id: 8,
-    name: "Category 8",
-  },
-  {
-    id: 9,
-    name: "Category 9",
-  },
-  {
-    id: 10,
-    name: "Category 10",
-  },
-  {
-    id: 11,
-    name: "Category 11",
-  },
-  {
-    id: 12,
-    name: "Category 12",
-  },
-  {
-    id: 13,
-    name: "Category 13",
-  },
-  {
-    id: 14,
-    name: "Category 14",
-  },
-  {
-    id: 15,
-    name: "Category 15",
-  },
-  {
-    id: 16,
-    name: "Category 16",
-  },
-  {
-    id: 17,
-    name: "Category 17",
-  },
-  {
-    id: 18,
-    name: "Category 18",
-  },
-  {
-    id: 19,
-    name: "Category 19",
-  },
-  {
-    id: 20,
-    name: "Category 20",
-  },
-  {
-    id: 21,
-    name: "Category 21",
-  },
-  {
-    id: 22,
-    name: "Category 22",
-  },
-  {
-    id: 23,
-    name: "Category 23",
-  },
-  {
-    id: 24,
-    name: "Category 24",
-  },
-  {
-    id: 25,
-    name: "Category 25",
-  },
-  {
-    id: 26,
-    name: "Category 26",
-  },
-  {
-    id: 27,
-    name: "Category 27",
-  },
-  {
-    id: 28,
-    name: "Category 28",
-  },
-  {
-    id: 29,
-    name: "Category 29",
-  },
-  {
-    id: 30,
-    name: "Category 30",
-  },
-  {
-    id: 31,
-    name: "Category 31",
-  },
-  {
-    id: 32,
-    name: "Category 32",
-  },
-  {
-    id: 33,
-    name: "Category 33",
-  },
-  {
-    id: 34,
-    name: "Category 34",
-  },
-  {
-    id: 35,
-    name: "Category 35",
-  },
-  {
-    id: 36,
-    name: "Category 36",
-  },
-  {
-    id: 37,
-    name: "Category 37",
-  },
-  {
-    id: 38,
-    name: "Category 38",
-  },
-];
+const props = defineProps<{
+  categories: Category[];
+}>();
 
-const { categories } = defineProps({
-  categories: {
-    type: Array<Category>,
-    required: true,
-  },
-});
-
-const firstTabContent = ref([]);
-const isLoading = ref(true);
-const categorizedHotels = ref([]);
-const nextUrl = ref("");
+const hotels = ref<Hotel[]>([]);
+const loading = ref(true);
+const loadingMore = ref(false);
+const nextUrl = ref<string | null>(null);
 const activeTab = ref(0);
 const tabWrapper = useTemplateRef("tabWrapper");
-const requestUrlForTab = ref("");
+const initialized = ref(false);
 
 /**
- * On tab change, fetch hotels based on the category
- * @param {string | number} value - New tab value
- * @returns {Promise<void>}
+ * Get the base request URL for the current tab
+ */
+const getRequestUrl = (tabValue: number | string = activeTab.value): string => {
+  const tabIndex =
+    typeof tabValue === "string" ? parseInt(tabValue, 10) : tabValue;
+  return tabIndex === 0
+    ? "/hotels"
+    : `/hotels?category_id=${props.categories[tabIndex - 1].id}`;
+};
+
+/**
+ * Fetch hotels with optional params
+ */
+const fetchHotels = async (url: string, append: boolean = false) => {
+  try {
+    if (!append) {
+      loading.value = true;
+    } else {
+      loadingMore.value = true;
+    }
+
+    const response = (await $hotelApi(url)) as {
+      results: Hotel[];
+      next: string | null;
+    };
+
+    if (append) {
+      hotels.value.push(...response.results);
+    } else {
+      hotels.value = response.results;
+    }
+    nextUrl.value = response.next;
+  } catch (error) {
+    console.error("Error fetching hotels:", error);
+  } finally {
+    loading.value = false;
+    loadingMore.value = false;
+    initialized.value = true;
+  }
+};
+
+/**
+ * Handle tab change
  */
 const onTabChange = async (value: string | number): Promise<void> => {
   const newIndex = typeof value === "string" ? parseInt(value, 10) : value;
   scrollToTabs();
-  if (newIndex !== 0) {
-    try {
-      const requestUrl = `/hotels?category_id=${categories[newIndex - 1].id.toString()}`;
-      requestUrlForTab.value = requestUrl;
-      isLoading.value = true;
-      const response = (await $hotelApi(requestUrl)) as any;
-      categorizedHotels.value = response.results;
-      nextUrl.value = response.next;
-    } catch (error) {
-      console.log(error);
-    } finally {
-      isLoading.value = false;
-    }
-  }
-
   activeTab.value = newIndex;
+  await fetchHotels(getRequestUrl(newIndex));
+};
+
+/**
+ * Handle sort event
+ */
+const handleSort = async ({ key, value }: { key: string; value: string }) => {
+  const baseUrl = getRequestUrl();
+  const params = new URLSearchParams({ [key]: value });
+  await fetchHotels(`${baseUrl}?${params.toString()}`);
+};
+
+/**
+ * Handle load more event
+ */
+const handleLoadMore = async () => {
+  if (!nextUrl.value || loadingMore.value) return;
+  await fetchHotels(nextUrl.value, true);
 };
 
 const scrollToTabs = () => {
   tabWrapper?.value?.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
-/**
- * Fetch hotels for the first tab
- * @returns {Promise<void>}
- */
-const getFirstTabContent = async (): Promise<void> => {
-  try {
-    isLoading.value = true;
-    const response = (await $hotelApi("/hotels")) as any;
-    firstTabContent.value = response.results;
-    nextUrl.value = response.next;
-  } catch (error) {
-    console.log(error);
-  } finally {
-    isLoading.value = false;
-  }
-};
-
-getFirstTabContent();
+// Initial fetch
+onMounted(() => {
+  fetchHotels(getRequestUrl());
+});
 </script>
 
 <style lang="pcss">

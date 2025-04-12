@@ -9,7 +9,10 @@
     "priceLowToHigh": "Prix : Du plus bas au plus élevé",
     "ratingHighToLow": "Note : De la plus haute à la plus basse",
     "ratingLowToHigh": "Note : De la plus basse à la plus haute",
-    "toggleTheme": "Basculer le mode sombre"
+    "toggleTheme": "Basculer le mode sombre",
+    "from": "À partir de",
+    "viewDetails": "Voir les détails",
+    "noResults": "Aucun résultat trouvé"
   },
   "LanguageButton": {
     "selectLanguage": "Choisir la langue"
@@ -31,8 +34,14 @@
     "readMore": "En savoir plus",
     "whereYouWillBe": "Voici où vous serez"
   },
+  "HotelAmenities": {
+    "title": "Services de l'hôtel"
+  },
   "Amenities": {
-    "title": "Ce que nous offrons"
+    "title": "Équipements de la chambre"
+  },
+  "Rooms": {
+    "title": "Types de chambres"
   },
   "Search": {
     "filters": {
@@ -45,7 +54,7 @@
     },
     "priceRange": {
       "title": "Fourchette de prix",
-      "description": "Ajustez la fourchette de prix selon votre budget. Vous pouvez définir un prix minimum et maximum.",
+      "description": "Filtrer les hôtels par fourchette de prix",
       "min": "Prix minimum",
       "max": "Prix maximum"
     },
@@ -66,7 +75,9 @@
     "from": "De",
     "to": "À",
     "priceNotAvailable": "Prix non disponible",
-    "contactHotel": "Contacter l'hôtel"
+    "contactHotel": "Contacter l'hôtel",
+    "info": "Hôtel non disponible pour contact.",
+    "contactHotelInfo": "Cet hôtel n'est pas abonné à notre service en ligne. Vous pouvez contacter l'hôtel directement ou rechercher un autre hôtel disponible dans la région."
   },
   "SocialNetworks": {
     "visitUsAlsoOn": "Visitez-nous aussi sur"
@@ -82,25 +93,36 @@
       "email": {
         "label": "E-mail",
         "placeholder": "Entrez votre e-mail",
-        "error": "L'e-mail est requis",
-        "invalid": "Veuillez entrer une adresse e-mail valide"
+        "error": "Veuillez entrer un e-mail valide"
+      },
+      "phone": {
+        "label": "Téléphone",
+        "placeholder": "Entrez votre numéro de téléphone (facultatif)"
+      },
+      "date": {
+        "label": "Date",
+        "placeholder": "Sélectionnez une date (facultatif)"
       },
       "message": {
         "label": "Message",
         "placeholder": "Tapez votre message",
         "error": "Le message est requis"
-      },
-      "phone": {
-        "label": "Téléphone",
-        "placeholder": "Entrez votre téléphone"
-      },
-      "date": {
-        "label": "Date",
-        "placeholder": "Sélectionnez la date"
       }
     },
     "buttons": {
-      "submit": "Envoyer"
+      "submit": "Envoyer le message"
     }
+  },
+  "Gallery": {
+    "title": "Galerie"
+  },
+  "Card": {
+    "imageOf": "Image de {title}",
+    "priceRange": "{start} - {end}",
+    "priceFrom": "À partir de {price}",
+    "priceUpTo": "Jusqu'à {price}",
+    "priceOnRequest": "Prix sur demande",
+    "premium": "Premium",
+    "plusMoreItems": "+{count}"
   }
 }

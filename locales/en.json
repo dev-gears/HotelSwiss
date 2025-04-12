@@ -9,7 +9,10 @@
     "priceLowToHigh": "Price: Low to High",
     "ratingHighToLow": "Rating: High to Low",
     "ratingLowToHigh": "Rating: Low to High",
-    "toggleTheme": "Toggle dark mode"
+    "toggleTheme": "Toggle dark mode",
+    "from": "From",
+    "viewDetails": "View details",
+    "noResults": "No results found"
   },
   "LanguageButton": {
     "selectLanguage": "Select language"
@@ -112,5 +115,14 @@
   },
   "Gallery": {
     "title": "Gallery"
+  },
+  "Card": {
+    "imageOf": "Image of {title}",
+    "priceRange": "{start} - {end}",
+    "priceFrom": "From {price}",
+    "priceUpTo": "Up to {price}",
+    "priceOnRequest": "Price on request",
+    "premium": "Premium",
+    "plusMoreItems": "+{count}"
   }
 }

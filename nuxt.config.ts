@@ -1,5 +1,6 @@
 import { defineNuxtConfig } from "nuxt/config";
 import Lara from "@primevue/themes/lara";
+import { fileURLToPath } from "url";
 
 const headerAuth = {
   Authorization: `Basic ${btoa(process.env.AUTH_CREDENTIALS as string)}`,
@@ -49,7 +50,6 @@ export default defineNuxtConfig({
       theme: {
         preset: Lara,
         options: {
-          prefix: "p",
           darkModeSelector: ".dark",
           cssLayer: true,
         },
@@ -125,7 +125,47 @@ export default defineNuxtConfig({
     modules: ["autoplay", "navigation"],
   },
 
-  css: ["primeicons/primeicons.css", "assets/css/fonts.css"],
+  css: [
+    "@/node_modules/primeicons/primeicons.css",
+    "@/assets/css/fonts.css",
+    "@/assets/css/base.css",
+  ],
+
+  vite: {
+    css: {
+      devSourcemap: true,
+    },
+    resolve: {
+      alias: {
+        primeicons: fileURLToPath(
+          new URL("./node_modules/primeicons", import.meta.url),
+        ),
+      },
+    },
+  },
+
+  nitro: {
+    routeRules: {
+      "/**": {
+        prerender: false,
+        cache: {
+          headersOnly: true,
+        },
+      },
+      "/assets/**": {
+        headers: {
+          "Content-Type": "text/css",
+        },
+      },
+    },
+    publicAssets: [
+      {
+        dir: "assets",
+        maxAge: 60 * 60 * 24 * 365, // 1 year
+        baseURL: "/assets",
+      },
+    ],
+  },
 
   compatibilityDate: "2024-10-06",
 });

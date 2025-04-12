@@ -14,6 +14,7 @@ export default {
       light: {
         DEFAULT: "#ffffff", // svetliji-text
         100: "#f2f2f2",
+        200: "#e5e5e5", // New light variant for borders and hover states
       },
       dark: {
         DEFAULT: "#1a2426", // Darker variant of your primary color
@@ -25,7 +26,7 @@ export default {
       primary: {
         DEFAULT: "#354f52",
         100: "#26393B",
-        200: "#1A2729", // tamniji-text
+        200: "#2C4144", // Updated to be a proper mid-tone between DEFAULT and 100
       },
       danger: {
         DEFAULT: "#970000",

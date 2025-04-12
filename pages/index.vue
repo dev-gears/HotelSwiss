@@ -21,7 +21,10 @@ definePageMeta({
   layout: "base",
 });
 
-const { data: firstScreenData } = useHotelApiData("/first-screen") as any;
+// Modify API call to handle SSR properly with server option
+const { data: firstScreenData } = useHotelApiData("/first-screen", {
+  server: true, // Ensure this runs on the server during prerendering
+}) as any;
 </script>
 
 <style>
