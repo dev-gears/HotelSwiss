@@ -26,13 +26,14 @@
 </template>
 
 <script setup lang="ts">
-import type { Hotel, Canton, Amenity, Filters } from "@/types/hotel";
+import type {
+  Hotel,
+  Canton,
+  Amenity,
+  HotelListWithPagination,
+} from "@/types/hotel";
 import { useFiltersStore } from "@/store/filters";
-
-interface ApiResponse {
-  results: Hotel[];
-  next: string | null;
-}
+import { fetchHotels } from "~/utils/api";
 
 definePageMeta({
   layout: "base",
@@ -47,64 +48,58 @@ const loadingMore = ref(false);
 const searchedTerm = ref("");
 
 /**
- * Build URL parameters from filters
+ * Build query parameters from filters
  */
-const buildUrlParams = (additionalParams: Record<string, string> = {}) => {
-  const params = new URLSearchParams();
+const buildQueryParams = (
+  additionalParams: Record<string, string | number> = {},
+) => {
+  const params: Record<string, string | number> = {};
   const filters = filtersStore.filters;
   const searchValue = filtersStore.searchValue;
 
   if (searchValue) {
-    params.append("search", searchValue);
+    params.search = searchValue;
     searchedTerm.value = searchValue;
   }
 
   if (filters.cantons.length) {
-    params.append(
-      "cantons",
-      filters.cantons.map((canton: Canton) => canton.id).join(","),
-    );
+    params.cantons = filters.cantons
+      .map((canton: Canton) => canton.id)
+      .join(",");
   }
 
   if (
     filters.price_range.from !== undefined &&
     filters.price_range.from !== null
   ) {
-    params.append("min_price", filters.price_range.from.toString());
+    params.min_price = filters.price_range.from;
   }
 
   if (filters.price_range.to !== undefined && filters.price_range.to !== null) {
-    params.append("max_price", filters.price_range.to.toString());
+    params.max_price = filters.price_range.to;
   }
 
   if (filters.amenities.length) {
-    filters.amenities.forEach((amenity: Amenity) => {
-      params.append("amenities", amenity.toString());
-    });
+    params.amenities = filters.amenities.join(",");
   }
 
   if (filters.stars) {
-    params.append("stars", filters.stars);
+    params.stars = filters.stars;
   }
 
-  // Add any additional parameters (like sort)
-  Object.entries(additionalParams).forEach(([key, value]) => {
-    params.append(key, value);
-  });
-
-  return params;
+  return { ...params, ...additionalParams };
 };
 
 /**
  * Fetch hotels based on search query
  */
-const fetchHotels = async (additionalParams: Record<string, string> = {}) => {
+const fetchFilteredHotels = async (
+  additionalParams: Record<string, string | number> = {},
+) => {
   try {
     isLoading.value = true;
-    const params = buildUrlParams(additionalParams);
-    const data = (await $hotelApi(
-      `/hotels?${params.toString()}`,
-    )) as ApiResponse;
+    const params = buildQueryParams(additionalParams);
+    const data = await fetchHotels(params);
     results.value = data.results;
     nextUrl.value = data.next;
   } catch (error) {
@@ -124,7 +119,7 @@ const handleSort = async ({
   key: string;
   value: string;
 }): Promise<void> => {
-  await fetchHotels({ [key]: value });
+  await fetchFilteredHotels({ [key]: value });
 };
 
 /**
@@ -135,7 +130,8 @@ const handleLoadMore = async () => {
 
   try {
     loadingMore.value = true;
-    const data = (await $hotelApi(nextUrl.value)) as ApiResponse;
+
+    const data = (await $hotelApi(nextUrl.value)) as HotelListWithPagination;
     results.value = [...results.value, ...data.results];
     nextUrl.value = data.next;
   } catch (error) {
@@ -145,15 +141,23 @@ const handleLoadMore = async () => {
   }
 };
 
-// Initial fetch and watch for filter changes
 onMounted(() => {
-  fetchHotels();
+  filtersStore.initFromUrlParams();
 
-  // Watch for filter changes
+  fetchFilteredHotels();
+
   watch(
     () => [filtersStore.filters, filtersStore.searchValue],
     () => {
-      fetchHotels();
+      fetchFilteredHotels();
+    },
+    { deep: true },
+  );
+
+  watch(
+    () => route.query,
+    () => {
+      filtersStore.initFromUrlParams();
     },
     { deep: true },
   );

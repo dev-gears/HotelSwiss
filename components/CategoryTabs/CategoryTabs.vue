@@ -97,7 +97,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import type { Category, Hotel } from "@/types/hotel";
+import type { Category, Hotel, HotelListWithPagination } from "@/types/hotel";
+import { fetchHotels } from "~/utils/api";
 
 const props = defineProps<{
   categories: Category[];
@@ -112,20 +113,24 @@ const tabWrapper = useTemplateRef("tabWrapper");
 const initialized = ref(false);
 
 /**
- * Get the base request URL for the current tab
+ * Get the query parameters for the current tab
  */
-const getRequestUrl = (tabValue: number | string = activeTab.value): string => {
+const getQueryParams = (tabValue: number | string = activeTab.value) => {
   const tabIndex =
     typeof tabValue === "string" ? parseInt(tabValue, 10) : tabValue;
   return tabIndex === 0
-    ? "/hotels"
-    : `/hotels?category_id=${props.categories[tabIndex - 1].id}`;
+    ? {}
+    : { category_id: props.categories[tabIndex - 1].id };
 };
 
 /**
  * Fetch hotels with optional params
  */
-const fetchHotels = async (url: string, append: boolean = false) => {
+const fetchHotelsForTab = async (
+  tabValue: number | string = activeTab.value,
+  sortParams = {},
+  append = false,
+) => {
   try {
     if (!append) {
       loading.value = true;
@@ -133,17 +138,22 @@ const fetchHotels = async (url: string, append: boolean = false) => {
       loadingMore.value = true;
     }
 
-    const response = (await $hotelApi(url)) as {
-      results: Hotel[];
-      next: string | null;
-    };
+    const params = {
+      ...getQueryParams(tabValue),
+      ...sortParams,
+    } as Record<string, string | number>;
+
+    const data = await fetchHotels(params, {
+      key: `category-tab-${tabValue}-${JSON.stringify(sortParams)}`,
+      cache: true,
+    });
 
     if (append) {
-      hotels.value.push(...response.results);
+      hotels.value.push(...data.results);
     } else {
-      hotels.value = response.results;
+      hotels.value = data.results;
     }
-    nextUrl.value = response.next;
+    nextUrl.value = data.next;
   } catch (error) {
     console.error("Error fetching hotels:", error);
   } finally {
@@ -160,16 +170,14 @@ const onTabChange = async (value: string | number): Promise<void> => {
   const newIndex = typeof value === "string" ? parseInt(value, 10) : value;
   scrollToTabs();
   activeTab.value = newIndex;
-  await fetchHotels(getRequestUrl(newIndex));
+  await fetchHotelsForTab(newIndex);
 };
 
 /**
  * Handle sort event
  */
 const handleSort = async ({ key, value }: { key: string; value: string }) => {
-  const baseUrl = getRequestUrl();
-  const params = new URLSearchParams({ [key]: value });
-  await fetchHotels(`${baseUrl}?${params.toString()}`);
+  await fetchHotelsForTab(activeTab.value, { [key]: value });
 };
 
 /**
@@ -177,16 +185,26 @@ const handleSort = async ({ key, value }: { key: string; value: string }) => {
  */
 const handleLoadMore = async () => {
   if (!nextUrl.value || loadingMore.value) return;
-  await fetchHotels(nextUrl.value, true);
+
+  try {
+    loadingMore.value = true;
+
+    const data = (await $hotelApi(nextUrl.value)) as HotelListWithPagination;
+    hotels.value = [...hotels.value, ...data.results];
+    nextUrl.value = data.next;
+  } catch (error) {
+    console.error("Error loading more hotels:", error);
+  } finally {
+    loadingMore.value = false;
+  }
 };
 
 const scrollToTabs = () => {
   tabWrapper?.value?.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
-// Initial fetch
 onMounted(() => {
-  fetchHotels(getRequestUrl());
+  fetchHotelsForTab();
 });
 </script>
 

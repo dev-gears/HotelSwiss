@@ -46,9 +46,16 @@
   "Search": {
     "filters": {
       "clearFilters": "Clear filters",
-      "searchHotels": "Search hotels"
+      "searchHotels": "Search hotels",
+      "activeFilters": "Active Filters ({0})",
+      "clearAllFilters": "Clear All Filters",
+      "tips": "Tip: Click on any filter to remove it",
+      "amenities": "Amenities",
+      "stars": "Star Rating",
+      "priceRange": "Price Range"
     },
     "searchForSpecificHotel": "Search for a specific hotel",
+    "searchTerm": "Search Term",
     "amenities": {
       "title": "Amenities"
     },

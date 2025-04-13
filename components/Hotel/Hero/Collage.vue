@@ -6,7 +6,7 @@
     <div class="lg:col-span-2">
       <Image
         @click="emit('openGallery')"
-        :src="images[0].url"
+        :src="images[0]?.url ?? undefined"
         class="hero-image h-96 w-full object-cover transition-all hover:brightness-75 [&_img]:aspect-video [&_img]:rounded"
       />
     </div>

@@ -26,19 +26,14 @@
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import type { Hotel } from "@/types/hotel";
-
-interface ApiResponse {
-  results: Hotel[];
-  next: string | null;
-}
+import type { Hotel, HotelListWithPagination } from "@/types/hotel";
+import { fetchHotels } from "~/utils/api";
 
 definePageMeta({
   layout: "base",
 });
 
 const route = useRoute();
-const runtimeConfig = useRuntimeConfig();
 const title = ref(route.query.title as string);
 const results = ref<Hotel[]>([]);
 const nextUrl = ref<string | null>(null);
@@ -50,16 +45,21 @@ const loadingMore = ref(false);
  * If the id is "all", fetch all hotels
  * Otherwise, fetch hotels based on the category id
  */
-const fetchUrl = computed(() => {
+const getQueryParams = (): Record<string, string | number> => {
   if (route.params.id === "all") {
-    return `/hotels`;
+    return {};
   } else {
-    return `/hotels?category_id=${route.params.id}`;
+    // Convert array to string if necessary
+    const categoryId = Array.isArray(route.params.id)
+      ? route.params.id[0]
+      : route.params.id;
+    return { category_id: categoryId };
   }
-});
+};
 
+// Initial data fetch
 try {
-  const data = (await $hotelApi(fetchUrl.value)) as ApiResponse;
+  const data = await fetchHotels(getQueryParams());
   results.value = data.results;
   nextUrl.value = data.next;
 } catch (error) {
@@ -80,12 +80,11 @@ const handleSort = async ({
 }): Promise<void> => {
   try {
     isLoading.value = true;
-    const params = new URLSearchParams({
+    const params = {
+      ...getQueryParams(),
       [key]: value,
-    });
-    const data = (await $hotelApi(
-      `${fetchUrl.value}&${params.toString()}`,
-    )) as ApiResponse;
+    };
+    const data = await fetchHotels(params);
     results.value = data.results;
     nextUrl.value = data.next;
   } catch (error) {
@@ -103,7 +102,8 @@ const handleLoadMore = async () => {
 
   try {
     loadingMore.value = true;
-    const data = (await $hotelApi(nextUrl.value)) as ApiResponse;
+    // For pagination, we need to use the full URL that comes back from the API
+    const data = (await $hotelApi(nextUrl.value)) as HotelListWithPagination;
     results.value = [...results.value, ...data.results];
     nextUrl.value = data.next;
   } catch (error) {

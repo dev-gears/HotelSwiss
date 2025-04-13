@@ -63,35 +63,39 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useHotelStore } from "@/store/hotelStore";
 import type { Hotel } from "@/types/hotel";
 import GalleryDrawer from "@/components/Hotel/Hero/Gallery.vue";
+import { useHotelData } from "~/utils/api";
 
 definePageMeta({
   layout: "single",
 });
 
 const route = useRoute();
-const pending = ref(true);
-const hotel = ref(null) as Ref<Hotel | null>;
-
 const hotelStore = useHotelStore();
 const showImageModal = ref(false);
+
+// Use the type-safe composable for reactive data fetching
+const { data: hotel, pending } = useHotelData(
+  Array.isArray(route.params.id) ? route.params.id[0] : route.params.id,
+);
+
+// Watch for hotel data changes to update the store
+watch(
+  hotel,
+  (newHotel) => {
+    if (newHotel) {
+      hotelStore.setHotel(newHotel);
+      hotelStore.setImages(newHotel.images);
+    }
+  },
+  { immediate: true },
+);
 
 const openImageModal = () => {
   showImageModal.value = true;
 };
-
-try {
-  const response = await useHotelApiData(`hotels/${route.params.id}`);
-  hotel.value = response.data.value as Hotel;
-  hotelStore.setHotel(hotel.value);
-  hotelStore.setImages(hotel.value.images);
-} catch (error) {
-  console.error(error);
-} finally {
-  pending.value = false;
-}
 </script>

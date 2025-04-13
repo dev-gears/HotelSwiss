@@ -6,7 +6,6 @@ const headerAuth = {
   Authorization: `Basic ${btoa(process.env.AUTH_CREDENTIALS as string)}`,
 };
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
     head: {
@@ -66,6 +65,8 @@ export default defineNuxtConfig({
       hotelApi: {
         url: process.env.BASE_URL! + process.env.API_PATH!,
         headers: headerAuth,
+
+        cookies: true,
       },
     },
   },
@@ -105,10 +106,10 @@ export default defineNuxtConfig({
     },
     baseUrl: process.env.SITE_URL || "http://localhost:3000",
     locales: [
-      { code: "en", iso: "en-US", file: "en.json" },
-      { code: "fr", iso: "fr-FR", file: "fr.json" },
-      { code: "de", iso: "de-DE", file: "de.json" },
-      { code: "it", iso: "it-IT", file: "it.json" },
+      { code: "en", language: "en-US", file: "en.json" },
+      { code: "fr", language: "fr-FR", file: "fr.json" },
+      { code: "de", language: "de-DE", file: "de.json" },
+      { code: "it", language: "it-IT", file: "it.json" },
     ],
     lazy: true,
     langDir: "locales",
@@ -161,10 +162,14 @@ export default defineNuxtConfig({
     publicAssets: [
       {
         dir: "assets",
-        maxAge: 60 * 60 * 24 * 365, // 1 year
+        maxAge: 60 * 60 * 24 * 365,
         baseURL: "/assets",
       },
     ],
+  },
+
+  build: {
+    transpile: ["primevue"],
   },
 
   compatibilityDate: "2024-10-06",

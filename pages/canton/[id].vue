@@ -26,19 +26,14 @@
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import type { Hotel } from "@/types/hotel";
-
-interface ApiResponse {
-  results: Hotel[];
-  next: string | null;
-}
+import type { Hotel, HotelListWithPagination } from "@/types/hotel";
+import { fetchHotels } from "~/utils/api";
 
 definePageMeta({
   layout: "base",
 });
 
 const route = useRoute();
-const runtimeConfig = useRuntimeConfig();
 const title = ref(route.query.title as string);
 const results = ref<Hotel[]>([]);
 const nextUrl = ref<string | null>(null);
@@ -46,35 +41,24 @@ const isLoading = ref(true);
 const loadingMore = ref(false);
 
 /**
- * Fetch hotels based on the canton id
+ * Get query parameters for this canton
  */
-const fetchUrl = computed(() => `/hotels?canton_id=${route.params.id}`);
+const getQueryParams = () => ({
+  canton_id: Array.isArray(route.params.id)
+    ? route.params.id[0]
+    : route.params.id,
+});
 
-// Use useHotelApiData with proper server-side prerendering support
-const fetchHotels = async (url: string) => {
-  try {
-    isLoading.value = true;
-
-    const { data } = await useHotelApiData(url, {
-      server: true, // Enable server-side rendering
-      default: () => ref({ results: [], next: null }),
-    });
-
-    // Add type checking before accessing properties
-    if (data.value && "results" in data.value) {
-      results.value = data.value.results || [];
-      nextUrl.value = data.value.next || null;
-    }
-  } catch (error) {
-    console.warn("Error fetching hotels:", error);
-    results.value = [];
-  } finally {
-    isLoading.value = false;
-  }
-};
-
-// Initial fetch
-await fetchHotels(fetchUrl.value);
+// Initial data fetch
+try {
+  const data = await fetchHotels(getQueryParams());
+  results.value = data.results;
+  nextUrl.value = data.next;
+} catch (error) {
+  console.warn(error);
+} finally {
+  isLoading.value = false;
+}
 
 /**
  * Handle sort event from GridSection
@@ -86,10 +70,20 @@ const handleSort = async ({
   key: string;
   value: string;
 }): Promise<void> => {
-  const params = new URLSearchParams({
-    [key]: value,
-  });
-  await fetchHotels(`${fetchUrl.value}&${params.toString()}`);
+  try {
+    isLoading.value = true;
+    const params = {
+      ...getQueryParams(),
+      [key]: value,
+    };
+    const data = await fetchHotels(params);
+    results.value = data.results;
+    nextUrl.value = data.next;
+  } catch (error) {
+    console.warn(error);
+  } finally {
+    isLoading.value = false;
+  }
 };
 
 /**
@@ -100,19 +94,12 @@ const handleLoadMore = async () => {
 
   try {
     loadingMore.value = true;
-
-    // Use client-side for pagination
-    const { data } = await useHotelApiData(nextUrl.value, {
-      server: false,
-    });
-
-    // Add type checking before accessing properties
-    if (data.value && 'results' in data.value) {
-      results.value = [...results.value, ...data.value.results || []];
-      nextUrl.value = data.value.next || null;
-    }
+    // For pagination links, we still need to use the direct API call
+    const data = (await $hotelApi(nextUrl.value)) as HotelListWithPagination;
+    results.value = [...results.value, ...data.results];
+    nextUrl.value = data.next;
   } catch (error) {
-    console.warn('Error loading more hotels:', error);
+    console.warn(error);
   } finally {
     loadingMore.value = false;
   }

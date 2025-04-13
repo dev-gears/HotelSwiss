@@ -24,7 +24,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "nuxt": "^3.14.159",
-    "nuxt-api-party": "^2.0.11",
+    "nuxt-api-party": "^2.2.2",
     "nuxt-swiper": "^1.2.2",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.6.8",

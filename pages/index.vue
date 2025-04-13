@@ -17,14 +17,15 @@
 </template>
 
 <script setup lang="ts">
+import { useFirstScreenData } from "~/utils/api";
+
 definePageMeta({
   layout: "base",
 });
 
-// Modify API call to handle SSR properly with server option
-const { data: firstScreenData } = useHotelApiData("/first-screen", {
-  server: true, // Ensure this runs on the server during prerendering
-}) as any;
+const { data: firstScreenData } = useFirstScreenData({
+  lazy: false,
+});
 </script>
 
 <style>
