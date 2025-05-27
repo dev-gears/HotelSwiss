@@ -3,11 +3,6 @@
   "devCommand": "npm run dev",
   "installCommand": "npm ci --prefer-offline --no-audit",
   "framework": "nuxtjs",
-  "functions": {
-    ".output/server/**": {
-      "maxDuration": 60
-    }
-  },
   "build": {
     "env": {
       "NODE_VERSION": "22.0.0",
