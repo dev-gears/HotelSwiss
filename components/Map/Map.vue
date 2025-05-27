@@ -1,10 +1,12 @@
 <template>
   <div class="px-3">
     <div class="flex flex-col gap-3">
-      <h2 class="font-robotoRegular text-xl text-primary-200">
+      <h2 class="font-robotoRegular text-xl text-primary-200 dark:text-light">
         {{ $t("Content.whereYouWillBe") }}
       </h2>
-      <div class="mx-auto h-60 w-full rounded-lg shadow-md md:h-80">
+      <div
+        class="mx-auto h-60 w-full rounded-lg shadow-md dark:shadow-dark-200/20 md:h-80"
+      >
         <LMap
           ref="map"
           :zoom="10"

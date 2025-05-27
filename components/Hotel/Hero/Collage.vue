@@ -1,25 +1,25 @@
 <template>
   <div
-    class="grid grid-cols-1 gap-4 lg:mt-5 lg:grid-cols-4"
+    class="grid grid-cols-1 gap-4 transition-colors md:grid-cols-4 lg:mt-5"
     @click="emit('openGallery')"
   >
-    <div class="lg:col-span-2">
+    <div class="md:col-span-2">
       <Image
         @click="emit('openGallery')"
         :src="images[0]?.url ?? undefined"
-        class="hero-image h-96 w-full object-cover transition-all hover:brightness-75 [&_img]:aspect-video [&_img]:rounded"
+        class="hero-image h-96 w-full cursor-pointer object-cover transition-all hover:brightness-75 [&_img]:aspect-video [&_img]:rounded"
       />
     </div>
 
     <div
-      class="grid grid-cols-1 gap-4 lg:col-span-2 lg:grid-cols-2 lg:grid-rows-2"
+      class="grid grid-cols-1 gap-4 md:col-span-2 md:grid-cols-2 md:grid-rows-2"
     >
       <template v-for="(data, index) in parsedImagesForCollage">
         <div :key="data.id" v-if="data?.renditions?.thumbnail">
           <Image
             @click="emit('openGallery')"
             :src="data.renditions.thumbnail"
-            class="hero-image h-96 w-full object-cover transition-all hover:brightness-75 [&_img]:!aspect-video [&_img]:!h-full [&_img]:rounded [&_img]:object-cover"
+            class="hero-image h-96 w-full cursor-pointer object-cover transition-all hover:brightness-75 [&_img]:!aspect-video [&_img]:!h-full [&_img]:rounded [&_img]:object-cover"
           />
         </div>
       </template>
@@ -53,15 +53,5 @@ const parsedImagesForCollage = computed(() => {
     (image) => image.renditions.thumbnail,
   );
   return imagesWithThumbnail?.slice(1, 5);
-});
-
-const getLink = (index: number) => ({
-  name: "gallery",
-  query: {
-    images: JSON.stringify(props.images),
-    hotelId: props.hotelId,
-    hotelTitle: props.hotelTitle,
-    index,
-  },
 });
 </script>

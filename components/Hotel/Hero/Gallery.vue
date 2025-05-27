@@ -18,7 +18,7 @@
     <template #default>
       <div class="container mx-auto">
         <div
-          class="grid grid-cols-1 justify-center gap-3 rounded-md bg-primary-100/10 p-3 dark:bg-dark-200/50 md:grid-cols-2 lg:grid-cols-3"
+          class="grid grid-cols-1 justify-center gap-3 rounded-md bg-primary/10 p-3 dark:bg-dark-200/50 md:grid-cols-2 lg:grid-cols-3"
         >
           <div
             v-for="(image, index) in images"

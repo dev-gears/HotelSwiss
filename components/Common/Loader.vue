@@ -1,5 +1,5 @@
 <template>
-  <div class="loader" :class="{ dark: isDark }">
+  <div class="loader">
     <span></span>
     <span></span>
     <span></span>
@@ -9,15 +9,10 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { useDarkMode } from "@/composables/useDarkMode";
-
-const { isDark } = useDarkMode();
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
 .loader {
-  --color: #568085;
   --size: 40px;
   width: var(--size);
   height: var(--size);
@@ -26,14 +21,10 @@ const { isDark } = useDarkMode();
   gap: 5px;
 }
 
-.loader.dark {
-  --color: #26393b;
-}
-
 .loader span {
+  @apply bg-primary;
   width: 100%;
   height: 100%;
-  background-color: var(--color);
   animation: keyframes-blink 0.6s alternate infinite linear;
 }
 

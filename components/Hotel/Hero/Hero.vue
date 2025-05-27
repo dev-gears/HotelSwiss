@@ -2,14 +2,14 @@
   <div class="container relative w-full">
     <CommonBackButton class="!absolute top-4 max-lg:!left-4 lg:!hidden" />
     <div v-if="images?.length && images[0]?.url">
-      <HotelHeroImageCarousel
-        v-if="deviceType !== 'desktop'"
+      <ImageCarousel
+        class="block md:hidden"
         :images="parsedImagesWithFullPath"
         :hotelId="hotelId"
         :hotelTitle="hotelTitle"
       />
-      <HotelHeroCollage
-        v-else
+      <Collage
+        class="hidden md:grid"
         :images="parsedImagesWithFullPath"
         :hotelId="hotelId"
         :hotelTitle="hotelTitle"
@@ -19,7 +19,7 @@
     <div v-else>
       <Image
         :src="Global.PLACEHOLDER_IMAGE_URL"
-        class="hero-image mt-5 h-96 w-full rounded object-cover grayscale lg:h-full"
+        class="fallback-image mt-5 !h-96 w-full rounded object-cover grayscale"
       />
     </div>
     <HotelHeroGallery
@@ -30,10 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import useDeviceType from "@/composables/useDeviceType";
 import type { Image } from "@/types/hotel";
 import { Global } from "@/enums/Global";
 import HotelHeroGallery from "./Gallery.vue";
+import Collage from "./Collage.vue";
+import ImageCarousel from "./ImageCarousel.vue";
 
 const { images } = defineProps({
   images: {
@@ -71,14 +72,12 @@ const parsedImagesWithFullPath = images?.map((image) => ({
   width: image.width,
   height: image.height,
 }));
-
-const { deviceType } = useDeviceType();
 </script>
 
 <style>
-.hero-image {
+.fallback-image {
   img {
-    @apply h-96 w-full object-cover lg:h-full;
+    @apply !h-96 w-full object-cover lg:h-full;
   }
 }
 </style>

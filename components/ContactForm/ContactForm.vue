@@ -9,12 +9,12 @@
           {{ $t("ContactForm.fields.name.label") }}:
           <span class="text-[red]">*</span>
         </label>
-        <InputText
+        <Input
           id="name"
           v-model="name"
           :placeholder="$t('ContactForm.fields.name.placeholder')"
           required
-          class="!focus:shadow dark:!bg-dark-400 !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow dark:!text-light dark:!shadow-dark-200/20"
+          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow dark:!bg-dark-400 dark:!text-light dark:!shadow-dark-200/20"
         />
         <span v-if="errors.name" class="text-red-500 text-sm">{{
           $t("ContactForm.fields.name.error")
@@ -26,13 +26,13 @@
           {{ $t("ContactForm.fields.email.label") }}:
           <span class="text-[red]">*</span>
         </label>
-        <InputText
+        <Input
           id="email"
           v-model="email"
           type="email"
           :placeholder="$t('ContactForm.fields.email.placeholder')"
           required
-          class="!focus:shadow dark:!bg-dark-400 !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow dark:!text-light dark:!shadow-dark-200/20"
+          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow dark:!bg-dark-400 dark:!text-light dark:!shadow-dark-200/20"
         />
         <span v-if="errors.email" class="text-red-500 text-sm">{{
           $t("ContactForm.fields.email.error")
@@ -42,28 +42,28 @@
       <div class="flex flex-col gap-2">
         <label for="phone" class="text-sm text-primary-200 dark:text-light/80">
           {{ $t("ContactForm.fields.phone.label") }}:
-          <span class="text-primary-200/30 dark:text-light/30"
-            >({{ $t("Common.optional") }})</span
-          >
+          <span class="text-primary-200/30 dark:text-light/30">
+            ({{ $t("Common.optional") }})
+          </span>
         </label>
-        <InputText
+        <Input
           id="phone"
           v-model="phone"
           type="tel"
           :placeholder="$t('ContactForm.fields.phone.placeholder')"
-          class="!focus:shadow dark:!bg-dark-400 !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow dark:!text-light dark:!shadow-dark-200/20"
+          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow dark:!bg-dark-400 dark:!text-light dark:!shadow-dark-200/20"
         />
       </div>
 
       <div class="flex flex-col gap-2">
         <label class="text-sm text-primary-200 dark:text-light/80">
           {{ $t("ContactForm.fields.date.label") }}:
-          <span class="text-primary-200/30 dark:text-light/30"
-            >({{ $t("Common.optional") }})</span
-          >
+          <span class="text-primary-200/30 dark:text-light/30">
+            ({{ $t("Common.optional") }})
+          </span>
         </label>
         <InputGroup
-          class="!focus:shadow dark:!bg-dark-400 !h-12 w-full !rounded-xl !bg-light-100 !text-primary-200 !shadow dark:!text-light dark:!shadow-dark-200/20 sm:w-auto"
+          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !text-primary-200 !shadow dark:!bg-dark-400 dark:!text-light dark:!shadow-dark-200/20 sm:w-auto"
         >
           <DatePicker
             :pt="{
@@ -95,8 +95,8 @@
           v-model="message"
           :placeholder="$t('ContactForm.fields.message.placeholder')"
           required
-          rows="5"
-          class="!focus:shadow dark:!bg-dark-400 !h-auto w-full !rounded-xl !bg-light-100 !px-2 !py-4 !text-primary-200 !shadow dark:!text-light dark:!shadow-dark-200/20"
+          :rows="5"
+          class="!focus:shadow !h-auto w-full !rounded-xl !bg-light-100 !px-2 !py-4 !text-primary-200 !shadow dark:!bg-dark-400 dark:!text-light dark:!shadow-dark-200/20"
         />
         <span v-if="errors.message" class="text-red-500 text-sm">{{
           $t("ContactForm.fields.message.error")
@@ -116,17 +116,18 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import InputText from "primevue/inputtext";
+import Input from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import Button from "primevue/button";
 import InputGroup from "primevue/inputgroup";
+import DatePicker from "primevue/datepicker";
 import { useI18n } from "vue-i18n";
 
 const name = ref("");
 const email = ref("");
 const message = ref("");
 const phone = ref("");
-const date = ref<Date | null>(null);
+const date = ref<Date | Date[] | null>(null);
 const { t: $t } = useI18n();
 
 const errors = ref({
@@ -201,6 +202,8 @@ const submitForm = (e: Event) => {
 
 <style>
 .p-datepicker-input {
-  @apply !bg-light-100 pl-2 !text-primary-200 dark:!bg-dark-300 dark:!text-light;
+  background-color: var(--light-100);
+  padding-left: 0.5rem;
+  color: var(--primary-200);
 }
 </style>

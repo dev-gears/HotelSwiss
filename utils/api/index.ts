@@ -10,7 +10,7 @@ import type {
 
 // Types for API fetch options
 export interface ApiQueryOptions {
-  query?: Record<string, string | number | boolean>;
+  query?: Record<string, string | number | boolean | number[]>;
   headers?: Record<string, string>;
   key?: string;
   client?: boolean;
@@ -31,6 +31,21 @@ export interface ApiDataOptions extends ApiQueryOptions {
   watch?: any[] | false;
 }
 
+// Extended API options with caching
+export interface CachedApiOptions extends ApiQueryOptions {
+  // We'll use standard cache logic but add these as custom properties
+  // that our useApiCache composable can handle
+  cacheTime?: number; // Time in seconds to cache
+  forceRefresh?: boolean; // Force refresh the cache
+}
+
+// Extended API data options with caching
+export interface CachedApiDataOptions extends ApiDataOptions {
+  // We'll use standard cache logic but add these as custom properties
+  // that our useApiCache composable can handle
+  cacheTime?: number; // Time in seconds to cache
+}
+
 /**
  * Type-safe API client functions for direct data fetching
  * These functions use $hotelApi for non-reactive data fetching
@@ -41,7 +56,7 @@ export const fetchHotel = (id: number | string, options?: ApiQueryOptions) =>
   $hotelApi<Hotel>(`hotels/${id}/`, options);
 
 export const fetchHotels = (
-  params?: Record<string, string | number>,
+  params?: Record<string, string | number | number[]>,
   options?: ApiQueryOptions,
 ) =>
   $hotelApi<HotelListWithPagination>("hotels/", {
@@ -104,10 +119,6 @@ export const useCantonsData = (options?: ApiDataOptions) =>
 
 export const useCantonData = (id: number | string, options?: ApiDataOptions) =>
   useHotelApiData<Canton>(`cantons/${id}/`, options);
-
-// Other composables
-export const useFiltersData = (options?: ApiDataOptions) =>
-  useHotelApiData<Filters>("filters/", options);
 
 export const useFirstScreenData = (options?: ApiDataOptions) =>
   useHotelApiData<FirstScreen>("first-screen/", options);

@@ -23,7 +23,7 @@
           />
 
           <NuxtLink :to="`/hotel/${hotel.id}`" class="block h-full w-full">
-            <div v-ripple class="relative h-full w-full">
+            <div v-ripple class="relative h-full w-full rounded-br-2xl">
               <NuxtImg
                 :placeholder="Global.PLACEHOLDER_IMAGE_URL"
                 loading="lazy"
@@ -60,16 +60,15 @@
         <h3
           class="mb-2 line-clamp-2 h-14 text-lg font-semibold text-light transition-colors hover:text-primary"
         >
-          <NuxtLink :to="`/hotel/${hotel.id}`">
+          <a :href="`/hotel/${hotel.id}`">
             {{ hotel.title }}
-          </NuxtLink>
+          </a>
         </h3>
 
         <div class="mb-3 flex items-center text-sm text-light">
           <i class="pi pi-map-marker mr-2"></i>
           <span class="truncate">{{ hotel.city }}, {{ hotel.address }}</span>
         </div>
-
         <div v-if="showAmenities && hotel.amenities.length > 0" class="mt-3">
           <Divider class="my-2" />
           <div class="flex flex-wrap gap-2">
@@ -77,41 +76,42 @@
               v-for="(item, index) in hotel.amenities.slice(0, 3)"
               :key="index"
               :label="item.amenity.name"
-              class="text-xs"
-            />
+              class="bg-light-100 text-xs text-dark-100 dark:bg-dark-300 dark:text-light"
+            >
+              <img
+                :src="getImageUrl(String(item?.amenity?.image?.url))"
+                :alt="item.amenity.name"
+                class="h-4 w-4 invert dark:invert-0"
+                v-tooltip.top="item.amenity.name"
+              />
+            </Chip>
+
             <Chip
               v-if="hotel.amenities.length > 3"
               :label="
                 t('Card.plusMoreItems', { count: hotel.amenities.length - 3 })
               "
-              class="bg-light-100 text-xs dark:bg-dark-100"
+              class="bg-light-100 text-xs text-dark-100 dark:bg-dark-300 dark:text-light"
+              v-tooltip.top="
+                t('Card.additionalAmenities', {
+                  count: hotel.amenities.length - 3,
+                })
+              "
             />
           </div>
         </div>
       </div>
-
-      <div class="mt-auto flex items-center justify-between px-4 pb-4">
+      <div
+        class="mt-auto flex items-center justify-between px-4 pb-4"
+        v-if="hotel.paid"
+      >
         <div>
           <Badge
-            v-if="hotel.paid"
-            :value="t('Card.premium')"
+            :value="t('Card.verified')"
             severity="success"
-            class="mr-2"
+            class="bg-light-100 text-sm font-semibold text-dark-100 dark:bg-primary dark:text-light"
           />
         </div>
-        <Button
-          :label="t('Common.viewDetails')"
-          icon="pi pi-arrow-right"
-          :pt="{
-            root: 'bg-dark-200 text-light p-2 rounded-full',
-            icon: 'text-light',
-          }"
-          iconPos="right"
-          size="small"
-          outlined
-          class="p-button-rounded"
-          @click="navigateToHotel"
-        />
       </div>
     </div>
   </div>

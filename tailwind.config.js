@@ -10,28 +10,6 @@ export default {
         md: '1rem',
       },
     },
-    colors: {
-      light: {
-        DEFAULT: "#ffffff", // svetliji-text
-        100: "#f2f2f2",
-        200: "#e5e5e5", // New light variant for borders and hover states
-      },
-      dark: {
-        DEFAULT: "#1a2426", // Darker variant of your primary color
-        100: "#212e30", // Slightly lighter
-        200: "#1a2426", // Base dark
-        300: "#151d1f", // Deeper dark
-        400: "#10181a", // Even deeper dark
-      },
-      primary: {
-        DEFAULT: "#354f52",
-        100: "#26393B",
-        200: "#2C4144", // Updated to be a proper mid-tone between DEFAULT and 100
-      },
-      danger: {
-        DEFAULT: "#970000",
-      },
-    },
 
     fontFamily: {
       patuaOne: "Patua One",
@@ -39,6 +17,32 @@ export default {
     },
 
     extend: {
+      colors: {
+        light: {
+          DEFAULT: "#ffffff", // svetliji-text
+          100: "#f2f2f2",
+          200: "#e5e5e5", // New light variant for borders and hover states
+        },
+        dark: {
+          DEFAULT: "#1a2426", // Darker variant of your primary color
+          50: "#f2f2f2", // Lightest variant for backgrounds
+          100: "#212e30", // Slightly lighter
+          200: "#1a2426", // Base dark
+          300: "#151d1f", // Deeper dark
+          400: "#10181a", // Even deeper dark
+          500: "#0b1214", // Deepest dark
+          600: "#060c0e", // Almost black
+          700: "#030606", // Near black
+        },
+        primary: {
+          DEFAULT: "#354f52",
+          100: "#26393B",
+          200: "#2C4144", // Updated to be a proper mid-tone between DEFAULT and 100
+        },
+        danger: {
+          DEFAULT: "#970000",
+        },
+      },
       backgroundImage: {
         "previous-gradient": "linear-gradient(90deg, #f2f2f2 0%, #f2f2f2 70%, transparent 100%)",
         "next-gradient": "linear-gradient(90deg, transparent 0%, #f2f2f2 30%, #f2f2f2 100%)",

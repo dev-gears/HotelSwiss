@@ -1,5 +1,9 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
+/**
+ * Composable for detecting device type based on window width
+ * @returns Object with deviceType state
+ */
 const useDeviceType = () => {
   const deviceType = ref("desktop");
 

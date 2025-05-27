@@ -3,19 +3,17 @@
     dismissableMask
     position="bottom"
     closable
-    v-model:visible="formVisible"
+    v-model:modelValue="formVisible"
     modal
     blockScroll
-    :ptOptions="{ mergeSections: false }"
+    size="large"
+    class="h-[90%] rounded-t-3xl"
     :pt="{
-      root: 'bg-primary h-full w-full fixed bottom-0 left-0 !rounded-t-3xl transition-all !h-[90%]',
+      root: 'bg-light dark:bg-dark-200 transition-colors',
       header:
-        'bg-light z-50 border-b border-primary/30 rounded-t-3xl fixed w-full flex !justify-end items-center !py-2 !px-6',
-      content:
-        'bg-light !pt-14 rounded-t-3xl overflow-y-scroll flex flex-col gap-6',
-      footer:
-        'bg-light bottom-0 border-t border-primary/30 !py-2 !px-6 flex justify-between',
-      mask: 'bg-primary/50 !transition-all',
+        'bg-light dark:bg-dark-200 border-b border-primary/30 dark:border-light/10',
+      content: 'bg-light dark:bg-dark-200',
+      mask: 'bg-primary/50 dark:bg-dark/70 backdrop-blur-[2px]',
     }"
   >
     <ContactForm class="px-3 py-6" />
@@ -24,6 +22,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import Drawer from "primevue/drawer";
 
 const formVisible = ref(false);
 </script>

@@ -24,7 +24,7 @@
           path: `/canton/${hotel?.canton?.id}`,
           query: { title: hotel?.canton?.name },
         }"
-        class="relative flex h-14 w-1/3 cursor-pointer items-center justify-center border-r border-light/20 dark:border-light/10"
+        class="relative flex h-14 w-1/3 cursor-pointer items-center justify-center border-r border-dark/20 dark:border-light/10"
       >
         <img
           class="absolute inset-0 h-full w-full p-2 dark:brightness-75 md:brightness-50"
@@ -45,7 +45,7 @@
           {{ $t("Content.class") }}
         </p>
         <CommonStars
-          class="[&_img]:invert md:[&_img]:invert-0 dark:md:[&_img]:invert"
+          class="[&_img]:invert md:[&_img]:invert dark:md:[&_img]:invert-0"
           :stars="hotel?.stars"
         />
       </div>
@@ -55,7 +55,7 @@
           path: `/category/${hotel?.categories[0]?.category?.id}`,
           query: { title: hotel?.categories[0]?.category?.name },
         }"
-        class="flex h-14 w-1/3 cursor-pointer items-center justify-center border-l border-light/20 text-center font-robotoRegular text-lg font-normal text-light dark:border-light/10 md:text-dark dark:md:text-light"
+        class="flex h-14 w-1/3 cursor-pointer items-center justify-center border-l border-dark/20 text-center font-robotoRegular text-lg font-normal text-light dark:border-light/10 md:text-dark dark:md:text-light"
         v-if="hotel?.categories[0]"
       >
         {{ hotel?.categories[0]?.category?.name }}

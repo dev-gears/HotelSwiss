@@ -35,6 +35,7 @@
 
 <script setup lang="ts">
 import FormDialog from "../ContactForm/FormDialog.vue";
+import Button from "primevue/button";
 
 defineProps({
   startPrice: String,

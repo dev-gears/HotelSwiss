@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         lang: "en",
+        class: "theme-loading", // Add initial class for theme handling
       },
     },
   },
@@ -33,7 +34,6 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/tailwindcss",
     "nuxt-api-party",
-    "nuxt-swiper",
     "@pinia/nuxt",
     "@nuxtjs/i18n",
     "@nuxt/image",
@@ -55,17 +55,18 @@ export default defineNuxtConfig({
       },
       cssLayer: {
         name: "primevue",
-        order: " tailwind-utilities, tailwind-base, primevue",
+        order: "tailwind-utilities, tailwind-base, primevue",
       },
     },
+    directives: {
+      tooltip: true,
+    },
   },
-
   apiParty: {
     endpoints: {
       hotelApi: {
         url: process.env.BASE_URL! + process.env.API_PATH!,
         headers: headerAuth,
-
         cookies: true,
       },
     },
@@ -106,30 +107,23 @@ export default defineNuxtConfig({
     },
     baseUrl: process.env.SITE_URL || "http://localhost:3000",
     locales: [
-      { code: "en", language: "en-US", file: "en.json" },
-      { code: "fr", language: "fr-FR", file: "fr.json" },
-      { code: "de", language: "de-DE", file: "de.json" },
-      { code: "it", language: "it-IT", file: "it.json" },
+      { code: "en", language: "en-US", file: "../../locales/en.json" },
+      { code: "fr", language: "fr-FR", file: "../../locales/fr.json" },
+      { code: "de", language: "de-DE", file: "../../locales/de.json" },
+      { code: "it", language: "it-IT", file: "../../locales/it.json" },
     ],
     lazy: true,
-    langDir: "locales",
     vueI18n: "./i18n.config.ts",
   },
-
   pages: true,
 
-  plugins: ["@/plugins/gesture.ts"],
-
-  swiper: {
-    prefix: "Swiper",
-    styleLang: "css",
-    modules: ["autoplay", "navigation"],
-  },
+  plugins: ["@/plugins/gesture.ts", "@/plugins/theme.client.ts"],
 
   css: [
-    "@/node_modules/primeicons/primeicons.css",
+    "primeicons/primeicons.css",
     "@/assets/css/fonts.css",
     "@/assets/css/base.css",
+    "vue3-carousel/carousel.css",
   ],
 
   vite: {
@@ -147,22 +141,64 @@ export default defineNuxtConfig({
 
   nitro: {
     routeRules: {
-      "/**": {
-        prerender: false,
+      // Home page - static content, fully prerendered
+      "/": {
+        prerender: true,
         cache: {
-          headersOnly: true,
+          maxAge: 60 * 60, // 1 hour
         },
       },
+
+      // Search page - dynamic with filters, no prerendering
+      "/search": {
+        ssr: true,
+        cache: {
+          maxAge: 300, // 5 minutes
+        },
+      },
+
+      // Individual hotel pages - dynamic content with moderate caching
+      "/hotel/**": {
+        ssr: true,
+        cache: {
+          maxAge: 600, // 10 minutes
+        },
+      },
+
+      // Category pages - semi-static, can be cached longer
+      "/category/**": {
+        ssr: true,
+        cache: {
+          maxAge: 1800, // 30 minutes
+        },
+      },
+
+      // Canton pages - semi-static, can be cached longer
+      "/canton/**": {
+        ssr: true,
+        cache: {
+          maxAge: 1800, // 30 minutes
+        },
+      },
+
+      // Static assets with long-term caching
       "/assets/**": {
         headers: {
           "Content-Type": "text/css",
+          "Cache-Control": "public, max-age=31536000, immutable",
         },
+      },
+
+      // Default for any other routes
+      "/**": {
+        prerender: true,
+        ssr: true,
       },
     },
     publicAssets: [
       {
         dir: "assets",
-        maxAge: 60 * 60 * 24 * 365,
+        maxAge: 60 * 60 * 24 * 365, // 1 year
         baseURL: "/assets",
       },
     ],

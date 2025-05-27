@@ -28,8 +28,8 @@ export interface Image {
 }
 
 export interface PriceRange {
-  from: number | undefined;
-  to: number | undefined;
+  from: number | null;
+  to: number | null;
 }
 
 export interface Amenity {

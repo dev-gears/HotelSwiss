@@ -14,20 +14,8 @@
       ref="overlayPanel"
       :dismissable="true"
       :showCloseIcon="false"
-      :pt="{
-        root: {
-          class:
-            '!mt-[2px] !w-[330px] !rounded-[10px] !rounded-tr-none !bg-primary-100 !text-light !p-3',
-        },
-        content: {
-          class: 'p-0',
-        },
-        header: {
-          class: 'hidden',
-        },
-      }"
+      class="mt-[2px] w-[330px] rounded-[10px] rounded-tr-none bg-primary text-light"
       @hide="onOverlayHide"
-      class="mt-[2px] w-[330px] rounded-[10px] rounded-tr-none bg-primary-100 text-light"
     >
       <div class="m-0 list-none p-0 font-robotoRegular">
         <h2 class="bottom-border-item mb-2 border-b px-2 py-2 text-xl">
@@ -54,8 +42,8 @@
 <script setup lang="ts">
 import { ref, computed, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
-import OverlayPanel from "primevue/overlaypanel";
 import { useLanguageStore } from "@/store/language";
+import Popover from "primevue/popover";
 
 import engIcon from "@/assets/images/language/eng.svg";
 import gerIcon from "@/assets/images/language/ger.svg";
@@ -66,7 +54,7 @@ type LanguageCode = "en" | "de" | "it" | "fr";
 
 const { t, locale } = useI18n();
 const languageStore = useLanguageStore();
-const overlayPanel = ref<InstanceType<typeof OverlayPanel> | null>(null);
+const overlayPanel = ref<any | null>(null);
 const languageSwitcherRef = ref<HTMLElement | null>(null);
 const isOverlayPanelOpen = ref(false);
 

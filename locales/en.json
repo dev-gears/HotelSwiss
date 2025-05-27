@@ -12,7 +12,9 @@
     "toggleTheme": "Toggle dark mode",
     "from": "From",
     "viewDetails": "View details",
-    "noResults": "No results found"
+    "noResults": "No results found",
+    "clearAll": "Clear All",
+    "done": "Done"
   },
   "LanguageButton": {
     "selectLanguage": "Select language"
@@ -47,9 +49,11 @@
     "filters": {
       "clearFilters": "Clear filters",
       "searchHotels": "Search hotels",
-      "activeFilters": "Active Filters ({0})",
+      "activeFilters": "Active Filters",
       "clearAllFilters": "Clear All Filters",
-      "tips": "Tip: Click on any filter to remove it",
+      "tips": "Click on any filter chip to remove it",
+      "refineSearch": "Refine your search",
+      "editFilters": "Edit",
       "amenities": "Amenities",
       "stars": "Star Rating",
       "priceRange": "Price Range"
@@ -57,7 +61,12 @@
     "searchForSpecificHotel": "Search for a specific hotel",
     "searchTerm": "Search Term",
     "amenities": {
-      "title": "Amenities"
+      "title": "Amenities",
+      "viewAll": "View All Amenities",
+      "allAmenities": "All Amenities",
+      "searchPlaceholder": "Search amenities...",
+      "noResults": "No amenities match your search",
+      "selected": "selected"
     },
     "priceRange": {
       "title": "Price Range",
@@ -129,7 +138,8 @@
     "priceFrom": "From {price}",
     "priceUpTo": "Up to {price}",
     "priceOnRequest": "Price on request",
-    "premium": "Premium",
-    "plusMoreItems": "+{count}"
+    "verified": "Verified",
+    "plusMoreItems": "+{count}",
+    "additionalAmenities": "{count} more amenities"
   }
 }

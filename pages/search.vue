@@ -2,8 +2,8 @@
   <div class="flex flex-col items-center bg-light-100 dark:bg-dark-100">
     <div class="container mx-auto max-md:px-3">
       <CommonBlockHeader
-        v-if="searchedTerm"
-        :title="`${$t('Search.searchResults')}: ${searchedTerm}`"
+        v-if="searchTerm"
+        :title="`${$t('Search.searchResults')}: ${searchTerm}`"
         class="mb-5 border-b border-primary/30 py-3 font-robotoRegular dark:border-primary-200/20"
       />
       <CommonGridSection
@@ -13,14 +13,6 @@
         @sort="handleSort"
         @loadMore="handleLoadMore"
       />
-      <div
-        v-if="!isLoading && !results.length"
-        class="flex h-[50vh] items-center justify-center"
-      >
-        <h1 class="text-2xl text-primary-100 dark:text-primary-200">
-          {{ $t("Common.noResults") }}
-        </h1>
-      </div>
     </div>
   </div>
 </template>
@@ -32,7 +24,6 @@ import type {
   Amenity,
   HotelListWithPagination,
 } from "@/types/hotel";
-import { useFiltersStore } from "@/store/filters";
 import { fetchHotels } from "~/utils/api";
 
 definePageMeta({
@@ -40,70 +31,33 @@ definePageMeta({
 });
 
 const route = useRoute();
-const filtersStore = useFiltersStore();
 const results = ref<Hotel[]>([]);
 const nextUrl = ref<string | null>(null);
 const isLoading = ref(true);
 const loadingMore = ref(false);
-const searchedTerm = ref("");
+
+// Reactive parameters from URL
+const searchTerm = computed(() => (route.query.q as string) || "");
 
 /**
- * Build query parameters from filters
+ * Build query parameters directly from URL query
  */
-const buildQueryParams = (
-  additionalParams: Record<string, string | number> = {},
-) => {
-  const params: Record<string, string | number> = {};
-  const filters = filtersStore.filters;
-  const searchValue = filtersStore.searchValue;
-
-  if (searchValue) {
-    params.search = searchValue;
-    searchedTerm.value = searchValue;
-  }
-
-  if (filters.cantons.length) {
-    params.cantons = filters.cantons
-      .map((canton: Canton) => canton.id)
-      .join(",");
-  }
-
-  if (
-    filters.price_range.from !== undefined &&
-    filters.price_range.from !== null
-  ) {
-    params.min_price = filters.price_range.from;
-  }
-
-  if (filters.price_range.to !== undefined && filters.price_range.to !== null) {
-    params.max_price = filters.price_range.to;
-  }
-
-  if (filters.amenities.length) {
-    params.amenities = filters.amenities.join(",");
-  }
-
-  if (filters.stars) {
-    params.stars = filters.stars;
-  }
-
-  return { ...params, ...additionalParams };
-};
+import { buildApiQueryParams } from "~/utils/filter-url-params";
 
 /**
- * Fetch hotels based on search query
+ * Fetch hotels based on URL parameters
  */
 const fetchFilteredHotels = async (
-  additionalParams: Record<string, string | number> = {},
+  additionalParams: Record<string, string | number | number[]> = {},
 ) => {
   try {
     isLoading.value = true;
-    const params = buildQueryParams(additionalParams);
+    const params = buildApiQueryParams(route, additionalParams);
     const data = await fetchHotels(params);
     results.value = data.results;
     nextUrl.value = data.next;
   } catch (error) {
-    console.warn(error);
+    console.warn("Error fetching hotels:", error);
   } finally {
     isLoading.value = false;
   }
@@ -135,31 +89,18 @@ const handleLoadMore = async () => {
     results.value = [...results.value, ...data.results];
     nextUrl.value = data.next;
   } catch (error) {
-    console.warn(error);
+    console.warn("Error loading more results:", error);
   } finally {
     loadingMore.value = false;
   }
 };
 
-onMounted(() => {
-  filtersStore.initFromUrlParams();
-
-  fetchFilteredHotels();
-
-  watch(
-    () => [filtersStore.filters, filtersStore.searchValue],
-    () => {
-      fetchFilteredHotels();
-    },
-    { deep: true },
-  );
-
-  watch(
-    () => route.query,
-    () => {
-      filtersStore.initFromUrlParams();
-    },
-    { deep: true },
-  );
-});
+// Watch for changes in the URL query parameters
+watch(
+  () => route.query,
+  () => {
+    fetchFilteredHotels();
+  },
+  { immediate: true, deep: true },
+);
 </script>

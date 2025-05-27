@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container mx-auto border-b border-primary/30 px-3 pb-7 dark:border-primary-200/20"
+    class="container mx-auto border-b border-primary/30 px-3 pb-7 dark:border-primary-200"
   >
     <h3 class="font-robotoRegular text-xl text-primary-200 dark:text-light">
       {{ $t("Search.hotelClass.title") }}

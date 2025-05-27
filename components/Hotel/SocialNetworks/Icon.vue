@@ -1,6 +1,6 @@
 <template>
   <a
-    class="flex items-center justify-center rounded bg-primary p-2"
+    class="flex items-center justify-center rounded bg-primary p-2 transition-colors dark:bg-primary-200"
     :href="link"
     target="_blank"
   >

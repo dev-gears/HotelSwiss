@@ -3,7 +3,7 @@
     <div
       class="border-b border-primary-100/40 bg-light-100 pb-6 pt-3 dark:border-light/10 dark:bg-dark-100"
     >
-      <h2 class="font-robotoRegular text-xl text-primary-200">
+      <h2 class="font-robotoRegular text-xl text-primary-200 dark:text-light">
         {{ $t("SocialNetworks.visitUsAlsoOn") }}:
       </h2>
       <div

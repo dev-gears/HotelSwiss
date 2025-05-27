@@ -12,7 +12,9 @@
     "toggleTheme": "Basculer le mode sombre",
     "from": "À partir de",
     "viewDetails": "Voir les détails",
-    "noResults": "Aucun résultat trouvé"
+    "noResults": "Aucun résultat trouvé",
+    "clearAll": "Tout effacer",
+    "done": "Terminé"
   },
   "LanguageButton": {
     "selectLanguage": "Choisir la langue"
@@ -46,11 +48,24 @@
   "Search": {
     "filters": {
       "clearFilters": "Effacer les filtres",
-      "searchHotels": "Rechercher des hôtels"
+      "searchHotels": "Rechercher des hôtels",
+      "activeFilters": "Filtres actifs",
+      "clearAllFilters": "Effacer tous les filtres",
+      "tips": "Cliquez sur une puce de filtre pour la supprimer",
+      "refineSearch": "Affiner votre recherche",
+      "editFilters": "Modifier",
+      "amenities": "Équipements",
+      "stars": "Évaluation par étoiles",
+      "priceRange": "Fourchette de prix"
     },
     "searchForSpecificHotel": "Rechercher un hôtel spécifique",
     "amenities": {
-      "title": "Équipements"
+      "title": "Équipements",
+      "viewAll": "Voir tous les équipements",
+      "allAmenities": "Tous les équipements",
+      "searchPlaceholder": "Rechercher des équipements...",
+      "noResults": "Aucun équipement ne correspond à votre recherche",
+      "selected": "sélectionnés"
     },
     "priceRange": {
       "title": "Fourchette de prix",
@@ -122,7 +137,8 @@
     "priceFrom": "À partir de {price}",
     "priceUpTo": "Jusqu'à {price}",
     "priceOnRequest": "Prix sur demande",
-    "premium": "Premium",
-    "plusMoreItems": "+{count}"
+    "verified": "Vérifié",
+    "plusMoreItems": "+{count}",
+    "additionalAmenities": "{count} équipements supplémentaires"
   }
 }

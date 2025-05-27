@@ -1,10 +1,10 @@
 <template>
   <div class="container px-3">
     <div
-      class="border-b border-primary-100/40 bg-light-100 pb-8 pt-3 dark:border-light/10 dark:bg-dark-100"
+      class="border-b border-primary-100/40 bg-light-100 pb-8 pt-3 dark:border-light/10 dark:bg-dark-100 dark:text-light"
     >
       <div class="flex flex-col flex-wrap gap-3">
-        <h2 class="font-robotoRegular text-xl text-primary-200">
+        <h2 class="font-robotoRegular text-xl text-primary-200 dark:text-light">
           {{ $t("Rooms.title") }}:
         </h2>
         <div class="flex items-center gap-3 px-3 max-md:justify-center">

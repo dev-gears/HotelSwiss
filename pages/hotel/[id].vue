@@ -6,7 +6,7 @@
     :url="`https://hotelswiss.ch/hotel/${hotel?.id}`"
   />
 
-  <HotelSkeletonLoader v-if="pending" />
+  <HotelSkeleton v-if="pending" />
   <div v-else class="flex flex-col bg-light-100 dark:bg-dark-100 max-sm:pb-32">
     <div class="flex flex-col md:gap-5">
       <HotelHero
@@ -59,40 +59,28 @@
     :visible="showImageModal"
     :images="hotel?.images ?? null"
     @update:visible="showImageModal = $event"
+    class="transition-colors"
   />
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { useHotelStore } from "@/store/hotelStore";
-import type { Hotel } from "@/types/hotel";
 import GalleryDrawer from "@/components/Hotel/Hero/Gallery.vue";
 import { useHotelData } from "~/utils/api";
+import HotelSkeleton from "~/components/SkeletonLoaders/HotelSkeleton.vue";
 
 definePageMeta({
   layout: "single",
 });
 
 const route = useRoute();
-const hotelStore = useHotelStore();
 const showImageModal = ref(false);
-
-// Use the type-safe composable for reactive data fetching
 const { data: hotel, pending } = useHotelData(
   Array.isArray(route.params.id) ? route.params.id[0] : route.params.id,
-);
-
-// Watch for hotel data changes to update the store
-watch(
-  hotel,
-  (newHotel) => {
-    if (newHotel) {
-      hotelStore.setHotel(newHotel);
-      hotelStore.setImages(newHotel.images);
-    }
+  {
+    cache: true,
   },
-  { immediate: true },
 );
 
 const openImageModal = () => {

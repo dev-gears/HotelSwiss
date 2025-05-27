@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-primary">
+  <footer class="bg-primary text-light dark:bg-dark-300">
     <div class="container mx-auto px-3">
       <div class="flex flex-col items-center justify-center">
         <span class="p-2 text-2xl font-bold text-light">Hotel Swiss</span>

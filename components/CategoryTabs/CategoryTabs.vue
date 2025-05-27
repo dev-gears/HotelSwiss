@@ -15,7 +15,7 @@
           tabList:
             '!border-none flex gap-3 py-2 px-3 !bg-light-100 dark:!bg-dark-100',
           content: '!bg-light-100 dark:!bg-dark-100',
-          activeBar: '!bg-primary dark:!bg-primary-100',
+          activeBar: '!bg-primary dark:!bg-primary',
           prevButton:
             '!bg-previous-gradient dark:!bg-dark-previous-gradient !border-none rounded-l-md overflow-hidden shadow-none text-primary-200 dark:text-light',
           nextButton:
@@ -38,7 +38,7 @@
           :key="index + 1"
           :pt="{
             root: '!border-none !rounded-xl !px-4 !py-2 shadow-cardImage !bg-light dark:!bg-dark-400 text-primary-200 dark:text-light',
-            activeBar: '!bg-primary dark:!bg-primary-100',
+            activeBar: '!bg-primary dark:!bg-primary',
           }"
           :value="tab.id.toString()"
         >
@@ -210,6 +210,6 @@ onMounted(() => {
 
 <style lang="pcss">
 .p-tab-active {
-  @apply !bg-primary !text-light !transition-all !duration-500 dark:!bg-primary-100;
+  @apply !bg-primary !text-light !transition-all !duration-500 dark:!bg-primary;
 }
 </style>
