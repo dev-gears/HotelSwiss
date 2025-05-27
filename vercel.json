@@ -4,20 +4,20 @@
   "installCommand": "npm ci --prefer-offline --no-audit",
   "framework": "nuxtjs",
   "functions": {
-    "node_modules/@nuxt/image/dist/runtime/ipx.mjs": {
+    ".output/server/**": {
       "maxDuration": 60
     }
   },
   "build": {
     "env": {
-      "NODE_VERSION": "20.18.0",
+      "NODE_VERSION": "22.0.0",
       "NPM_CONFIG_LEGACY_PEER_DEPS": "true",
       "SKIP_ENV_VALIDATION": "true",
       "NODE_OPTIONS": "--max-old-space-size=4096"
     }
   },
   "env": {
-    "NODE_VERSION": "20.18.0"
+    "NODE_VERSION": "22.0.0"
   },
   "regions": ["iad1"],
   "git": {
