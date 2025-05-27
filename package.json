@@ -56,14 +56,6 @@
     "vue3-carousel": "^0.15.1"
   },
   "overrides": {
-    "vue": "latest",
-    "magic-string-ast": "latest",
-    "oxc-parser": "latest",
-    "@oxc-parser/wasm": "latest"
-  },
-  "resolutions": {
-    "magic-string-ast": "latest",
-    "oxc-parser": "latest",
-    "@oxc-parser/wasm": "latest"
+    "vue": "latest"
   }
 }
