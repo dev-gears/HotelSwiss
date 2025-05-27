@@ -1,0 +1,9 @@
+# Vercel ignore patterns
+.nuxt/
+.output/
+node_modules/
+dist/
+.git/
+*.log
+.env*
+!.env.example
