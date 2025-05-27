@@ -9,7 +9,8 @@
         :src="images[0]?.url ?? undefined"
         class="hero-image h-96 w-full cursor-pointer object-cover transition-all hover:brightness-75 [&_img]:aspect-video [&_img]:rounded"
       />
-    </div>    <div
+    </div>
+    <div
       class="grid grid-cols-1 gap-4 md:col-span-2 md:grid-cols-2 md:grid-rows-2"
     >
       <template v-for="(data, index) in parsedImagesForCollage" :key="data.id">

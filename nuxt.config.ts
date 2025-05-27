@@ -124,7 +124,8 @@ export default defineNuxtConfig({
     "@/assets/css/fonts.css",
     "@/assets/css/base.css",
     "vue3-carousel/carousel.css",
-  ],  vite: {
+  ],
+  vite: {
     css: {
       devSourcemap: true,
     },
@@ -137,35 +138,21 @@ export default defineNuxtConfig({
     },
     build: {
       rollupOptions: {
-        external: ['oxc-parser', 'magic-string-ast'],
+        external: ["oxc-parser"],
         output: {
           manualChunks: {
-            vendor: ['vue', 'vue-router'],
-            primevue: ['primevue/button', 'primevue/inputtext'],
+            vendor: ["vue", "vue-router"],
+            primevue: ["primevue/button", "primevue/inputtext"],
           },
         },
       },
-      target: 'node18',
-      minify: 'terser',
     },
     optimizeDeps: {
-      exclude: ['oxc-parser', 'magic-string-ast'],
-      include: ['vue', 'vue-router', 'pinia'],
-    },
-    esbuild: {
-      target: 'node18',
+      exclude: ["oxc-parser"],
     },
   },
+
   nitro: {
-    preset: 'vercel',
-    minify: true,
-    sourceMap: false,
-    experimental: {
-      wasm: false,
-    },
-    rollupConfig: {
-      external: ['oxc-parser', 'magic-string-ast'],
-    },
     routeRules: {
       // Home page - static content, fully prerendered
       "/": {

@@ -1,5 +1,5 @@
 export default {
   typescript: {
-    typeCheck: false
-  }
-}
+    typeCheck: false,
+  },
+};
