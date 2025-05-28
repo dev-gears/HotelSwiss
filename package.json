@@ -15,8 +15,7 @@
   "engines": {
     "node": ">=20.18.0",
     "npm": ">=10.0.0"
-  },
-  "devDependencies": {
+  },  "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxt/image": "^1.10.0",
     "@nuxtjs/leaflet": "^1.2.6",
@@ -30,7 +29,6 @@
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",
-    "nuxt": "^3.17.3",
     "nuxt-api-party": "^2.2.2",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
@@ -46,6 +44,7 @@
     "@primevue/themes": "^4.3.4",
     "dotenv": "^16.5.0",
     "leaflet-geosearch": "^4.2.0",
+    "nuxt": "^3.17.3",
     "pinia": "^3.0.2",
     "primevue": "^4.3.4",
     "unhead": "^2.0.8",
