@@ -32,16 +32,31 @@
             v-if="hotel?.social_links"
             :socialLinks="hotel?.social_links"
             class="pt-3"
-          />
-          <HotelRooms
+          />          <HotelRooms
             v-if="hotel?.rooms?.length"
             :rooms="hotel?.rooms"
             class="pt-3"
           />
-          <Map
-            :address="`${hotel?.address}, ${hotel?.zip} ${hotel?.city}`"
-            class="pt-3"
-          />
+          <ClientOnly>
+            <Map
+              :address="`${hotel?.address}, ${hotel?.zip} ${hotel?.city}`"
+              class="pt-3"
+            />
+            <template #fallback>
+              <div class="px-3 pt-3">
+                <div class="flex flex-col gap-3">
+                  <h2 class="font-robotoRegular text-xl text-primary-200 dark:text-light">
+                    {{ $t("Content.whereYouWillBe") }}
+                  </h2>
+                  <div class="mx-auto h-60 w-full rounded-lg bg-gray-100 dark:bg-dark-200 md:h-80 flex items-center justify-center">
+                    <div class="text-gray-500 dark:text-gray-400">
+                      {{ $t("Common.loading") || "Loading map..." }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </ClientOnly>
         </div>
         <div>
           <ContactForm
