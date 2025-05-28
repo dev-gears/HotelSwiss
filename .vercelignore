@@ -7,3 +7,11 @@ dist/
 *.log
 .env*
 !.env.example
+tests/
+docs/
+memory-bank/
+examples/
+build.ps1
+build.sh
+*.md
+!README.md

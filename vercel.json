@@ -1,18 +1,24 @@
 {
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev", 
-  "installCommand": "npm install --prefer-offline --no-audit",
+  "buildCommand": "npm run build:vercel",
+  "devCommand": "npm run dev",
+  "installCommand": "npm ci --prefer-offline --no-audit --legacy-peer-deps",
   "framework": "nuxtjs",
   "build": {
     "env": {
       "NPM_CONFIG_LEGACY_PEER_DEPS": "true",
       "SKIP_ENV_VALIDATION": "true",
       "NODE_OPTIONS": "--max-old-space-size=4096",
-      "NITRO_PRESET": "vercel"
+      "NITRO_PRESET": "vercel-edge",
+      "NODE_ENV": "production"
     }
   },
   "regions": ["iad1"],
   "git": {
     "deploymentEnabled": true
+  },
+  "functions": {
+    "pages/**": {
+      "maxDuration": 30
+    }
   }
 }

@@ -15,11 +15,13 @@ export default defineNuxtConfig({
       },
     },
   },
-
   runtimeConfig: {
     public: {
       backendUrl: process.env.BASE_URL || "http://localhost:3000",
-      siteUrl: process.env.SITE_URL || "http://localhost:3000",
+      siteUrl:
+        process.env.SITE_URL ||
+        process.env.NUXT_SITE_URL ||
+        "https://hotelswiss.stefanivic.com",
     },
   },
 
@@ -75,9 +77,11 @@ export default defineNuxtConfig({
   sitemap: {
     exclude: ["/gallery"],
   },
-
   site: {
-    url: process.env.SITE_URL || "https://localhost:3000",
+    url:
+      process.env.SITE_URL ||
+      process.env.NUXT_SITE_URL ||
+      "https://hotelswiss.stefanivic.com",
     name: "Hotel Swiss",
     description: "The best hotel in the world",
 
@@ -86,13 +90,18 @@ export default defineNuxtConfig({
     },
 
     sitemap: {
-      hostname: process.env.SITE_URL || "https://localhost:3000",
+      hostname:
+        process.env.SITE_URL ||
+        process.env.NUXT_SITE_URL ||
+        "https://hotelswiss.stefanivic.com",
     },
 
     image: {
       url: process.env.SITE_URL
         ? `${process.env.SITE_URL}/logo.png`
-        : "https://localhost:3000/logo.png",
+        : process.env.NUXT_SITE_URL
+          ? `${process.env.NUXT_SITE_URL}/logo.png`
+          : "https://hotelswiss.stefanivic.com/logo.png",
       alt: "Hotel Swiss",
     },
   },
@@ -105,7 +114,10 @@ export default defineNuxtConfig({
       cookieKey: "i18n_redirected",
       redirectOn: "root",
     },
-    baseUrl: process.env.SITE_URL || "http://localhost:3000",
+    baseUrl:
+      process.env.SITE_URL ||
+      process.env.NUXT_SITE_URL ||
+      "https://hotelswiss.stefanivic.com",
     locales: [
       { code: "en", language: "en-US", file: "../../locales/en.json" },
       { code: "fr", language: "fr-FR", file: "../../locales/fr.json" },
@@ -118,13 +130,13 @@ export default defineNuxtConfig({
   pages: true,
 
   plugins: ["@/plugins/gesture.ts", "@/plugins/theme.client.ts"],
-
   css: [
     "primeicons/primeicons.css",
     "@/assets/css/fonts.css",
     "@/assets/css/base.css",
     "vue3-carousel/carousel.css",
   ],
+
   vite: {
     css: {
       devSourcemap: true,
@@ -150,9 +162,13 @@ export default defineNuxtConfig({
     optimizeDeps: {
       exclude: ["oxc-parser"],
     },
+    define: {
+      // Disable oxc-parser for production builds
+      "process.env.DISABLE_OXC": "true",
+    },
   },
-
   nitro: {
+    preset: process.env.NITRO_PRESET || "node-server",
     routeRules: {
       // Home page - static content, fully prerendered
       "/": {
@@ -215,6 +231,9 @@ export default defineNuxtConfig({
         baseURL: "/assets",
       },
     ],
+    rollupConfig: {
+      external: ["oxc-parser"],
+    },
   },
   build: {
     transpile: ["primevue"],
@@ -223,6 +242,19 @@ export default defineNuxtConfig({
 
   experimental: {
     payloadExtraction: false,
+  },
+
+  typescript: {
+    typeCheck: false, // Disable for faster builds
+  },
+
+  // Disable oxc-parser for Vercel builds
+  hooks: {
+    "build:before": () => {
+      if (process.env.VERCEL) {
+        process.env.DISABLE_OXC = "true";
+      }
+    },
   },
 
   compatibilityDate: "2024-10-06",
