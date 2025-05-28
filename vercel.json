@@ -15,10 +15,5 @@
   "regions": ["iad1"],
   "git": {
     "deploymentEnabled": true
-  },
-  "functions": {
-    "pages/**": {
-      "maxDuration": 30
-    }
   }
 }
