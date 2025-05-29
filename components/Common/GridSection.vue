@@ -106,15 +106,64 @@
           />
         </div>
       </template>
-
       <template #empty>
-        <div class="flex flex-col items-center justify-center gap-4 p-4">
-          <h2 class="text-lg font-semibold text-light dark:text-dark-200">
-            {{ $t("Common.noResults") }}
-          </h2>
-          <p class="text-sm text-light dark:text-dark-200">
-            {{ $t("Common.noResultsDescription") }}
-          </p>
+        <div
+          class="flex min-h-[400px] flex-col items-center justify-center gap-6 p-8"
+        >
+          <div
+            class="bg-primary-50 dark:bg-primary-900/20 flex h-24 w-24 items-center justify-center rounded-full"
+          >
+            <svg
+              class="dark:text-primary-300 h-12 w-12 text-primary-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </div>
+
+          <div class="text-center">
+            <h2
+              class="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100"
+            >
+              {{ $t("Common.noResults") }}
+            </h2>
+            <p class="max-w-md text-gray-600 dark:text-gray-400">
+              {{ $t("Common.noResultsDescription") }}
+            </p>
+          </div>
+
+          <div class="mt-4 text-center">
+            <p
+              class="mb-4 text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              {{ $t("Common.tryTheseSuggestions") }}
+            </p>
+            <div class="flex flex-wrap justify-center gap-2">
+              <span
+                class="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+              >
+                {{ $t("Common.adjustFilters") }}
+              </span>
+              <span
+                class="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+              >
+                {{ $t("Common.tryDifferentKeywords") }}
+              </span>
+              <span
+                class="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+              >
+                {{ $t("Common.expandSearchArea") }}
+              </span>
+            </div>
+          </div>
         </div>
       </template>
     </DataView>
@@ -151,9 +200,13 @@ const safeHotels = computed(() => {
 });
 
 watch(
-  () => props.hotels,
-  (newHotels) => {
-    if (newHotels && newHotels.length > 0) {
+  [() => props.hotels, () => props.loading],
+  ([newHotels, loading], [oldHotels, oldLoading]) => {
+    if (loading === true && oldLoading === false) {
+      isInitialLoading.value = true;
+    }
+
+    if ((newHotels && newHotels.length > 0) || loading === false) {
       isInitialLoading.value = false;
     }
   },
@@ -161,7 +214,7 @@ watch(
 );
 
 onMounted(() => {
-  if (safeHotels.value.length > 0) {
+  if (safeHotels.value.length > 0 || props.loading === false) {
     isInitialLoading.value = false;
   }
 });
@@ -258,7 +311,3 @@ onUnmounted(() => {
   unbindObserver();
 });
 </script>
-
-<style scoped>
-/* Our wrapper components now handle the styling internally */
-</style>

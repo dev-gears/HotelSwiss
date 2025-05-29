@@ -28,7 +28,6 @@ export const buildApiQueryParams = (
   if (route.query.price_max) {
     params.max_price = route.query.price_max as string;
   }
-
   if (route.query.amenities) {
     params.amenities = (route.query.amenities as string)
       .split(",")
@@ -36,7 +35,9 @@ export const buildApiQueryParams = (
   }
 
   if (route.query.stars) {
-    params.stars = route.query.stars as string;
+    params.stars = (route.query.stars as string)
+      .split(",")
+      .map((star) => parseInt(star));
   }
 
   return { ...params, ...additionalParams };
@@ -61,9 +62,8 @@ export const buildUrlQueryParams = (
   if (filters.cantons?.length) {
     query.cantons = filters.cantons.map((c) => c.id).join(",");
   }
-
-  if (filters.stars) {
-    query.stars = filters.stars;
+  if (filters.stars?.length) {
+    query.stars = filters.stars.join(",");
   }
 
   if (filters.amenities?.length) {
@@ -102,7 +102,7 @@ export const extractFiltersFromUrl = (
   const filters: Partial<Filters> = {
     cantons: [],
     amenities: [],
-    stars: "",
+    stars: [],
     price_range: { from: null, to: null },
   };
 
@@ -129,9 +129,9 @@ export const extractFiltersFromUrl = (
       amenityIds.includes(a.id),
     );
   }
-
   if (route.query.stars) {
-    filters.stars = route.query.stars as string;
+    const stars = String(route.query.stars).split(",").filter(Boolean);
+    filters.stars = stars;
   }
 
   if (route.query.price_min || route.query.price_max) {

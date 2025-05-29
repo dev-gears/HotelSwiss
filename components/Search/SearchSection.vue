@@ -65,7 +65,7 @@
           size="small"
           icon="pi pi-times"
           variant="text"
-          class="to-red-100/50 hover:to-red-200/60 hover:text-danger-600 dark:to-red-800/30 dark:text-red-400 dark:hover:to-red-700/40 h-9 w-9 rounded-full bg-gradient-to-br from-danger/10 p-0 text-danger shadow-sm transition-all hover:scale-105 hover:from-danger/20 hover:shadow-md dark:from-danger/20 dark:hover:from-danger/30"
+          class="hover:text-danger-600 h-9 w-9 rounded-full bg-gradient-to-br from-danger/10 to-red-100/50 p-0 text-danger shadow-sm transition-all hover:scale-105 hover:from-danger/20 hover:to-red-200/60 hover:shadow-md dark:from-danger/20 dark:to-red-800/30 dark:text-red-400 dark:hover:from-danger/30 dark:hover:to-red-700/40"
           @click="clearFiltersFromUrl"
           v-tooltip.top="
             $t('Search.filters.clearAllFilters') || 'Clear All Filters'
@@ -75,186 +75,99 @@
     </div>
     <div class="space-y-5 p-6 dark:bg-dark-200/50">
       <!-- Search Term Filter -->
-      <div v-if="searchTerm" class="filter-group">
-        <div class="mb-3 flex items-center gap-2">
-          <div
-            class="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 shadow-sm ring-2 ring-primary/5 dark:bg-primary-200/25 dark:ring-primary-200/15"
-          >
-            <i
-              class="pi pi-search text-sm font-bold text-primary dark:text-light"
-            ></i>
-          </div>
-          <span
-            class="font-robotoRegular text-sm font-medium text-primary-200 dark:text-light"
-          >
-            {{ $t("Search.searchTerm") || "Search Term" }}
-          </span>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <Chip
-            removable
-            :label="searchTerm"
-            class="modern-chip emerald-chip"
-            @remove="removeSearchTermFromUrl"
-            :pt="{
-              root: '!bg-primary/8 !border-primary/25 hover:!bg-primary/15 dark:!bg-primary-200/20 dark:!border-primary-200/40 dark:hover:!bg-primary-200/30 !text-primary dark:!text-light !rounded-full !px-3 !py-1.5 !text-sm font-medium transition-all duration-200 shadow-sm hover:shadow-md',
-              removeIcon:
-                '!text-primary hover:!text-primary-100 dark:!text-light dark:hover:!text-light/80 !ml-2 transition-colors',
-            }"
-          />
-        </div>
-      </div>
+      <FilterGroup
+        v-if="searchTerm"
+        title="Search Term"
+        icon="pi pi-search"
+        :count="1"
+        icon-variant="primary"
+      >
+        <FilterChip
+          :label="searchTerm"
+          variant="emerald"
+          @remove="removeSearchTermFromUrl"
+        />
+      </FilterGroup>
+
       <!-- Cantons Filter -->
-      <div v-if="activeFilters.cantons.length" class="filter-group">
-        <div class="mb-3 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div
-              class="flex h-7 w-7 items-center justify-center rounded-full bg-primary/15 shadow-sm ring-2 ring-primary/10 dark:bg-primary-200/25 dark:ring-primary-200/15"
-            >
-              <i
-                class="pi pi-map-marker text-sm font-bold text-primary dark:text-light"
-              ></i>
-            </div>
-            <span
-              class="font-robotoRegular text-sm font-medium text-primary-200 dark:text-light"
-            >
-              {{ $t("Search.cantons.title") || "Cantons" }}
-            </span>
-            <span
-              class="rounded-full bg-gradient-to-r from-primary/20 to-primary-200/30 px-3 py-1 text-xs font-bold text-primary shadow-sm ring-1 ring-primary/20 dark:from-primary-200/25 dark:to-primary/35 dark:text-primary-200 dark:ring-primary-200/15"
-            >
-              {{ activeFilters.cantons.length }}
-            </span>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <Chip
-            v-for="canton in activeFilters.cantons"
-            :key="canton.id"
-            removable
-            :label="canton.name"
-            class="modern-chip primary-chip"
-            @remove="removeCantonFromUrl(canton)"
-            :pt="{
-              root: '!bg-primary/10 !border-primary/30 hover:!bg-primary/18 dark:!bg-primary-200/25 dark:!border-primary-200/50 dark:hover:!bg-primary-200/35 !text-primary dark:!text-light !rounded-full !px-3 !py-1.5 !text-sm font-medium transition-all duration-200 shadow-sm hover:shadow-md',
-              removeIcon:
-                '!text-primary hover:!text-primary-100 dark:!text-light dark:hover:!text-light/80 !ml-2 transition-colors',
-            }"
-          />
-        </div>
-      </div>
+      <FilterGroup
+        :title="$t('Search.cantons.title') || 'Cantons'"
+        icon="pi pi-map-marker"
+        :count="activeFilters.cantons.length"
+        :items="activeFilters.cantons"
+        icon-variant="secondary"
+      >
+        <FilterChip
+          v-for="canton in activeFilters.cantons"
+          :key="canton.id"
+          :label="canton.name"
+          variant="primary"
+          @remove="removeCantonFromUrl(canton)"
+        />
+      </FilterGroup>
+
       <!-- Star Rating Filter -->
-      <div v-if="activeFilters.stars" class="filter-group">
-        <div class="mb-3 flex items-center gap-2">
-          <div
-            class="flex h-7 w-7 items-center justify-center rounded-full bg-primary-200/15 shadow-sm ring-2 ring-primary-200/10 dark:bg-primary/25 dark:ring-primary/15"
-          >
-            <i
-              class="pi pi-star text-sm font-bold text-primary-200 dark:text-light"
-            ></i>
-          </div>
-          <span
-            class="font-robotoRegular text-sm font-medium text-primary-200 dark:text-light"
-          >
-            {{ $t("Search.filters.stars") || "Stars" }}
-          </span>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <Chip
-            removable
-            :label="`${activeFilters.stars} ⭐`"
-            class="modern-chip primary-chip"
-            @remove="removeStarsFromUrl"
-            :pt="{
-              root: '!bg-primary-200/10 !border-primary-200/30 hover:!bg-primary-200/18 dark:!bg-primary/25 dark:!border-primary/50 dark:hover:!bg-primary/35 !text-primary-200 dark:!text-light !rounded-full !px-3 !py-1.5 !text-sm font-medium transition-all duration-200 shadow-sm hover:shadow-md',
-              removeIcon:
-                '!text-primary-200 hover:!text-primary dark:!text-light dark:hover:!text-light/80 !ml-2 transition-colors',
-            }"
-          />
-        </div>
-      </div>
+      <FilterGroup
+        :title="$t('Search.filters.stars') || 'Stars'"
+        icon="pi pi-star"
+        :count="activeFilters.stars.length"
+        :items="activeFilters.stars"
+        icon-variant="tertiary"
+      >
+        <FilterChip
+          v-for="star in activeFilters.stars"
+          :key="star"
+          :label="star === 'all' ? $t('Search.hotelClass.all') : `${star} ⭐`"
+          variant="secondary"
+          @remove="removeStarFromUrl(star)"
+        />
+      </FilterGroup>
+
       <!-- Price Range Filter -->
-      <div v-if="hasPriceFilter" class="filter-group">
-        <div class="mb-3 flex items-center gap-2">
-          <div
-            class="flex h-7 w-7 items-center justify-center rounded-full bg-primary/20 shadow-sm ring-2 ring-primary/15 dark:bg-primary-200/20 dark:ring-primary-200/15"
-          >
-            <i
-              class="pi pi-dollar text-sm font-bold text-primary dark:text-light"
-            ></i>
-          </div>
-          <span
-            class="font-robotoRegular text-sm font-medium text-primary-200 dark:text-light"
-          >
-            {{ $t("Search.priceRange.title") || "Price Range" }}
-          </span>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <Chip
-            removable
-            :label="formatPriceRange"
-            class="modern-chip primary-chip"
-            @remove="removePriceRangeFromUrl"
-            :pt="{
-              root: '!bg-primary/12 !border-primary/35 hover:!bg-primary/20 dark:!bg-primary-200/25 dark:!border-primary-200/50 dark:hover:!bg-primary-200/35 !text-primary dark:!text-light !rounded-full !px-3 !py-1.5 !text-sm font-medium transition-all duration-200 shadow-sm hover:shadow-md',
-              removeIcon:
-                '!text-primary hover:!text-primary-100 dark:!text-light dark:hover:!text-light/80 !ml-2 transition-colors',
-            }"
-          />
-        </div>
-      </div>
+      <FilterGroup
+        v-if="hasPriceFilter"
+        :title="$t('Search.priceRange.title') || 'Price Range'"
+        icon="pi pi-dollar"
+        :count="1"
+        icon-variant="quaternary"
+      >
+        <FilterChip
+          :label="formatPriceRange"
+          variant="primary"
+          @remove="removePriceRangeFromUrl"
+        />
+      </FilterGroup>
 
       <!-- Amenities Filter -->
-      <div v-if="activeFilters.amenities.length" class="filter-group">
-        <div class="mb-3 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div
-              class="flex h-7 w-7 items-center justify-center rounded-full bg-primary/20 shadow-sm ring-2 ring-primary-100/15 dark:bg-primary/25 dark:ring-primary/20"
-            >
-              <i
-                class="pi pi-list text-sm font-bold text-primary-100 dark:text-light"
-              ></i>
-            </div>
-            <span
-              class="font-robotoRegular text-sm font-medium text-primary-200 dark:text-light"
-            >
-              {{ $t("Search.amenities.title") || "Amenities" }}
-            </span>
-            <span
-              class="rounded-full bg-gradient-to-r from-primary-100/20 to-primary/30 px-3 py-1 text-xs font-bold text-primary-100 shadow-sm ring-1 ring-primary-100/20 dark:from-primary/25 dark:to-primary-200/35 dark:text-primary dark:ring-primary/15"
-            >
-              {{ activeFilters.amenities.length }}
-            </span>
-          </div>
+      <FilterGroup
+        :title="$t('Search.amenities.title') || 'Amenities'"
+        icon="pi pi-list"
+        :count="activeFilters.amenities.length"
+        :items="activeFilters.amenities"
+        icon-variant="quaternary"
+      >
+        <template #actions>
           <Button
             v-if="activeFilters.amenities.length > 3"
             @click="showAllAmenities = !showAllAmenities"
             variant="text"
             size="small"
-            class="h-7 rounded-full bg-gradient-to-r from-primary-100/15 to-primary/25 px-3 text-xs font-semibold text-primary-100 shadow-sm transition-all hover:from-primary-100/25 hover:to-primary/35 hover:shadow-md dark:from-primary/20 dark:to-primary-200/30 dark:text-primary dark:hover:from-primary/30 dark:hover:to-primary-200/40"
+            class="h-7 rounded-full bg-gradient-to-r from-primary-100/15 to-primary/25 px-3 text-xs font-semibold text-primary-100 shadow-sm transition-all hover:from-primary-100/25 hover:to-primary/35 hover:shadow-md dark:from-primary/20 dark:to-primary-200/30 dark:text-light dark:hover:from-primary/30 dark:hover:to-primary-200/40"
             :label="
               showAllAmenities
                 ? 'Show Less'
                 : `+${activeFilters.amenities.length - 3} more`
             "
           />
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <Chip
-            v-for="(amenity, index) in displayedAmenities"
-            :key="amenity.id"
-            removable
-            :label="amenity.name"
-            class="modern-chip primary-chip"
-            @remove="removeAmenityFromUrl(amenity)"
-            :pt="{
-              root: '!bg-primary/12 !border-primary-100/35 hover:!bg-primary/20 dark:!bg-primary/25 dark:!border-primary/50 dark:hover:!bg-primary/35 !text-primary-100 dark:!text-light !rounded-full !px-3 !py-1.5 !text-sm font-medium transition-all duration-200 shadow-sm hover:shadow-md',
-              removeIcon:
-                '!text-primary-100 hover:!text-primary dark:!text-light dark:hover:!text-light/80 !ml-2 transition-colors',
-            }"
-          />
-        </div>
-      </div>
+        </template>
+        <FilterChip
+          v-for="(amenity, index) in displayedAmenities"
+          :key="amenity.id"
+          :label="amenity.name"
+          variant="primary"
+          @remove="removeAmenityFromUrl(amenity)"
+        />
+      </FilterGroup>
     </div>
     <!-- Modern Footer -->
     <div
@@ -265,7 +178,7 @@
           class="font-robotoRegular text-xs text-primary-200/70 dark:text-light/90"
         >
           <i
-            class="pi pi-info-circle text-blue-500 dark:text-blue-400 mr-1"
+            class="pi pi-info-circle mr-1 text-blue-500 dark:text-blue-400"
           ></i>
           {{
             $t("Search.filters.tips") || "Click on any filter chip to remove it"
@@ -293,26 +206,38 @@
 import { ref, computed, onMounted, watch } from "vue";
 import type { Canton, Amenity, Filters } from "@/types/hotel";
 import SearchFilters from "~/components/Search/Filters/SearchFilters.vue";
-import Chip from "primevue/chip";
+import FilterGroup from "~/components/Search/FilterGroup.vue";
+import FilterChip from "~/components/Search/FilterChip.vue";
 // Import utility function for extracting filters from URL
 import { extractFiltersFromUrl } from "~/utils/filter-url-params";
+import { useFilterUrlManagement } from "~/composables/useFilterUrlManagement";
 
 const route = useRoute();
 const router = useRouter();
 const showFilters = ref(false);
 const showAllAmenities = ref(false);
 
+// Use the filter URL management composable
+const {
+  clearAllFilters,
+  removeSearchTerm,
+  removePriceRange,
+  removeCanton,
+  removeAmenity,
+  removeStar,
+} = useFilterUrlManagement();
+
 // Define reactive filters based on URL params
 const searchTerm = computed(() => (route.query.q as string) || "");
 const activeFilters = ref<{
   cantons: Canton[];
   amenities: Amenity[];
-  stars: string;
+  stars: string[];
   price_range: { from: number | null; to: number | null };
 }>({
   cantons: [],
   amenities: [],
-  stars: "",
+  stars: [],
   price_range: { from: null, to: null },
 });
 
@@ -331,7 +256,8 @@ const activeFiltersCount = computed(() => {
     count += activeFilters.value.cantons.length;
   if (activeFilters.value.amenities.length > 0)
     count += activeFilters.value.amenities.length;
-  if (activeFilters.value.stars) count += 1;
+  if (activeFilters.value.stars.length > 0)
+    count += activeFilters.value.stars.length;
   if (hasPriceFilter.value) count += 1;
   if (searchTerm.value) count += 1;
   return count;
@@ -374,12 +300,11 @@ const updateFiltersFromUrl = async () => {
     route,
     filters.value,
   );
-
   // Update active filters
   activeFilters.value = {
     cantons: extractedFilters.cantons || [],
     amenities: extractedFilters.amenities || [],
-    stars: extractedFilters.stars || "",
+    stars: extractedFilters.stars || [],
     price_range: extractedFilters.price_range || { from: null, to: null },
   };
 };
@@ -390,66 +315,13 @@ const handleFiltersUpdate = (newFilters: Filters) => {
   // The filter component already handles the URL navigation
 };
 
-// Clear all filters by removing all URL parameters
-const clearFiltersFromUrl = async () => {
-  await router.replace({ query: {} });
-};
-
-// Remove canton filter
-const removeCantonFromUrl = async (canton: Canton) => {
-  const newCantons = activeFilters.value.cantons
-    .filter((c) => c.id !== canton.id)
-    .map((c) => c.id);
-
-  const query = { ...route.query };
-
-  if (newCantons.length) {
-    query.cantons = newCantons.join(",");
-  } else {
-    delete query.cantons;
-  }
-
-  await router.replace({ query });
-};
-
-// Remove stars filter
-const removeStarsFromUrl = async () => {
-  const query = { ...route.query };
-  delete query.stars;
-  await router.replace({ query });
-};
-
-// Remove price range filter
-const removePriceRangeFromUrl = async () => {
-  const query = { ...route.query };
-  delete query.price_min;
-  delete query.price_max;
-  await router.replace({ query });
-};
-
-// Remove amenity filter
-const removeAmenityFromUrl = async (amenity: Amenity) => {
-  const newAmenities = activeFilters.value.amenities
-    .filter((a) => a.id !== amenity.id)
-    .map((a) => a.id);
-
-  const query = { ...route.query };
-
-  if (newAmenities.length) {
-    query.amenities = newAmenities.join(",");
-  } else {
-    delete query.amenities;
-  }
-
-  await router.replace({ query });
-};
-
-// Remove search term
-const removeSearchTermFromUrl = async () => {
-  const query = { ...route.query };
-  delete query.q;
-  await router.replace({ query });
-};
+// Simplified filter removal functions using the composable
+const clearFiltersFromUrl = clearAllFilters;
+const removeSearchTermFromUrl = removeSearchTerm;
+const removePriceRangeFromUrl = removePriceRange;
+const removeCantonFromUrl = (canton: Canton) => removeCanton(canton);
+const removeAmenityFromUrl = (amenity: Amenity) => removeAmenity(amenity);
+const removeStarFromUrl = (star: string) => removeStar(star);
 
 // Watch for route query changes and update the active filters
 watch(
@@ -522,13 +394,6 @@ onMounted(async () => {
   to {
     opacity: 1;
     transform: scale(1);
-  }
-}
-
-/* Responsive improvements */
-@media (max-width: 640px) {
-  :deep(.modern-chip) {
-    @apply text-xs;
   }
 }
 </style>

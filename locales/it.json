@@ -13,6 +13,11 @@
     "from": "Da",
     "viewDetails": "Vedi dettagli",
     "noResults": "Nessun risultato trovato",
+    "noResultsDescription": "Non siamo riusciti a trovare hotel che corrispondano ai tuoi criteri. Prova a modificare la ricerca o i filtri.",
+    "tryTheseSuggestions": "Prova questi suggerimenti:",
+    "adjustFilters": "Regola i filtri",
+    "tryDifferentKeywords": "Parole chiave diverse",
+    "expandSearchArea": "Espandi area di ricerca",
     "clearAll": "Cancella tutto",
     "done": "Fatto"
   },
@@ -72,12 +77,31 @@
       "title": "Fascia di prezzo",
       "description": "Filtra gli hotel per fascia di prezzo",
       "min": "Prezzo minimo",
-      "max": "Prezzo massimo"
+      "max": "Prezzo massimo",
+      "minLabel": "Prezzo minimo",
+      "maxLabel": "Prezzo massimo",
+      "quickSelect": "Selezione rapida",
+      "anyPrice": "Qualsiasi prezzo",
+      "noLimit": "Nessun limite",
+      "selectedRange": "Fascia selezionata:",
+      "customRange": "Fascia personalizzata",
+      "perNight": "Per notte",
+      "presets": {
+        "budget": "Budget",
+        "midRange": "Fascia media",
+        "luxury": "Lusso",
+        "premium": "Premium"
+      },
+      "validation": {
+        "minGreaterThanMax": "Il prezzo minimo non può essere superiore al prezzo massimo",
+        "priceNegative": "Il prezzo non può essere negativo"
+      }
     },
     "hotelClass": {
       "title": "Categoria dell'hotel",
-      "description": "Seleziona una categoria di hotel per filtrare i risultati di ricerca. Puoi scegliere tra 1 e 5 stelle oppure selezionare 'Tutti' per includere tutte le categorie.",
-      "all": "Tutti"
+      "description": "Seleziona categorie di hotel per filtrare i risultati di ricerca. Puoi scegliere tra 1 e 5 stelle, selezionare più valutazioni oppure scegliere 'Tutti' per includere tutte le categorie.",
+      "all": "Tutti",
+      "selected": "selezionato"
     },
     "cantons": {
       "title": "Cantoni",

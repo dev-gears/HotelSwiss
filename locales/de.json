@@ -3,6 +3,12 @@
     "loadMore": "Mehr anzeigen",
     "viewAll": "Alle anzeigen",
     "optional": "Optional",
+    "hotelClass": {
+      "title": "Hotel-Kategorie",
+      "description": "Wählen Sie Hotel-Kategorien aus, um Ihre Suchergebnisse zu filtern. Sie können zwischen 1 und 5 Sternen wählen, mehrere Bewertungen auswählen oder 'Alle' wählen, um alle Kategorien einzuschließen.",
+      "all": "Alle",
+      "selected": "ausgewählt"
+    },
     "recommended": "Empfohlen",
     "sortBy": "Sortieren nach",
     "priceHighToLow": "Preis: Höchster zuerst",
@@ -13,6 +19,11 @@
     "from": "Ab",
     "viewDetails": "Details ansehen",
     "noResults": "Keine Ergebnisse gefunden",
+    "noResultsDescription": "Wir konnten keine Hotels finden, die Ihren Kriterien entsprechen. Versuchen Sie, Ihre Suche oder Filter anzupassen.",
+    "tryTheseSuggestions": "Versuchen Sie diese Vorschläge:",
+    "adjustFilters": "Filter anpassen",
+    "tryDifferentKeywords": "Andere Suchbegriffe",
+    "expandSearchArea": "Suchbereich erweitern",
     "clearAll": "Alle löschen",
     "done": "Fertig"
   },
@@ -71,12 +82,31 @@
       "title": "Preisspanne",
       "description": "Filtern Sie Hotels nach Preisbereich",
       "min": "Mindestpreis",
-      "max": "Höchstpreis"
+      "max": "Höchstpreis",
+      "minLabel": "Mindestpreis",
+      "maxLabel": "Höchstpreis",
+      "quickSelect": "Schnellauswahl",
+      "anyPrice": "Beliebiger Preis",
+      "noLimit": "Kein Limit",
+      "selectedRange": "Ausgewählter Bereich:",
+      "customRange": "Benutzerdefinierter Bereich",
+      "perNight": "Pro Nacht",
+      "presets": {
+        "budget": "Budget",
+        "midRange": "Mittelklasse",
+        "luxury": "Luxus",
+        "premium": "Premium"
+      },
+      "validation": {
+        "minGreaterThanMax": "Der Mindestpreis darf nicht höher als der Höchstpreis sein",
+        "priceNegative": "Der Preis darf nicht negativ sein"
+      }
     },
     "hotelClass": {
       "title": "Hotelkategorie",
-      "description": "Wählen Sie eine Hotelkategorie, um Ihre Suchergebnisse zu filtern. Sie können zwischen 1 bis 5 Sternen wählen oder 'Alle' auswählen, um alle Kategorien einzuschließen.",
-      "all": "Alle"
+      "description": "Wählen Sie Hotelkategorien aus, um Ihre Suchergebnisse zu filtern. Sie können zwischen 1 bis 5 Sternen wählen, mehrere Bewertungen auswählen oder 'Alle' wählen, um alle Kategorien einzuschließen.",
+      "all": "Alle",
+      "selected": "ausgewählt"
     },
     "cantons": {
       "title": "Kantone",

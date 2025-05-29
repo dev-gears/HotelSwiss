@@ -13,6 +13,11 @@
     "from": "À partir de",
     "viewDetails": "Voir les détails",
     "noResults": "Aucun résultat trouvé",
+    "noResultsDescription": "Nous n'avons trouvé aucun hôtel correspondant à vos critères. Essayez d'ajuster votre recherche ou vos filtres.",
+    "tryTheseSuggestions": "Essayez ces suggestions :",
+    "adjustFilters": "Ajuster les filtres",
+    "tryDifferentKeywords": "Mots-clés différents",
+    "expandSearchArea": "Élargir la zone de recherche",
     "clearAll": "Tout effacer",
     "done": "Terminé"
   },
@@ -71,12 +76,31 @@
       "title": "Fourchette de prix",
       "description": "Filtrer les hôtels par fourchette de prix",
       "min": "Prix minimum",
-      "max": "Prix maximum"
+      "max": "Prix maximum",
+      "minLabel": "Prix minimum",
+      "maxLabel": "Prix maximum",
+      "quickSelect": "Sélection rapide",
+      "anyPrice": "Tout prix",
+      "noLimit": "Sans limite",
+      "selectedRange": "Plage sélectionnée :",
+      "customRange": "Plage personnalisée",
+      "perNight": "Par nuit",
+      "presets": {
+        "budget": "Budget",
+        "midRange": "Gamme moyenne",
+        "luxury": "Luxe",
+        "premium": "Premium"
+      },
+      "validation": {
+        "minGreaterThanMax": "Le prix minimum ne peut pas être supérieur au prix maximum",
+        "priceNegative": "Le prix ne peut pas être négatif"
+      }
     },
     "hotelClass": {
       "title": "Classe de l'hôtel",
-      "description": "Sélectionnez une classe d'hôtel pour affiner vos résultats de recherche. Vous pouvez choisir de 1 à 5 étoiles ou sélectionner 'Tous' pour inclure toutes les classes.",
-      "all": "Tous"
+      "description": "Sélectionnez des classes d'hôtel pour affiner vos résultats de recherche. Vous pouvez choisir de 1 à 5 étoiles, sélectionner plusieurs évaluations ou choisir 'Tous' pour inclure toutes les classes.",
+      "all": "Tous",
+      "selected": "sélectionné"
     },
     "cantons": {
       "title": "Cantons",

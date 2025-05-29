@@ -13,7 +13,13 @@
     "from": "From",
     "viewDetails": "View details",
     "noResults": "No results found",
+    "noResultsDescription": "We couldn't find any hotels matching your criteria. Try adjusting your search or filters.",
+    "tryTheseSuggestions": "Try these suggestions:",
+    "adjustFilters": "Adjust filters",
+    "tryDifferentKeywords": "Try different keywords",
+    "expandSearchArea": "Expand search area",
     "clearAll": "Clear All",
+    "clear": "Clear",
     "done": "Done"
   },
   "LanguageButton": {
@@ -72,12 +78,31 @@
       "title": "Price Range",
       "description": "Filter hotels by price range",
       "min": "Min price",
-      "max": "Max price"
+      "max": "Max price",
+      "minLabel": "Minimum price",
+      "maxLabel": "Maximum price",
+      "quickSelect": "Quick select",
+      "anyPrice": "Any price",
+      "noLimit": "No limit",
+      "selectedRange": "Selected range:",
+      "customRange": "Custom range",
+      "perNight": "Per night",
+      "presets": {
+        "budget": "Budget",
+        "midRange": "Mid-range",
+        "luxury": "Luxury",
+        "premium": "Premium"
+      },
+      "validation": {
+        "minGreaterThanMax": "Minimum price cannot be greater than maximum price",
+        "priceNegative": "Price cannot be negative"
+      }
     },
     "hotelClass": {
       "title": "Hotel Class",
-      "description": "Select a hotel class to filter your search results. You can choose from 1 to 5 stars, or select 'all' to include all classes in your search.",
-      "all": "All"
+      "description": "Select hotel classes to filter your search results. You can choose from 1 to 5 stars, select multiple ratings, or choose 'All' to include all classes.",
+      "all": "All",
+      "selected": "selected"
     },
     "cantons": {
       "title": "Cantons",

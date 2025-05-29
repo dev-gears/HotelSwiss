@@ -84,7 +84,7 @@ const showFilters = ref(false);
 const localCantons = ref([]) as Ref<Canton[]>;
 const localPriceRange = ref<PriceRange>({ from: null, to: null });
 const localAmenities = ref([]) as Ref<number[]>;
-const localStars = ref("") as Ref<string>;
+const localStars = ref([]) as Ref<string[]>;
 const searchValue = ref("");
 
 // Initialize filter values from URL parameters
@@ -102,10 +102,10 @@ const initFiltersFromUrl = () => {
   if (route.query.q) {
     searchValue.value = route.query.q as string;
   }
-
   // Get stars
   if (route.query.stars) {
-    localStars.value = route.query.stars as string;
+    const stars = (route.query.stars as string).split(",").filter(Boolean);
+    localStars.value = stars;
   }
 
   // Get price range
@@ -154,7 +154,7 @@ const clearLocalFilters = () => {
   localCantons.value = [];
   localPriceRange.value = { from: null, to: null };
   localAmenities.value = [];
-  localStars.value = "";
+  localStars.value = [];
   searchValue.value = "";
 };
 
@@ -190,10 +190,9 @@ const navigateWithFilters = async () => {
   if (localCantons.value.length) {
     query.cantons = localCantons.value.map((c) => c.id).join(",");
   }
-
   // Add stars
-  if (localStars.value) {
-    query.stars = localStars.value;
+  if (localStars.value.length) {
+    query.stars = localStars.value.join(",");
   }
   // Add amenities
   if (localAmenities.value.length) {
