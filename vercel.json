@@ -10,7 +10,7 @@
       "NODE_OPTIONS": "--max-old-space-size=4096",
       "NITRO_PRESET": "vercel",
       "NODE_ENV": "production",
-      "BASE_URL": "https://hotel-swiss-prod.vercel.app",
+      "BASE_URL": "https://hotelswiss.stefanivic.com",
       "API_PATH": "/api",
       "SITE_URL": "https://hotel-swiss-prod.vercel.app"
     }

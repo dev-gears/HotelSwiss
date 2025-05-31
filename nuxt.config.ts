@@ -4,10 +4,7 @@ import { fileURLToPath } from "url";
 
 // Robust environment variable handling with fallbacks
 const getApiConfig = () => {
-  const baseUrl =
-    process.env.BASE_URL ||
-    process.env.NUXT_PUBLIC_BASE_URL ||
-    "https://your-backend-api.com";
+  const baseUrl = process.env.BASE_URL || process.env.NUXT_PUBLIC_BASE_URL;
   const apiPath =
     process.env.API_PATH || process.env.NUXT_PUBLIC_API_PATH || "/api";
   const authCredentials =
@@ -212,10 +209,10 @@ export default defineNuxtConfig({
       process.env.NITRO_PRESET ||
       (process.env.VERCEL ? "vercel" : "node-server"),
     routeRules: {
-      // Home page - static content, fully prerendered
+      // Home page - SSR with API calls, cache for short time
       "/": {
-        prerender: true,
-        headers: { "cache-control": "s-maxage=3600" },
+        ssr: true,
+        headers: { "cache-control": "s-maxage=300" },
       },
 
       // Search page - dynamic with filters, no prerendering
@@ -242,7 +239,7 @@ export default defineNuxtConfig({
         headers: { "cache-control": "s-maxage=1800" },
       },
 
-      // Legal and static content pages - cache for 2 hours
+      // Legal and static content pages - these can remain prerendered
       "/privacy": {
         prerender: true,
         headers: { "cache-control": "s-maxage=7200" },
@@ -256,7 +253,7 @@ export default defineNuxtConfig({
         headers: { "cache-control": "s-maxage=7200" },
       },
 
-      // Support and informational pages - cache for 1 hour
+      // Support and informational pages - these can remain prerendered
       "/help": {
         prerender: true,
         headers: { "cache-control": "s-maxage=3600" },
@@ -278,9 +275,9 @@ export default defineNuxtConfig({
         headers: { "cache-control": "s-maxage=3600" },
       },
 
-      // Contact page - shorter cache since it might have dynamic elements
+      // Contact page - might have dynamic elements, use SSR
       "/contact": {
-        prerender: true,
+        ssr: true,
         headers: { "cache-control": "s-maxage=1800" },
       },
 
