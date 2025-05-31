@@ -27,3 +27,16 @@ img {
 * {
   transition: background-color 0.2s ease-in-out;
 }
+
+/* Font optimization to reduce warnings */
+body {
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure proper font loading */
+.font-robotoRegular {
+  font-family: "Roboto", "Roboto Regular", system-ui, sans-serif;
+}

@@ -9,11 +9,9 @@ export default {
         DEFAULT: '0',
         md: '1rem',
       },
-    },
-
-    fontFamily: {
+    }, fontFamily: {
       patuaOne: "Patua One",
-      robotoRegular: "Roboto Regular",
+      robotoRegular: ["Roboto", "Roboto Regular", "system-ui", "sans-serif"],
     },
 
     extend: {

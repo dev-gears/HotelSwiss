@@ -13,6 +13,22 @@ export default defineNuxtConfig({
         lang: "en",
         class: "theme-loading", // Add initial class for theme handling
       },
+      link: [
+        {
+          rel: "preload",
+          href: "/assets/fonts/Roboto/roboto-regular.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "anonymous",
+        },
+        {
+          rel: "preload",
+          href: "/assets/fonts/Patua_One/PatuaOne-Regular.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "anonymous",
+        },
+      ],
     },
   },
   runtimeConfig: {
@@ -200,11 +216,69 @@ export default defineNuxtConfig({
         cache: {
           maxAge: 1800, // 30 minutes
         },
-      },
-
-      // Canton pages - semi-static, can be cached longer
+      }, // Canton pages - semi-static, can be cached longer
       "/canton/**": {
         ssr: true,
+        cache: {
+          maxAge: 1800, // 30 minutes
+        },
+      },
+
+      // Legal and static content pages - cache for 2 hours
+      "/privacy": {
+        prerender: true,
+        cache: {
+          maxAge: 7200, // 2 hours
+        },
+      },
+      "/terms": {
+        prerender: true,
+        cache: {
+          maxAge: 7200, // 2 hours
+        },
+      },
+      "/cookies": {
+        prerender: true,
+        cache: {
+          maxAge: 7200, // 2 hours
+        },
+      },
+
+      // Support and informational pages - cache for 1 hour
+      "/help": {
+        prerender: true,
+        cache: {
+          maxAge: 3600, // 1 hour
+        },
+      },
+      "/contact-guide": {
+        prerender: true,
+        cache: {
+          maxAge: 3600, // 1 hour
+        },
+      },
+      "/contact-policy": {
+        prerender: true,
+        cache: {
+          maxAge: 3600, // 1 hour
+        },
+      },
+      "/faq": {
+        prerender: true,
+        cache: {
+          maxAge: 3600, // 1 hour
+        },
+      },
+      "/about": {
+        prerender: true,
+        cache: {
+          maxAge: 3600, // 1 hour
+        },
+      },
+
+      // Contact page - shorter cache since it might have dynamic elements
+      "/contact": {
+        prerender: true,
         cache: {
           maxAge: 1800, // 30 minutes
         },
