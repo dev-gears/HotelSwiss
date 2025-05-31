@@ -4,15 +4,31 @@ import { fileURLToPath } from "url";
 
 // Robust environment variable handling with fallbacks
 const getApiConfig = () => {
-  const baseUrl = process.env.BASE_URL || process.env.NUXT_PUBLIC_BASE_URL;
-  const apiPath =
-    process.env.API_PATH || process.env.NUXT_PUBLIC_API_PATH || "/api";
-  const authCredentials =
-    process.env.AUTH_CREDENTIALS || process.env.NUXT_AUTH_CREDENTIALS || "";
+  // For this hotel site, it appears you're using your own backend API
+  // Let's set a proper fallback that won't break the build
+  const baseUrl = process.env.BASE_URL || 
+                 process.env.NUXT_PUBLIC_BASE_URL || 
+                 "https://hotelswiss.stefanivic.com";
+  const apiPath = process.env.API_PATH || 
+                 process.env.NUXT_PUBLIC_API_PATH || 
+                 "/api";
+  const authCredentials = process.env.AUTH_CREDENTIALS || 
+                         process.env.NUXT_AUTH_CREDENTIALS || 
+                         "";
 
   const headers: Record<string, string> = {};
   if (authCredentials) {
     headers.Authorization = `Basic ${btoa(authCredentials)}`;
+  }
+
+  // Debug log for build time (will be removed in production)
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('API Config:', { 
+      baseUrl, 
+      apiPath, 
+      fullUrl: baseUrl + apiPath,
+      hasAuth: !!authCredentials 
+    });
   }
 
   return {

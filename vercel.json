@@ -1,13 +1,10 @@
 {
-  "buildCommand": "npm run build:vercel",
-  "devCommand": "npm run dev",
-  "installCommand": "npm ci --prefer-offline --no-audit --legacy-peer-deps",
   "framework": "nuxtjs",
+  "buildCommand": "npm run build",
+  "installCommand": "npm ci --prefer-offline --no-audit --legacy-peer-deps",
   "build": {
     "env": {
       "NPM_CONFIG_LEGACY_PEER_DEPS": "true",
-      "SKIP_ENV_VALIDATION": "true",
-      "NODE_OPTIONS": "--max-old-space-size=4096",
       "NITRO_PRESET": "vercel",
       "NODE_ENV": "production",
       "BASE_URL": "https://hotelswiss.stefanivic.com",
@@ -15,33 +12,5 @@
       "SITE_URL": "https://hotel-swiss-prod.vercel.app"
     }
   },
-  "routes": [
-    {
-      "src": "/_nuxt/(.*)",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "src": "/assets/(.*)",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/server/api/$1"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/server"
-    }
-  ],
-  "regions": ["iad1"],
-  "git": {
-    "deploymentEnabled": true
-  }
+  "regions": ["iad1"]
 }
