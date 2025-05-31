@@ -2,9 +2,29 @@ import { defineNuxtConfig } from "nuxt/config";
 import Lara from "@primevue/themes/lara";
 import { fileURLToPath } from "url";
 
-const headerAuth = {
-  Authorization: `Basic ${btoa(process.env.AUTH_CREDENTIALS as string)}`,
+// Robust environment variable handling with fallbacks
+const getApiConfig = () => {
+  const baseUrl =
+    process.env.BASE_URL ||
+    process.env.NUXT_PUBLIC_BASE_URL ||
+    "https://your-backend-api.com";
+  const apiPath =
+    process.env.API_PATH || process.env.NUXT_PUBLIC_API_PATH || "/api";
+  const authCredentials =
+    process.env.AUTH_CREDENTIALS || process.env.NUXT_AUTH_CREDENTIALS || "";
+
+  const headers: Record<string, string> = {};
+  if (authCredentials) {
+    headers.Authorization = `Basic ${btoa(authCredentials)}`;
+  }
+
+  return {
+    url: baseUrl + apiPath,
+    headers,
+  };
 };
+
+const apiConfig = getApiConfig();
 
 export default defineNuxtConfig({
   app: {
@@ -83,8 +103,8 @@ export default defineNuxtConfig({
   apiParty: {
     endpoints: {
       hotelApi: {
-        url: process.env.BASE_URL! + process.env.API_PATH!,
-        headers: headerAuth,
+        url: apiConfig.url,
+        headers: apiConfig.headers,
         cookies: true,
       },
     },

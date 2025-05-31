@@ -9,7 +9,10 @@
       "SKIP_ENV_VALIDATION": "true",
       "NODE_OPTIONS": "--max-old-space-size=4096",
       "NITRO_PRESET": "vercel",
-      "NODE_ENV": "production"
+      "NODE_ENV": "production",
+      "BASE_URL": "https://hotel-swiss-prod.vercel.app",
+      "API_PATH": "/api",
+      "SITE_URL": "https://hotel-swiss-prod.vercel.app"
     }
   },
   "routes": [
@@ -18,6 +21,16 @@
       "headers": {
         "cache-control": "public, max-age=31536000, immutable"
       }
+    },
+    {
+      "src": "/assets/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/server/api/$1"
     },
     {
       "handle": "filesystem"
