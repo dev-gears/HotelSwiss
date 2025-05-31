@@ -1,30 +1,25 @@
 {
   "Common": {
-    "loadMore": "Mehr anzeigen",
+    "loadMore": "Mehr laden",
     "viewAll": "Alle anzeigen",
     "optional": "Optional",
-    "hotelClass": {
-      "title": "Hotel-Kategorie",
-      "description": "Wählen Sie Hotel-Kategorien aus, um Ihre Suchergebnisse zu filtern. Sie können zwischen 1 und 5 Sternen wählen, mehrere Bewertungen auswählen oder 'Alle' wählen, um alle Kategorien einzuschließen.",
-      "all": "Alle",
-      "selected": "ausgewählt"
-    },
     "recommended": "Empfohlen",
     "sortBy": "Sortieren nach",
-    "priceHighToLow": "Preis: Höchster zuerst",
-    "priceLowToHigh": "Preis: Niedrigster zuerst",
-    "ratingHighToLow": "Bewertung: Höchste zuerst",
-    "ratingLowToHigh": "Bewertung: Niedrigste zuerst",
+    "priceHighToLow": "Preis: absteigend",
+    "priceLowToHigh": "Preis: aufsteigend",
+    "ratingHighToLow": "Bewertung: absteigend",
+    "ratingLowToHigh": "Bewertung: aufsteigend",
     "toggleTheme": "Dunkelmodus umschalten",
-    "from": "Ab",
-    "viewDetails": "Details ansehen",
+    "from": "Von",
+    "viewDetails": "Details anzeigen",
     "noResults": "Keine Ergebnisse gefunden",
     "noResultsDescription": "Wir konnten keine Hotels finden, die Ihren Kriterien entsprechen. Versuchen Sie, Ihre Suche oder Filter anzupassen.",
     "tryTheseSuggestions": "Versuchen Sie diese Vorschläge:",
     "adjustFilters": "Filter anpassen",
-    "tryDifferentKeywords": "Andere Suchbegriffe",
+    "tryDifferentKeywords": "Andere Stichwörter ausprobieren",
     "expandSearchArea": "Suchbereich erweitern",
     "clearAll": "Alle löschen",
+    "clear": "Löschen",
     "done": "Fertig",
     "backToHome": "Zurück zur Startseite"
   },
@@ -32,7 +27,7 @@
     "selectLanguage": "Sprache auswählen"
   },
   "HotelDetails": {
-    "includedAmenities": "Inbegriffen"
+    "includedAmenities": "Inklusive"
   },
   "TabContent": {
     "noHotelsFound": "Keine Hotels gefunden"
@@ -45,8 +40,8 @@
   },
   "Content": {
     "class": "Klasse",
-    "readMore": "Mehr erfahren",
-    "whereYouWillBe": "Hier werden Sie sein"
+    "readMore": "Weiterlesen",
+    "whereYouWillBe": "Wo Sie sein werden"
   },
   "HotelAmenities": {
     "title": "Hotelangebote"
@@ -63,34 +58,35 @@
       "searchHotels": "Hotels suchen",
       "activeFilters": "Aktive Filter",
       "clearAllFilters": "Alle Filter löschen",
-      "tips": "Klicken Sie auf einen Filter-Chip, um ihn zu entfernen",
+      "tips": "Klicken Sie auf einen Filter, um ihn zu entfernen",
       "refineSearch": "Suche verfeinern",
       "editFilters": "Bearbeiten",
-      "amenities": "Annehmlichkeiten",
-      "stars": "Sterne-Bewertung",
+      "amenities": "Ausstattung",
+      "stars": "Sternebewertung",
       "priceRange": "Preisspanne"
     },
     "searchForSpecificHotel": "Nach einem bestimmten Hotel suchen",
+    "searchTerm": "Suchbegriff",
     "amenities": {
-      "title": "Annehmlichkeiten",
-      "viewAll": "Alle Annehmlichkeiten anzeigen",
-      "allAmenities": "Alle Annehmlichkeiten",
-      "searchPlaceholder": "Annehmlichkeiten suchen...",
-      "noResults": "Keine Annehmlichkeiten entsprechen Ihrer Suche",
+      "title": "Ausstattung",
+      "viewAll": "Alle Ausstattungen anzeigen",
+      "allAmenities": "Alle Ausstattungen",
+      "searchPlaceholder": "Ausstattungen suchen...",
+      "noResults": "Keine Ausstattungen gefunden",
       "selected": "ausgewählt"
     },
     "priceRange": {
       "title": "Preisspanne",
-      "description": "Filtern Sie Hotels nach Preisbereich",
+      "description": "Filter Hotels nach Preisspanne",
       "min": "Mindestpreis",
       "max": "Höchstpreis",
       "minLabel": "Mindestpreis",
-      "maxLabel": "Höchstpreis",
+      "maxLabel": "Maximalpreis",
       "quickSelect": "Schnellauswahl",
       "anyPrice": "Beliebiger Preis",
-      "noLimit": "Kein Limit",
-      "selectedRange": "Ausgewählter Bereich:",
-      "customRange": "Benutzerdefinierter Bereich",
+      "noLimit": "Keine Begrenzung",
+      "selectedRange": "Ausgewählte Spanne:",
+      "customRange": "Benutzerdefinierte Spanne",
       "perNight": "Pro Nacht",
       "presets": {
         "budget": "Budget",
@@ -99,60 +95,60 @@
         "premium": "Premium"
       },
       "validation": {
-        "minGreaterThanMax": "Der Mindestpreis darf nicht höher als der Höchstpreis sein",
-        "priceNegative": "Der Preis darf nicht negativ sein"
+        "minGreaterThanMax": "Mindestpreis darf nicht höher als Höchstpreis sein",
+        "priceNegative": "Preis darf nicht negativ sein"
       }
     },
     "hotelClass": {
-      "title": "Hotelkategorie",
-      "description": "Wählen Sie Hotelkategorien aus, um Ihre Suchergebnisse zu filtern. Sie können zwischen 1 bis 5 Sternen wählen, mehrere Bewertungen auswählen oder 'Alle' wählen, um alle Kategorien einzuschließen.",
+      "title": "Hotelklasse",
+      "description": "Wählen Sie Hotelklassen, um Ihre Suchergebnisse zu filtern. Sie können zwischen 1 und 5 Sternen wählen, mehrere Bewertungen auswählen oder 'Alle' wählen, um alle Klassen einzuschließen.",
       "all": "Alle",
       "selected": "ausgewählt"
     },
     "cantons": {
       "title": "Kantone",
-      "description": "Wählen Sie einen oder mehrere Kantone aus der Liste unten aus."
+      "description": "Wählen Sie einen oder mehrere Kantone aus der Liste unten."
     }
   },
   "PromoBlock": {
-    "promoHotels": "Aktionshotels"
+    "promoHotels": "Promo-Hotels"
   },
   "ContactFooter": {
     "from": "Von",
     "to": "Bis",
     "priceNotAvailable": "Preis nicht verfügbar",
     "contactHotel": "Hotel kontaktieren",
-    "info": "Hotel steht nicht für Kontakt zur Verfügung.",
-    "contactHotelInfo": "Dieses Hotel hat unseren Online-Service nicht abonniert. Sie können das Hotel direkt kontaktieren oder nach einem anderen verfügbaren Hotel in der Gegend suchen."
+    "info": "Hotel nicht verfügbar für Kontakt.",
+    "contactHotelInfo": "Dieses Hotel ist nicht für unseren Online-Service registriert. Sie können das Hotel direkt kontaktieren oder nach einem anderen verfügbaren Hotel in der Umgebung suchen."
   },
   "SocialNetworks": {
     "visitUsAlsoOn": "Besuchen Sie uns auch auf"
   },
   "ContactForm": {
-    "title": "Kontakt",
+    "title": "Kontaktieren Sie uns",
     "fields": {
       "name": {
         "label": "Name",
-        "placeholder": "Name eingeben",
-        "error": "Name erforderlich"
+        "placeholder": "Geben Sie Ihren Namen ein",
+        "error": "Name ist Pflicht"
       },
       "email": {
         "label": "E-Mail",
-        "placeholder": "E-Mail eingeben",
+        "placeholder": "Geben Sie Ihre E-Mail ein",
         "error": "Bitte geben Sie eine gültige E-Mail ein"
       },
       "phone": {
         "label": "Telefon",
-        "placeholder": "Telefonnummer eingeben (optional)"
+        "placeholder": "Geben Sie Ihre Telefonnummer ein (optional)"
       },
       "date": {
         "label": "Datum",
-        "placeholder": "Datum wählen (optional)"
+        "placeholder": "Datum auswählen (optional)"
       },
       "message": {
         "label": "Nachricht",
-        "placeholder": "Nachricht eingeben",
-        "error": "Nachricht erforderlich"
+        "placeholder": "Geben Sie Ihre Nachricht ein",
+        "error": "Nachricht ist Pflicht"
       }
     },
     "buttons": {
@@ -166,56 +162,56 @@
     "imageOf": "Bild von {title}",
     "priceRange": "{start} - {end}",
     "priceFrom": "Ab {price}",
-    "priceUpTo": "Bis zu {price}",
+    "priceUpTo": "Bis {price}",
     "priceOnRequest": "Preis auf Anfrage",
     "verified": "Verifiziert",
     "plusMoreItems": "+{count}",
-    "additionalAmenities": "{count} weitere Annehmlichkeiten"
+    "additionalAmenities": "{count} weitere Ausstattungen"
   },
   "Footer": {
     "brandName": "Hotel Swiss",
-    "brandDescription": "Entdecken Sie die besten Hotels in der Schweiz. Verbinden Sie sich direkt mit Unterkünften über unsere Kontaktvermittlungsplattform für außergewöhnlichen Service und unvergessliche Erlebnisse.",
-    "quickLinks": "Schnellzugriff",
+    "brandDescription": "Entdecken Sie die besten Hotels in der ganzen Schweiz. Verbinden Sie sich direkt mit Unterkünften über unsere Kontaktplattform für außergewöhnlichen Service und unvergessliche Erlebnisse.",
+    "quickLinks": "Schnellzugriffe",
     "support": "Support",
     "contact": "Kontakt",
     "home": "Startseite",
-    "findHotels": "Hotels Finden",
+    "findHotels": "Hotels finden",
     "luxury": "Luxushotels",
-    "budget": "Budget Hotels",
-    "about": "Über Uns",
-    "contactUs": "Kontakt",
+    "budget": "Budgethotels",
+    "about": "Über uns",
+    "contactUs": "Kontaktieren Sie uns",
     "help": "Hilfe-Center",
-    "contactGuide": "Kontakt-Leitfaden",
+    "contactGuide": "Kontaktleitfaden",
     "contactPolicy": "Kontakt-Richtlinie",
     "faq": "FAQ",
     "address": "Bahnhofstrasse 1, 8001 Zürich, Schweiz",
     "phone": "+41 44 123 45 67",
     "copyright": "© {year} Hotel Swiss. Alle Rechte vorbehalten.",
-    "privacy": "Datenschutz",
+    "privacy": "Datenschutzrichtlinie",
     "terms": "Nutzungsbedingungen",
     "cookies": "Cookie-Richtlinie",
     "madeWith": "Gemacht mit",
     "inSwitzerland": "in der Schweiz"
   },
   "Privacy": {
-    "pageTitle": "Datenschutzerklärung - Hotel Swiss",
-    "pageDescription": "Erfahren Sie, wie Hotel Swiss Ihre Privatsphäre schützt und Ihre persönlichen Daten behandelt.",
-    "title": "Datenschutzerklärung",
+    "pageTitle": "Datenschutzrichtlinie - Hotel Swiss",
+    "pageDescription": "Erfahren Sie, wie Hotel Swiss Ihre Privatsphäre schützt und mit Ihren persönlichen Daten umgeht.",
+    "title": "Datenschutzrichtlinie",
     "lastUpdated": "Zuletzt aktualisiert",
     "introduction": {
       "title": "Einführung",
-      "content": "Bei Hotel Swiss verpflichten wir uns, Ihre Privatsphäre zu schützen und die Sicherheit Ihrer persönlichen Daten zu gewährleisten. Diese Datenschutzerklärung erklärt, wie wir Ihre Daten sammeln, verwenden und schützen, wenn Sie unsere Kontaktvermittlungsplattform nutzen, um sich mit Schweizer Hotels zu verbinden."
+      "content": "Bei Hotel Swiss verpflichten wir uns, Ihre Privatsphäre zu schützen und die Sicherheit Ihrer persönlichen Daten zu gewährleisten. Diese Datenschutzrichtlinie erklärt, wie wir Ihre Daten sammeln, verwenden und schützen, wenn Sie unsere Kontaktplattform nutzen, um sich mit Schweizer Hotels zu verbinden."
     },
     "informationCollected": {
       "title": "Informationen, die wir sammeln",
       "types": {
         "personal": {
           "title": "Persönliche Informationen",
-          "content": "Wir sammeln persönliche Informationen wie Ihren Namen, E-Mail-Adresse und Telefonnummer, wenn Sie Hotels über unsere Plattform kontaktieren oder ein Konto erstellen."
+          "content": "Wir sammeln persönliche Informationen wie Ihren Namen, Ihre E-Mail-Adresse und Telefonnummer, wenn Sie über unsere Plattform Hotels kontaktieren oder ein Konto erstellen."
         },
         "contact": {
           "title": "Kontaktinformationen",
-          "content": "Wir sammeln Details über Ihre Hotelanfragen, Reisepräferenzen, spezielle Wünsche und Kommunikationshistorie, um Verbindungen mit Hotels zu erleichtern."
+          "content": "Wir sammeln Details zu Ihren Hotelanfragen, Reisepräferenzen, Sonderwünschen und Kommunikationsverlauf, um Verbindungen zu Hotels zu erleichtern."
         },
         "technical": {
           "title": "Technische Informationen",
@@ -223,7 +219,7 @@
         },
         "preferences": {
           "title": "Präferenzen und Kommunikation",
-          "content": "Wir sammeln Informationen über Ihre Kommunikationspräferenzen, Marketingzustimmung und Feedback, das Sie zur Verbesserung unserer Dienste bereitstellen."
+          "content": "Wir sammeln Informationen zu Ihren Kommunikationspräferenzen, Marketingeinwilligung und Feedback, um unsere Dienste zu verbessern."
         }
       }
     },
@@ -231,107 +227,107 @@
       "title": "Wie wir Ihre Informationen verwenden",
       "uses": {
         "facilitateContact": "Direkten Kontakt zwischen Gästen und Hotels ermöglichen",
-        "provideSupport": "Kundensupport und Unterstützung bei Hotelverbindungen bereitstellen",
+        "provideSupport": "Kundensupport und Unterstützung bei Hotelverbindungen anbieten",
         "improveServices": "Unsere Plattform und Kontaktvermittlungsdienste verbessern",
-        "communication": "Kontaktbestätigungen und wichtige Plattform-Updates senden",
-        "marketing": "Werbeangebote und Hotelempfehlungen senden (mit Ihrer Zustimmung)",
-        "legal": "Rechtliche Verpflichtungen erfüllen und Betrug verhindern"
+        "communication": "Ihnen Kontaktbestätigungen und wichtige Plattformupdates senden",
+        "marketing": "Ihnen Werbeangebote und Hotelsempfehlungen senden (mit Ihrer Einwilligung)",
+        "legal": "Gesetzlichen Verpflichtungen nachkommen und Betrug verhindern"
       }
     },
     "informationSharing": {
-      "title": "Informationsaustausch",
-      "content": "Wir verkaufen, tauschen oder vermieten Ihre persönlichen Daten nicht an Dritte. Wir teilen Ihre Informationen nur mit vertrauenswürdigen Partnern und Dienstleistern, die uns beim Betrieb unseres Geschäfts helfen, wie Zahlungsabwickler und Hotelpartner, und nur in dem Umfang, der zur Erbringung unserer Dienste erforderlich ist."
+      "title": "Informationsweitergabe",
+      "content": "Wir verkaufen, handeln oder vermieten Ihre persönlichen Daten nicht an Dritte. Wir geben Ihre Kontaktinformationen nur dann an Hotels weiter, wenn Sie über unsere Plattform Kontakt aufnehmen. Wir arbeiten mit vertrauenswürdigen Dienstleistern zusammen, die uns beim Betrieb unserer Plattform unterstützen, und geben Daten nur im erforderlichen Umfang weiter, um unsere Kontaktvermittlungsdienste bereitzustellen."
     },
     "yourRights": {
       "title": "Ihre Rechte",
       "rights": {
-        "access": "Zugriff auf und Einsicht in Ihre persönlichen Daten",
-        "rectification": "Korrektur ungenauer oder unvollständiger Informationen",
-        "erasure": "Beantragung der Löschung Ihrer persönlichen Daten",
+        "access": "Zugriff auf und Überprüfung Ihrer persönlichen Daten",
+        "rectification": "Berichtigung ungenauer oder unvollständiger Informationen",
+        "erasure": "Löschung Ihrer persönlichen Daten verlangen",
         "portability": "Erhalt einer Kopie Ihrer Daten in einem portablen Format",
-        "restriction": "Einschränkung der Verarbeitung Ihrer Informationen",
-        "objection": "Widerspruch gegen die Verarbeitung Ihrer Informationen"
+        "restriction": "Einschränkung der Verarbeitung Ihrer Informationen verlangen",
+        "objection": "Widerspruch gegen die Verarbeitung Ihrer Informationen einlegen"
       }
     },
     "contact": {
-      "title": "Kontakt",
-      "content": "Wenn Sie Fragen zu dieser Datenschutzerklärung haben oder Ihre Rechte ausüben möchten, kontaktieren Sie uns bitte:",
+      "title": "Kontaktieren Sie uns",
+      "content": "Wenn Sie Fragen zu dieser Datenschutzrichtlinie haben oder Ihre Rechte ausüben möchten, kontaktieren Sie uns bitte:",
       "email": "E-Mail",
       "address": "Adresse"
     }
   },
   "Terms": {
     "pageTitle": "Nutzungsbedingungen - Hotel Swiss",
-    "pageDescription": "Lesen Sie die Geschäftsbedingungen für die Nutzung der Hotel Swiss Dienste und Buchung von Unterkünften.",
+    "pageDescription": "Lesen Sie die Bedingungen für die Nutzung der Hotel Swiss-Dienste und das Buchen von Unterkünften.",
     "title": "Nutzungsbedingungen",
     "lastUpdated": "Zuletzt aktualisiert",
     "introduction": {
       "title": "Einführung",
-      "content": "Willkommen bei Hotel Swiss. Diese Nutzungsbedingungen regeln Ihre Nutzung unserer Website und Dienste. Durch den Zugriff auf oder die Nutzung unserer Plattform stimmen Sie zu, an diese Bedingungen gebunden zu sein."
+      "content": "Willkommen bei Hotel Swiss. Diese Nutzungsbedingungen regeln Ihre Nutzung unserer Kontaktplattform, die Gäste mit Schweizer Hotels verbindet. Durch den Zugriff auf oder die Nutzung unserer Plattform erklären Sie sich mit diesen Bedingungen einverstanden."
     },
     "acceptance": {
-      "title": "Annahme der Bedingungen",
-      "content": "Durch die Nutzung unserer Website, das Erstellen eines Kontos oder das Vornehmen einer Buchung bestätigen Sie, dass Sie diese Nutzungsbedingungen und unsere Datenschutzerklärung gelesen, verstanden und akzeptiert haben."
+      "title": "Akzeptanz der Bedingungen",
+      "content": "Durch die Nutzung unserer Website, die Erstellung eines Kontos oder das Kontaktieren von Hotels über unsere Plattform bestätigen Sie, dass Sie diese Nutzungsbedingungen und unsere Datenschutzrichtlinie gelesen, verstanden und akzeptiert haben."
     },
     "useOfService": {
       "title": "Nutzung des Dienstes",
       "rules": {
         "eligibility": {
           "title": "Berechtigung",
-          "content": "Sie müssen mindestens 18 Jahre alt sein, um unsere Dienste zu nutzen und Buchungen vorzunehmen. Sie sind dafür verantwortlich, sicherzustellen, dass alle von Ihnen bereitgestellten Informationen korrekt und aktuell sind."
+          "content": "Sie müssen mindestens 18 Jahre alt sein, um unsere Dienste zu nutzen, und sind dafür verantwortlich, dass alle von Ihnen bereitgestellten Informationen korrekt und aktuell sind."
         },
         "accountSecurity": {
           "title": "Kontosicherheit",
-          "content": "Sie sind verantwortlich für die Wahrung der Vertraulichkeit Ihrer Kontodaten und für alle Aktivitäten, die unter Ihrem Konto auftreten."
+          "content": "Sie sind dafür verantwortlich, die Vertraulichkeit Ihrer Kontodaten zu wahren und für alle Aktivitäten verantwortlich, die unter Ihrem Konto stattfinden."
         },
         "prohibitedUse": {
           "title": "Verbotene Nutzung",
-          "content": "Sie dürfen unseren Dienst nicht für illegale Aktivitäten, zur Schädigung unserer Systeme oder zur Beeinträchtigung der Erfahrung anderer Benutzer verwenden."
+          "content": "Sie dürfen unseren Dienst nicht für illegale Aktivitäten, zur Schädigung unserer Systeme oder zur Störung anderer Benutzer verwenden."
         },
         "contentPolicy": {
           "title": "Inhaltsrichtlinie",
-          "content": "Alle von Ihnen übermittelten Inhalte müssen korrekt, rechtmäßig und dürfen keine Rechte Dritter verletzen. Wir behalten uns das Recht vor, unangemessene Inhalte zu entfernen."
+          "content": "Alle von Ihnen eingereichten Inhalte müssen korrekt und legal sein und dürfen keine Rechte Dritter verletzen. Wir behalten uns das Recht vor, unangemessene Inhalte zu entfernen."
         }
       }
     },
     "contactTerms": {
-      "title": "Kontaktvermittlungsbedingungen",
+      "title": "Kontaktvermittlung Bedingungen",
       "terms": {
-        "availability": "Hotelkontaktinformationen unterliegen der Verfügbarkeit und Hotelteilnahme",
+        "availability": "Hotel-Kontaktinformationen unterliegen der Verfügbarkeit und Hotelteilnahme",
         "directContact": "Alle Kommunikation und Vereinbarungen erfolgen direkt zwischen Ihnen und dem Hotel",
-        "noCommission": "Hotel Swiss erhebt keine Provisionen für direkte Buchungen mit Hotels",
+        "noCommission": "Hotel Swiss erhebt keine Provisionen für direkte Buchungen bei Hotels",
         "verification": "Verifizierte Hotels haben unseren Verifizierungsprozess für erhöhte Glaubwürdigkeit durchlaufen",
-        "premiumPlacement": "Einige Hotels können für Premium-Platzierung in Suchergebnissen bezahlen"
+        "premiumPlacement": "Einige Hotels können für Premium-Platzierungen in den Suchergebnissen bezahlen"
       }
     },
     "verificationBadges": {
       "title": "Verifizierungsabzeichen",
-      "content": "Hotels können Verifizierungsabzeichen durch unseren kostenpflichtigen Verifizierungsprozess erhalten. Diese Abzeichen zeigen an, dass das Hotel für Authentizität und Qualitätsstandards verifiziert wurde."
+      "content": "Hotels können Verifizierungsabzeichen durch unseren kostenpflichtigen Verifizierungsprozess erhalten. Diese Abzeichen zeigen an, dass das Hotel auf Authentizität und Qualitätsstandards geprüft wurde."
     },
     "premiumPlacement": {
       "title": "Premium-Platzierung",
-      "content": "Hotels können für Premium-Platzierung in Suchergebnissen und Featured Listings bezahlen. Premium-Platzierung beeinflusst nicht unseren Verifizierungsprozess oder Qualitätsstandards."
+      "content": "Hotels können für Premium-Platzierungen in den Suchergebnissen und ausgewählten Listen bezahlen. Premium-Platzierungen beeinflussen nicht unseren Verifizierungsprozess oder unsere Qualitätsstandards."
     },
     "cancellation": {
-      "title": "Kontakt- und Kommunikationsrichtlinie",
-      "content": "Hotel Swiss erleichtert den Kontakt zwischen Gästen und Hotels. Alle Buchungsvereinbarungen, Stornierungen und Richtlinien werden direkt zwischen Ihnen und dem Hotel verwaltet.",
+      "title": "Kontakt- und Kommunikationsrichtlinien",
+      "content": "Hotel Swiss ermöglicht den Kontakt zwischen Gästen und Hotels. Alle Buchungsvereinbarungen, Stornierungen und Richtlinien werden direkt zwischen Ihnen und dem Hotel verwaltet.",
       "policy": {
-        "title": "Kommunikationsrichtlinien",
+        "title": "Richtlinien für Kommunikation",
         "rules": {
-          "directArrangement": "Alle Buchungen und Vereinbarungen werden direkt mit Hotels getätigt",
+          "directArrangement": "Alle Buchungen und Vereinbarungen erfolgen direkt mit den Hotels",
           "hotelPolicies": "Hotelspezifische Richtlinien gelten für alle Reservierungen und Stornierungen",
           "noLiability": "Hotel Swiss ist nicht verantwortlich für Hotelrichtlinien oder Vereinbarungen",
-          "disputeResolution": "Streitigkeiten sollten direkt mit dem Hotel gelöst werden"
+          "disputeResolution": "Alle Streitigkeiten sollten direkt mit dem Hotel geklärt werden"
         }
       }
     },
     "liability": {
       "title": "Haftungsbeschränkung",
-      "content": "Hotel Swiss fungiert als Kontaktvermittlungsplattform zwischen Gästen und Hotels. Wir bieten eine Plattform für Verbindungen, sind aber nicht an Buchungstransaktionen beteiligt. Wir haften nicht für Probleme, die aus direkten Vereinbarungen mit Hotels entstehen können. Unsere Haftung ist auf den Betrieb unserer Plattformdienste beschränkt."
+      "content": "Hotel Swiss fungiert als Kontaktplattform zwischen Gästen und Hotels. Wir stellen eine Plattform für die Verbindung bereit, sind jedoch nicht am Buchungstransaktionsprozess beteiligt. Wir haften nicht für Probleme, die aus direkten Vereinbarungen mit Hotels entstehen können. Unsere Haftung ist auf den Betrieb unserer Plattformdienste beschränkt."
     },
     "governingLaw": {
       "title": "Anwendbares Recht",
-      "content": "Diese Nutzungsbedingungen unterliegen schweizerischem Recht. Alle Streitigkeiten werden vor den Gerichten in Zürich, Schweiz, beigelegt."
+      "content": "Diese Nutzungsbedingungen unterliegen dem Schweizer Recht. Alle Streitigkeiten werden vor den Gerichten in Zürich, Schweiz, entschieden."
     },
     "contact": {
       "title": "Kontaktinformationen",
@@ -349,37 +345,37 @@
     "duration": "Dauer",
     "introduction": {
       "title": "Einführung",
-      "content": "Diese Cookie-Richtlinie erklärt, wie Hotel Swiss Cookies und ähnliche Technologien verwendet, wenn Sie unsere Website besuchen. Sie erklärt, was diese Technologien sind und warum wir sie verwenden, sowie Ihre Rechte, ihre Verwendung zu kontrollieren."
+      "content": "Diese Cookie-Richtlinie erklärt, wie Hotel Swiss Cookies und ähnliche Technologien verwendet, wenn Sie unsere Website besuchen. Sie erklärt, was diese Technologien sind und warum wir sie verwenden, sowie Ihre Rechte zur Kontrolle unserer Verwendung."
     },
     "whatAreCookies": {
       "title": "Was sind Cookies?",
-      "content": "Cookies sind kleine Textdateien, die auf Ihrem Gerät platziert werden, wenn Sie eine Website besuchen. Sie werden weithin verwendet, um Websites effizienter zu machen und Website-Besitzern Informationen darüber zu geben, wie Benutzer mit ihren Websites interagieren."
+      "content": "Cookies sind kleine Textdateien, die auf Ihrem Gerät abgelegt werden, wenn Sie eine Website besuchen. Sie werden häufig verwendet, um Websites effizienter zu gestalten und Websitebetreibern Informationen darüber zu liefern, wie Benutzer mit ihren Seiten interagieren."
     },
     "typesOfCookies": {
       "title": "Arten von Cookies, die wir verwenden",
       "types": {
         "essential": {
-          "title": "Wesentliche Cookies",
-          "description": "Diese Cookies sind für das ordnungsgemäße Funktionieren der Website erforderlich und können nicht deaktiviert werden.",
-          "purpose": "Grundlegende Website-Funktionalität, Sicherheit und Benutzerauthentifizierung ermöglichen",
-          "duration": "Sitzungs-Cookies (gelöscht, wenn Sie Ihren Browser schließen)"
+          "title": "Unverzichtbare Cookies",
+          "description": "Diese Cookies sind notwendig, damit die Website ordnungsgemäß funktioniert und können nicht deaktiviert werden.",
+          "purpose": "Ermöglichen grundlegende Website-Funktionalität, Sicherheit und Benutzerauthentifizierung",
+          "duration": "Sitzungscookies (werden gelöscht, wenn Sie Ihren Browser schließen)"
         },
         "functional": {
           "title": "Funktionale Cookies",
-          "description": "Diese Cookies verbessern Ihre Erfahrung, indem sie sich Ihre Präferenzen und Einstellungen merken.",
-          "purpose": "Sprachpräferenzen, Theme-Einstellungen und Benutzerpräferenzen merken",
+          "description": "Diese Cookies verbessern Ihr Erlebnis, indem sie sich Ihre Präferenzen und Einstellungen merken.",
+          "purpose": "Merken von Sprachpräferenzen, Theme-Einstellungen und Benutzerpräferenzen",
           "duration": "Bis zu 1 Jahr"
         },
         "analytics": {
-          "title": "Analyse-Cookies",
+          "title": "Analytische Cookies",
           "description": "Diese Cookies helfen uns zu verstehen, wie Besucher mit unserer Website interagieren.",
-          "purpose": "Website-Traffic, Benutzerverhalten und Leistungsmetriken analysieren",
+          "purpose": "Analysieren des Website-Traffics, des Benutzerverhaltens und der Leistungskennzahlen",
           "duration": "Bis zu 2 Jahre"
         },
         "marketing": {
           "title": "Marketing-Cookies",
-          "description": "Diese Cookies werden verwendet, um relevante Werbung zu liefern und die Kampagneneffektivität zu verfolgen.",
-          "purpose": "Werbung personalisieren und Marketing-Kampagnenleistung messen",
+          "description": "Diese Cookies werden verwendet, um relevante Werbung anzuzeigen und die Kampagneneffektivität zu verfolgen.",
+          "purpose": "Personalisierung von Werbung und Messung der Marketingkampagnenleistung",
           "duration": "Bis zu 1 Jahr"
         }
       }
@@ -387,29 +383,29 @@
     "howWeUseCookies": {
       "title": "Wie wir Cookies verwenden",
       "uses": {
-        "authentication": "Sie in Ihrem Konto angemeldet halten",
+        "authentication": "Sie eingeloggt halten",
         "preferences": "Ihre Sprach- und Anzeigeeinstellungen merken",
-        "security": "Vor betrügerischen Aktivitäten schützen und Sicherheit verbessern",
+        "security": "Schutz vor Betrugsaktivitäten und Verbesserung der Sicherheit",
         "analytics": "Verstehen, wie Sie unsere Website nutzen, um die Benutzererfahrung zu verbessern",
         "personalization": "Personalisierte Inhalte und Empfehlungen bereitstellen",
-        "advertising": "Ihnen relevante Werbung auf unserer Website und anderen Websites zeigen"
+        "advertising": "Ihnen relevante Werbung auf unserer Website und anderen Websites anzeigen"
       }
     },
     "thirdParty": {
       "title": "Drittanbieter-Cookies",
-      "content": "Wir arbeiten mit vertrauenswürdigen Drittanbieter-Dienstleistern zusammen, die möglicherweise Cookies auf Ihrem Gerät platzieren, um uns bei der Bereitstellung unserer Dienste zu helfen:",
+      "content": "Wir arbeiten mit vertrauenswürdigen Drittanbietern zusammen, die Cookies auf Ihrem Gerät platzieren können, um uns bei der Bereitstellung unserer Dienste zu unterstützen:",
       "providers": {
         "googleAnalytics": {
           "name": "Google Analytics",
-          "purpose": "Website-Analyse und Leistungsüberwachung"
+          "purpose": "Website-Analysen und Leistungsüberwachung"
         },
         "googleMaps": {
           "name": "Google Maps",
           "purpose": "Interaktive Karten und Standortdienste"
         },
         "socialMedia": {
-          "name": "Social Media Plattformen",
-          "purpose": "Social Media Integration und Teilen-Funktionalität"
+          "name": "Soziale Medien-Plattformen",
+          "purpose": "Integration in soziale Medien und Sharing-Funktionalität"
         },
         "paymentProcessors": {
           "name": "Zahlungsabwickler",
@@ -418,8 +414,8 @@
       }
     },
     "managingCookies": {
-      "title": "Verwaltung Ihrer Cookie-Präferenzen",
-      "content": "Sie können Cookies in Ihren Browsereinstellungen kontrollieren und verwalten. Bitte beachten Sie, dass das Deaktivieren bestimmter Cookies die Funktionalität unserer Website beeinträchtigen kann.",
+      "title": "Verwalten Ihrer Cookie-Einstellungen",
+      "content": "Sie können Cookies in Ihren Browsereinstellungen steuern und verwalten. Bitte beachten Sie, dass das Deaktivieren bestimmter Cookies die Funktionalität unserer Website beeinträchtigen kann.",
       "browserInstructions": {
         "title": "Browser-spezifische Anweisungen",
         "browsers": {
@@ -429,7 +425,7 @@
           },
           "firefox": {
             "name": "Mozilla Firefox",
-            "instruction": "Optionen > Datenschutz & Sicherheit > Cookies und Website-Daten"
+            "instruction": "Einstellungen > Datenschutz & Sicherheit > Cookies und Websitedaten"
           },
           "safari": {
             "name": "Safari",
@@ -437,239 +433,483 @@
           },
           "edge": {
             "name": "Microsoft Edge",
-            "instruction": "Einstellungen > Cookies und Website-Berechtigungen > Cookies und Website-Daten"
+            "instruction": "Einstellungen > Cookies und Websitedaten"
           }
         }
       }
     },
     "contact": {
-      "title": "Kontakt",
+      "title": "Kontaktieren Sie uns",
       "content": "Wenn Sie Fragen zu unserer Verwendung von Cookies haben, kontaktieren Sie uns bitte:",
       "email": "E-Mail",
       "address": "Adresse"
     }
   },
-  "ContactPage": {
-    "title": "Kontakt",
-    "description": "Kontaktieren Sie uns",
-    "form": {
-      "name": "Name",
-      "email": "E-Mail",
-      "subject": "Betreff",
-      "message": "Nachricht",
-      "send": "Senden"
-    }
-  },
   "Help": {
+    "pageTitle": "Hilfe-Center - Hotel Swiss",
+    "pageDescription": "Finden Sie Antworten auf häufig gestellte Fragen und erhalten Sie Hilfe bei der Nutzung der Hotel Swiss-Plattform.",
     "title": "Hilfe-Center",
-    "subtitle": "Finden Sie Antworten auf Ihre Fragen",
-    "searchPlaceholder": "Suchen Sie nach Hilfethemen...",
-    "categories": {
-      "gettingStarted": "Erste Schritte",
-      "contact": "Hotels kontaktieren",
-      "account": "Konto-Verwaltung",
-      "technical": "Technische Probleme"
-    },
+    "subtitle": "Finden Sie Antworten auf Ihre Fragen und erhalten Sie die Unterstützung, die Sie benötigen",
+    "searchPlaceholder": "Hilfsartikel suchen...",
     "popularArticles": "Beliebte Artikel",
-    "articles": {
-      "howToSearch": {
-        "title": "Wie man Hotels sucht",
-        "summary": "Lernen Sie, wie Sie die Suchfunktion effektiv nutzen"
+    "readMore": "Weiterlesen",
+    "needMoreHelp": "Brauchen Sie mehr Hilfe?",
+    "contactSupportText": "Können Sie nicht finden, wonach Sie suchen? Unser Support-Team hilft Ihnen gerne.",
+    "categories": {
+      "gettingStarted": {
+        "title": "Erste Schritte",
+        "description": "Erlernen Sie die Grundlagen der Nutzung von Hotel Swiss",
+        "items": {
+          "howToSearch": "Wie man nach Hotels sucht",
+          "accountSetup": "Einrichtung Ihres Kontos",
+          "contactingHotels": "Hotels direkt kontaktieren"
+        }
       },
-      "contactHotels": {
-        "title": "Hotels kontaktieren",
-        "summary": "Schritte zur direkten Kontaktaufnahme mit Hotels"
+      "platformFeatures": {
+        "title": "Plattformfunktionen",
+        "description": "Entdecken Sie die Funktionen unserer Plattform",
+        "items": {
+          "verificationBadges": "Verifizierungsabzeichen verstehen",
+          "premiumPlacement": "Premium-Platzierung erklärt",
+          "filters": "Verwendung von Suchfiltern"
+        }
       },
-      "verificationBadges": {
-        "title": "Verifizierungs-Abzeichen verstehen",
-        "summary": "Was bedeuten die verschiedenen Verifizierungs-Abzeichen"
-      },
-      "accountSettings": {
-        "title": "Kontoeinstellungen verwalten",
-        "summary": "Wie Sie Ihre Kontoeinstellungen aktualisieren"
+      "troubleshooting": {
+        "title": "Fehlerbehebung",
+        "description": "Beheben Sie häufige Probleme",
+        "items": {
+          "contactIssues": "Probleme mit dem Kontaktformular",
+          "accountProblems": "Probleme mit dem Konto",
+          "technicalSupport": "Technische Schwierigkeiten"
+        }
       }
     },
-    "needMoreHelp": "Benötigen Sie weitere Hilfe?",
+    "articles": {
+      "howToContact": {
+        "title": "Wie man Hotels effektiv kontaktiert",
+        "excerpt": "Erfahren Sie die besten Praktiken, um Hotels über unsere Plattform zu kontaktieren."
+      },
+      "verificationBadges": {
+        "title": "Verifizierungsabzeichen verstehen",
+        "excerpt": "Entdecken Sie, was unsere Verifizierungsabzeichen bedeuten und wie sie Ihnen helfen, vertrauenswürdige Hotels auszuwählen."
+      },
+      "accountSettings": {
+        "title": "Verwalten Ihrer Kontoeinstellungen",
+        "excerpt": "Konfigurieren Sie Ihre Kontopräferenzen für die beste Erfahrung bei Hotel Swiss."
+      }
+    },
+    "stillNeedHelp": {
+      "title": "Immer noch Hilfe benötigt?",
+      "content": "Können Sie nicht finden, wonach Sie suchen? Unser Hilfe-Center enthält weitere Informationen oder Sie können sich direkt an unser Support-Team wenden."
+    },
+    "visitHelpCenter": "Besuchen Sie das Hilfe-Center",
     "contactSupport": "Support kontaktieren"
   },
   "ContactGuide": {
-    "title": "Leitfaden zur Hotelkontaktierung",
-    "subtitle": "Schritt-für-Schritt-Anleitung zur effektiven Kontaktaufnahme mit Hotels",
+    "pageTitle": "Kontaktleitfaden - Hotel Swiss",
+    "pageDescription": "Erfahren Sie, wie Sie Hotels effektiv über die Hotel Swiss-Plattform kontaktieren, mit unserem umfassenden Leitfaden.",
+    "title": "Kontaktleitfaden",
+    "subtitle": "Ihr vollständiger Leitfaden, um Hotels effektiv zu kontaktieren",
+    "introduction": {
+      "title": "Wie man Hotels kontaktiert",
+      "content": "Unsere Plattform macht es einfach, direkt mit Schweizer Hotels in Kontakt zu treten. Befolgen Sie diesen umfassenden Leitfaden, um erfolgreiche Kontakte und Kommunikation mit Ihren bevorzugten Unterkünften zu gewährleisten."
+    },
+    "stepByStep": {
+      "title": "Schritt-für-Schritt-Kontaktprozess"
+    },
     "steps": {
-      "step1": {
-        "title": "1. Hotel finden",
-        "description": "Nutzen Sie unsere Suchfunktion, um das perfekte Hotel für Ihre Bedürfnisse zu finden."
+      "search": {
+        "title": "Hotels suchen",
+        "description": "Verwenden Sie unsere erweiterten Such- und Filteroptionen, um Hotels zu finden, die Ihren Präferenzen und Anforderungen entsprechen.",
+        "tips": {
+          "useFilters": "Verwenden Sie Standort-, Preis- und Ausstattungsfilter, um Ihre Auswahl einzugrenzen",
+          "checkVerification": "Achten Sie auf verifizierte Hotels mit unseren Vertrauensabzeichen",
+          "readReviews": "Lesen Sie Hotelbeschreibungen und Gästebewertungen"
+        }
       },
-      "step2": {
-        "title": "2. Hoteldetails prüfen",
-        "description": "Überprüfen Sie Annehmlichkeiten, Bewertungen und Verifizierungs-Abzeichen."
+      "selectHotel": {
+        "title": "Wählen Sie Ihr bevorzugtes Hotel",
+        "description": "Überprüfen Sie Hoteldetails, Ausstattungen und Standortinformationen, um eine fundierte Entscheidung zu treffen.",
+        "tips": {
+          "checkAmenities": "Vergewissern Sie sich, dass das Hotel die gewünschten Ausstattungen bietet",
+          "verifyLocation": "Stellen Sie sicher, dass der Standort Ihren Reiseanforderungen entspricht",
+          "compareOptions": "Vergleichen Sie bei Bedarf mehrere Hotels"
+        }
       },
-      "step3": {
-        "title": "3. Kontaktinformationen verwenden",
-        "description": "Verwenden Sie die bereitgestellten Telefonnummern oder E-Mail-Adressen."
+      "initiateContact": {
+        "title": "Kontakt aufnehmen",
+        "description": "Verwenden Sie unser Kontaktformular, um direkt an das Hotel eine Anfrage oder Buchungsanfrage zu senden.",
+        "tips": {
+          "clearMessage": "Formulieren Sie eine klare, präzise Nachricht mit Ihren Anforderungen",
+          "includeDates": "Geben Sie Ihre Reisedaten und Gästeinformationen an",
+          "mentionRequirements": "Erwähnen Sie besondere Anforderungen oder Präferenzen"
+        }
       },
-      "step4": {
-        "title": "4. Direkt kontaktieren",
-        "description": "Kontaktieren Sie das Hotel direkt für Buchungen und Anfragen."
+      "followUp": {
+        "title": "Nachfassen",
+        "description": "Behalten Sie Ihre E-Mails im Auge, um Hotelantworten zu erhalten, und kommunizieren Sie professionell während des gesamten Prozesses.",
+        "tips": {
+          "waitPatient": "Warten Sie 24–48 Stunden auf eine Hotelantwort",
+          "checkSpam": "Überprüfen Sie Ihren Spam-Ordner auf eingehende Antworten",
+          "keepRecords": "Führen Sie Aufzeichnungen über alle Kommunikationen"
+        }
       }
     },
     "bestPractices": {
-      "title": "Bewährte Praktiken",
-      "tips": [
-        "Seien Sie höflich und professionell in der Kommunikation",
-        "Geben Sie spezifische Daten und Anforderungen an",
-        "Fragen Sie nach Verfügbarkeit und Preisen",
-        "Bestätigen Sie alle Details schriftlich",
-        "Bewahren Sie Kommunikationsaufzeichnungen auf"
-      ]
+      "title": "Best Practices für Hotelkontakt",
+      "timing": {
+        "title": "Optimales Timing",
+        "description": "Kontaktieren Sie Hotels während der Geschäftszeiten in Schweizer Zeitzonen für schnellere Antworten."
+      },
+      "communication": {
+        "title": "Klare Kommunikation",
+        "description": "Seien Sie spezifisch in Bezug auf Ihre Bedürfnisse, Daten und besondere Anforderungen, um genaue Informationen zu erhalten."
+      },
+      "verification": {
+        "title": "Verifizierte Hotels wählen",
+        "description": "Priorisieren Sie Hotels mit Verifizierungsabzeichen für erhöhte Zuverlässigkeit und Qualitätssicherung."
+      },
+      "courtesy": {
+        "title": "Professionelle Höflichkeit",
+        "description": "Halten Sie während aller Interaktionen respektvollen und professionellen Ton."
+      }
     },
-    "verificationInfo": {
-      "title": "Verifizierungs-Abzeichen",
-      "description": "Hotels mit Verifizierungs-Abzeichen haben ihre Identität und Legitimität bestätigt.",
-      "benefits": [
-        "Erhöhte Vertrauenswürdigkeit",
-        "Verifizierte Kontaktinformationen",
-        "Bestätigte Geschäftstätigkeit",
-        "Höhere Antwortrate"
-      ]
-    }
+    "commonIssues": {
+      "title": "Häufige Probleme & Lösungen"
+    },
+    "issues": {
+      "noResponse": {
+        "title": "Keine Antwort vom Hotel",
+        "problem": "Sie haben innerhalb von 48 Stunden nach Ihrer ersten Anfrage keine Antwort erhalten.",
+        "solution": "Überprüfen Sie Ihren Spam-Ordner, versuchen Sie alternative Kontaktmethoden oder wenden Sie sich an unser Support-Team."
+      },
+      "unavailability": {
+        "title": "Hotel nicht verfügbar",
+        "problem": "Das Hotel gibt an, für Ihre gewünschten Daten ausgebucht zu sein.",
+        "solution": "Fragen Sie nach alternativen Daten, Wartelistenoptionen oder Empfehlungen für ähnliche Unterkünfte."
+      },
+      "pricing": {
+        "title": "Preisdifferenzen",
+        "problem": "Der vom Hotel angebotene Preis weicht von dem ab, der auf unserer Plattform angezeigt wurde.",
+        "solution": "Preise können je nach Verfügbarkeit und Saison schwanken. Klären Sie die aktuellen Raten direkt beim Hotel."
+      }
+    },
+    "solution": "Lösung",
+    "needHelp": {
+      "title": "Immer noch Hilfe benötigt?",
+      "content": "Wenn Sie Schwierigkeiten haben oder spezifische Fragen zum Kontaktieren von Hotels, steht Ihnen unser Support-Team gerne zur Verfügung."
+    },
+    "visitHelpCenter": "Besuchen Sie das Hilfe-Center",
+    "contactSupport": "Support kontaktieren"
   },
   "ContactPolicy": {
+    "pageTitle": "Kontakt-Richtlinie - Hotel Swiss",
+    "pageDescription": "Verstehen Sie unsere Kontaktvermittlungsrichtlinien und -richtlinien für die Kommunikation mit Hotels über unsere Plattform.",
     "title": "Kontakt-Richtlinie",
-    "subtitle": "Verstehen Sie unsere Rolle als Kontaktvermittlungsplattform",
+    "subtitle": "Richtlinien und Leitlinien für die Kontaktvermittlung mit Hotels",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "introduction": {
+      "title": "Unser Kontaktvermittlungsdienst",
+      "content": "Hotel Swiss fungiert als Kontaktvermittlungsplattform, die Reisende mit Schweizer Hotels verbindet. Diese Richtlinie erläutert, wie unser Kontaktservice funktioniert, Ihre Verantwortlichkeiten und was Sie von unserer Plattform erwarten können."
+    },
     "platformRole": {
-      "title": "Unsere Rolle",
-      "description": "Hotel Swiss fungiert als Kontaktvermittlungsplattform und verbindet Reisende direkt mit Hotels. Wir verarbeiten keine Buchungen oder Zahlungen.",
-      "responsibilities": [
-        "Bereitstellung genauer Hotelkontaktinformationen",
-        "Verifizierung der Hotellegitimität",
-        "Aufrechterhaltung einer aktuellen Hotel-Datenbank",
-        "Unterstützung bei technischen Problemen"
-      ]
+      "title": "Unsere Rolle bei der Kontaktvermittlung"
+    },
+    "roles": {
+      "facilitation": {
+        "title": "Kontaktvermittlung",
+        "description": "Wir bieten eine Plattform, die direkte Kommunikation zwischen Reisenden und Hotels ermöglicht und den ersten Kontaktprozess optimiert."
+      },
+      "verification": {
+        "title": "Hotelverifizierung",
+        "description": "Wir verifizieren teilnehmende Hotels, um sicherzustellen, dass sie legitime Unternehmen sind. Wir garantieren jedoch nicht deren Dienstleistungen oder Verfügbarkeit."
+      },
+      "visibility": {
+        "title": "Erhöhte Sichtbarkeit",
+        "description": "Wir helfen Hotels, sichtbarer auf unserer Plattform zu werden, während sie ihre Unabhängigkeit bei Preis- und Verfügbarkeitsentscheidungen beibehalten."
+      },
+      "support": {
+        "title": "Plattform-Support",
+        "description": "Wir bieten technischen Support für plattformbezogene Probleme, sind jedoch nicht in direkte Verhandlungen zwischen Hotel und Gast involviert."
+      }
+    },
+    "guidelines": {
+      "title": "Kontaktleitlinien",
+      "timing": {
+        "title": "Antwortzeiten",
+        "description": "Hotels antworten in der Regel innerhalb von 24–48 Stunden an Werktagen."
+      },
+      "communication": {
+        "title": "Professionelle Kommunikation",
+        "description": "Halten Sie jederzeit respektvollen und klaren Ton gegenüber Hotelmitarbeitern."
+      },
+      "information": {
+        "title": "Genauigkeit der Informationen",
+        "description": "Geben Sie genaue Angaben zu Ihren Reisebedürfnissen, Daten und Anforderungen."
+      },
+      "respect": {
+        "title": "Gegenseitiger Respekt",
+        "description": "Behandeln Sie Hotelmitarbeiter professionell und respektieren Sie deren Richtlinien und Verfahren."
+      }
+    },
+    "responseTimes": {
+      "title": "Erwartete Antwortzeiten",
+      "immediate": {
+        "type": "Sofortige Anfragen",
+        "description": "Dringende Anfragen während der Geschäftszeiten",
+        "time": "2–4 Stunden"
+      },
+      "standard": {
+        "type": "Standardanfragen",
+        "description": "Allgemeine Informationen und Buchungsanfragen",
+        "time": "24–48 Stunden"
+      },
+      "complex": {
+        "type": "Komplexe Anfragen",
+        "description": "Sonderwünsche oder Gruppenbuchungen",
+        "time": "2–3 Werktage"
+      }
     },
     "userResponsibilities": {
-      "title": "Ihre Verantwortlichkeiten",
-      "items": [
-        "Direkte Kommunikation mit Hotels für alle Buchungsangelegenheiten",
-        "Überprüfung aller Details vor der Buchungsbestätigung",
-        "Einhaltung der Geschäftsbedingungen der Hotels",
-        "Respektvolle und professionelle Kommunikation"
-      ]
+      "title": "Ihre Verantwortlichkeiten"
     },
-    "disclaimers": {
-      "title": "Wichtige Haftungsausschlüsse",
-      "items": [
-        "Wir sind nicht verantwortlich für Buchungsstreitigkeiten",
-        "Alle Vereinbarungen werden direkt zwischen Ihnen und dem Hotel getroffen",
-        "Preise und Verfügbarkeit können sich ändern",
-        "Wir garantieren keine spezifischen Ergebnisse aus Kontaktversuchen"
-      ]
+    "responsibilities": {
+      "accurate": "Genaue und vollständige Informationen in allen Kontaktformularen angeben",
+      "respectful": "Respektvollen und professionellen Umgang mit Hotels wahren",
+      "responsive": "Prompt auf Hotelkommunikation und Anfragen nach zusätzlichen Informationen reagieren",
+      "direct": "Direkt mit Hotels für Buchungen, Änderungen und Sonderwünsche kommunizieren",
+      "privacy": "Hotel-Datenschutzrichtlinien und Datenschutzanforderungen respektieren"
+    },
+    "privacy": {
+      "title": "Datenschutz und Datenschutzrichtlinien",
+      "content": "Wir verpflichten uns, Ihre Privatsphäre und persönlichen Daten zu schützen. Wenn Sie über unsere Plattform Hotels kontaktieren, werden Ihre Informationen nur mit dem jeweiligen Hotel geteilt.",
+      "readMore": "Lesen Sie unsere vollständige Datenschutzrichtlinie"
     },
     "support": {
-      "title": "Support erhalten",
-      "description": "Wenn Sie Probleme mit unserer Plattform haben, kontaktieren Sie unser Support-Team für Hilfe."
+      "title": "Plattform-Support benötigt?",
+      "content": "Bei Problemen mit unserer Plattform, technischen Schwierigkeiten oder Fragen zu unserem Kontaktvermittlungsdienst wenden Sie sich bitte an unser Support-Team.",
+      "contactUs": "Kontaktieren Sie unser Support-Team"
     }
   },
   "FAQ": {
+    "pageTitle": "Häufig gestellte Fragen - Hotel Swiss",
+    "pageDescription": "Finden Sie Antworten auf die am häufigsten gestellten Fragen zur Nutzung der Hotel Swiss-Plattform.",
     "title": "Häufig gestellte Fragen",
-    "subtitle": "Finden Sie Antworten auf häufige Fragen",
-    "searchPlaceholder": "FAQ durchsuchen...",
+    "subtitle": "Schnelle Antworten auf Ihre häufigsten Fragen",
+    "searchPlaceholder": "Fragen suchen...",
     "categories": {
+      "all": "Alle Fragen",
       "general": "Allgemein",
-      "contact": "Kontaktierung",
-      "verification": "Verifizierung",
-      "technical": "Technisch"
+      "contact": "Kontaktprozess",
+      "account": "Konto",
+      "platform": "Plattformfunktionen"
     },
-    "questions": {
+    "items": {
       "whatIsHotelSwiss": {
         "question": "Was ist Hotel Swiss?",
-        "answer": "Hotel Swiss ist eine Kontaktvermittlungsplattform, die Reisende direkt mit Hotels in der Schweiz verbindet. Wir verarbeiten keine Buchungen, sondern stellen verifizierte Kontaktinformationen bereit."
+        "answer": "Hotel Swiss ist eine Kontaktvermittlungsplattform, die Reisende mit verifizierten Schweizer Hotels verbindet. Wir helfen Ihnen, Hotels direkt zu finden und zu kontaktieren, um personalisierten Service und authentische Schweizer Gastfreundschaft zu erhalten."
+      },
+      "howItWorks": {
+        "question": "Wie funktioniert die Plattform?",
+        "answer": "Suchen Sie einfach nach Hotels anhand von Standort, Ausstattungen oder Präferenzen. Wenn Sie ein passendes Hotel finden, nutzen Sie unser Kontaktformular, um direkt eine Anfrage zu senden. Das Hotel wird Ihnen Verfügbarkeit, Preise und Sondervereinbarungen mitteilen."
       },
       "howToContact": {
         "question": "Wie kontaktiere ich ein Hotel?",
-        "answer": "Verwenden Sie die auf der Hotelseite bereitgestellten Kontaktinformationen (Telefon, E-Mail oder Website), um das Hotel direkt zu kontaktieren."
+        "answer": "Klicken Sie auf ein Hotellisting, prüfen Sie die Details und verwenden Sie die Schaltfläche 'Hotel kontaktieren'. Füllen Sie das Formular mit Ihren Reisedaten, Anforderungen und Ihrer Nachricht aus. Das Hotel erhält Ihre Anfrage und antwortet direkt per E-Mail."
       },
-      "verificationMeaning": {
-        "question": "Was bedeuten Verifizierungs-Abzeichen?",
-        "answer": "Verifizierungs-Abzeichen zeigen an, dass ein Hotel seine Identität und Geschäftstätigkeit bei uns bestätigt hat, was die Vertrauenswürdigkeit erhöht."
+      "responseTime": {
+        "question": "Wie lange dauert es, bis Hotels antworten?",
+        "answer": "Die meisten Hotels antworten innerhalb von 24–48 Stunden an Werktagen. Antwortzeiten können während der Hauptsaison oder an Feiertagen variieren. Wenn Sie innerhalb von 48 Stunden keine Antwort erhalten, überprüfen Sie Ihren Spam-Ordner oder kontaktieren Sie unser Support-Team."
       },
-      "freeToUse": {
-        "question": "Ist die Nutzung von Hotel Swiss kostenlos?",
-        "answer": "Ja, unsere Plattform ist für Reisende völlig kostenlos. Hotels können für Premium-Platzierung und Verifizierungs-Abzeichen bezahlen."
+      "noResponse": {
+        "question": "Was passiert, wenn ein Hotel nicht auf meine Anfrage antwortet?",
+        "answer": "Überprüfen Sie zunächst Ihren Spam-/Junk-Ordner. Wenn Sie nach 48 Stunden immer noch keine Antwort erhalten haben, versuchen Sie, das Hotel über alternative Methoden zu kontaktieren, oder wenden Sie sich an unser Support-Team."
       },
-      "bookingProcess": {
-        "question": "Wie funktioniert der Buchungsprozess?",
-        "answer": "Wir verarbeiten keine Buchungen. Alle Buchungen werden direkt zwischen Ihnen und dem Hotel über deren bevorzugte Methoden abgewickelt."
+      "verificationBadges": {
+        "question": "Was sind Verifizierungsabzeichen?",
+        "answer": "Verifizierungsabzeichen zeigen an, dass ein Hotel von unserem Team auf Authentizität, Qualitätsstandards und Zuverlässigkeit geprüft wurde. Verifizierte Hotels haben einen zusätzlichen Screening-Prozess durchlaufen."
       },
-      "supportIssues": {
-        "question": "Was soll ich tun, wenn ich Probleme habe?",
-        "answer": "Kontaktieren Sie unser Support-Team über die Kontaktseite. Wir helfen bei technischen Problemen und Plattform-bezogenen Fragen."
+      "premiumPlacement": {
+        "question": "Was ist Premium-Platzierung?",
+        "answer": "Premium-Platzierung ermöglicht Hotels, in Suchergebnissen höher angezeigt zu werden, um mehr Sichtbarkeit zu erhalten. Dies ist ein kostenpflichtiger Service, der qualitativ hochwertigen Hotels hilft, mehr potenzielle Gäste zu erreichen, ohne faire Wettbewerbsvorteile zu beeinträchtigen."
+      },
+      "trustSafety": {
+        "question": "Wie stellen Sie Vertrauen und Sicherheit sicher?",
+        "answer": "Wir verifizieren alle teilnehmenden Hotels, bieten sichere Kontaktformulare, schützen Ihre persönlichen Daten und bieten Support während des gesamten Kontaktprozesses. Alle Buchungen und Transaktionen erfolgen jedoch direkt zwischen Ihnen und dem Hotel."
+      },
+      "createAccount": {
+        "question": "Muss ich ein Konto erstellen?",
+        "answer": "Die Erstellung eines Kontos ist optional, wird jedoch empfohlen. Mit einem Konto können Sie Lieblingshotels speichern, Ihren Kontaktverlauf verfolgen und personalisierte Empfehlungen basierend auf Ihren Präferenzen erhalten."
+      },
+      "accountBenefits": {
+        "question": "Welche Vorteile habe ich mit einem Konto?",
+        "answer": "Kontoinhaber können Lieblingshotels speichern, ihren Kontaktverlauf verfolgen, personalisierte Empfehlungen erhalten und vorrangigen Support bekommen. Die Erstellung eines Kontos ist kostenlos und verbessert Ihre Plattformerfahrung."
+      },
+      "fees": {
+        "question": "Fallen Gebühren für die Nutzung von Hotel Swiss an?",
+        "answer": "Die Nutzung unserer Plattform zum Suchen und Kontaktieren von Hotels ist für Reisende völlig kostenlos. Wir generieren Einnahmen durch Hotelpartnerschaften und Premiumdienste für Hotelpartner, nicht durch Reisende."
+      },
+      "directBooking": {
+        "question": "Kann ich direkt über Ihre Plattform buchen?",
+        "answer": "Wir ermöglichen den Kontakt zwischen Ihnen und Hotels, aber alle Buchungen erfolgen direkt mit dem Hotel. So erhalten Sie die besten Preise, persönlichen Service und direkte Kommunikation mit Ihrem Unterkunftsanbieter."
       }
-    }
+    },
+    "stillNeedHelp": {
+      "title": "Immer noch Hilfe benötigt?",
+      "content": "Können Sie nicht finden, wonach Sie suchen? Unser Hilfe-Center enthält weitere Informationen oder Sie können sich direkt an unser Support-Team wenden."
+    },
+    "visitHelpCenter": "Besuchen Sie das Hilfe-Center",
+    "contactSupport": "Support kontaktieren"
   },
   "About": {
-    "title": "Über uns",
-    "subtitle": "Entdecken Sie die Geschichte und Mission von Hotel Swiss",
-    "story": {
-      "title": "Unsere Geschichte",
-      "content": "Hotel Swiss wurde mit der Vision gegründet, die Art und Weise zu revolutionieren, wie Reisende Hotels in der Schweiz entdecken und kontaktieren. Als spezialisierte Kontaktvermittlungsplattform überbrücken wir die Lücke zwischen Reisenden und Hotels und bieten direkten, verifizierten Zugang zu Schweizer Gastfreundschaft."
+    "pageTitle": "Über uns - Hotel Swiss",
+    "pageDescription": "Erfahren Sie mehr über Hotel Swiss, unsere Mission, Reisende mit authentischer Schweizer Gastfreundschaft zu verbinden, und unser Engagement für Qualität.",
+    "hero": {
+      "title": "Über Hotel Swiss",
+      "subtitle": "Verbinden Sie Reisende seit 2020 mit authentischer Schweizer Gastfreundschaft"
     },
     "mission": {
       "title": "Unsere Mission",
-      "content": "Reisende mit verifizierten, direkten Kontaktinformationen für Schweizer Hotels zu versorgen und dabei Transparenz, Vertrauen und echte Verbindungen in der Reisebranche zu fördern."
+      "content": "Die Lücke zwischen Reisenden und Schweizer Hotels zu schließen, indem wir eine vertrauenswürdige Plattform bieten, die direkte Kommunikation ermöglicht, Qualitätsstandards sicherstellt und authentische Schweizer Gastfreundschaftserlebnisse fördert."
+    },
+    "story": {
+      "title": "Unsere Geschichte",
+      "paragraph1": "Gegründet im Jahr 2020, entstand Hotel Swiss aus der einfachen Beobachtung: Reisende wollten persönlichere Verbindungen zu ihren Unterkünften und Schweizer Hotels brauchten bessere Möglichkeiten, ihren einzigartigen Charakter und ihre Gastfreundschaft zu präsentieren.",
+      "paragraph2": "Anstatt eine weitere Buchungsplattform zu erstellen, konzentrierten wir uns auf das Wesentliche – die Vermittlung echter Verbindungen zwischen Reisenden und Hotels. Unser Ansatz ermöglicht es Hotels, ihre Unabhängigkeit zu bewahren und Reisenden gleichzeitig persönlichen Service zu bieten.",
+      "paragraph3": "Heute dienen wir stolz als Brücke zwischen anspruchsvollen Reisenden und den besten Unterkünften der Schweiz, von Boutique-Berglodges bis hin zu Luxushotels in der Stadt, alle vereint durch unser Engagement für authentische Schweizer Gastfreundschaft."
+    },
+    "differentiators": {
+      "title": "Was uns auszeichnet"
+    },
+    "features": {
+      "directContact": {
+        "title": "Direkter Kontakt",
+        "description": "Direkte Verbindung zu Hotels für persönlichen Service und authentische Kommunikation, ohne Zwischenhändler."
+      },
+      "verified": {
+        "title": "Verifizierte Unterkünfte",
+        "description": "Alle unsere Hotelpartner durchlaufen Verifizierungsprozesse, um Qualität, Authentizität und Zuverlässigkeit sicherzustellen."
+      },
+      "multilingual": {
+        "title": "Mehrsprachige Unterstützung",
+        "description": "Unsere Plattform unterstützt Deutsch, Französisch, Italienisch und Englisch und spiegelt die sprachliche Vielfalt der Schweiz wider."
+      },
+      "local": {
+        "title": "Schweizer Expertise",
+        "description": "Entwickelt von Einheimischen, die die Schweizer Gastfreundschaftsstandards und Erwartungen der Reisenden verstehen."
+      },
+      "technology": {
+        "title": "Moderne Technologie",
+        "description": "Modernste Plattformtechnologie, die schnell, sicher und benutzerfreundlich auf allen Geräten ist."
+      },
+      "community": {
+        "title": "Gemeinschaftsfokus",
+        "description": "Unterstützung lokaler Schweizer Hotels und Förderung nachhaltiger Tourismuspraktiken im ganzen Land."
+      }
     },
     "values": {
       "title": "Unsere Werte",
-      "items": [
-        {
-          "title": "Transparenz",
-          "description": "Klare Informationen über unsere Rolle als Kontaktvermittlungsplattform"
-        },
-        {
-          "title": "Vertrauen",
-          "description": "Verifizierte Hotelpartner und zuverlässige Kontaktinformationen"
-        },
-        {
-          "title": "Qualität",
-          "description": "Kuratierte Auswahl der besten Schweizer Hotels"
-        },
-        {
-          "title": "Innovation",
-          "description": "Modernste Technologie für nahtlose Benutzererfahrungen"
-        }
-      ]
+      "transparency": {
+        "title": "Transparenz",
+        "description": "Wir glauben an klare Kommunikation, ehrliche Praktiken und transparente Beziehungen mit Reisenden und Hotels."
+      },
+      "quality": {
+        "title": "Qualitätsstandards",
+        "description": "Wir wahren hohe Standards für Hotelpartnerschaften und Plattformleistung, um außergewöhnliche Erlebnisse zu gewährleisten."
+      },
+      "community": {
+        "title": "Gemeinschaftsunterstützung",
+        "description": "Wir engagieren uns für die Unterstützung des Schweizer Tourismus und helfen lokalen Hotels, im digitalen Zeitalter zu gedeihen."
+      },
+      "innovation": {
+        "title": "Kontinuierliche Innovation",
+        "description": "Wir verbessern unsere Plattform und unsere Dienstleistungen ständig basierend auf Nutzerfeedback und Branchenbest Practices."
+      }
     },
-    "features": {
-      "title": "Plattform-Features",
-      "items": [
-        {
-          "title": "Verifizierte Hotels",
-          "description": "Alle gelisteten Hotels durchlaufen unseren Verifizierungsprozess"
-        },
-        {
-          "title": "Direkte Kontakte",
-          "description": "Aktuelle Telefonnummern, E-Mails und Website-Links"
-        },
-        {
-          "title": "Mehrsprachig",
-          "description": "Verfügbar in Deutsch, Französisch, Italienisch und Englisch"
-        },
-        {
-          "title": "Mobile-optimiert",
-          "description": "Nahtlose Erfahrung auf allen Geräten"
-        }
-      ]
+    "statistics": {
+      "title": "Plattformstatistiken"
     },
     "stats": {
-      "title": "Unsere Zahlen",
-      "hotels": "500+ Hotels",
-      "regions": "26 Kantone",
-      "languages": "4 Sprachen",
-      "satisfaction": "98% Zufriedenheit"
+      "hotels": {
+        "number": "500+",
+        "label": "Verifizierte Hotels"
+      },
+      "cantons": {
+        "number": "26",
+        "label": "Schweizer Kantone"
+      },
+      "languages": {
+        "number": "4",
+        "label": "Unterstützte Sprachen"
+      },
+      "contacts": {
+        "number": "10.000+",
+        "label": "Erfolgreiche Kontakte"
+      }
     },
-    "team": {
-      "title": "Unser Team",
-      "description": "Unser leidenschaftliches Team aus Reise-Enthusiasten und Technologie-Experten arbeitet daran, Ihre Schweizer Hotelerfahrung außergewöhnlich zu machen."
+    "cta": {
+      "title": "Bereit, die Schweiz zu entdecken?",
+      "subtitle": "Beginnen Sie Ihre Reise, indem Sie die perfekte Schweizer Unterkunft für Ihr nächstes Abenteuer finden.",
+      "startExploring": "Erkunden Sie jetzt",
+      "contactUs": "Kontaktieren Sie uns"
+    }
+  },
+  "Contact": {
+    "pageTitle": "Kontaktieren Sie uns - Hotel Swiss",
+    "pageDescription": "Nehmen Sie Kontakt mit dem Hotel Swiss-Team für Support, Fragen oder Feedback zu unserer Plattform auf.",
+    "title": "Kontaktieren Sie uns",
+    "subtitle": "Wir helfen Ihnen gerne bei Fragen oder Supportbedarf",
+    "form": {
+      "title": "Senden Sie uns eine Nachricht",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail-Adresse",
+      "subject": "Betreff",
+      "selectSubject": "Betreff auswählen",
+      "message": "Nachricht",
+      "messagePlaceholder": "Bitte beschreiben Sie Ihre Frage, Ihr Feedback oder wie wir Ihnen helfen können...",
+      "submit": "Nachricht senden",
+      "submitting": "Wird gesendet..."
+    },
+    "subjects": {
+      "general": "Allgemeine Anfrage",
+      "technical": "Technischer Support",
+      "platform": "Plattformfunktionen",
+      "hotelInquiry": "Hotelbezogene Frage",
+      "partnership": "Partnerschaftsanfrage",
+      "feedback": "Feedback & Vorschläge",
+      "other": "Andere"
+    },
+    "info": {
+      "title": "Kontaktinformationen",
+      "address": {
+        "title": "Adresse",
+        "street": "Bahnhofstrasse 1",
+        "city": "8001 Zürich",
+        "country": "Schweiz"
+      },
+      "phone": {
+        "title": "Telefon",
+        "number": "+41 44 123 45 67"
+      },
+      "email": {
+        "title": "E-Mail",
+        "address": "info{at}hotelswiss.ch"
+      },
+      "hours": {
+        "title": "Geschäftszeiten",
+        "weekdays": "Montag – Freitag: 9:00 – 18:00 Uhr",
+        "weekend": "Samstag – Sonntag: 10:00 – 16:00 Uhr"
+      }
+    },
+    "faq": {
+      "title": "Schnell Antworten",
+      "content": "Suchen Sie nach schnellen Antworten? Besuchen Sie unseren FAQ-Bereich für sofortige Hilfe bei häufigen Fragen.",
+      "visitFAQ": "FAQ-Bereich besuchen"
+    },
+    "social": {
+      "title": "Folgen Sie uns",
+      "content": "Bleiben Sie in sozialen Medien für Updates, Tipps und Schweizer Reiseinspiration verbunden."
     }
   }
 }

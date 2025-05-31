@@ -152,7 +152,6 @@ export default defineNuxtConfig({
     "@/assets/css/base.css",
     "vue3-carousel/carousel.css",
   ],
-
   vite: {
     css: {
       devSourcemap: true,
@@ -169,8 +168,8 @@ export default defineNuxtConfig({
         external: ["oxc-parser"],
         output: {
           manualChunks: {
-            vendor: ["vue", "vue-router"],
-            primevue: ["primevue/button", "primevue/inputtext"],
+            "vue-vendor": ["vue", "vue-router"],
+            "primevue-vendor": ["primevue/button", "primevue/inputtext"],
           },
         },
       },
@@ -182,129 +181,95 @@ export default defineNuxtConfig({
       // Disable oxc-parser for production builds
       "process.env.DISABLE_OXC": "true",
     },
+    server: {
+      fs: {
+        allow: [".."],
+      },
+    },
   },
   nitro: {
-    preset: process.env.NITRO_PRESET || "node-server",
+    preset:
+      process.env.NITRO_PRESET ||
+      (process.env.VERCEL ? "vercel" : "node-server"),
     routeRules: {
       // Home page - static content, fully prerendered
       "/": {
         prerender: true,
-        cache: {
-          maxAge: 60 * 60, // 1 hour
-        },
+        headers: { "cache-control": "s-maxage=3600" },
       },
 
       // Search page - dynamic with filters, no prerendering
       "/search": {
         ssr: true,
-        cache: {
-          maxAge: 300, // 5 minutes
-        },
+        headers: { "cache-control": "s-maxage=300" },
       },
 
       // Individual hotel pages - dynamic content with moderate caching
       "/hotel/**": {
         ssr: true,
-        cache: {
-          maxAge: 600, // 10 minutes
-        },
+        headers: { "cache-control": "s-maxage=600" },
       },
 
       // Category pages - semi-static, can be cached longer
       "/category/**": {
         ssr: true,
-        cache: {
-          maxAge: 1800, // 30 minutes
-        },
-      }, // Canton pages - semi-static, can be cached longer
+        headers: { "cache-control": "s-maxage=1800" },
+      },
+
+      // Canton pages - semi-static, can be cached longer
       "/canton/**": {
         ssr: true,
-        cache: {
-          maxAge: 1800, // 30 minutes
-        },
+        headers: { "cache-control": "s-maxage=1800" },
       },
 
       // Legal and static content pages - cache for 2 hours
       "/privacy": {
         prerender: true,
-        cache: {
-          maxAge: 7200, // 2 hours
-        },
+        headers: { "cache-control": "s-maxage=7200" },
       },
       "/terms": {
         prerender: true,
-        cache: {
-          maxAge: 7200, // 2 hours
-        },
+        headers: { "cache-control": "s-maxage=7200" },
       },
       "/cookies": {
         prerender: true,
-        cache: {
-          maxAge: 7200, // 2 hours
-        },
+        headers: { "cache-control": "s-maxage=7200" },
       },
 
       // Support and informational pages - cache for 1 hour
       "/help": {
         prerender: true,
-        cache: {
-          maxAge: 3600, // 1 hour
-        },
+        headers: { "cache-control": "s-maxage=3600" },
       },
       "/contact-guide": {
         prerender: true,
-        cache: {
-          maxAge: 3600, // 1 hour
-        },
+        headers: { "cache-control": "s-maxage=3600" },
       },
       "/contact-policy": {
         prerender: true,
-        cache: {
-          maxAge: 3600, // 1 hour
-        },
+        headers: { "cache-control": "s-maxage=3600" },
       },
       "/faq": {
         prerender: true,
-        cache: {
-          maxAge: 3600, // 1 hour
-        },
+        headers: { "cache-control": "s-maxage=3600" },
       },
       "/about": {
         prerender: true,
-        cache: {
-          maxAge: 3600, // 1 hour
-        },
+        headers: { "cache-control": "s-maxage=3600" },
       },
 
       // Contact page - shorter cache since it might have dynamic elements
       "/contact": {
         prerender: true,
-        cache: {
-          maxAge: 1800, // 30 minutes
-        },
+        headers: { "cache-control": "s-maxage=1800" },
       },
 
-      // Static assets with long-term caching
-      "/assets/**": {
-        headers: {
-          "Content-Type": "text/css",
-          "Cache-Control": "public, max-age=31536000, immutable",
-        },
-      },
-
-      // Default for any other routes
-      "/**": {
-        prerender: true,
-        ssr: true,
+      // API routes
+      "/api/**": {
+        cors: true,
+        headers: { "cache-control": "s-maxage=60" },
       },
     },
-    publicAssets: [
-      {
-        dir: "assets",
-        maxAge: 60 * 60 * 24 * 365, // 1 year
-        baseURL: "/assets",
-      },
-    ],
     rollupConfig: {
       external: ["oxc-parser"],
     },
@@ -314,9 +279,7 @@ export default defineNuxtConfig({
     analyze: false,
   },
 
-  experimental: {
-    payloadExtraction: false,
-  },
+  ssr: true,
 
   typescript: {
     typeCheck: false, // Disable for faster builds
@@ -325,7 +288,7 @@ export default defineNuxtConfig({
   // Disable oxc-parser for Vercel builds
   hooks: {
     "build:before": () => {
-      if (process.env.VERCEL) {
+      if (process.env.VERCEL || process.env.NITRO_PRESET === "vercel") {
         process.env.DISABLE_OXC = "true";
       }
     },

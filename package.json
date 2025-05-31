@@ -9,7 +9,7 @@
     "postinstall": "nuxt prepare",
     "clean": "powershell -Command \"if (Test-Path '.nuxt') { Remove-Item -Recurse -Force '.nuxt' }; if (Test-Path '.output') { Remove-Item -Recurse -Force '.output' }; if (Test-Path 'node_modules\\.cache') { Remove-Item -Recurse -Force 'node_modules\\.cache' }\"",
     "build:analyze": "nuxt build --analyze",
-    "build:vercel": "NODE_OPTIONS=\"--max-old-space-size=4096\" nuxt build",
+    "build:vercel": "NITRO_PRESET=vercel NODE_OPTIONS=\"--max-old-space-size=4096\" nuxt build",
     "typecheck": "nuxt typecheck"
   },
   "engines": {
