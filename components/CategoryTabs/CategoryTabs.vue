@@ -63,6 +63,7 @@
                 :hotels="hotels"
                 :loading="loading || !initialized"
                 :loadingMore="loadingMore"
+                :hasMore="!!nextUrl"
                 @sort="handleSort"
                 @loadMore="handleLoadMore"
               />
@@ -84,6 +85,7 @@
                 :hotels="hotels"
                 :loading="loading || !initialized"
                 :loadingMore="loadingMore"
+                :hasMore="!!nextUrl"
                 @sort="handleSort"
                 @loadMore="handleLoadMore"
               />

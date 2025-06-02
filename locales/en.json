@@ -20,8 +20,13 @@
     "expandSearchArea": "Expand search area",
     "clearAll": "Clear All",
     "clear": "Clear",
+    "clearSearch": "Clear search",
     "done": "Done",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "backToHelp": "Back to Help Center",
+    "errorLoading": "Error loading data",
+    "hotels": "hotels",
+    "switzerland": "Switzerland"
   },
   "LanguageButton": {
     "selectLanguage": "Select language"
@@ -34,6 +39,17 @@
   },
   "CategoryTabs": {
     "allHotels": "All hotels"
+  },
+  "Category": {
+    "hero": {
+      "subtitle": "{count} hotels available"
+    },
+    "hotels": {
+      "title": "{name} Hotels",
+      "count": "{count} hotels found",
+      "noHotels": "No Hotels Found",
+      "noHotelsDescription": "There are currently no hotels available in the {name} category."
+    }
   },
   "BlockHeader": {
     "viewAll": "View all"
@@ -110,6 +126,34 @@
       "description": "Select one or more cantons from the list below."
     }
   },
+  "Discovery": {
+    "hero": {
+      "title": "Discover Switzerland's Best Hotels",
+      "subtitle": "Explore hotels by canton or find the perfect accommodation for your needs"
+    },
+    "cantons": {
+      "title": "Discover by Canton",
+      "subtitle": "Explore hotels across Switzerland's beautiful cantons",
+      "viewHotels": "View Hotels",
+      "hotelsFound": "hotels found",
+      "noCantons": "No cantons available",
+      "searchPlaceholder": "Search cantons...",
+      "noSearchResults": "No cantons found for \"{query}\""
+    },
+    "categories": {
+      "title": "Discover by Category",
+      "subtitle": "Find the perfect hotel type for your stay",
+      "viewHotels": "View Hotels",
+      "hotelsFound": "hotels found",
+      "noCategories": "No categories available",
+      "searchPlaceholder": "Search categories...",
+      "noSearchResults": "No categories found for \"{query}\""
+    },
+    "loading": "Loading...",
+    "loadingMap": "Loading map...",
+    "error": "Failed to load data. Please try again.",
+    "noData": "No data available"
+  },
   "PromoBlock": {
     "promoHotels": "Promo hotels"
   },
@@ -180,6 +224,7 @@
     "budget": "Budget Hotels",
     "about": "About Us",
     "contactUs": "Contact Us",
+    "discover": "Discover",
     "help": "Help Center",
     "contactGuide": "Contact Guide",
     "contactPolicy": "Contact Policy",
@@ -462,7 +507,6 @@
         "description": "Learn the basics of using Hotel Swiss",
         "items": {
           "howToSearch": "How to search for hotels",
-          "accountSetup": "Setting up your account",
           "contactingHotels": "Contacting hotels directly"
         }
       },
@@ -480,7 +524,6 @@
         "description": "Solve common issues",
         "items": {
           "contactIssues": "Contact form problems",
-          "accountProblems": "Account access issues",
           "technicalSupport": "Technical difficulties"
         }
       }
@@ -493,10 +536,6 @@
       "verificationBadges": {
         "title": "Understanding Verification Badges",
         "excerpt": "Discover what our verification badges mean and how they help you choose trusted hotels."
-      },
-      "accountSettings": {
-        "title": "Managing Your Account Settings",
-        "excerpt": "Configure your account preferences for the best experience on Hotel Swiss."
       }
     }
   },
@@ -905,6 +944,58 @@
     "social": {
       "title": "Follow Us",
       "content": "Stay connected with us on social media for updates, tips, and Swiss travel inspiration."
+    }
+  },
+  "Navigation": {
+    "menu": "Menu",
+    "menuToggle": "Toggle navigation menu",
+    "home": "Home",
+    "search": "Search Hotels",
+    "discover": "Discover",
+    "byCategory": "By Category",
+    "byCanton": "By Canton",
+    "about": "About",
+    "support": "Support",
+    "help": "Help",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "contactGuide": "Contact Guide",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cookies": "Cookie Policy",
+    "contactPolicy": "Contact Policy"
+  },
+  "Canton": {
+    "hero": {
+      "title": "Hotels",
+      "subtitle": "Discover {count} hotels and accommodations"
+    },
+    "about": {
+      "title": "About this Canton",
+      "placeholder": "Discover the beauty and charm of {name}, one of Switzerland's remarkable cantons. This region offers a unique blend of natural landscapes, cultural heritage, and exceptional hospitality.",
+      "keyFacts": "Key Facts",
+      "location": "Canton",
+      "country": "Country"
+    },
+    "map": {
+      "title": "Location",
+      "placeholder": "Interactive map coming soon",
+      "info": "Detailed canton map will be available soon with points of interest and hotel locations."
+    },
+    "hotels": {
+      "title": "Hotels in {name}",
+      "subtitle": "Explore {count} accommodations in this canton",
+      "noHotels": {
+        "title": "No Hotels Found",
+        "description": "We couldn't find any hotels in {name} at the moment. Check back later or explore other cantons.",
+        "searchAll": "Browse All Hotels"
+      }
+    },
+    "notFound": {
+      "title": "Canton Not Found",
+      "description": "The canton you're looking for doesn't exist or has been moved.",
+      "backToDiscover": "Back to Discover"
     }
   }
 }

@@ -20,6 +20,7 @@
     "expandSearchArea": "Suchbereich erweitern",
     "clearAll": "Alle löschen",
     "clear": "Löschen",
+    "clearSearch": "Suche löschen",
     "done": "Fertig",
     "backToHome": "Zurück zur Startseite"
   },
@@ -34,6 +35,26 @@
   },
   "CategoryTabs": {
     "allHotels": "Alle Hotels"
+  },
+  "Category": {
+    "hero": {
+      "subtitle": "{count} Hotels verfügbar"
+    },
+    "about": {
+      "title": "Über diese Kategorie",
+      "placeholder": "Entdecken Sie außergewöhnliche {name} Hotels in der Schweiz. Jedes Hotel in dieser Kategorie bietet einzigartige Erlebnisse und hochwertige Annehmlichkeiten, die auf spezifische Vorlieben und Reisestile zugeschnitten sind.",
+      "keyFacts": "Wichtige Fakten",
+      "type": "Kategorie-Typ",
+      "location": "Standort",
+      "quality": "Qualitätsstandard",
+      "premium": "Premium-Qualität"
+    },
+    "hotels": {
+      "title": "{name} Hotels",
+      "count": "{count} Hotels gefunden",
+      "noHotels": "Keine Hotels gefunden",
+      "noHotelsDescription": "Es sind derzeit keine Hotels in der Kategorie {name} verfügbar."
+    }
   },
   "BlockHeader": {
     "viewAll": "Alle anzeigen"
@@ -109,6 +130,35 @@
       "title": "Kantone",
       "description": "Wählen Sie einen oder mehrere Kantone aus der Liste unten."
     }
+  },
+  "Discovery": {
+    "hero": {
+      "title": "Entdecken Sie die besten Hotels der Schweiz",
+      "subtitle": "Erkunden Sie Hotels nach Kantonen oder finden Sie die perfekte Unterkunft für Ihre Bedürfnisse"
+    },
+    "cantons": {
+      "title": "Entdecken nach Kanton",
+      "subtitle": "Erkunden Sie Hotels in den wunderschönen Kantonen der Schweiz",
+      "viewHotels": "Hotels ansehen",
+      "hotelsFound": "Hotels gefunden",
+      "noCantons": "Keine Kantone verfügbar",
+      "searchPlaceholder": "Kantone suchen...",
+      "noSearchResults": "Keine Kantone gefunden für \"{query}\""
+    },
+    "categories": {
+      "title": "Entdecken nach Kategorie",
+      "subtitle": "Finden Sie den perfekten Hoteltyp für Ihren Aufenthalt",
+      "viewHotels": "Hotels ansehen",
+      "hotelsFound": "Hotels gefunden",
+      "noCategories": "Keine Kategorien verfügbar",
+      "searchPlaceholder": "Kategorien suchen...",
+      "noSearchResults": "Keine Kategorien gefunden für \"{query}\"",
+      "showLess": "Weniger anzeigen"
+    },
+    "loading": "Wird geladen...",
+    "loadingMap": "Karte wird geladen...",
+    "error": "Fehler beim Laden der Daten. Bitte versuchen Sie es erneut.",
+    "noData": "Keine Daten verfügbar"
   },
   "PromoBlock": {
     "promoHotels": "Promo-Hotels"
@@ -461,7 +511,6 @@
         "description": "Erlernen Sie die Grundlagen der Nutzung von Hotel Swiss",
         "items": {
           "howToSearch": "Wie man nach Hotels sucht",
-          "accountSetup": "Einrichtung Ihres Kontos",
           "contactingHotels": "Hotels direkt kontaktieren"
         }
       },
@@ -479,7 +528,6 @@
         "description": "Beheben Sie häufige Probleme",
         "items": {
           "contactIssues": "Probleme mit dem Kontaktformular",
-          "accountProblems": "Probleme mit dem Konto",
           "technicalSupport": "Technische Schwierigkeiten"
         }
       }
@@ -492,10 +540,6 @@
       "verificationBadges": {
         "title": "Verifizierungsabzeichen verstehen",
         "excerpt": "Entdecken Sie, was unsere Verifizierungsabzeichen bedeuten und wie sie Ihnen helfen, vertrauenswürdige Hotels auszuwählen."
-      },
-      "accountSettings": {
-        "title": "Verwalten Ihrer Kontoeinstellungen",
-        "excerpt": "Konfigurieren Sie Ihre Kontopräferenzen für die beste Erfahrung bei Hotel Swiss."
       }
     },
     "stillNeedHelp": {
@@ -910,6 +954,55 @@
     "social": {
       "title": "Folgen Sie uns",
       "content": "Bleiben Sie in sozialen Medien für Updates, Tipps und Schweizer Reiseinspiration verbunden."
+    }
+  },
+  "Navigation": {
+    "menu": "Menü",
+    "menuToggle": "Navigationsmenü umschalten",
+    "home": "Startseite",
+    "search": "Hotels Suchen",
+    "discover": "Entdecken",
+    "byCategory": "Nach Kategorie",
+    "byCanton": "Nach Kanton",
+    "about": "Über Uns",
+    "support": "Support",
+    "help": "Hilfe",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "contactGuide": "Kontakt-Leitfaden",
+    "legal": "Rechtliches",
+    "privacy": "Datenschutzrichtlinie",
+    "terms": "Nutzungsbedingungen",
+    "cookies": "Cookie-Richtlinie",
+    "contactPolicy": "Kontakt-Richtlinie"
+  },
+  "Canton": {
+    "hero": {
+      "title": "Kanton",
+      "subtitle": "{count} Hotels verfügbar"
+    },
+    "about": {
+      "title": "Über diesen Kanton",
+      "placeholder": "Entdecken Sie die Schönheit und den Charme von {name}, einem der bemerkenswerten Kantone der Schweiz. Diese Region bietet eine einzigartige Mischung aus natürlichen Landschaften, kulturellem Erbe und außergewöhnlicher Gastfreundschaft.",
+      "keyFacts": "Wichtige Fakten",
+      "location": "Kanton",
+      "country": "Land"
+    },
+    "map": {
+      "title": "Standort",
+      "placeholder": "Interaktive Karte kommt bald",
+      "info": "Eine detaillierte Kantonskarte mit Sehenswürdigkeiten und Hotelstandorten wird bald verfügbar sein."
+    },
+    "hotels": {
+      "title": "Hotels in {name}",
+      "subtitle": "Entdecken Sie {count} Unterkünfte in diesem Kanton",
+      "noHotels": {
+        "title": "Keine Hotels gefunden",
+        "description": "Wir konnten derzeit keine Hotels in {name} finden. Schauen Sie später noch einmal vorbei oder erkunden Sie andere Kantone.",
+        "searchAll": "Alle Hotels durchsuchen"
+      },
+      "sortBy": "Sortieren nach",
+      "loadMore": "Mehr laden"
     }
   }
 }

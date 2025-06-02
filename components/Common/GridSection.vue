@@ -170,13 +170,32 @@
     <div class="card my-3 flex justify-center" v-if="loadingMore">
       <Loader />
     </div>
-    <div id="observed-item" ref="end"></div>
+    <!-- Load More Button (when useLoadMoreButton is true) -->
+    <div
+      v-if="useLoadMoreButton && hasMore && !loading && !loadingMore"
+      class="mt-6 flex justify-center"
+    >
+      <Button
+        @click="emit('loadMore')"
+        :label="$t('Common.loadMore')"
+        :pt="{
+          root: 'px-4 py-2 text-light bg-primary dark:hover:bg-dark-200 border-light dark:border-dark-100',
+        }"
+        size="large"
+        icon="pi pi-chevron-down"
+        iconPosition="right"
+        rounded
+      />
+    </div>
+
+    <!-- Intersection Observer Element (when useLoadMoreButton is false) -->
+    <div v-if="!useLoadMoreButton" id="observed-item" ref="end"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch, computed } from "vue";
-import type { Hotel } from "@/types/hotel";
+import type { Hotel, HotelArray } from "@/types/hotel";
 import Card from "@/components/Card/Card.vue";
 
 import Button from "primevue/button";
@@ -186,14 +205,22 @@ import DataView from "primevue/dataview";
 import Loader from "@/components/Common/Loader.vue";
 import GridSkeleton from "@/components/SkeletonLoaders/GridSkeleton.vue";
 
-const props = defineProps<{
-  hotels: Array<Hotel>;
-  loading?: boolean;
-  loadingMore?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    hotels: HotelArray;
+    loading?: boolean;
+    loadingMore?: boolean;
+    useLoadMoreButton?: boolean;
+    hasMore?: boolean;
+  }>(),
+  {
+    useLoadMoreButton: true,
+    hasMore: false,
+  },
+);
 
 const isInitialLoading = ref(true);
-const isClient = process.client;
+const isClient = import.meta.client;
 
 const safeHotels = computed(() => {
   return Array.isArray(props.hotels) ? props.hotels : [];
@@ -279,7 +306,7 @@ const end = ref<HTMLElement | null>(null);
 let observer: IntersectionObserver | null = null;
 
 const bindObserver = (el: HTMLElement) => {
-  if (!isClient) return;
+  if (!isClient || props.useLoadMoreButton) return;
 
   observer = new IntersectionObserver(
     (entries) => {
@@ -302,7 +329,7 @@ const unbindObserver = () => {
 };
 
 onMounted(() => {
-  if (end.value) {
+  if (end.value && !props.useLoadMoreButton) {
     bindObserver(end.value);
   }
 });

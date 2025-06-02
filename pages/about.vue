@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-light dark:bg-dark-400">
+  <div class="min-h-screen bg-light dark:bg-primary">
     <!-- Hero Section -->
     <div class="bg-primary py-20 text-center text-light dark:bg-dark-300">
       <div class="container mx-auto px-3">
@@ -55,7 +55,7 @@
               <img
                 src="~/assets/images/minimal-logo.svg"
                 alt="Hotel Swiss Logo"
-                class="h-64 w-64"
+                class="h-64 w-64 invert dark:invert-0"
               />
             </div>
           </div>
@@ -198,7 +198,6 @@ definePageMeta({
   layout: "base",
 });
 
-// SEO
 useHead({
   title: t("About.pageTitle"),
   meta: [{ name: "description", content: t("About.pageDescription") }],

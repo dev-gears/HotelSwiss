@@ -1,6 +1,6 @@
 export default defineNuxtPlugin(() => {
   // Ensure theme is properly set on client-side navigation
-  if (process.client) {
+  if (import.meta.client) {
     const router = useRouter();
 
     router.beforeEach(() => {

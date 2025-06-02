@@ -2,7 +2,7 @@ type ID = number;
 type Title = string;
 type Name = string;
 type Description = string;
-type URL = string | null;
+type URL = string | null | undefined;
 type Width = number;
 type Height = number;
 type Telephone = string;
@@ -49,6 +49,7 @@ export interface Canton {
   id: ID;
   name: Name;
   image: Image;
+  description?: Description;
 }
 
 export interface CategoryWrapper {
@@ -117,3 +118,7 @@ export interface FirstScreen {
   all_hotels: Hotel[];
   filters: Filters;
 }
+
+// Utility types for handling readonly hotels
+export type ReadonlyHotel = Readonly<Hotel>;
+export type HotelArray = Hotel[] | readonly Hotel[] | ReadonlyHotel[];

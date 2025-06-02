@@ -19,6 +19,8 @@
     "tryDifferentKeywords": "Mots-clés différents",
     "expandSearchArea": "Élargir la zone de recherche",
     "clearAll": "Tout effacer",
+    "clear": "Effacer",
+    "clearSearch": "Effacer la recherche",
     "done": "Terminé",
     "backToHome": "Retour à l'accueil"
   },
@@ -33,6 +35,26 @@
   },
   "CategoryTabs": {
     "allHotels": "Tous les hôtels"
+  },
+  "Category": {
+    "hero": {
+      "subtitle": "{count} hôtels disponibles"
+    },
+    "about": {
+      "title": "À propos de cette catégorie",
+      "placeholder": "Découvrez des hôtels {name} exceptionnels en Suisse. Chaque hôtel de cette catégorie offre des expériences uniques et des équipements de haute qualité qui répondent à des préférences spécifiques et des styles de voyage.",
+      "keyFacts": "Faits clés",
+      "type": "Type de catégorie",
+      "location": "Localisation",
+      "quality": "Standard de qualité",
+      "premium": "Qualité premium"
+    },
+    "hotels": {
+      "title": "Hôtels {name}",
+      "count": "{count} hôtels trouvés",
+      "noHotels": "Aucun hôtel trouvé",
+      "noHotelsDescription": "Il n'y a actuellement aucun hôtel disponible dans la catégorie {name}."
+    }
   },
   "BlockHeader": {
     "viewAll": "Voir tout"
@@ -107,6 +129,34 @@
       "title": "Cantons",
       "description": "Sélectionnez un ou plusieurs cantons dans la liste ci-dessous."
     }
+  },
+  "Discovery": {
+    "hero": {
+      "title": "Découvrez les meilleurs hôtels de Suisse",
+      "subtitle": "Explorez les hôtels par canton ou trouvez l'hébergement parfait pour vos besoins"
+    },
+    "cantons": {
+      "title": "Découvrir par Canton",
+      "subtitle": "Explorez les hôtels dans les magnifiques cantons de Suisse",
+      "viewHotels": "Voir les Hôtels",
+      "hotelsFound": "hôtels trouvés",
+      "noCantons": "Aucun canton disponible",
+      "searchPlaceholder": "Rechercher des cantons...",
+      "noSearchResults": "Aucun canton trouvé pour \"{query}\""
+    },
+    "categories": {
+      "title": "Découvrir par Catégorie",
+      "subtitle": "Trouvez le type d'hôtel parfait pour votre séjour",
+      "viewHotels": "Voir les Hôtels",
+      "hotelsFound": "hôtels trouvés",
+      "noCategories": "Aucune catégorie disponible",
+      "searchPlaceholder": "Rechercher des catégories...",
+      "noSearchResults": "Aucune catégorie trouvée pour \"{query}\""
+    },
+    "loading": "Chargement...",
+    "loadingMap": "Chargement de la carte...",
+    "error": "Échec du chargement des données. Veuillez réessayer.",
+    "noData": "Aucune donnée disponible"
   },
   "PromoBlock": {
     "promoHotels": "Hôtels promotionnels"
@@ -903,6 +953,55 @@
     "social": {
       "title": "Suivez-Nous",
       "content": "Restez connecté avec nous sur les médias sociaux pour des mises à jour, conseils, et inspiration de voyage suisse."
+    }
+  },
+  "Navigation": {
+    "menu": "Menu",
+    "menuToggle": "Basculer le menu de navigation",
+    "home": "Accueil",
+    "search": "Rechercher des Hôtels",
+    "discover": "Découvrir",
+    "byCategory": "Par Catégorie",
+    "byCanton": "Par Canton",
+    "about": "À Propos",
+    "support": "Support",
+    "help": "Aide",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "contactGuide": "Guide de Contact",
+    "legal": "Légal",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "cookies": "Politique des Cookies",
+    "contactPolicy": "Politique de Contact"
+  },
+  "Canton": {
+    "hero": {
+      "title": "Canton",
+      "subtitle": "{count} hôtels disponibles"
+    },
+    "about": {
+      "title": "À propos de ce Canton",
+      "placeholder": "Découvrez la beauté et le charme de {name}, l'un des cantons remarquables de la Suisse. Cette région offre un mélange unique de paysages naturels, de patrimoine culturel et d'hospitalité exceptionnelle.",
+      "keyFacts": "Faits Importants",
+      "location": "Canton",
+      "country": "Pays"
+    },
+    "map": {
+      "title": "Localisation",
+      "placeholder": "Carte interactive bientôt disponible",
+      "info": "Une carte détaillée du canton avec points d'intérêt et emplacements d'hôtels sera bientôt disponible."
+    },
+    "hotels": {
+      "title": "Hôtels en {name}",
+      "subtitle": "Explorez {count} hébergements dans ce canton",
+      "noHotels": {
+        "title": "Aucun hôtel trouvé",
+        "description": "Nous n'avons pas pu trouver d'hôtels en {name} pour le moment. Revenez plus tard ou explorez d'autres cantons.",
+        "searchAll": "Rechercher tous les hôtels"
+      },
+      "sortBy": "Trier par",
+      "loadMore": "Charger plus"
     }
   }
 }

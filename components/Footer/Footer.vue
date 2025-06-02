@@ -142,19 +142,7 @@
               </NuxtLink>
             </div>
           </div>
-          <div class="flex items-center space-x-2">
-            <span
-              class="font-robotoRegular text-xs text-light/70 dark:text-light/60"
-            >
-              {{ $t("Footer.madeWith") }}
-            </span>
-            <i class="pi pi-heart text-sm text-red-400"></i>
-            <span
-              class="font-robotoRegular text-xs text-light/70 dark:text-light/60"
-            >
-              {{ $t("Footer.inSwitzerland") }}
-            </span>
-          </div>
+          <div class="flex items-center space-x-2"></div>
         </div>
       </div>
     </div>
@@ -191,15 +179,12 @@ const socialLinks = [
 
 const quickLinks = [
   { path: "/", label: "Footer.home" },
-  { path: "/search", label: "Footer.findHotels" },
-  { path: "/category/luxury", label: "Footer.luxury" },
-  { path: "/category/budget", label: "Footer.budget" },
+  { path: "/discover", label: "Footer.discover" },
   { path: "/about", label: "Footer.about" },
 ];
 
 const supportLinks = [
   { path: "/contact", label: "Footer.contactUs" },
-  { path: "/help", label: "Footer.help" },
   { path: "/contact-guide", label: "Footer.contactGuide" },
   { path: "/contact-policy", label: "Footer.contactPolicy" },
   { path: "/faq", label: "Footer.faq" },

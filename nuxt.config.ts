@@ -2,33 +2,19 @@ import { defineNuxtConfig } from "nuxt/config";
 import Lara from "@primevue/themes/lara";
 import { fileURLToPath } from "url";
 
-// Robust environment variable handling with fallbacks
 const getApiConfig = () => {
-  // For this hotel site, it appears you're using your own backend API
-  // Let's set a proper fallback that won't break the build
-  const baseUrl = process.env.BASE_URL || 
-                 process.env.NUXT_PUBLIC_BASE_URL || 
-                 "https://hotelswiss.stefanivic.com";
-  const apiPath = process.env.API_PATH || 
-                 process.env.NUXT_PUBLIC_API_PATH || 
-                 "/api";
-  const authCredentials = process.env.AUTH_CREDENTIALS || 
-                         process.env.NUXT_AUTH_CREDENTIALS || 
-                         "";
+  const baseUrl =
+    process.env.BASE_URL ||
+    process.env.NUXT_PUBLIC_BASE_URL ||
+    "https://hotelswiss.stefanivic.com";
+  const apiPath =
+    process.env.API_PATH || process.env.NUXT_PUBLIC_API_PATH || "/api";
+  const authCredentials =
+    process.env.AUTH_CREDENTIALS || process.env.NUXT_AUTH_CREDENTIALS || "";
 
   const headers: Record<string, string> = {};
   if (authCredentials) {
     headers.Authorization = `Basic ${btoa(authCredentials)}`;
-  }
-
-  // Debug log for build time (will be removed in production)
-  if (process.env.NODE_ENV !== 'production') {
-    console.log('API Config:', { 
-      baseUrl, 
-      apiPath, 
-      fullUrl: baseUrl + apiPath,
-      hasAuth: !!authCredentials 
-    });
   }
 
   return {
@@ -44,7 +30,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         lang: "en",
-        class: "theme-loading", // Add initial class for theme handling
+        class: "theme-loading",
       },
       link: [
         {
@@ -211,7 +197,6 @@ export default defineNuxtConfig({
       exclude: ["oxc-parser"],
     },
     define: {
-      // Disable oxc-parser for production builds
       "process.env.DISABLE_OXC": "true",
     },
     server: {
@@ -225,37 +210,31 @@ export default defineNuxtConfig({
       process.env.NITRO_PRESET ||
       (process.env.VERCEL ? "vercel" : "node-server"),
     routeRules: {
-      // Home page - SSR with API calls, cache for short time
       "/": {
         ssr: true,
         headers: { "cache-control": "s-maxage=300" },
       },
 
-      // Search page - dynamic with filters, no prerendering
       "/search": {
         ssr: true,
         headers: { "cache-control": "s-maxage=300" },
       },
 
-      // Individual hotel pages - dynamic content with moderate caching
       "/hotel/**": {
         ssr: true,
         headers: { "cache-control": "s-maxage=600" },
       },
 
-      // Category pages - semi-static, can be cached longer
       "/category/**": {
         ssr: true,
         headers: { "cache-control": "s-maxage=1800" },
       },
 
-      // Canton pages - semi-static, can be cached longer
       "/canton/**": {
         ssr: true,
         headers: { "cache-control": "s-maxage=1800" },
       },
 
-      // Legal and static content pages - these can remain prerendered
       "/privacy": {
         prerender: true,
         headers: { "cache-control": "s-maxage=7200" },
@@ -267,12 +246,6 @@ export default defineNuxtConfig({
       "/cookies": {
         prerender: true,
         headers: { "cache-control": "s-maxage=7200" },
-      },
-
-      // Support and informational pages - these can remain prerendered
-      "/help": {
-        prerender: true,
-        headers: { "cache-control": "s-maxage=3600" },
       },
       "/contact-guide": {
         prerender: true,
@@ -291,13 +264,11 @@ export default defineNuxtConfig({
         headers: { "cache-control": "s-maxage=3600" },
       },
 
-      // Contact page - might have dynamic elements, use SSR
       "/contact": {
         ssr: true,
         headers: { "cache-control": "s-maxage=1800" },
       },
 
-      // API routes
       "/api/**": {
         cors: true,
         headers: { "cache-control": "s-maxage=60" },
@@ -315,10 +286,9 @@ export default defineNuxtConfig({
   ssr: true,
 
   typescript: {
-    typeCheck: false, // Disable for faster builds
+    typeCheck: false,
   },
 
-  // Disable oxc-parser for Vercel builds
   hooks: {
     "build:before": () => {
       if (process.env.VERCEL || process.env.NITRO_PRESET === "vercel") {

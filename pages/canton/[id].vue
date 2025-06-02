@@ -1,107 +1,101 @@
 <template>
   <CommonHead
-    :title="`Canton: ${title}`"
-    :description="`Hotels in ${title} canton, Switzerland`"
+    :title="`${cantonData?.name} ${$t('Canton.hero.title')}`"
+    :description="`${$t('Canton.hero.subtitle')} ${cantonData?.name}, ${$t('Common.switzerland')}`"
     :url="`/canton/${route.params.id}`"
   />
-  <div class="container mx-auto px-3 max-sm:px-4">
-    <CommonBlockHeader v-if="title" :title="`Canton: ${title}`" />
-    <CommonGridSection
-      :hotels="results"
-      :loading="isLoading"
-      :loadingMore="loadingMore"
-      @sort="handleSort"
-      @loadMore="handleLoadMore"
-    />
-    <div
-      v-if="!isLoading && !results.length"
-      class="flex h-[50vh] items-center justify-center"
+  <CommonBaseHotelListPage
+    :hotels="hotels"
+    :is-loading="isLoading"
+    :loading-more="loadingMore"
+    :has-more="hasMore"
+    :total-count="totalCount"
+    :is-data-ready="isDataReady"
+    :handle-sort="handleSort"
+    :load-more="loadMore"
+  >
+    <template #hero>
+      <CantonHero :canton="cantonData" :hotel-count="totalCount" />
+    </template>
+
+    <template #description>
+      <CantonDescription :canton="cantonData" />
+    </template>
+
+    <template #map>
+      <ClientOnly>
+        <CantonMap :canton="cantonData" />
+        <template #fallback>
+          <div class="rounded-lg bg-light p-6 shadow-md dark:bg-dark-300">
+            <h2
+              class="mb-6 font-patuaOne text-2xl font-bold text-dark dark:text-light"
+            >
+              {{ $t("Canton.map.title") }}
+            </h2>
+            <div class="relative h-80 overflow-hidden rounded-lg">
+              <div
+                class="flex h-full w-full items-center justify-center bg-light-200 dark:bg-dark-200"
+              >
+                <div class="text-center">
+                  <i class="pi pi-map mb-4 text-4xl text-primary" />
+                  <p
+                    class="font-robotoRegular text-gray-600 dark:text-gray-400"
+                  >
+                    {{ $t("Common.loading") }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </ClientOnly>
+    </template>
+
+    <template
+      #hotels="{
+        hotels,
+        loading,
+        loadingMore,
+        hasMore,
+        handleSort,
+        handleLoadMore,
+      }"
     >
-      <h1 class="text-2xl text-primary-100 dark:text-primary-200">
-        {{ $t("Common.noResults") }}
-      </h1>
-    </div>
-  </div>
+      <CantonHotels
+        :canton="cantonData"
+        :hotels="hotels"
+        :loading="loading"
+        :loading-more="loadingMore"
+        :has-more="hasMore"
+        @sort="handleSort"
+        @load-more="handleLoadMore"
+      />
+    </template>
+  </CommonBaseHotelListPage>
 </template>
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import type { Hotel, HotelListWithPagination } from "@/types/hotel";
-import { fetchHotels } from "~/utils/api";
+import { useCantonPage } from "~/composables/useCantonPage";
 
 definePageMeta({
   layout: "base",
 });
 
 const route = useRoute();
-const title = ref(route.query.title as string);
-const results = ref<Hotel[]>([]);
-const nextUrl = ref<string | null>(null);
-const isLoading = ref(true);
-const loadingMore = ref(false);
+const cantonId = Array.isArray(route.params.id)
+  ? route.params.id[0]
+  : route.params.id;
 
-/**
- * Get query parameters for this canton
- */
-const getQueryParams = () => ({
-  canton_id: Array.isArray(route.params.id)
-    ? route.params.id[0]
-    : route.params.id,
-});
-
-// Initial data fetch
-try {
-  const data = await fetchHotels(getQueryParams());
-  results.value = data.results;
-  nextUrl.value = data.next;
-} catch (error) {
-  console.warn(error);
-} finally {
-  isLoading.value = false;
-}
-
-/**
- * Handle sort event from GridSection
- */
-const handleSort = async ({
-  key,
-  value,
-}: {
-  key: string;
-  value: string;
-}): Promise<void> => {
-  try {
-    isLoading.value = true;
-    const params = {
-      ...getQueryParams(),
-      [key]: value,
-    };
-    const data = await fetchHotels(params);
-    results.value = data.results;
-    nextUrl.value = data.next;
-  } catch (error) {
-    console.warn(error);
-  } finally {
-    isLoading.value = false;
-  }
-};
-
-/**
- * Handle load more event from GridSection
- */
-const handleLoadMore = async () => {
-  if (!nextUrl.value || loadingMore.value) return;
-
-  try {
-    loadingMore.value = true;
-    // For pagination links, we still need to use the direct API call
-    const data = (await $hotelApi(nextUrl.value)) as HotelListWithPagination;
-    results.value = [...results.value, ...data.results];
-    nextUrl.value = data.next;
-  } catch (error) {
-    console.warn(error);
-  } finally {
-    loadingMore.value = false;
-  }
-};
+const {
+  cantonData,
+  hotels,
+  isLoading,
+  loadingMore,
+  totalCount,
+  hasMore,
+  isDataReady,
+  handleSort,
+  loadMore,
+} = useCantonPage(cantonId);
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-light dark:bg-dark-400">
+  <div class="min-h-screen bg-light dark:bg-primary">
     <!-- Header -->
     <div class="bg-primary py-12 text-center text-light dark:bg-dark-300">
       <div class="container mx-auto px-3">
@@ -42,8 +42,8 @@
               :class="[
                 'font-robotoMedium rounded-lg px-6 py-3 transition-colors',
                 selectedCategory === category.id
-                  ? 'bg-primary text-light'
-                  : 'bg-white text-dark hover:bg-gray-50 dark:bg-dark-300 dark:text-light dark:hover:bg-dark-200',
+                  ? 'bg-primary-200 text-light dark:border'
+                  : 'bg-gray-100 text-dark hover:bg-gray-50 dark:bg-dark-300 dark:text-light dark:hover:bg-dark-200',
               ]"
             >
               {{ $t(category.name) }}
@@ -103,14 +103,8 @@
             </p>
             <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
               <NuxtLink
-                to="/help"
-                class="font-robotoMedium hover:bg-primary-dark inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-light transition-colors"
-              >
-                {{ $t("FAQ.visitHelpCenter") }}
-              </NuxtLink>
-              <NuxtLink
                 to="/contact"
-                class="font-robotoMedium inline-flex items-center justify-center rounded-lg border border-primary px-6 py-3 text-primary transition-colors hover:bg-primary hover:text-light"
+                class="font-robotoMedium hover:bg-primary-dark inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-light transition-colors"
               >
                 {{ $t("FAQ.contactSupport") }}
               </NuxtLink>

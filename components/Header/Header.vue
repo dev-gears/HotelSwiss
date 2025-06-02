@@ -8,7 +8,18 @@
           class="h-8"
         />
       </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:block">
+        <NavigationMenu />
+      </div>
+
       <div class="flex items-center gap-4">
+        <!-- Mobile Navigation -->
+        <div class="lg:hidden">
+          <NavigationMenu />
+        </div>
+
         <CommonThemeToggle />
         <LanguageSwitcher />
       </div>
@@ -17,5 +28,5 @@
 </template>
 
 <script setup lang="ts">
-import CommonThemeToggle from "~/components/Common/ThemeToggle.vue";
+// Components are auto-imported by Nuxt
 </script>

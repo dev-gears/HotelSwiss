@@ -8,9 +8,11 @@
       <slot />
     </div>
     <Footer />
+    <ScrollTop />
   </div>
 </template>
 
 <script setup lang="ts">
+import ScrollTop from "primevue/scrolltop";
 import SearchSection from "~/components/Search/SearchSection.vue";
 </script>

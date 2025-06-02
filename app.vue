@@ -2,13 +2,6 @@
   <NuxtLoadingIndicator />
   <NuxtLayout>
     <NuxtPage />
-    <ScrollTop
-      class="light-ripple"
-      :pt="{
-        root: '!bg-primary !text-light !rounded-full !p-2 !z-50 !shadow-cardImage light-ripple',
-        transition: '!transition-all !duration-300 !ease-in-out',
-      }"
-    />
   </NuxtLayout>
 </template>
 
@@ -45,6 +38,14 @@ useHead({
 
 .dark {
   --p-primary-color: #26393b;
+}
+
+.dark button.p-scrolltop {
+  @apply bg-dark-100 text-light shadow-lg transition-colors hover:bg-light-100 hover:text-dark;
+}
+
+button.p-scrolltop {
+  @apply bg-light text-primary shadow-lg transition-colors hover:bg-primary hover:text-light;
 }
 
 /* Prevent flash of wrong theme during loading */
