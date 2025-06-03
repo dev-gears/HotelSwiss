@@ -67,6 +67,8 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import type { Hotel } from "@/types/hotel";
+import { useLocalizedDescription } from "@/composables/useLocalizedDescription";
+
 const runtimeConfig = useRuntimeConfig();
 const NUMBER_OF_CHARACTERS = 500;
 const props = defineProps<{
@@ -75,6 +77,10 @@ const props = defineProps<{
 
 const backendUrl = runtimeConfig.public.backendUrl;
 const showFullDescription = ref(false);
+
+// Get localized description
+const { getHotelDescription } = useLocalizedDescription();
+const localizedDescription = getHotelDescription(props.hotel);
 
 /**
  * Toggle full description
@@ -85,11 +91,11 @@ const toggleFullDescription = () => {
 
 /**
  * Display description
- * If the description is longer than 200 characters, show only the first 200 characters
+ * If the description is longer than 500 characters, show only the first 500 characters
  * @returns {string} Description
  */
 const displayDescription = computed(() => {
-  const { description } = props.hotel;
+  const description = localizedDescription.value;
   return showFullDescription.value || description.length <= NUMBER_OF_CHARACTERS
     ? description
     : `${description.substring(0, NUMBER_OF_CHARACTERS)}...`;
@@ -100,6 +106,6 @@ const displayDescription = computed(() => {
  * @returns {boolean} Is long description
  */
 const isLongDescription = computed(
-  () => props.hotel.description.length > NUMBER_OF_CHARACTERS,
+  () => localizedDescription.value.length > NUMBER_OF_CHARACTERS,
 );
 </script>

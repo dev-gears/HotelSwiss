@@ -2,12 +2,10 @@
   <div v-if="canton" class="rounded-lg bg-light p-6 shadow-md dark:bg-dark-300">
     <h2 class="mb-6 font-patuaOne text-2xl font-bold text-dark dark:text-light">
       {{ $t("Canton.about.title") }}
-    </h2>
-
-    <!-- Description (will be available when API is expanded) -->
-    <div v-if="canton.description" class="prose prose-gray dark:prose-invert">
+    </h2>    <!-- Description (localized based on current language) -->
+    <div v-if="localizedDescription" class="prose prose-gray dark:prose-invert">
       <p class="font-robotoRegular text-gray-600 dark:text-gray-400">
-        {{ canton.description }}
+        {{ localizedDescription }}
       </p>
     </div>
 
@@ -43,8 +41,17 @@
 
 <script setup lang="ts">
 import type { Canton } from "@/types/hotel";
+import { useLocalizedDescription } from "@/composables/useLocalizedDescription";
+import { computed } from "vue";
 
-defineProps<{
+const props = defineProps<{
   canton?: Canton;
 }>();
+
+// Get localized description
+const { getCantonDescription } = useLocalizedDescription();
+const localizedDescription = computed(() => {
+  if (!props.canton) return '';
+  return getCantonDescription(props.canton).value;
+});
 </script>
