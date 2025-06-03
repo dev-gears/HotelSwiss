@@ -8,7 +8,7 @@ const getApiConfig = () => {
     process.env.NUXT_PUBLIC_BASE_URL ||
     "https://hotelswiss.stefanivic.com";
   const apiPath =
-    process.env.API_PATH || process.env.NUXT_PUBLIC_API_PATH || "/api";
+    process.env.API_PATH || process.env.NUXT_PUBLIC_API_PATH || "/api/v1";
   const authCredentials =
     process.env.AUTH_CREDENTIALS || process.env.NUXT_AUTH_CREDENTIALS || "";
 
@@ -32,6 +32,15 @@ export default defineNuxtConfig({
         lang: "en",
         class: "theme-loading",
       },
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "format-detection", content: "telephone=no" },
+        { name: "author", content: "Hotel Swiss" },
+        { property: "og:site_name", content: "Hotel Swiss" },
+        { name: "msapplication-TileColor", content: "#6cc5cf" },
+        { name: "theme-color", content: "#6cc5cf" },
+      ],
       link: [
         {
           rel: "preload",
@@ -47,6 +56,7 @@ export default defineNuxtConfig({
           type: "font/woff2",
           crossorigin: "anonymous",
         },
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       ],
     },
   },

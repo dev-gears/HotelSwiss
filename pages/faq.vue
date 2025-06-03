@@ -1,5 +1,10 @@
 <template>
   <div class="min-h-screen bg-light dark:bg-primary">
+    <CommonHead
+      title="Frequently Asked Questions - Hotel Swiss"
+      description="Find answers to common questions about Hotel Swiss, booking process, accommodations, and hotel services in Switzerland."
+      url="https://hotelswiss.ch/faq"
+    />
     <!-- Header -->
     <div class="bg-primary py-12 text-center text-light dark:bg-dark-300">
       <div class="container mx-auto px-3">

@@ -1,6 +1,5 @@
 import { ref, onMounted } from "vue";
 
-// Global state for dark mode
 const isDark = ref(false);
 let isInitialized = false;
 
@@ -17,11 +16,9 @@ const initializeTheme = () => {
 
   isDark.value = savedTheme === "dark" || (!savedTheme && prefersDark);
 
-  // Apply theme immediately without transition to prevent flash
   document.documentElement.classList.toggle("dark", isDark.value);
 };
 
-// Initialize theme immediately if on client
 if (import.meta.client) {
   initializeTheme();
 }
@@ -31,7 +28,6 @@ if (import.meta.client) {
  * @returns Object with isDark state and toggleDarkMode function
  */
 export const useDarkMode = () => {
-  // Ensure theme is initialized when composable is used
   onMounted(() => {
     initializeTheme();
   });

@@ -1,5 +1,10 @@
 <template>
   <div class="min-h-screen bg-light dark:bg-dark-400">
+    <CommonHead
+      title="Contact Guide - Hotel Swiss"
+      description="A comprehensive guide on how to contact Hotel Swiss, reach our support team, and get the assistance you need for your Swiss hotel booking."
+      url="https://hotelswiss.ch/contact-guide"
+    />
     <!-- Header -->
     <div class="bg-primary py-12 text-center text-light dark:bg-dark-300">
       <div class="container mx-auto px-3">
@@ -157,16 +162,11 @@
             </p>
             <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
               <NuxtLink
-                to="/help"
-                class="font-robotoMedium hover:bg-primary-dark inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-light transition-colors"
-              >
-                {{ $t("ContactGuide.visitHelpCenter") }}
-              </NuxtLink>
-              <NuxtLink
                 to="/contact"
-                class="font-robotoMedium inline-flex items-center justify-center rounded-lg border border-primary px-6 py-3 text-primary transition-colors hover:bg-primary hover:text-light"
+                class="font-robotoMedium hover:bg-primary-dark inline-flex items-center rounded-lg bg-primary px-6 py-3 text-light transition-colors"
               >
-                {{ $t("ContactGuide.contactSupport") }}
+                {{ $t("ContactPolicy.support.contactUs") }}
+                <i class="pi pi-arrow-right ml-2"></i>
               </NuxtLink>
             </div>
           </div>

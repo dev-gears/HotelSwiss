@@ -1,5 +1,10 @@
 <template>
   <div class="min-h-screen bg-light dark:bg-primary">
+    <CommonHead
+      title="Discover Switzerland - Hotel Swiss"
+      description="Explore Switzerland's most beautiful regions, luxury accommodations, and travel tips. Plan your perfect Swiss getaway with Hotel Swiss."
+      url="https://hotelswiss.ch/discover"
+    />
     <!-- Hero Section -->
     <div class="bg-primary py-20 text-center text-light dark:bg-dark-300">
       <div class="container mx-auto px-3">

@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="category"
-    class="rounded-lg bg-light p-6 shadow-md dark:bg-dark-300"
+    class="rounded-lg bg-light p-6 shadow-md dark:bg-dark-100"
   >
     <div class="mb-6 flex items-center justify-between">
       <h2 class="font-patuaOne text-2xl font-bold text-dark dark:text-light">

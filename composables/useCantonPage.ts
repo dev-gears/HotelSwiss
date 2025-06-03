@@ -4,6 +4,12 @@ import { useHotelList } from "./useHotelList";
 
 /**
  * Composable for canton page data and hotel management
+ * Fetches canton data from first screen data
+ * Manages hotel list with canton-specific filters
+ * Supports automatic fetching on client-side
+ * @param {string} cantonId - The ID of the canton to fetch hotels for
+ * @return {Object} - Reactive canton data and hotel list methods
+ * @throws {Error} If canton data is not found
  */
 export const useCantonPage = (cantonId: string) => {
   const { data: firstScreenData } = useFirstScreenData({
@@ -15,13 +21,12 @@ export const useCantonPage = (cantonId: string) => {
       (canton: any) => canton.id.toString() === cantonId,
     );
   });
-
   const hotelList = useHotelList({
-    initialFilters: { canton_id: cantonId },
+    initialFilters: { cantons: cantonId },
     autoFetch: false,
   });
 
-  if (process.client) {
+  if (import.meta.client) {
     hotelList.fetchHotelList();
   }
 

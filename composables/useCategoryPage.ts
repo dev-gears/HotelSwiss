@@ -15,12 +15,11 @@ export const useCategoryPage = (categoryId: string) => {
       (category: any) => category.id.toString() === categoryId,
     );
   });
-
   const getQueryParams = () => {
     if (categoryId === "all") {
       return {};
     } else {
-      return { category_id: categoryId };
+      return { category_id: parseInt(categoryId, 10) };
     }
   };
 

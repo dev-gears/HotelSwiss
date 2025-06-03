@@ -1,9 +1,26 @@
 <template>
   <CommonHead
     :title="hotel?.title ?? 'Default Hotel Title'"
-    :description="`Every info you need if staying at ${hotel?.title}`"
+    :description="`Discover ${hotel?.title} in Switzerland. View photos, amenities, and location information for your perfect stay.`"
     :imageUrl="hotel?.images[0]?.url ?? 'default-image-url.jpg'"
-    :url="`https://hotelswiss.ch/hotel/${hotel?.id}`"
+    :url="`/hotel/${hotel?.id}`"
+    :keywords="`${hotel?.title}, Switzerland hotel, luxury accommodation, ${hotel?.city || ''} hotel`"
+    :structuredDataType="'hotel'"
+    :structuredDataProps="{
+      name: hotel?.title,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: hotel?.address,
+        addressLocality: hotel?.city,
+        addressRegion: hotel?.canton?.name,
+        addressCountry: 'Switzerland',
+      },
+      priceRange: getPriceRangeSymbol(
+        hotel?.start_price ? parseInt(hotel?.start_price) : undefined,
+      ),
+      starRating: hotel?.stars,
+      telephone: hotel?.telephone,
+    }"
   />
 
   <HotelSkeleton v-if="pending" />
@@ -105,5 +122,15 @@ const { data: hotel, pending } = useHotelData(
 
 const openImageModal = () => {
   showImageModal.value = true;
+};
+
+// Function to convert price to price range symbols for structured data
+const getPriceRangeSymbol = (price?: number) => {
+  if (!price) return "$$";
+
+  if (price < 100) return "$";
+  if (price < 300) return "$$";
+  if (price < 600) return "$$$";
+  return "$$$$";
 };
 </script>

@@ -7,7 +7,7 @@
       <Image
         @click="emit('openGallery')"
         :src="images[0]?.url ?? undefined"
-        class="hero-image h-96 w-full cursor-pointer object-cover transition-all hover:brightness-75 [&_img]:aspect-video [&_img]:rounded"
+        class="flex h-full w-full cursor-pointer object-cover transition-all hover:brightness-75 [&_img]:aspect-video [&_img]:rounded"
       />
     </div>
     <div
@@ -19,7 +19,7 @@
             @click="emit('openGallery')"
             :src="data.renditions.thumbnail"
             :alt="`Hotel image ${index + 2}`"
-            class="hero-image h-96 w-full cursor-pointer object-cover transition-all hover:brightness-75 [&_img]:!aspect-video [&_img]:!h-full [&_img]:rounded [&_img]:object-cover"
+            class="flex h-full w-full cursor-pointer object-cover transition-all hover:brightness-75 [&_img]:!aspect-video [&_img]:!h-full [&_img]:rounded [&_img]:object-cover"
           />
         </div>
       </template>

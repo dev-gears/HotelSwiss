@@ -12,11 +12,11 @@
         </div>
 
         <!-- Canton Image -->
-        <div v-if="canton.image" class="ml-8 hidden md:block">
+        <div v-if="canton.image" class="w-32">
           <img
-            :src="String(canton.image.url) || String(canton.image.original)"
+            :src="getImageUrl(canton.image.url)"
             :alt="canton.name"
-            class="h-32 w-32 rounded-lg object-cover shadow-lg"
+            class="h-32 w-32 rounded-lg object-contain shadow-lg"
           />
         </div>
       </div>
@@ -25,6 +25,9 @@
 </template>
 
 <script setup lang="ts">
+import { useHotelImage } from "@/composables/useHotelImage";
+
+const { getImageUrl } = useHotelImage();
 import type { Canton } from "@/types/hotel";
 
 defineProps<{

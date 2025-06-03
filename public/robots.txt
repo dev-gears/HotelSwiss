@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Block access to admin or private areas
+Disallow: /admin/
+Disallow: /private/
+
+# Block specific file types
+Disallow: /*.json$
+Disallow: /*.xml$
+
+# Allow all bots to access CSS, JS and image files
+Allow: /*.css
+Allow: /*.js
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
+
+# Sitemap location
+Sitemap: https://hotelswiss.ch/sitemap.xml

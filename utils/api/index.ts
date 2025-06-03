@@ -4,8 +4,14 @@ import type {
   HotelListWithPagination,
   Category,
   Filters,
+  FiltersResponse,
   FirstScreen,
+  FirstScreenResponse,
   Canton,
+  Amenity,
+  Room,
+  EmailRequest,
+  EmailResponse,
 } from "~/types/hotel";
 
 // Types for API fetch options
@@ -33,22 +39,21 @@ export interface ApiDataOptions extends ApiQueryOptions {
 
 // Extended API options with caching
 export interface CachedApiOptions extends ApiQueryOptions {
-  // We'll use standard cache logic but add these as custom properties
-  // that our useApiCache composable can handle
+  // Custom caching properties for potential future use
   cacheTime?: number; // Time in seconds to cache
   forceRefresh?: boolean; // Force refresh the cache
 }
 
 // Extended API data options with caching
 export interface CachedApiDataOptions extends ApiDataOptions {
-  // We'll use standard cache logic but add these as custom properties
-  // that our useApiCache composable can handle
+  // Custom caching properties for potential future use
   cacheTime?: number; // Time in seconds to cache
 }
 
 /**
  * Type-safe API client functions for direct data fetching
  * These functions use $hotelApi for non-reactive data fetching
+ * All endpoints include trailing slash as per OpenAPI spec
  */
 
 // Hotel endpoints
@@ -78,12 +83,34 @@ export const fetchCantons = (options?: ApiQueryOptions) =>
 export const fetchCanton = (id: number | string, options?: ApiQueryOptions) =>
   $hotelApi<Canton>(`cantons/${id}/`, options);
 
+// Amenity endpoints
+export const fetchAmenities = (options?: ApiQueryOptions) =>
+  $hotelApi<{ results: Amenity[] }>("amenities/", options);
+
+export const fetchAmenity = (id: number | string, options?: ApiQueryOptions) =>
+  $hotelApi<Amenity>(`amenities/${id}/`, options);
+
+// Room endpoints
+export const fetchRooms = (options?: ApiQueryOptions) =>
+  $hotelApi<{ results: Room[] }>("rooms/", options);
+
+export const fetchRoom = (id: number | string, options?: ApiQueryOptions) =>
+  $hotelApi<Room>(`rooms/${id}/`, options);
+
 // Other endpoints
 export const fetchFilters = (options?: ApiQueryOptions) =>
-  $hotelApi<Filters>("filters/", options);
+  $hotelApi<FiltersResponse>("filters/", options);
 
 export const fetchFirstScreen = (options?: ApiQueryOptions) =>
-  $hotelApi<FirstScreen>("first-screen/", options);
+  $hotelApi<FirstScreenResponse>("first-screen/", options);
+
+// Email endpoint
+export const sendEmail = (emailData: EmailRequest, options?: ApiQueryOptions) =>
+  $hotelApi<EmailResponse>("send-email/", {
+    ...options,
+    method: "POST",
+    body: emailData,
+  });
 
 /**
  * Type-safe composables for reactive data fetching
@@ -120,5 +147,23 @@ export const useCantonsData = (options?: ApiDataOptions) =>
 export const useCantonData = (id: number | string, options?: ApiDataOptions) =>
   useHotelApiData<Canton>(`cantons/${id}/`, options);
 
+// Amenity composables
+export const useAmenitiesData = (options?: ApiDataOptions) =>
+  useHotelApiData<{ results: Amenity[] }>("amenities/", options);
+
+export const useAmenityData = (id: number | string, options?: ApiDataOptions) =>
+  useHotelApiData<Amenity>(`amenities/${id}/`, options);
+
+// Room composables
+export const useRoomsData = (options?: ApiDataOptions) =>
+  useHotelApiData<{ results: Room[] }>("rooms/", options);
+
+export const useRoomData = (id: number | string, options?: ApiDataOptions) =>
+  useHotelApiData<Room>(`rooms/${id}/`, options);
+
+// Other composables
+export const useFiltersData = (options?: ApiDataOptions) =>
+  useHotelApiData<FiltersResponse>("filters/", options);
+
 export const useFirstScreenData = (options?: ApiDataOptions) =>
-  useHotelApiData<FirstScreen>("first-screen/", options);
+  useHotelApiData<FirstScreenResponse>("first-screen/", options);

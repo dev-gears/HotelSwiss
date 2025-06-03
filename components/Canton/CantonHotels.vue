@@ -1,5 +1,5 @@
 <template>
-  <div v-if="canton" class="rounded-lg bg-light p-6 shadow-md dark:bg-dark-300">
+  <div v-if="canton" class="rounded-lg bg-light p-6 shadow-md dark:bg-dark-100">
     <!-- Section Header -->
     <div class="mb-8 text-center">
       <h2 class="font-patuaOne text-3xl font-bold text-dark dark:text-light">
@@ -8,7 +8,7 @@
       <p
         class="mt-4 font-robotoRegular text-lg text-gray-600 dark:text-gray-400"
       >
-        {{ $t("Canton.hotels.subtitle", { count: hotels.length }) }}
+        {{ $t("Canton.hotels.subtitle") }}
       </p>
     </div>
     <!-- Hotels Grid -->

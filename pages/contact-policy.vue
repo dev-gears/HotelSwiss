@@ -1,5 +1,10 @@
 <template>
   <div class="min-h-screen bg-light dark:bg-dark-400">
+    <CommonHead
+      title="Contact Policy - Hotel Swiss"
+      description="Learn about Hotel Swiss contact policies, how we handle your inquiries, and our commitment to providing excellent customer service."
+      url="https://hotelswiss.ch/contact-policy"
+    />
     <!-- Header -->
     <div class="bg-primary py-12 text-center text-light dark:bg-dark-300">
       <div class="container mx-auto px-3">

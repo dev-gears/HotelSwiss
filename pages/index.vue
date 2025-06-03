@@ -1,8 +1,10 @@
 <template>
   <CommonHead
-    title="Hotel Swiss: Discover Luxury"
-    description="Explore the finest luxury hotels in Switzerland with Hotel Swiss."
-    url="https://hotelswiss.ch"
+    title="Hotel Swiss: Discover Luxury Hotels in Switzerland"
+    description="Explore the finest luxury hotels in Switzerland with Hotel Swiss. Find the perfect accommodation for your Swiss holiday."
+    url="/"
+    keywords="luxury hotels, Switzerland hotels, hotel booking, Swiss accommodations, vacation in Switzerland"
+    :structuredDataType="'website'"
   />
   <Slider
     v-if="firstScreenData?.promo_hotels"

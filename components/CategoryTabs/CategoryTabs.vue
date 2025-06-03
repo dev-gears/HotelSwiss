@@ -61,9 +61,9 @@
               />
               <CommonGridSection
                 :hotels="hotels"
-                :loading="loading || !initialized"
+                :loading="loading"
                 :loadingMore="loadingMore"
-                :hasMore="!!nextUrl"
+                :hasMore="hasMore"
                 @sort="handleSort"
                 @loadMore="handleLoadMore"
               />
@@ -83,9 +83,9 @@
               />
               <CommonGridSection
                 :hotels="hotels"
-                :loading="loading || !initialized"
+                :loading="loading"
                 :loadingMore="loadingMore"
-                :hasMore="!!nextUrl"
+                :hasMore="hasMore"
                 @sort="handleSort"
                 @loadMore="handleLoadMore"
               />
@@ -99,20 +99,30 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import type { Category, Hotel, HotelListWithPagination } from "@/types/hotel";
-import { fetchHotels } from "~/utils/api";
+import type { Category } from "@/types/hotel";
+import { useHotelList } from "~/composables/useHotelList";
 
 const props = defineProps<{
   categories: Category[];
 }>();
 
-const hotels = ref<Hotel[]>([]);
-const loading = ref(true);
-const loadingMore = ref(false);
-const nextUrl = ref<string | null>(null);
 const activeTab = ref(0);
 const tabWrapper = useTemplateRef("tabWrapper");
-const initialized = ref(false);
+
+// Use the hotel list composable for consistent behavior
+const hotelList = useHotelList({
+  autoFetch: false, // We'll manually control fetching per tab
+});
+
+const {
+  hotels,
+  isLoading: loading,
+  loadingMore,
+  hasMore,
+  fetchHotelList,
+  loadMore,
+  handleSort: baseHandleSort,
+} = hotelList;
 
 /**
  * Get the query parameters for the current tab
@@ -126,43 +136,18 @@ const getQueryParams = (tabValue: number | string = activeTab.value) => {
 };
 
 /**
- * Fetch hotels with optional params
+ * Fetch hotels for the current tab
  */
 const fetchHotelsForTab = async (
   tabValue: number | string = activeTab.value,
   sortParams = {},
-  append = false,
 ) => {
-  try {
-    if (!append) {
-      loading.value = true;
-    } else {
-      loadingMore.value = true;
-    }
+  const params = {
+    ...getQueryParams(tabValue),
+    ...sortParams,
+  };
 
-    const params = {
-      ...getQueryParams(tabValue),
-      ...sortParams,
-    } as Record<string, string | number>;
-
-    const data = await fetchHotels(params, {
-      key: `category-tab-${tabValue}-${JSON.stringify(sortParams)}`,
-      cache: true,
-    });
-
-    if (append) {
-      hotels.value.push(...data.results);
-    } else {
-      hotels.value = data.results;
-    }
-    nextUrl.value = data.next;
-  } catch (error) {
-    console.error("Error fetching hotels:", error);
-  } finally {
-    loading.value = false;
-    loadingMore.value = false;
-    initialized.value = true;
-  }
+  await fetchHotelList(params);
 };
 
 /**
@@ -183,22 +168,10 @@ const handleSort = async ({ key, value }: { key: string; value: string }) => {
 };
 
 /**
- * Handle load more event
+ * Handle load more event - delegate to composable
  */
 const handleLoadMore = async () => {
-  if (!nextUrl.value || loadingMore.value) return;
-
-  try {
-    loadingMore.value = true;
-
-    const data = (await $hotelApi(nextUrl.value)) as HotelListWithPagination;
-    hotels.value = [...hotels.value, ...data.results];
-    nextUrl.value = data.next;
-  } catch (error) {
-    console.error("Error loading more hotels:", error);
-  } finally {
-    loadingMore.value = false;
-  }
+  await loadMore();
 };
 
 const scrollToTabs = () => {

@@ -1,5 +1,18 @@
 <template>
   <div class="flex flex-col items-center bg-light-100 dark:bg-dark-100">
+    <CommonHead
+      :title="
+        searchTerm
+          ? `${searchTerm} - Hotel Swiss Search Results`
+          : 'Search Hotels - Hotel Swiss'
+      "
+      :description="
+        searchTerm
+          ? `Find the best hotels in Switzerland matching '${searchTerm}'. Browse our curated selection of luxury accommodations.`
+          : 'Search and discover the finest hotels in Switzerland. Filter by location, amenities, and more.'
+      "
+      :url="`https://hotelswiss.ch/search?q=${encodeURIComponent(searchTerm || '')}`"
+    />
     <!-- Search Results Section -->
     <div class="container mx-auto max-md:px-3">
       <CommonBlockHeader

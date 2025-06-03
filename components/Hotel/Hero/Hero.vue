@@ -24,7 +24,7 @@
     </div>
     <HotelHeroGallery
       v-model:visible="showGallery"
-      :images="parsedImagesWithFullPath ?? null"
+      :images="parsedImagesWithFullPath ?? []"
     />
   </div>
 </template>
@@ -59,25 +59,41 @@ const showGallery = ref(false);
 const runtimeConfig = useRuntimeConfig();
 const backendUrl = runtimeConfig.public.backendUrl;
 
-const parsedImagesWithFullPath = images?.map((image) => ({
-  id: image.id,
-  original: backendUrl + image.url,
-  url: backendUrl + image.url,
-  renditions: {
-    thumbnail: image.renditions.thumbnail
-      ? backendUrl + image.renditions.thumbnail
-      : null,
-  },
-  title: image.title,
-  width: image.width,
-  height: image.height,
-}));
+const parsedImagesWithFullPath = computed(() =>
+  images?.map(
+    (image) =>
+      ({
+        id: image.id,
+        url: backendUrl + image.url,
+        renditions: {
+          thumbnail: image.renditions.thumbnail
+            ? backendUrl + image.renditions.thumbnail
+            : undefined,
+          medium: image.renditions.medium
+            ? backendUrl + image.renditions.medium
+            : undefined,
+          large: image.renditions.large
+            ? backendUrl + image.renditions.large
+            : undefined,
+        },
+        title: image.title,
+        width: image.width,
+        height: image.height,
+      }) satisfies Image,
+  ),
+);
 </script>
 
 <style>
-.fallback-image {
-  img {
-    @apply !h-96 w-full object-cover lg:h-full;
+.fallback-image img {
+  height: 24rem !important; /* h-96 */
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+@media (min-width: 1024px) {
+  .fallback-image img {
+    height: 100% !important; /* lg:h-full */
   }
 }
 </style>

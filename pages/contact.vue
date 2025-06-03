@@ -1,5 +1,10 @@
 <template>
   <div class="min-h-screen bg-light dark:bg-dark-400">
+    <CommonHead
+      title="Contact Hotel Swiss - Get in Touch"
+      description="Contact Hotel Swiss for inquiries about hotels, reservations, or partnerships. Our team is ready to assist you with finding the perfect accommodation in Switzerland."
+      url="https://hotelswiss.ch/contact"
+    />
     <!-- Header -->
     <div class="bg-primary py-12 text-center text-light dark:bg-dark-300">
       <div class="container mx-auto px-3">
