@@ -4,7 +4,9 @@
     :description="`${$t('Canton.hero.subtitle')} ${cantonData?.name}, ${$t('Common.switzerland')}`"
     :url="`/canton/${route.params.id}`"
   />
+  <SkeletonLoadersPageSkeleton v-if="!isDataReady" :showMap="true" />
   <CommonBaseHotelListPage
+    v-else
     :hotels="hotels"
     :is-loading="isLoading"
     :loading-more="loadingMore"
@@ -15,16 +17,16 @@
     :load-more="loadMore"
   >
     <template #hero>
-      <CantonHero :canton="cantonData" :hotel-count="totalCount" />
+      <CantonHero :canton="cantonData || undefined" :hotel-count="totalCount" />
     </template>
 
     <template #description>
-      <CantonDescription :canton="cantonData" />
+      <CantonDescription :canton="cantonData || undefined" />
     </template>
 
     <template #map>
       <ClientOnly>
-        <CantonMap :canton="cantonData" />
+        <CantonMap :canton="cantonData || undefined" />
         <template #fallback>
           <div class="rounded-lg bg-light p-6 shadow-md dark:bg-dark-300">
             <h2
@@ -62,7 +64,7 @@
       }"
     >
       <CantonHotels
-        :canton="cantonData"
+        :canton="cantonData || undefined"
         :hotels="hotels"
         :loading="loading"
         :loading-more="loadingMore"
@@ -77,6 +79,7 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import { useCantonPage } from "~/composables/useCantonPage";
+import SkeletonLoadersPageSkeleton from "~/components/SkeletonLoaders/PageSkeleton.vue";
 
 definePageMeta({
   layout: "base",

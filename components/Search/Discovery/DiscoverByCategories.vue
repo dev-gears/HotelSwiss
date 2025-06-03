@@ -110,7 +110,6 @@
           </button>
         </div>
       </div>
-
       <!-- No Search Results -->
       <div
         v-else-if="categorySearchQuery && categories?.results?.length"
@@ -150,21 +149,16 @@
 </template>
 
 <script setup lang="ts">
-import { useFirstScreenData } from "~/utils/api";
+import { useCategoriesData } from "~/utils/api";
 
-// Fetch first screen data to get categories
+// Fetch categories data using dedicated endpoint
 const {
-  data: firstScreen,
+  data: categories,
   pending,
   error,
-} = await useFirstScreenData({
+} = await useCategoriesData({
   lazy: false,
 });
-
-// Extract categories from first screen data
-const categories = computed(() => ({
-  results: firstScreen.value?.categories || [],
-}));
 
 // Search functionality
 const categorySearchQuery = ref("");
@@ -172,12 +166,14 @@ const categorySearchQuery = ref("");
 // Filtered categories based on search query
 const filteredCategories = computed(() => {
   if (!categorySearchQuery.value.trim()) {
-    return categories.value.results;
+    return categories.value?.results || [];
   }
 
   const query = categorySearchQuery.value.toLowerCase().trim();
-  return categories.value.results.filter((category) =>
-    category.name.toLowerCase().includes(query),
+  return (
+    categories.value?.results?.filter((category) =>
+      category.name.toLowerCase().includes(query),
+    ) || []
   );
 });
 
@@ -198,7 +194,7 @@ const showAllCategories = () => loadMoreState.value.loadMore();
  */
 const handleCategoryClick = (categoryId: number, type: string) => {
   // Find the category to get its name for the URL
-  const category = categories.value.results.find(
+  const category = categories.value?.results?.find(
     (cat) => cat.id === categoryId,
   );
   navigateTo(

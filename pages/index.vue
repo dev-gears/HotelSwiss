@@ -25,7 +25,7 @@ definePageMeta({
 
 const { data: firstScreenData } = useFirstScreenData({
   lazy: false,
-  cache: false,
+  cache: true,
 });
 </script>
 

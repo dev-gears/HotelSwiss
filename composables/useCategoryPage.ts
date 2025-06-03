@@ -1,20 +1,24 @@
-import { computed } from "vue";
-import { useFirstScreenData } from "~/utils/api";
+import { computed, ref } from "vue";
+import { useCategoryData } from "~/utils/api";
 import { useHotelList } from "./useHotelList";
 
 /**
  * Composable for category page data and hotel management
+ * Fetches category data from dedicated category endpoint
+ * Manages hotel list with category-specific filters
+ * Supports automatic fetching
+ * @param {string} categoryId - The ID of the category to fetch hotels for
+ * @return {Object} - Reactive category data and hotel list methods
  */
 export const useCategoryPage = (categoryId: string) => {
-  const { data: firstScreenData } = useFirstScreenData({
-    lazy: false,
-  });
+  // Only fetch category data if it's not "all"
+  const { data: categoryData } =
+    categoryId === "all"
+      ? { data: ref(undefined) }
+      : useCategoryData(categoryId, {
+          lazy: false,
+        });
 
-  const categoryData = computed(() => {
-    return firstScreenData.value?.categories?.find(
-      (category: any) => category.id.toString() === categoryId,
-    );
-  });
   const getQueryParams = () => {
     if (categoryId === "all") {
       return {};
@@ -22,11 +26,14 @@ export const useCategoryPage = (categoryId: string) => {
       return { category_id: parseInt(categoryId, 10) };
     }
   };
-
   const hotelList = useHotelList({
     initialFilters: getQueryParams(),
-    autoFetch: true,
+    autoFetch: false,
   });
+
+  if (import.meta.client) {
+    hotelList.fetchHotelList();
+  }
 
   return {
     categoryData,

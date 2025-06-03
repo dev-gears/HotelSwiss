@@ -4,32 +4,54 @@
     :description="`${$t('Category.about.placeholder', { name: categoryData?.name })} ${$t('Common.switzerland')}`"
     :url="`/category/${route.params.id}`"
   />
-  <div v-if="isDataReady" class="container mx-auto flex flex-col gap-3 py-3">
-    <!-- Hero Section -->
-    <CategoryHero :category="categoryData" :hotel-count="totalCount" />
+  <SkeletonLoadersPageSkeleton v-if="!isDataReady" />
+  <CommonBaseHotelListPage
+    v-else
+    :hotels="hotels"
+    :is-loading="isLoading"
+    :loading-more="loadingMore"
+    :has-more="hasMore"
+    :total-count="totalCount"
+    :is-data-ready="isDataReady"
+    :handle-sort="handleSort"
+    :load-more="loadMore"
+  >
+    <template #hero>
+      <CategoryHero
+        :category="categoryData || undefined"
+        :hotel-count="totalCount"
+      />
+    </template>
 
-    <!-- Hotels Section -->
-    <CategoryHotels
-      :category="categoryData"
-      :hotels="hotels"
-      :loading="isLoading"
-      :loading-more="loadingMore"
-      :has-more="hasMore"
-      @sort="handleSort"
-      @load-more="loadMore"
-    />
-  </div>
+    <template #description> </template>
 
-  <div v-else class="container mx-auto px-3 py-20 text-center">
-    <h1 class="text-2xl text-primary-100 dark:text-primary-200">
-      {{ $t("Common.noResults") }}
-    </h1>
-  </div>
+    <template
+      #hotels="{
+        hotels,
+        loading,
+        loadingMore,
+        hasMore,
+        handleSort,
+        handleLoadMore,
+      }"
+    >
+      <CategoryHotels
+        :category="categoryData || undefined"
+        :hotels="hotels"
+        :loading="loading"
+        :loading-more="loadingMore"
+        :has-more="hasMore"
+        @sort="handleSort"
+        @load-more="handleLoadMore"
+      />
+    </template>
+  </CommonBaseHotelListPage>
 </template>
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import { useCategoryPage } from "~/composables/useCategoryPage";
+import SkeletonLoadersPageSkeleton from "~/components/SkeletonLoaders/PageSkeleton.vue";
 
 definePageMeta({
   layout: "base",

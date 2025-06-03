@@ -114,22 +114,17 @@
 </template>
 
 <script setup lang="ts">
-import { useFirstScreenData } from "~/utils/api";
+import { useCantonsData } from "~/utils/api";
 import DiscoveryCard from "./DiscoveryCard.vue";
 
-// Fetch first screen data to get cantons
+// Fetch cantons data using dedicated endpoint
 const {
-  data: firstScreen,
+  data: cantons,
   pending,
   error,
-} = await useFirstScreenData({
+} = await useCantonsData({
   lazy: false,
 });
-
-// Extract cantons from first screen data
-const cantons = computed(() => ({
-  results: firstScreen.value?.filters?.cantons || [],
-}));
 
 // Search functionality
 const cantonSearchQuery = ref("");
@@ -137,12 +132,14 @@ const cantonSearchQuery = ref("");
 // Filtered cantons based on search query
 const filteredCantons = computed(() => {
   if (!cantonSearchQuery.value.trim()) {
-    return cantons.value.results;
+    return cantons.value?.results || [];
   }
 
   const query = cantonSearchQuery.value.toLowerCase().trim();
-  return cantons.value.results.filter((canton) =>
-    canton.name.toLowerCase().includes(query),
+  return (
+    cantons.value?.results?.filter((canton) =>
+      canton.name.toLowerCase().includes(query),
+    ) || []
   );
 });
 
