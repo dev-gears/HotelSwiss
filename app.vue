@@ -1,5 +1,6 @@
 <template>
   <NuxtLoadingIndicator />
+  <Toast position="top-right" />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

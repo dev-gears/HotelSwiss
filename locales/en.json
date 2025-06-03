@@ -179,7 +179,8 @@
       "email": {
         "label": "Email",
         "placeholder": "Enter your email",
-        "error": "Please enter a valid email"
+        "error": "Email is required",
+        "invalid": "Please enter a valid email"
       },
       "phone": {
         "label": "Phone",
@@ -196,7 +197,31 @@
       }
     },
     "buttons": {
-      "submit": "Send Message"
+      "submit": "Send Message",
+      "submitting": "Sending..."
+    },
+    "notifications": {
+      "success": {
+        "title": "Message Sent",
+        "message": "Your message has been sent successfully. We'll get back to you soon."
+      },
+      "error": {
+        "title": "Error",
+        "message": "There was a problem sending your message. Please try again."
+      },
+      "authError": {
+        "title": "Email Service Unavailable",
+        "message": "Our email service is currently experiencing technical difficulties. Please contact the hotel directly using the phone number or email address listed on this page."
+      }
+    },
+    "emailTemplate": {
+      "subjectPrefix": "Inquiry about",
+      "defaultSubject": "Hotel Inquiry",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "date": "Date",
+      "message": "Message"
     }
   },
   "Gallery": {

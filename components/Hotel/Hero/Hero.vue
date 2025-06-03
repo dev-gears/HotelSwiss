@@ -7,6 +7,7 @@
         :images="parsedImagesWithFullPath"
         :hotelId="hotelId"
         :hotelTitle="hotelTitle"
+        @openImageModal="showGallery = true"
       />
       <Collage
         class="hidden md:grid"

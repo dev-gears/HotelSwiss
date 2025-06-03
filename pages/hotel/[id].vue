@@ -83,6 +83,9 @@
         <div>
           <ContactForm
             class="sticky top-3 rounded-2xl bg-light p-8 shadow-filters dark:bg-dark-200 dark:shadow-dark-200/20 max-md:hidden"
+            :hotelId="hotel?.id"
+            :hotelTitle="hotel?.title"
+            :hotelEmail="hotel?.email"
           />
         </div>
       </div>
@@ -90,6 +93,8 @@
     <HotelContactFooter
       :startPrice="hotel?.start_price"
       :endPrice="hotel?.end_price"
+      :hotelTitle="hotel?.title"
+      :hotelEmail="hotel?.email"
     />
   </div>
   <GalleryDrawer
