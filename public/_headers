@@ -40,3 +40,21 @@
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Enhanced caching for index page
+/
+  Cache-Control: public, s-maxage=900, max-age=300, stale-while-revalidate=3600
+  Vary: Accept-Encoding, Accept-Language
+  X-Cache-Strategy: enhanced-index-page
+
+# Enhanced caching for API endpoints
+/api/__api_party/hotelApi*
+  Cache-Control: public, s-maxage=900, max-age=300, stale-while-revalidate=3600
+  Vary: Accept-Encoding, Accept
+  X-Cache-Strategy: enhanced-api-caching
+
+# Enhanced caching for first-screen specific data
+/api/*first-screen*
+  Cache-Control: public, s-maxage=900, max-age=300, stale-while-revalidate=3600
+  Vary: Accept-Encoding, Accept
+  X-Cache-Strategy: enhanced-first-screen

@@ -214,35 +214,39 @@ export default defineNuxtConfig({
         allow: [".."],
       },
     },
-  },
-  nitro: {
+  },  nitro: {
     preset:
       process.env.NITRO_PRESET ||
       (process.env.VERCEL ? "vercel" : "node-server"),
-    routeRules: {
+    routeRules: {// Enhanced index page caching with Nuxt's built-in features
       "/": {
         ssr: true,
-        headers: { "cache-control": "s-maxage=300" },
+        headers: { 
+          "cache-control": "public, s-maxage=900, max-age=300, stale-while-revalidate=3600" 
+        },
       },
 
+      // Search page with moderate caching
       "/search": {
         ssr: true,
-        headers: { "cache-control": "s-maxage=300" },
+        headers: { "cache-control": "public, s-maxage=600, max-age=180" },
       },
 
+      // Hotel pages with longer caching (content changes less frequently)
       "/hotel/**": {
         ssr: true,
-        headers: { "cache-control": "s-maxage=600" },
+        headers: { "cache-control": "public, s-maxage=1800, max-age=600" },
       },
 
+      // Category and canton pages with long-term caching
       "/category/**": {
         ssr: true,
-        headers: { "cache-control": "s-maxage=1800" },
+        headers: { "cache-control": "public, s-maxage=3600, max-age=1200" },
       },
 
       "/canton/**": {
         ssr: true,
-        headers: { "cache-control": "s-maxage=1800" },
+        headers: { "cache-control": "public, s-maxage=3600, max-age=1200" },
       },
 
       "/privacy": {
@@ -277,11 +281,10 @@ export default defineNuxtConfig({
       "/contact": {
         ssr: true,
         headers: { "cache-control": "s-maxage=1800" },
-      },
-
+      },      // Enhanced API caching using Nuxt's route rules
       "/api/**": {
         cors: true,
-        headers: { "cache-control": "s-maxage=60" },
+        headers: { "cache-control": "public, s-maxage=300, max-age=120" },
       },
     },
     rollupConfig: {
