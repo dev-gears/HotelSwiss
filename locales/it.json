@@ -76,6 +76,8 @@
     "subtitle": "{count} tipi di camere disponibili",
     "gridView": "Vista a griglia",
     "listView": "Vista a elenco",
+    "viewGallery": "Visualizza galleria",
+    "viewDetails": "Visualizza dettagli",
     "guest": "ospite",
     "guests": "ospiti",
     "accommodates": "Ospita",

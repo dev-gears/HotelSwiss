@@ -75,6 +75,8 @@
     "subtitle": "{count} types de chambres disponibles",
     "gridView": "Vue en grille",
     "listView": "Vue en liste",
+    "viewGallery": "Voir la galerie",
+    "viewDetails": "Voir les détails",
     "guest": "invité",
     "guests": "invités",
     "accommodates": "Héberge",

@@ -26,6 +26,7 @@
     "backToHome": "Back to Home",
     "backToHelp": "Back to Help Center",
     "errorLoading": "Error loading data",
+    "close": "Close",
     "hotels": "hotels",
     "switzerland": "Switzerland"
   },
@@ -75,6 +76,8 @@
     "guests": "guests",
     "accommodates": "Accommodates",
     "amenities": "Room Features",
+    "viewGallery": "View Gallery",
+    "viewDetails": "View Details",
     "inquire": "Inquire",
     "inquireAbout": "Inquire About Room",
     "inquireAboutRoom": "Room Inquiry",
