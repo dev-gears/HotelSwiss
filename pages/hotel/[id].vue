@@ -24,7 +24,7 @@
   />
 
   <HotelSkeleton v-if="pending" />
-  <div v-else class="flex flex-col bg-light-100 dark:bg-dark-100 max-sm:pb-32">
+  <div v-else class="flex flex-col bg-light-100 dark:bg-primary max-sm:pb-32">
     <div class="flex flex-col md:gap-5">
       <HotelHero
         :images="hotel?.images"

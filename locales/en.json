@@ -193,7 +193,9 @@
     "contactHotelInfo": "This hotel is not subscribed to our online service. You can contact the hotel directly or search for another available hotel in the area."
   },
   "SocialNetworks": {
-    "visitUsAlsoOn": "Visit us also on"
+    "visitUsAlsoOn": "Visit us also on",
+    "connectWithUs": "Connect with us on social media",
+    "followForUpdates": "Follow us for the latest updates and offers"
   },
   "ContactForm": {
     "title": "Contact Us",

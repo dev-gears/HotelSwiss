@@ -1,11 +1,11 @@
 <template>
   <div
-    class="flex flex-col gap-3 bg-primary text-light dark:bg-dark-100 max-md:px-5 max-md:py-6 md:bg-light-100 md:text-dark dark:md:text-light"
+    class="flex flex-col gap-3 rounded-2xl bg-primary text-light dark:bg-dark-100 max-md:px-5 max-md:py-6 md:bg-light-100 md:text-dark dark:md:text-light"
   >
     <h1 class="container mx-auto block font-patuaOne text-2xl md:hidden">
       {{ hotel?.title }}
     </h1>
-    <div>
+    <div class="p-3">
       <p v-if="displayDescription !== 'nan'" class="font-robotoRegular text-sm">
         {{ displayDescription }}
       </p>
@@ -16,51 +16,55 @@
         :label="$t('Content.readMore')"
       />
     </div>
-    <div
-      class="relative mb-5 flex w-full items-center justify-center rounded-[10px] border border-light px-3 py-4 md:border-dark/10 dark:md:border-light/10"
-    >
-      <NuxtLink
-        :to="{
-          path: `/canton/${hotel?.canton?.id}`,
-          query: { title: hotel?.canton?.name },
-        }"
-        class="relative flex h-14 w-1/3 cursor-pointer items-center justify-center border-r border-dark/20 dark:border-light/10"
-      >
-        <img
-          class="absolute inset-0 h-full w-full p-2 dark:brightness-75 md:brightness-50"
-          :src="backendUrl + hotel?.canton?.image?.url"
-          alt="canton image"
-        />
-        <p
-          class="font-robotoRegular text-lg text-light md:text-dark dark:md:text-light"
+    <Card>
+      <template #content>
+        <div
+          class="relative flex w-full items-center justify-center rounded-[10px] border border-light px-3 py-4 md:border-dark/10 dark:md:border-light/10"
         >
-          {{ hotel?.canton.name }}
-        </p>
-      </NuxtLink>
+          <NuxtLink
+            :to="{
+              path: `/canton/${hotel?.canton?.id}`,
+              query: { title: hotel?.canton?.name },
+            }"
+            class="relative flex h-14 w-1/3 cursor-pointer items-center justify-center border-r border-dark/20 dark:border-light/10"
+          >
+            <img
+              class="absolute inset-0 h-full w-full p-2 dark:brightness-75 md:brightness-50"
+              :src="backendUrl + hotel?.canton?.image?.url"
+              alt="canton image"
+            />
+            <p
+              class="font-robotoRegular text-lg text-light md:text-dark dark:md:text-light"
+            >
+              {{ hotel?.canton.name }}
+            </p>
+          </NuxtLink>
 
-      <div
-        class="flex h-full w-1/3 cursor-pointer flex-col items-center justify-center px-2 font-patuaOne text-xl"
-      >
-        <p class="text-light md:text-dark dark:md:text-light">
-          {{ $t("Content.class") }}
-        </p>
-        <CommonStars
-          class="[&_img]:invert md:[&_img]:invert dark:md:[&_img]:invert-0"
-          :stars="hotel?.stars"
-        />
-      </div>
+          <div
+            class="flex h-full w-1/3 cursor-pointer flex-col items-center justify-center px-2 font-patuaOne text-xl"
+          >
+            <p class="text-light md:text-dark dark:md:text-light">
+              {{ $t("Content.class") }}
+            </p>
+            <CommonStars
+              class="[&_img]:invert md:[&_img]:invert dark:md:[&_img]:invert-0"
+              :stars="hotel?.stars"
+            />
+          </div>
 
-      <NuxtLink
-        :to="{
-          path: `/category/${hotel?.categories[0]?.category?.id}`,
-          query: { title: hotel?.categories[0]?.category?.name },
-        }"
-        class="flex h-14 w-1/3 cursor-pointer items-center justify-center border-l border-dark/20 text-center font-robotoRegular text-lg font-normal text-light dark:border-light/10 md:text-dark dark:md:text-light"
-        v-if="hotel?.categories[0]"
-      >
-        {{ hotel?.categories[0]?.category?.name }}
-      </NuxtLink>
-    </div>
+          <NuxtLink
+            :to="{
+              path: `/category/${hotel?.categories[0]?.category?.id}`,
+              query: { title: hotel?.categories[0]?.category?.name },
+            }"
+            class="flex h-14 w-1/3 cursor-pointer items-center justify-center border-l border-dark/20 text-center font-robotoRegular text-lg font-normal text-light dark:border-light/10 md:text-dark dark:md:text-light"
+            v-if="hotel?.categories[0]"
+          >
+            {{ hotel?.categories[0]?.category?.name }}
+          </NuxtLink>
+        </div>
+      </template>
+    </Card>
   </div>
 </template>
 
