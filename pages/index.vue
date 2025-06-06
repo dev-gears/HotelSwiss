@@ -6,14 +6,19 @@
     keywords="luxury hotels, Switzerland hotels, hotel booking, Swiss accommodations, vacation in Switzerland"
     :structuredDataType="'website'"
   />
-  <Slider
-    v-if="firstScreenData?.promo_hotels"
-    :hotels="firstScreenData.promo_hotels"
-  />
-  <CategoryTabs
-    v-if="firstScreenData?.categories"
-    :categories="firstScreenData.categories"
-  />
+
+  <SkeletonLoadersLandingSkeleton v-if="pending" />
+
+  <template v-else>
+    <Slider
+      v-if="firstScreenData?.promo_hotels"
+      :hotels="firstScreenData.promo_hotels"
+    />
+    <CategoryTabs
+      v-if="firstScreenData?.categories"
+      :categories="firstScreenData.categories"
+    />
+  </template>
 </template>
 
 <script setup lang="ts">
@@ -23,7 +28,7 @@ definePageMeta({
   layout: "base",
 });
 
-const { data: firstScreenData } = useFirstScreenData({
+const { data: firstScreenData, pending } = useFirstScreenData({
   lazy: false,
   cache: true,
 });

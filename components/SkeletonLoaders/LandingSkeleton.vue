@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto h-[60vh] px-3 py-6">
+  <div class="container mx-auto mb-32 h-[60vh] px-3 py-6">
     <Skeleton
       height="5rem"
       width="100%"
