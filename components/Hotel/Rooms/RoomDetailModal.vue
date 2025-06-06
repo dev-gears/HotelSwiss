@@ -6,7 +6,7 @@
     :modal="true"
     class="mx-4"
     :style="{ width: '95vw', maxWidth: '900px' }"
-    :header="room?.value?.name || 'Room Details'"
+    :header="room?.name || 'Room Details'"
     :pt="{
       root: 'rounded-xl overflow-hidden',
       header: 'bg-primary text-white p-4',
@@ -17,20 +17,17 @@
   >
     <div v-if="room" class="max-h-[70vh] overflow-y-auto">
       <!-- Room Images Gallery -->
-      <div
-        v-if="room.value.images && room.value.images.length > 0"
-        class="relative"
-      >
+      <div v-if="room.images && room.images.length > 0" class="relative">
         <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2">
           <div
-            v-for="(image, index) in room.value.images.slice(0, 4)"
+            v-for="(image, index) in room.images.slice(0, 4)"
             :key="index"
             class="group relative cursor-pointer overflow-hidden rounded-lg"
             @click="$emit('openGallery', room)"
           >
             <Image
               :src="getImageUrl(image.url)"
-              :alt="`${room.value.name} - Image ${index + 1}`"
+              :alt="`${room.name} - Image ${index + 1}`"
               class="h-48 w-full object-cover transition-all duration-300 group-hover:scale-105"
               :pt="{
                 root: 'h-48 w-full',
@@ -49,9 +46,9 @@
           </div>
         </div>
         <Button
-          v-if="room.value.images.length > 4"
+          v-if="room.images.length > 4"
           @click="$emit('openGallery', room)"
-          :label="`View all ${room.value.images.length} photos`"
+          :label="`View all ${room.images.length} photos`"
           icon="pi pi-images"
           class="mx-4 mb-4 w-full bg-primary text-white"
         />
@@ -70,9 +67,9 @@
                 {{ $t("Rooms.accommodates") }}
               </h4>
               <p class="text-gray-600 dark:text-gray-400">
-                {{ room.value.max_occupants }}
+                {{ room.max_occupants }}
                 {{
-                  room.value.max_occupants === 1
+                  room.max_occupants === 1
                     ? $t("Rooms.guest")
                     : $t("Rooms.guests")
                 }}
@@ -82,7 +79,7 @@
         </div>
 
         <!-- Full Amenities List -->
-        <div v-if="room.value.amenities.length > 0" class="mb-6">
+        <div v-if="room.amenities.length > 0" class="mb-6">
           <h4
             class="mb-4 flex items-center gap-2 text-lg font-semibold text-dark dark:text-light"
           >
@@ -91,7 +88,7 @@
           </h4>
           <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
             <div
-              v-for="amenity in resolveAmenities(room.value.amenities)"
+              v-for="amenity in resolveAmenities(room.amenities)"
               :key="amenity.id"
               class="flex items-center gap-3 rounded-lg bg-light p-3 dark:bg-dark-200"
             >

@@ -75,16 +75,11 @@ export interface SocialLink {
   link: string;
 }
 
-export interface RoomValue {
+export interface Room {
   name: string;
   max_occupants: number;
   amenities: number[];
-  images: any[];
-}
-
-export interface Room {
-  type: string;
-  value: RoomValue;
+  images: Image[];
   id: string;
 }
 

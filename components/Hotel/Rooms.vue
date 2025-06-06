@@ -127,20 +127,24 @@ const shouldShowLoadMore = computed(() => {
 
 // Room gallery images for the selected room
 const roomGalleryImages = computed((): Image[] => {
-  if (!selectedRoom.value?.value?.images) return [];
+  if (!selectedRoom.value?.images) return [];
 
-  return selectedRoom.value.value.images.map((image: any) => ({
+  return selectedRoom.value.images.map((image: Image) => ({
     id: image.id || Math.random(),
-    title: image.title || selectedRoom.value!.value.name,
+    title: image.title || selectedRoom.value!.name,
     url: getImageUrl(image.url),
     width: image.width || 800,
     height: image.height || 600,
     renditions: {
-      thumbnail: image.thumbnail
-        ? getImageUrl(image.thumbnail)
+      thumbnail: image.renditions?.thumbnail
+        ? getImageUrl(image.renditions.thumbnail)
         : getImageUrl(image.url),
-      medium: image.medium ? getImageUrl(image.medium) : getImageUrl(image.url),
-      large: image.large ? getImageUrl(image.large) : getImageUrl(image.url),
+      medium: image.renditions?.medium
+        ? getImageUrl(image.renditions.medium)
+        : getImageUrl(image.url),
+      large: image.renditions?.large
+        ? getImageUrl(image.renditions.large)
+        : getImageUrl(image.url),
     },
   }));
 });

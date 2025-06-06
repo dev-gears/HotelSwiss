@@ -28,7 +28,8 @@
     "errorLoading": "Error loading data",
     "close": "Close",
     "hotels": "hotels",
-    "switzerland": "Switzerland"
+    "switzerland": "Switzerland",
+    "more": "more"
   },
   "LanguageButton": {
     "selectLanguage": "Select language"
@@ -62,7 +63,14 @@
     "whereYouWillBe": "Where you will be"
   },
   "HotelAmenities": {
-    "title": "Hotel offers"
+    "title": "Hotel Amenities & Services",
+    "subtitle": "{count} amenities available",
+    "viewAllDetails": "View all details",
+    "allAmenities": "All Amenities",
+    "noAmenities": {
+      "title": "No amenities listed",
+      "description": "This hotel hasn't listed specific amenities yet."
+    }
   },
   "Amenities": {
     "title": "Room amenities"

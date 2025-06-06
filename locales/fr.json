@@ -22,7 +22,8 @@
     "clear": "Effacer",
     "clearSearch": "Effacer la recherche",
     "done": "Terminé",
-    "backToHome": "Retour à l'accueil"
+    "backToHome": "Retour à l'accueil",
+    "more": "de plus"
   },
   "LanguageButton": {
     "selectLanguage": "Choisir la langue"
@@ -65,7 +66,14 @@
     "whereYouWillBe": "Voici où vous serez"
   },
   "HotelAmenities": {
-    "title": "Services de l'hôtel"
+    "title": "Équipements & Services de l'Hôtel",
+    "subtitle": "{count} équipements disponibles",
+    "viewAllDetails": "Voir tous les détails",
+    "allAmenities": "Tous les Équipements",
+    "noAmenities": {
+      "title": "Aucun équipement répertorié",
+      "description": "Cet hôtel n'a pas encore répertorié d'équipements spécifiques."
+    }
   },
   "Amenities": {
     "title": "Équipements de la chambre"

@@ -68,7 +68,7 @@
           id="roomType"
           v-model="selectedRoom"
           :options="rooms"
-          optionLabel="value.name"
+          optionLabel="name"
           optionValue="id"
           :placeholder="$t('ContactForm.fields.roomType.placeholder')"
           class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !text-primary-200 !shadow dark:!bg-dark-400 dark:!text-light dark:!shadow-dark-200/20"
@@ -83,11 +83,11 @@
         >
           <template #option="{ option }">
             <div class="flex w-full items-center justify-between">
-              <span>{{ option.value.name }}</span>
+              <span>{{ option.name }}</span>
               <span class="text-sm text-gray-500 dark:text-gray-400">
-                {{ option.value.max_occupants }}
+                {{ option.max_occupants }}
                 {{
-                  option.value.max_occupants === 1
+                  option.max_occupants === 1
                     ? $t("Rooms.guest")
                     : $t("Rooms.guests")
                 }}
@@ -330,7 +330,7 @@ const submitForm = async (e: Event) => {
       ? `${$t("ContactForm.emailTemplate.date")}: ${formatDate(date.value)}`
       : null,
     selectedRoomDetails
-      ? `${$t("ContactForm.emailTemplate.roomType")}: ${selectedRoomDetails.value.name} (${selectedRoomDetails.value.max_occupants} ${selectedRoomDetails.value.max_occupants === 1 ? $t("Rooms.guest") : $t("Rooms.guests")})`
+      ? `${$t("ContactForm.emailTemplate.roomType")}: ${selectedRoomDetails.name} (${selectedRoomDetails.max_occupants} ${selectedRoomDetails.max_occupants === 1 ? $t("Rooms.guest") : $t("Rooms.guests")})`
       : null,
     "",
     `${$t("ContactForm.emailTemplate.message")}:`,

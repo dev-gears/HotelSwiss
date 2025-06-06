@@ -6,13 +6,13 @@
       <!-- Room Image Thumbnail -->
       <div class="flex-shrink-0">
         <div
-          v-if="room.value.images && room.value.images.length > 0"
+          v-if="room.images && room.images.length > 0"
           class="relative h-20 w-20 cursor-pointer overflow-hidden rounded-lg"
           @click="$emit('openGallery', room)"
         >
           <Image
-            :src="getImageUrl(room.value.images[0]?.url)"
-            :alt="room.value.name"
+            :src="getImageUrl(room.images[0]?.url)"
+            :alt="room.name"
             class="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
             :pt="{
               root: 'h-full w-full',
@@ -20,10 +20,10 @@
             }"
           />
           <div
-            v-if="room.value.images.length > 1"
+            v-if="room.images.length > 1"
             class="absolute bottom-1 right-1 rounded bg-black/60 px-1 text-xs text-white"
           >
-            {{ room.value.images.length }}
+            {{ room.images.length }}
           </div>
         </div>
         <div
@@ -40,37 +40,34 @@
           <h3
             class="font-robotoRegular text-lg font-semibold text-dark transition-colors group-hover:text-primary dark:text-light dark:group-hover:text-primary-200"
           >
-            {{ room.value.name }}
+            {{ room.name }}
           </h3>
           <div
             class="mt-1 flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400"
           >
             <span class="flex items-center gap-1">
               <i class="pi pi-users" />
-              {{ room.value.max_occupants }}
+              {{ room.max_occupants }}
               {{
-                room.value.max_occupants === 1
+                room.max_occupants === 1
                   ? $t("Rooms.guest")
                   : $t("Rooms.guests")
               }}
             </span>
             <span
-              v-if="room.value.amenities.length > 0"
+              v-if="room.amenities.length > 0"
               class="flex items-center gap-1"
             >
               <i class="pi pi-star text-primary" />
               {{
-                resolveAmenities(room.value.amenities)
+                resolveAmenities(room.amenities)
                   .slice(0, 2)
                   .map((a: any) => a?.name)
                   .filter(Boolean)
                   .join(", ")
               }}
-              <span
-                v-if="room.value.amenities.length > 2"
-                class="text-gray-500"
-              >
-                +{{ room.value.amenities.length - 2 }} more
+              <span v-if="room.amenities.length > 2" class="text-gray-500">
+                +{{ room.amenities.length - 2 }} more
               </span>
             </span>
           </div>
@@ -85,7 +82,7 @@
             class="bg-primary px-4 py-2 text-white hover:bg-primary-200"
           />
           <Button
-            v-if="room.value.images && room.value.images.length > 0"
+            v-if="room.images && room.images.length > 0"
             @click="$emit('openGallery', room)"
             icon="pi pi-images"
             class="bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"

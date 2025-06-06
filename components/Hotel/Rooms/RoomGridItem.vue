@@ -5,14 +5,14 @@
     <!-- Room Image Section -->
     <div class="relative h-48 overflow-hidden">
       <div
-        v-if="room.value.images && room.value.images.length > 0"
+        v-if="room.images && room.images.length > 0"
         class="relative h-full w-full cursor-pointer"
         @click="$emit('openGallery', room)"
       >
         <Image
           v-ripple
-          :src="getImageUrl(room.value.images[0]?.url)"
-          :alt="room.value.name"
+          :src="getImageUrl(room.images[0]?.url)"
+          :alt="room.name"
           class="h-full w-full object-cover transition-all duration-300"
           :pt="{
             root: 'h-full w-full',
@@ -21,11 +21,11 @@
         />
         <!-- Image Count Badge -->
         <div
-          v-if="room.value.images.length > 1"
+          v-if="room.images.length > 1"
           class="absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-xs text-white backdrop-blur-sm"
         >
           <i class="pi pi-images text-xs"></i>
-          {{ room.value.images.length }}
+          {{ room.images.length }}
         </div>
         <!-- Gallery Overlay -->
         <div class="absolute inset-0 bg-black/0 transition-all duration-300">
@@ -53,18 +53,13 @@
           <i class="pi pi-home text-4xl" />
         </div>
       </div>
-
       <!-- Occupancy Badge -->
       <div
         class="absolute right-3 top-3 rounded-full bg-primary px-3 py-1 text-sm font-medium text-light shadow-lg"
       >
         <i class="pi pi-users mr-1" />
-        {{ room.value.max_occupants }}
-        {{
-          room.value.max_occupants === 1
-            ? $t("Rooms.guest")
-            : $t("Rooms.guests")
-        }}
+        {{ room.max_occupants }}
+        {{ room.max_occupants === 1 ? $t("Rooms.guest") : $t("Rooms.guests") }}
       </div>
     </div>
 
@@ -74,7 +69,7 @@
         <h3
           class="font-robotoRegular text-lg font-semibold text-dark transition-colors dark:text-light"
         >
-          {{ room.value.name }}
+          {{ room.name }}
         </h3>
         <Button
           v-ripple
@@ -93,17 +88,15 @@
           <i class="pi pi-users mr-2" />
           <span>
             {{ $t("Rooms.accommodates") }}
-            {{ room.value.max_occupants }}
+            {{ room.max_occupants }}
             {{
-              room.value.max_occupants === 1
-                ? $t("Rooms.guest")
-                : $t("Rooms.guests")
+              room.max_occupants === 1 ? $t("Rooms.guest") : $t("Rooms.guests")
             }}
           </span>
         </div>
 
         <!-- Amenities Preview -->
-        <div v-if="room.value.amenities.length > 0" class="mt-3">
+        <div v-if="room.amenities.length > 0" class="mt-3">
           <div
             class="mb-2 flex items-center text-sm font-medium text-gray-700 dark:text-gray-300"
           >
@@ -112,10 +105,7 @@
           </div>
           <div class="flex flex-wrap items-center gap-2">
             <div
-              v-for="amenity in resolveAmenities(room.value.amenities).slice(
-                0,
-                3,
-              )"
+              v-for="amenity in resolveAmenities(room.amenities).slice(0, 3)"
               :key="amenity.id"
               class="flex items-center gap-2 rounded-lg bg-primary/10 px-3 py-1 dark:bg-primary-200/10"
             >
@@ -130,11 +120,11 @@
               </span>
             </div>
             <button
-              v-if="room.value.amenities.length > 3"
+              v-if="room.amenities.length > 3"
               @click="$emit('selectRoom', room)"
               class="text-xs text-primary dark:!text-light"
             >
-              +{{ room.value.amenities.length - 3 }} more
+              +{{ room.amenities.length - 3 }} more
             </button>
           </div>
         </div>
@@ -152,7 +142,7 @@
         />
         <Button
           v-ripple
-          v-if="room.value.images && room.value.images.length > 0"
+          v-if="room.images && room.images.length > 0"
           @click="$emit('openGallery', room)"
           icon="pi pi-images"
           class="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"

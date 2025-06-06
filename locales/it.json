@@ -23,7 +23,8 @@
     "clearSearch": "Cancella ricerca",
     "done": "Fatto",
     "backToHome": "Torna alla Home",
-    "cancel": "Annulla"
+    "cancel": "Annulla",
+    "more": "altro"
   },
   "LanguageButton": {
     "selectLanguage": "Seleziona lingua"
@@ -66,7 +67,14 @@
     "whereYouWillBe": "Ecco dove sarai"
   },
   "HotelAmenities": {
-    "title": "Servizi dell'hotel"
+    "title": "Servizi & Comfort dell'Hotel",
+    "subtitle": "{count} servizi disponibili",
+    "viewAllDetails": "Visualizza tutti i dettagli",
+    "allAmenities": "Tutti i Servizi",
+    "noAmenities": {
+      "title": "Nessun servizio elencato",
+      "description": "Questo hotel non ha ancora elencato servizi specifici."
+    }
   },
   "Amenities": {
     "title": "Servizi della camera"

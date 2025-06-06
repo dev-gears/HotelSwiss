@@ -23,7 +23,8 @@
     "clearSearch": "Suche löschen",
     "done": "Fertig",
     "backToHome": "Zurück zur Startseite",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "more": "weitere"
   },
   "LanguageButton": {
     "selectLanguage": "Sprache auswählen"
@@ -66,7 +67,14 @@
     "whereYouWillBe": "Wo Sie sein werden"
   },
   "HotelAmenities": {
-    "title": "Hotelangebote"
+    "title": "Hotel Ausstattung & Services",
+    "subtitle": "{count} Ausstattungsmerkmale verfügbar",
+    "viewAllDetails": "Alle Details anzeigen",
+    "allAmenities": "Alle Ausstattungsmerkmale",
+    "noAmenities": {
+      "title": "Keine Ausstattung aufgeführt",
+      "description": "Dieses Hotel hat noch keine spezifischen Ausstattungsmerkmale aufgeführt."
+    }
   },
   "Amenities": {
     "title": "Zimmerausstattung"
