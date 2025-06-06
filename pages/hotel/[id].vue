@@ -86,6 +86,7 @@
             :hotelId="hotel?.id"
             :hotelTitle="hotel?.title"
             :hotelEmail="hotel?.email"
+            :rooms="hotel?.rooms"
           />
         </div>
       </div>
@@ -95,6 +96,8 @@
       :endPrice="hotel?.end_price"
       :hotelTitle="hotel?.title"
       :hotelEmail="hotel?.email"
+      :hotelId="hotel?.id"
+      :rooms="hotel?.rooms"
     />
   </div>
   <GalleryDrawer

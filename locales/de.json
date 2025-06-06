@@ -22,7 +22,8 @@
     "clear": "Löschen",
     "clearSearch": "Suche löschen",
     "done": "Fertig",
-    "backToHome": "Zurück zur Startseite"
+    "backToHome": "Zurück zur Startseite",
+    "cancel": "Abbrechen"
   },
   "LanguageButton": {
     "selectLanguage": "Sprache auswählen"
@@ -71,7 +72,22 @@
     "title": "Zimmerausstattung"
   },
   "Rooms": {
-    "title": "Zimmertypen"
+    "title": "Zimmertypen",
+    "subtitle": "{count} Zimmertypen verfügbar",
+    "gridView": "Rasteransicht",
+    "listView": "Listenansicht",
+    "guest": "Gast",
+    "guests": "Gäste",
+    "accommodates": "Unterbringt",
+    "amenities": "Zimmerausstattung",
+    "inquire": "Anfragen",
+    "inquireAbout": "Anfrage zum Zimmer",
+    "inquireAboutRoom": "Zimmeranfrage",
+    "inquireDescription": "Möchten Sie das Hotel zu diesem Zimmertyp kontaktieren? Wir helfen Ihnen dabei, in Kontakt zu treten.",
+    "contactHotel": "Hotel kontaktieren",
+    "noRooms": "Keine Zimmerinformationen",
+    "noRoomsDescription": "Informationen zu Zimmertypen sind für dieses Hotel derzeit nicht verfügbar.",
+    "cancel": "Abbrechen"
   },
   "Search": {
     "filters": {
@@ -199,6 +215,11 @@
         "label": "Nachricht",
         "placeholder": "Geben Sie Ihre Nachricht ein",
         "error": "Nachricht ist Pflicht"
+      },
+      "roomType": {
+        "label": "Zimmertyp",
+        "placeholder": "Zimmertyp auswählen (optional)",
+        "option": "{name} (bis zu {occupants} Gäste)"
       }
     },
     "buttons": {

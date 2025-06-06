@@ -2,7 +2,8 @@
   <div v-if="canton" class="rounded-lg bg-light p-6 shadow-md dark:bg-dark-300">
     <h2 class="mb-6 font-patuaOne text-2xl font-bold text-dark dark:text-light">
       {{ $t("Canton.about.title") }}
-    </h2>    <!-- Description (localized based on current language) -->
+    </h2>
+    <!-- Description (localized based on current language) -->
     <div v-if="localizedDescription" class="prose prose-gray dark:prose-invert">
       <p class="font-robotoRegular text-gray-600 dark:text-gray-400">
         {{ localizedDescription }}
@@ -51,7 +52,7 @@ const props = defineProps<{
 // Get localized description
 const { getCantonDescription } = useLocalizedDescription();
 const localizedDescription = computed(() => {
-  if (!props.canton) return '';
+  if (!props.canton) return "";
   return getCantonDescription(props.canton).value;
 });
 </script>

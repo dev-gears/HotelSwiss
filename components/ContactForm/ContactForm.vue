@@ -53,6 +53,49 @@
           class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !px-2 !text-primary-200 !shadow dark:!bg-dark-400 dark:!text-light dark:!shadow-dark-200/20"
         />
       </div>
+      <!-- Room Type Selection (optional) -->
+      <div v-if="rooms && rooms.length > 0" class="flex flex-col gap-2">
+        <label
+          for="roomType"
+          class="text-sm text-primary-200 dark:text-light/80"
+        >
+          {{ $t("ContactForm.fields.roomType.label") }}:
+          <span class="text-primary-200/30 dark:text-light/30">
+            ({{ $t("Common.optional") }})
+          </span>
+        </label>
+        <Select
+          id="roomType"
+          v-model="selectedRoom"
+          :options="rooms"
+          optionLabel="value.name"
+          optionValue="id"
+          :placeholder="$t('ContactForm.fields.roomType.placeholder')"
+          class="!focus:shadow !h-12 w-full !rounded-xl !bg-light-100 !text-primary-200 !shadow dark:!bg-dark-400 dark:!text-light dark:!shadow-dark-200/20"
+          :pt="{
+            root: '!rounded-xl !bg-light-100 dark:!bg-dark-400',
+            input: '!px-2 !text-primary-200 dark:!text-light',
+            trigger: '!text-primary-200 dark:!text-light',
+            panel:
+              '!bg-light dark:!bg-dark-400 !border-primary-200/20 dark:!border-light/10',
+            item: '!text-primary-200 dark:!text-light hover:!bg-primary/10 dark:hover:!bg-primary-200/10',
+          }"
+        >
+          <template #option="{ option }">
+            <div class="flex w-full items-center justify-between">
+              <span>{{ option.value.name }}</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400">
+                {{ option.value.max_occupants }}
+                {{
+                  option.value.max_occupants === 1
+                    ? $t("Rooms.guest")
+                    : $t("Rooms.guests")
+                }}
+              </span>
+            </div>
+          </template>
+        </Select>
+      </div>
 
       <!-- Honeypot field to catch bots - hidden from humans but visible to bots -->
       <div class="hidden" aria-hidden="true" style="display: none">
@@ -132,6 +175,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import type { PropType } from "vue";
 import Input from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import Button from "primevue/button";
@@ -140,7 +184,7 @@ import DatePicker from "primevue/datepicker";
 import { useI18n } from "vue-i18n";
 import { sendEmail } from "~/utils/api";
 import { useToast } from "primevue/usetoast";
-import type { EmailRequest } from "~/types/hotel";
+import type { EmailRequest, Room } from "~/types/hotel";
 
 const props = defineProps({
   hotelId: {
@@ -155,6 +199,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  rooms: {
+    type: Array as PropType<Room[]>,
+    default: () => [],
+  },
 });
 
 const toast = useToast();
@@ -162,6 +210,7 @@ const name = ref("");
 const email = ref("");
 const message = ref("");
 const phone = ref("");
+const selectedRoom = ref<string | null>(null);
 const date = ref<Date | Date[] | null>(null);
 const isSubmitting = ref(false);
 const honeypot = ref(""); // Honeypot field for spam protection
@@ -264,8 +313,11 @@ const submitForm = async (e: Event) => {
   if (!valid) {
     return;
   }
-
   isSubmitting.value = true;
+  // Find selected room details
+  const selectedRoomDetails = selectedRoom.value
+    ? props.rooms.find((room) => room.id === selectedRoom.value)
+    : null;
 
   // Create the formatted message with all details
   const formattedMessage = [
@@ -276,6 +328,9 @@ const submitForm = async (e: Event) => {
       : null,
     date.value
       ? `${$t("ContactForm.emailTemplate.date")}: ${formatDate(date.value)}`
+      : null,
+    selectedRoomDetails
+      ? `${$t("ContactForm.emailTemplate.roomType")}: ${selectedRoomDetails.value.name} (${selectedRoomDetails.value.max_occupants} ${selectedRoomDetails.value.max_occupants === 1 ? $t("Rooms.guest") : $t("Rooms.guests")})`
       : null,
     "",
     `${$t("ContactForm.emailTemplate.message")}:`,
@@ -311,13 +366,12 @@ const submitForm = async (e: Event) => {
       summary: $t("ContactForm.notifications.success.title"),
       detail: $t("ContactForm.notifications.success.message"),
       life: 5000,
-    });
-
-    // Reset form
+    }); // Reset form
     name.value = "";
     email.value = "";
     message.value = "";
     phone.value = "";
+    selectedRoom.value = null;
     date.value = null;
   } catch (error: any) {
     console.error("Error sending email:", error);

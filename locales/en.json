@@ -22,6 +22,7 @@
     "clear": "Clear",
     "clearSearch": "Clear search",
     "done": "Done",
+    "cancel": "Cancel",
     "backToHome": "Back to Home",
     "backToHelp": "Back to Help Center",
     "errorLoading": "Error loading data",
@@ -66,7 +67,22 @@
     "title": "Room amenities"
   },
   "Rooms": {
-    "title": "Room types"
+    "title": "Room types",
+    "subtitle": "{count} room types available",
+    "gridView": "Grid View",
+    "listView": "List View",
+    "guest": "guest",
+    "guests": "guests",
+    "accommodates": "Accommodates",
+    "amenities": "Room Features",
+    "inquire": "Inquire",
+    "inquireAbout": "Inquire About Room",
+    "inquireAboutRoom": "Room Inquiry",
+    "inquireDescription": "Would you like to contact the hotel about this room type? We'll help you get in touch.",
+    "contactHotel": "Contact Hotel",
+    "noRooms": "No Room Information",
+    "noRoomsDescription": "Room type information is not currently available for this hotel.",
+    "cancel": "Cancel"
   },
   "Search": {
     "filters": {
@@ -194,6 +210,11 @@
         "label": "Message",
         "placeholder": "Enter your message",
         "error": "Message is required"
+      },
+      "roomType": {
+        "label": "Room Type",
+        "placeholder": "Select a room type (optional)",
+        "option": "{name} (up to {occupants} guests)"
       }
     },
     "buttons": {

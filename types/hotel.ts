@@ -75,11 +75,17 @@ export interface SocialLink {
   link: string;
 }
 
-export interface Room {
-  id: number;
+export interface RoomValue {
   name: string;
-  occupants: number;
-  amenities: Amenity; // Single amenity according to API spec
+  max_occupants: number;
+  amenities: number[];
+  images: any[];
+}
+
+export interface Room {
+  type: string;
+  value: RoomValue;
+  id: string;
 }
 
 export interface EmailRequest {
@@ -117,7 +123,7 @@ export interface Hotel {
   images: string; // serialized according to API spec
   social_links: any[]; // read-only
   seo: object; // read-only object
-  rooms: string; // serialized according to API spec
+  rooms: Room[]; // Array of Room objects
 }
 
 // API Response Types (matching OpenAPI spec exactly)

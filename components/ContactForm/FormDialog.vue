@@ -21,13 +21,16 @@
       :hotelId="hotelId"
       :hotelTitle="hotelTitle"
       :hotelEmail="hotelEmail"
+      :rooms="rooms"
     />
   </Drawer>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
+import type { PropType } from "vue";
 import Drawer from "primevue/drawer";
+import type { Room } from "~/types/hotel";
 
 const props = defineProps({
   visible: {
@@ -45,6 +48,10 @@ const props = defineProps({
   hotelEmail: {
     type: String,
     default: "",
+  },
+  rooms: {
+    type: Array as PropType<Room[]>,
+    default: () => [],
   },
 });
 

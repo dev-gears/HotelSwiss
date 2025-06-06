@@ -32,22 +32,30 @@
   </div>
   <FormDialog
     v-model:visible="formVisible"
-    :hotelId="String($route.params.id)"
+    :hotelId="hotelId"
     :hotelTitle="hotelTitle"
     :hotelEmail="hotelEmail"
+    :rooms="rooms"
   />
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
+import type { PropType } from "vue";
 import FormDialog from "../ContactForm/FormDialog.vue";
 import Button from "primevue/button";
+import type { Room } from "~/types/hotel";
 
 defineProps({
   startPrice: String,
   endPrice: String,
   hotelTitle: String,
   hotelEmail: String,
+  hotelId: [String, Number],
+  rooms: {
+    type: Array as PropType<Room[]>,
+    default: () => [],
+  },
 });
 
 const formVisible = ref(false);

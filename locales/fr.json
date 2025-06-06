@@ -71,7 +71,22 @@
     "title": "Équipements de la chambre"
   },
   "Rooms": {
-    "title": "Types de chambres"
+    "title": "Types de chambres",
+    "subtitle": "{count} types de chambres disponibles",
+    "gridView": "Vue en grille",
+    "listView": "Vue en liste",
+    "guest": "invité",
+    "guests": "invités",
+    "accommodates": "Héberge",
+    "amenities": "Équipements de chambre",
+    "inquire": "Se renseigner",
+    "inquireAbout": "Se renseigner sur la chambre",
+    "inquireAboutRoom": "Demande de renseignements sur la chambre",
+    "inquireDescription": "Souhaitez-vous contacter l'hôtel au sujet de ce type de chambre ? Nous vous aiderons à entrer en contact.",
+    "contactHotel": "Contacter l'hôtel",
+    "noRooms": "Aucune information sur les chambres",
+    "noRoomsDescription": "Les informations sur les types de chambres ne sont pas actuellement disponibles pour cet hôtel.",
+    "cancel": "Annuler"
   },
   "Search": {
     "filters": {
@@ -197,6 +212,11 @@
         "label": "Message",
         "placeholder": "Tapez votre message",
         "error": "Le message est requis"
+      },
+      "roomType": {
+        "label": "Type de chambre",
+        "placeholder": "Sélectionnez un type de chambre (facultatif)",
+        "option": "{name} (jusqu'à {occupants} invités)"
       }
     },
     "buttons": {
