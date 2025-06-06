@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { emit } from "process";
+const emit = defineEmits(["openImageModal"]);
 
 defineProps({
   images: {
