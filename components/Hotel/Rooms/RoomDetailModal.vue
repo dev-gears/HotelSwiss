@@ -77,18 +77,19 @@
             </div>
           </div>
         </div>
-
         <!-- Full Amenities List -->
-        <div v-if="room.amenities.length > 0" class="mb-6">
+        <div v-if="room.amenities && room.amenities.length > 0" class="mb-6">
           <h4
             class="mb-4 flex items-center gap-2 text-lg font-semibold text-dark dark:text-light"
           >
             <i class="pi pi-star text-primary"></i>
             {{ $t("Rooms.amenities") }}
           </h4>
+
+          <!-- Amenities Grid -->
           <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
             <div
-              v-for="amenity in resolveAmenities(room.amenities)"
+              v-for="amenity in room.amenities"
               :key="amenity.id"
               class="flex items-center gap-3 rounded-lg bg-light p-3 dark:bg-dark-200"
             >
@@ -113,6 +114,22 @@
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- No amenities in room -->
+        <div v-else class="mb-6">
+          <h4
+            class="mb-4 flex items-center gap-2 text-lg font-semibold text-dark dark:text-light"
+          >
+            <i class="pi pi-star text-primary"></i>
+            {{ $t("Rooms.amenities") }}
+          </h4>
+          <div class="py-4 text-center">
+            <i class="pi pi-info-circle text-2xl text-gray-400"></i>
+            <p class="mt-2 text-gray-600 dark:text-gray-400">
+              No amenities listed for this room type.
+            </p>
           </div>
         </div>
       </div>
@@ -142,7 +159,6 @@ import type { Room } from "@/types/hotel";
 import Button from "primevue/button";
 import Dialog from "primevue/dialog";
 import { useHotelImage } from "#imports";
-import { useAmenityResolver } from "@/composables/useAmenityResolver";
 
 interface Props {
   visible: boolean;
@@ -155,9 +171,8 @@ interface Emits {
   (e: "proceedToContact"): void;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 defineEmits<Emits>();
 
 const { getImageUrl } = useHotelImage();
-const { resolveAmenities } = useAmenityResolver();
 </script>

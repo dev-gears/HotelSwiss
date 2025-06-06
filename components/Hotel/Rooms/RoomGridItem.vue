@@ -94,18 +94,19 @@
             }}
           </span>
         </div>
-
         <!-- Amenities Preview -->
-        <div v-if="room.amenities.length > 0" class="mt-3">
+        <div v-if="room.amenities && room.amenities.length > 0" class="mt-3">
           <div
             class="mb-2 flex items-center text-sm font-medium text-gray-700 dark:text-gray-300"
           >
             <i class="pi pi-star mr-2 text-primary" />
             {{ $t("Rooms.amenities") }}
           </div>
+
+          <!-- Amenities list -->
           <div class="flex flex-wrap items-center gap-2">
             <div
-              v-for="amenity in resolveAmenities(room.amenities).slice(0, 3)"
+              v-for="amenity in room.amenities.slice(0, 3)"
               :key="amenity.id"
               class="flex items-center gap-2 rounded-lg bg-primary/10 px-3 py-1 dark:bg-primary-200/10"
             >
@@ -158,7 +159,6 @@
 import type { Room } from "@/types/hotel";
 import Button from "primevue/button";
 import { useHotelImage } from "#imports";
-import { useAmenityResolver } from "@/composables/useAmenityResolver";
 
 interface Props {
   room: Room;
@@ -169,9 +169,8 @@ interface Emits {
   (e: "openGallery", room: Room): void;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 defineEmits<Emits>();
 
 const { getImageUrl } = useHotelImage();
-const { resolveAmenities } = useAmenityResolver();
 </script>

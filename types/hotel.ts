@@ -78,7 +78,7 @@ export interface SocialLink {
 export interface Room {
   name: string;
   max_occupants: number;
-  amenities: number[];
+  amenities: Amenity[];
   images: Image[];
   id: string;
 }

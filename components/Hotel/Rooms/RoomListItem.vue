@@ -38,7 +38,7 @@
       <div class="flex flex-1 items-center justify-between">
         <div class="flex-1">
           <h3
-            class="font-robotoRegular text-lg font-semibold text-dark transition-colors group-hover:text-primary dark:text-light dark:group-hover:text-primary-200"
+            class="font-robotoRegular text-lg font-semibold text-dark transition-colors group-hover:text-primary dark:text-light dark:group-hover:text-light/80"
           >
             {{ room.name }}
           </h3>
@@ -55,12 +55,12 @@
               }}
             </span>
             <span
-              v-if="room.amenities.length > 0"
+              v-if="room.amenities && room.amenities.length > 0"
               class="flex items-center gap-1"
             >
               <i class="pi pi-star text-primary" />
               {{
-                resolveAmenities(room.amenities)
+                room.amenities
                   .slice(0, 2)
                   .map((a: any) => a?.name)
                   .filter(Boolean)
@@ -99,7 +99,6 @@
 import type { Room } from "@/types/hotel";
 import Button from "primevue/button";
 import { useHotelImage } from "#imports";
-import { useAmenityResolver } from "@/composables/useAmenityResolver";
 
 interface Props {
   room: Room;
@@ -110,9 +109,8 @@ interface Emits {
   (e: "openGallery", room: Room): void;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 defineEmits<Emits>();
 
 const { getImageUrl } = useHotelImage();
-const { resolveAmenities } = useAmenityResolver();
 </script>
