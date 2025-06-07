@@ -1,4 +1,14 @@
 <template>
+  <!-- GTM (noscript) -->
+  <noscript v-if="$config.public.gtmId">
+    <iframe
+      :src="`https://www.googletagmanager.com/ns.html?id=${$config.public.gtmId}`"
+      height="0"
+      width="0"
+      style="display: none; visibility: hidden"
+    />
+  </noscript>
+
   <NuxtLoadingIndicator />
   <Toast position="top-right" />
   <NuxtLayout>

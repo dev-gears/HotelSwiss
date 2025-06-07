@@ -58,6 +58,18 @@ export default defineNuxtConfig({
         },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       ],
+      script: process.env.NUXT_PUBLIC_GTM_ID
+        ? [
+            {
+              innerHTML: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','${process.env.NUXT_PUBLIC_GTM_ID}');`,
+              type: "text/javascript",
+            },
+          ]
+        : [],
     },
   },
   runtimeConfig: {
@@ -67,6 +79,7 @@ export default defineNuxtConfig({
         process.env.SITE_URL ||
         process.env.NUXT_SITE_URL ||
         "https://hotelswiss.stefanivic.com",
+      gtmId: process.env.NUXT_PUBLIC_GTM_ID || "",
     },
   },
 
@@ -77,7 +90,6 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
-
   modules: [
     "@nuxtjs/tailwindcss",
     "nuxt-api-party",
@@ -214,15 +226,18 @@ export default defineNuxtConfig({
         allow: [".."],
       },
     },
-  },  nitro: {
+  },
+  nitro: {
     preset:
       process.env.NITRO_PRESET ||
       (process.env.VERCEL ? "vercel" : "node-server"),
-    routeRules: {// Enhanced index page caching with Nuxt's built-in features
+    routeRules: {
+      // Enhanced index page caching with Nuxt's built-in features
       "/": {
         ssr: true,
-        headers: { 
-          "cache-control": "public, s-maxage=900, max-age=300, stale-while-revalidate=3600" 
+        headers: {
+          "cache-control":
+            "public, s-maxage=900, max-age=300, stale-while-revalidate=3600",
         },
       },
 
@@ -281,7 +296,7 @@ export default defineNuxtConfig({
       "/contact": {
         ssr: true,
         headers: { "cache-control": "s-maxage=1800" },
-      },      // Enhanced API caching using Nuxt's route rules
+      }, // Enhanced API caching using Nuxt's route rules
       "/api/**": {
         cors: true,
         headers: { "cache-control": "public, s-maxage=300, max-age=120" },

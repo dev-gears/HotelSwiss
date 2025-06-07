@@ -59,10 +59,10 @@ const languageSwitcherRef = ref<HTMLElement | null>(null);
 const isOverlayPanelOpen = ref(false);
 
 const languageNames: Record<LanguageCode, string> = {
-  de: "Deutsch",
   en: "English",
-  it: "Italiano",
   fr: "Français",
+  de: "Deutsch",
+  it: "Italiano",
 };
 
 const icons: Record<LanguageCode, string> = {
