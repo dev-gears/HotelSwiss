@@ -258,11 +258,10 @@ export default defineNuxtConfig({
     vueI18n: "./i18n.config.ts",
   },
   pages: true,
-
   plugins: [
     "@/plugins/gesture.ts",
     "@/plugins/theme.client.ts",
-    "@/plugins/performance.client.ts",
+    // "@/plugins/performance.client.ts", // Temporarily disabled
   ],
   css: [
     "primeicons/primeicons.css",
@@ -280,87 +279,32 @@ export default defineNuxtConfig({
           new URL("./node_modules/primeicons", import.meta.url),
         ),
       },
-    },
-    build: {
+    },    build: {
       rollupOptions: {
         external: ["oxc-parser"],
         output: {
-          manualChunks(id) {
-            // Vue core
-            if (
-              id.includes("vue") &&
-              (id.includes("node_modules/vue/") ||
-                id.includes("node_modules/vue-router/"))
-            ) {
-              return "vue-vendor";
-            }
-
-            // PrimeVue core components
-            if (
-              id.includes("node_modules/primevue/") &&
-              (id.includes("button") ||
-                id.includes("inputtext") ||
-                id.includes("dialog") ||
-                id.includes("carousel"))
-            ) {
-              return "primevue-vendor";
-            }
-
-            // PrimeVue extended components
-            if (
-              id.includes("node_modules/primevue/") &&
-              (id.includes("rating") ||
-                id.includes("chip") ||
-                id.includes("badge") ||
-                id.includes("divider"))
-            ) {
-              return "primevue-extended";
-            }
-
+          manualChunks: {
+            // Core Vue dependencies
+            "vue-vendor": ["vue", "vue-router", "vue-i18n"],
+            
+            // PrimeVue components - group together to avoid circular refs
+            "primevue-vendor": [
+              "primevue/button", 
+              "primevue/inputtext", 
+              "primevue/dialog", 
+              "primevue/carousel",
+              "primevue/rating", 
+              "primevue/chip", 
+              "primevue/badge", 
+              "primevue/divider"
+            ],
+            
             // Third-party libraries
-            if (id.includes("node_modules/vue3-carousel/")) {
-              return "carousel-vendor";
-            }
-
-            if (
-              id.includes("node_modules/vue-i18n/") ||
-              id.includes("node_modules/@nuxtjs/i18n/")
-            ) {
-              return "i18n-vendor";
-            }
-
-            // Hotel-related components
-            if (
-              id.includes("components/Hotel/") ||
-              id.includes("components/Card/")
-            ) {
-              return "hotel-components";
-            }
-
-            // Common components
-            if (
-              id.includes("components/Common/") ||
-              id.includes("components/Navigation/")
-            ) {
-              return "common-components";
-            }
-
-            // Search and category components
-            if (
-              id.includes("components/Search/") ||
-              id.includes("components/Category/")
-            ) {
-              return "search-components";
-            }
-
-            // Composables and utils
-            if (id.includes("composables/") || id.includes("utils/")) {
-              return "utils";
-            }
+            "third-party": ["vue3-carousel", "@primevue/themes/lara"],
           },
         },
       },
-      cssCodeSplit: true,
+      cssCodeSplit: false, // Disable CSS code splitting to prevent load order issues
     },
     optimizeDeps: {
       exclude: ["oxc-parser"],
@@ -466,10 +410,9 @@ export default defineNuxtConfig({
     transpile: ["primevue"],
     analyze: false,
   },
-
   experimental: {
     payloadExtraction: false,
-    viewTransition: true,
+    viewTransition: false, // Disable to prevent potential bundling issues
     typedPages: false,
   },
 
