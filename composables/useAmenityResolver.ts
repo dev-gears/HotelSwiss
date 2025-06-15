@@ -1,6 +1,6 @@
 import { computed } from "vue";
 import type { Amenity } from "@/types/hotel";
-import { useAmenitiesData } from "~/utils/api";
+import { useAmenitiesData } from "@/utils/api";
 
 /**
  * Composable for resolving amenity IDs to full amenity objects

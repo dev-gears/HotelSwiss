@@ -1,4 +1,4 @@
-import { type Directive } from "vue";
+import { type Directive, type DirectiveBinding } from "vue";
 
 type GestureOptions = {
   onSwipeLeft?: () => void;
@@ -11,8 +11,16 @@ type GestureOptions = {
   pinchThreshold?: number;
 };
 
+// Extend HTMLElement to include our custom cleanup property
+interface HTMLElementWithCleanup extends HTMLElement {
+  _gestureCleanup?: () => void;
+}
+
 const gestureDirective: Directive = {
-  mounted(el, binding) {
+  mounted(
+    el: HTMLElementWithCleanup,
+    binding: DirectiveBinding<GestureOptions>,
+  ) {
     let touchStartX = 0;
     let touchStartY = 0;
     let touchEndX = 0;
@@ -89,18 +97,25 @@ const gestureDirective: Directive = {
       }
     };
 
+    // Add event listeners
     el.addEventListener("touchstart", handleTouchStart);
     el.addEventListener("touchmove", handleTouchMove);
     el.addEventListener("touchend", handleTouchEnd);
 
-    el._cleanup = () => {
+    // Store cleanup function on element
+    el._gestureCleanup = () => {
       el.removeEventListener("touchstart", handleTouchStart);
       el.removeEventListener("touchmove", handleTouchMove);
       el.removeEventListener("touchend", handleTouchEnd);
     };
   },
-  unmounted(el) {
-    el._cleanup?.();
+
+  unmounted(el: HTMLElementWithCleanup) {
+    // Call cleanup function if it exists
+    if (el._gestureCleanup) {
+      el._gestureCleanup();
+      delete el._gestureCleanup;
+    }
   },
 };
 

@@ -21,25 +21,29 @@
             :class="isFavorite ? 'text-red-500' : 'text-white'"
             @click="toggleFavorite"
           />
-
           <NuxtLink :to="`/hotel/${hotel.id}`" class="block h-full w-full">
             <div v-ripple class="relative h-full w-full rounded-br-2xl">
               <NuxtImg
                 :placeholder="Global.PLACEHOLDER_IMAGE_URL"
-                loading="lazy"
+                :loading="isLCPCandidate ? 'eager' : 'lazy'"
+                :fetchpriority="isLCPCandidate ? 'high' : 'auto'"
+                :preload="isLCPCandidate"
+                preset="card"
                 class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
                 :src="
                   getImageUrl(
                     hotel.images[0]?.renditions?.thumbnail ?? undefined,
                   )
                 "
+                :srcset="generateCardSrcset(hotel.images[0])"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 :alt="t('Card.imageOf', { title: hotel.title })"
               />
             </div>
           </NuxtLink>
 
           <div
-            class="bg-black/50 absolute bottom-3 left-3 z-[3] flex items-center rounded-full"
+            class="absolute bottom-3 left-3 z-[3] flex items-center rounded-full bg-black/50"
           >
             <Rating
               v-model="starRating"
@@ -133,6 +137,7 @@ const props = defineProps<{
   aspect?: string;
   showAmenities?: boolean;
   showFavoriteOption?: boolean;
+  isLCPCandidate?: boolean;
 }>();
 
 const {
@@ -140,10 +145,39 @@ const {
   aspect = "default",
   showAmenities = false,
   showFavoriteOption = false,
+  isLCPCandidate = false,
 } = props;
 const router = useRouter();
 const { getImageUrl } = useHotelImage();
 const { t } = useI18n();
+
+// Generate optimized srcset for card images
+const generateCardSrcset = (image: any) => {
+  if (!image?.renditions) return "";
+
+  const runtimeConfig = useRuntimeConfig();
+  const baseUrl = runtimeConfig.public.backendUrl;
+
+  const srcsetParts = [];
+
+  if (image.renditions.thumbnail) {
+    srcsetParts.push(
+      `${baseUrl}${image.renditions.thumbnail}?f=webp&q=80&w=400 400w`,
+    );
+  }
+  if (image.renditions.medium) {
+    srcsetParts.push(
+      `${baseUrl}${image.renditions.medium}?f=webp&q=85&w=600 600w`,
+    );
+  }
+  if (image.renditions.large) {
+    srcsetParts.push(
+      `${baseUrl}${image.renditions.large}?f=webp&q=90&w=800 800w`,
+    );
+  }
+
+  return srcsetParts.join(", ");
+};
 
 const starRating = ref(hotel.stars);
 

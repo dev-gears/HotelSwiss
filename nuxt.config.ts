@@ -40,6 +40,8 @@ export default defineNuxtConfig({
         { property: "og:site_name", content: "Hotel Swiss" },
         { name: "msapplication-TileColor", content: "#6cc5cf" },
         { name: "theme-color", content: "#6cc5cf" },
+        { name: "robots", content: "index, follow" },
+        { name: "google", content: "notranslate" },
       ],
       link: [
         {
@@ -55,6 +57,15 @@ export default defineNuxtConfig({
           as: "font",
           type: "font/woff2",
           crossorigin: "anonymous",
+        },
+        {
+          rel: "preconnect",
+          href: "https://hotelswiss.stefanivic.com",
+          crossorigin: "anonymous",
+        },
+        {
+          rel: "dns-prefetch",
+          href: "https://hotelswiss.stefanivic.com",
         },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       ],
@@ -100,6 +111,68 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@primevue/nuxt-module",
   ],
+
+  image: {
+    providers: {
+      hotelSwiss: {
+        name: "hotelSwiss",
+        provider: "~/providers/hotelSwissProvider.ts",
+        options: {
+          baseURL:
+            process.env.BASE_URL ||
+            process.env.NUXT_PUBLIC_BASE_URL ||
+            "https://hotelswiss.stefanivic.com",
+        },
+      },
+    },
+    provider: "hotelSwiss",
+    quality: 85,
+    format: ["webp", "avif", "jpg"],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
+    },
+    densities: [1, 2],
+    presets: {
+      thumbnail: {
+        modifiers: {
+          format: "webp",
+          quality: 80,
+          width: 400,
+          height: 300,
+        },
+      },
+      card: {
+        modifiers: {
+          format: "webp",
+          quality: 85,
+          width: 600,
+          height: 400,
+        },
+      },
+      hero: {
+        modifiers: {
+          format: "webp",
+          quality: 90,
+          width: 1200,
+          height: 800,
+        },
+      },
+      lcp: {
+        modifiers: {
+          format: "webp",
+          quality: 90,
+          width: 800,
+          height: 600,
+        },
+      },
+    },
+    domains: ["hotelswiss.stefanivic.com", "localhost"],
+  },
   primevue: {
     usePrimeVue: true,
     options: {
@@ -186,7 +259,11 @@ export default defineNuxtConfig({
   },
   pages: true,
 
-  plugins: ["@/plugins/gesture.ts", "@/plugins/theme.client.ts"],
+  plugins: [
+    "@/plugins/gesture.ts",
+    "@/plugins/theme.client.ts",
+    "@/plugins/performance.client.ts",
+  ],
   css: [
     "primeicons/primeicons.css",
     "@/assets/css/fonts.css",
@@ -208,15 +285,94 @@ export default defineNuxtConfig({
       rollupOptions: {
         external: ["oxc-parser"],
         output: {
-          manualChunks: {
-            "vue-vendor": ["vue", "vue-router"],
-            "primevue-vendor": ["primevue/button", "primevue/inputtext"],
+          manualChunks(id) {
+            // Vue core
+            if (
+              id.includes("vue") &&
+              (id.includes("node_modules/vue/") ||
+                id.includes("node_modules/vue-router/"))
+            ) {
+              return "vue-vendor";
+            }
+
+            // PrimeVue core components
+            if (
+              id.includes("node_modules/primevue/") &&
+              (id.includes("button") ||
+                id.includes("inputtext") ||
+                id.includes("dialog") ||
+                id.includes("carousel"))
+            ) {
+              return "primevue-vendor";
+            }
+
+            // PrimeVue extended components
+            if (
+              id.includes("node_modules/primevue/") &&
+              (id.includes("rating") ||
+                id.includes("chip") ||
+                id.includes("badge") ||
+                id.includes("divider"))
+            ) {
+              return "primevue-extended";
+            }
+
+            // Third-party libraries
+            if (id.includes("node_modules/vue3-carousel/")) {
+              return "carousel-vendor";
+            }
+
+            if (
+              id.includes("node_modules/vue-i18n/") ||
+              id.includes("node_modules/@nuxtjs/i18n/")
+            ) {
+              return "i18n-vendor";
+            }
+
+            // Hotel-related components
+            if (
+              id.includes("components/Hotel/") ||
+              id.includes("components/Card/")
+            ) {
+              return "hotel-components";
+            }
+
+            // Common components
+            if (
+              id.includes("components/Common/") ||
+              id.includes("components/Navigation/")
+            ) {
+              return "common-components";
+            }
+
+            // Search and category components
+            if (
+              id.includes("components/Search/") ||
+              id.includes("components/Category/")
+            ) {
+              return "search-components";
+            }
+
+            // Composables and utils
+            if (id.includes("composables/") || id.includes("utils/")) {
+              return "utils";
+            }
           },
         },
       },
+      cssCodeSplit: true,
     },
     optimizeDeps: {
       exclude: ["oxc-parser"],
+      include: [
+        "vue",
+        "vue-router",
+        "vue-i18n",
+        "primevue/button",
+        "primevue/inputtext",
+        "primevue/carousel",
+        "@primevue/themes/lara",
+      ],
     },
     define: {
       "process.env.DISABLE_OXC": "true",
@@ -309,6 +465,12 @@ export default defineNuxtConfig({
   build: {
     transpile: ["primevue"],
     analyze: false,
+  },
+
+  experimental: {
+    payloadExtraction: false,
+    viewTransition: true,
+    typedPages: false,
   },
 
   ssr: true,

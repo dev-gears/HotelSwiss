@@ -4,9 +4,14 @@
     @click="emit('openGallery')"
   >
     <div class="md:col-span-2">
-      <Image
+      <NuxtImg
         @click="emit('openGallery')"
         :src="images[0]?.url ?? undefined"
+        preset="hero"
+        loading="eager"
+        fetchpriority="high"
+        :preload="true"
+        sizes="(max-width: 768px) 100vw, 50vw"
         class="flex h-full w-full cursor-pointer object-cover transition-all hover:brightness-75 [&_img]:aspect-video [&_img]:rounded"
       />
     </div>
@@ -15,10 +20,13 @@
     >
       <template v-for="(data, index) in parsedImagesForCollage" :key="data.id">
         <div v-if="data?.renditions?.thumbnail">
-          <Image
+          <NuxtImg
             @click="emit('openGallery')"
             :src="data.renditions.thumbnail"
             :alt="`Hotel image ${index + 2}`"
+            preset="thumbnail"
+            loading="lazy"
+            sizes="(max-width: 768px) 50vw, 25vw"
             class="flex h-full w-full cursor-pointer object-cover transition-all hover:brightness-75 [&_img]:!aspect-video [&_img]:!h-full [&_img]:rounded [&_img]:object-cover"
           />
         </div>

@@ -11,12 +11,17 @@
         :navigationEnabled="true"
         :breakpoints="responsive"
       >
-        <Slide v-for="hotel in hotels" :key="hotel.id" class="slide-card">
+        <Slide
+          v-for="(hotel, index) in hotels"
+          :key="hotel.id"
+          class="slide-card"
+        >
           <Card
             :hotel="hotel"
             class="h-80"
             aspect="square"
             :showAmenities="false"
+            :isLCPCandidate="index === 0"
           />
         </Slide>
         <template #addons>
@@ -35,7 +40,7 @@
           class="server-side-fallback grid grid-cols-2 grid-rows-1 gap-4 overflow-hidden pb-4 max-sm:w-max md:grid-cols-2 lg:grid-cols-4"
         >
           <div
-            v-for="hotel in hotels"
+            v-for="(hotel, index) in hotels"
             :key="hotel.id"
             class="slide-card hidden"
           >
@@ -44,6 +49,7 @@
               class="h-80"
               aspect="square"
               :showAmenities="false"
+              :isLCPCandidate="index === 0"
             />
           </div>
         </div>
