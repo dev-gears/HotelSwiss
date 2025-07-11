@@ -112,7 +112,7 @@
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import GalleryDrawer from "@/components/Hotel/Hero/Gallery.vue";
-import { useHotelData } from "~/utils/api";
+import { useHotel } from "~/composables/useApi";
 import HotelSkeleton from "~/components/SkeletonLoaders/HotelSkeleton.vue";
 
 definePageMeta({
@@ -121,11 +121,8 @@ definePageMeta({
 
 const route = useRoute();
 const showImageModal = ref(false);
-const { data: hotel, pending } = useHotelData(
+const { data: hotel, pending } = await useHotel(
   Array.isArray(route.params.id) ? route.params.id[0] : route.params.id,
-  {
-    cache: true,
-  },
 );
 
 const openImageModal = () => {

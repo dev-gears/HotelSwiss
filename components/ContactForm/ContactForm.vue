@@ -182,7 +182,7 @@ import Button from "primevue/button";
 import InputGroup from "primevue/inputgroup";
 import DatePicker from "primevue/datepicker";
 import { useI18n } from "vue-i18n";
-import { sendEmail } from "~/utils/api";
+import { useSendEmail } from "~/composables/useApi";
 import { useToast } from "primevue/usetoast";
 import type { EmailRequest, Room } from "~/types/hotel";
 
@@ -358,7 +358,7 @@ const submitForm = async (e: Event) => {
   };
   try {
     // Send the email using the API
-    await sendEmail(emailData);
+    await useSendEmail(emailData);
 
     // Show success notification
     toast.add({

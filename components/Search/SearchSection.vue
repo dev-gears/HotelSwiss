@@ -27,7 +27,14 @@
   </div>
   <SearchFilters
     v-model:visible="showFilters"
-    :filters="filters"
+    :filters="
+      filters || {
+        cantons: [],
+        amenities: [],
+        price_range: { from: null, to: null },
+        stars: [],
+      }
+    "
     @submit-search="showFilters = false"
     @clear-filters="clearFiltersFromUrl"
     @update-filters="handleFiltersUpdate"
@@ -205,9 +212,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
 import type { Canton, Amenity, Filters } from "@/types/hotel";
+import { convertFiltersResponseToFilters } from "@/types/hotel";
 import SearchFilters from "~/components/Search/Filters/SearchFilters.vue";
 import FilterGroup from "~/components/Search/FilterGroup.vue";
 import FilterChip from "~/components/Search/FilterChip.vue";
+import { useFilters } from "~/composables/useApi";
 // Import utility function for extracting filters from URL
 import { extractFiltersFromUrl } from "~/utils/filter-url-params";
 import { useFilterUrlManagement } from "~/composables/useFilterUrlManagement";
@@ -290,11 +299,18 @@ const isSearchPage = computed(() => {
 });
 
 // Filter data from API
-const { data: filters } = (await useHotelApiData("/filters")) as any;
+const { data: filtersResponse } = await useFilters();
+
+// Convert API response to UI format
+const filters = computed(() =>
+  filtersResponse.value
+    ? convertFiltersResponseToFilters(filtersResponse.value)
+    : null,
+);
 
 // Update active filters from URL parameters
 const updateFiltersFromUrl = async () => {
-  if (!filters?.value) return;
+  if (!filters.value) return;
 
   const { filters: extractedFilters } = extractFiltersFromUrl(
     route,

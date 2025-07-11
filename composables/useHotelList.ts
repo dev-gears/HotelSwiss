@@ -1,8 +1,6 @@
 import { ref, computed } from "vue";
 import type { Ref } from "vue";
 import type { Hotel, HotelListWithPagination } from "@/types/hotel";
-import { fetchHotels } from "~/utils/api";
-import { $hotelApi } from "#imports";
 import { useErrorHandler } from "./useErrorHandler";
 import { useLoadingState } from "./useLoadingState";
 import {
@@ -85,7 +83,9 @@ export const useHotelList = (options: UseHotelListOptions = {}) => {
           filters[key] = value;
         }
       });
-      const data = await fetchHotels(filters);
+      const data = await $fetch<HotelListWithPagination>("/api/hotels", {
+        query: filters,
+      });
       hotels.value = data.results;
       nextUrl.value = data.next ?? null;
       totalCount.value = data.count || data.results.length;
@@ -111,7 +111,7 @@ export const useHotelList = (options: UseHotelListOptions = {}) => {
       if (apiPath.startsWith("v1/")) {
         apiPath = apiPath.substring(3);
       }
-      const data = (await $hotelApi(apiPath)) as HotelListWithPagination;
+      const data = await $fetch<HotelListWithPagination>(`/api/${apiPath}`);
       hotels.value = [...hotels.value, ...data.results];
       nextUrl.value = data.next ?? null;
       return data;

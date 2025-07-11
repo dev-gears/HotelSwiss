@@ -17,8 +17,12 @@ const getApiConfig = () => {
     headers.Authorization = `Basic ${btoa(authCredentials)}`;
   }
 
+  // Ensure no trailing slashes for consistent URL construction
+  const cleanBaseUrl = baseUrl.replace(/\/+$/, "");
+  const cleanApiPath = apiPath.replace(/^\/+/, "").replace(/\/+$/, "");
+
   return {
-    url: baseUrl + apiPath,
+    url: `${cleanBaseUrl}/${cleanApiPath}`,
     headers,
   };
 };
@@ -84,6 +88,9 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    // Private keys (only available on server-side)
+    apiBaseUrl: apiConfig.url,
+    authCredentials: apiConfig.headers.Authorization || "",
     public: {
       backendUrl: process.env.BASE_URL || "http://localhost:3000",
       siteUrl:
@@ -258,10 +265,11 @@ export default defineNuxtConfig({
     vueI18n: "./i18n.config.ts",
   },
   pages: true,
+
   plugins: [
     "@/plugins/gesture.ts",
     "@/plugins/theme.client.ts",
-    // "@/plugins/performance.client.ts", // Temporarily disabled
+    "@/plugins/performance.client.ts",
   ],
   css: [
     "primeicons/primeicons.css",
@@ -279,32 +287,87 @@ export default defineNuxtConfig({
           new URL("./node_modules/primeicons", import.meta.url),
         ),
       },
-    },    build: {
+    },
+    build: {
       rollupOptions: {
         external: ["oxc-parser"],
         output: {
-          manualChunks: {
-            // Core Vue dependencies
-            "vue-vendor": ["vue", "vue-router", "vue-i18n"],
-            
-            // PrimeVue components - group together to avoid circular refs
-            "primevue-vendor": [
-              "primevue/button", 
-              "primevue/inputtext", 
-              "primevue/dialog", 
-              "primevue/carousel",
-              "primevue/rating", 
-              "primevue/chip", 
-              "primevue/badge", 
-              "primevue/divider"
-            ],
-            
+          manualChunks(id) {
+            // Vue core
+            if (
+              id.includes("vue") &&
+              (id.includes("node_modules/vue/") ||
+                id.includes("node_modules/vue-router/"))
+            ) {
+              return "vue-vendor";
+            }
+
+            // PrimeVue core components
+            if (
+              id.includes("node_modules/primevue/") &&
+              (id.includes("button") ||
+                id.includes("inputtext") ||
+                id.includes("dialog") ||
+                id.includes("carousel"))
+            ) {
+              return "primevue-vendor";
+            }
+
+            // PrimeVue extended components
+            if (
+              id.includes("node_modules/primevue/") &&
+              (id.includes("rating") ||
+                id.includes("chip") ||
+                id.includes("badge") ||
+                id.includes("divider"))
+            ) {
+              return "primevue-extended";
+            }
+
             // Third-party libraries
-            "third-party": ["vue3-carousel", "@primevue/themes/lara"],
+            if (id.includes("node_modules/vue3-carousel/")) {
+              return "carousel-vendor";
+            }
+
+            if (
+              id.includes("node_modules/vue-i18n/") ||
+              id.includes("node_modules/@nuxtjs/i18n/")
+            ) {
+              return "i18n-vendor";
+            }
+
+            // Hotel-related components
+            if (
+              id.includes("components/Hotel/") ||
+              id.includes("components/Card/")
+            ) {
+              return "hotel-components";
+            }
+
+            // Common components
+            if (
+              id.includes("components/Common/") ||
+              id.includes("components/Navigation/")
+            ) {
+              return "common-components";
+            }
+
+            // Search and category components
+            if (
+              id.includes("components/Search/") ||
+              id.includes("components/Category/")
+            ) {
+              return "search-components";
+            }
+
+            // Composables and utils
+            if (id.includes("composables/") || id.includes("utils/")) {
+              return "utils";
+            }
           },
         },
       },
-      cssCodeSplit: false, // Disable CSS code splitting to prevent load order issues
+      cssCodeSplit: true,
     },
     optimizeDeps: {
       exclude: ["oxc-parser"],
@@ -331,10 +394,28 @@ export default defineNuxtConfig({
     preset:
       process.env.NITRO_PRESET ||
       (process.env.VERCEL ? "vercel" : "node-server"),
+
+    // Native storage configuration
+    storage: {
+      cache: {
+        driver: process.env.REDIS_URL ? "redis" : "fs",
+        ...(process.env.REDIS_URL && {
+          connectionString: process.env.REDIS_URL,
+          ttl: 900,
+        }),
+        ...(!process.env.REDIS_URL && {
+          base: "./.nuxt/cache",
+        }),
+      },
+    },
+
+    // Enable built-in timing headers
+    timing: true,
+
     routeRules: {
-      // Enhanced index page caching with Nuxt's built-in features
+      // Enhanced index page caching with ISR
       "/": {
-        ssr: true,
+        isr: 900, // Regenerate every 15 minutes
         headers: {
           "cache-control":
             "public, s-maxage=900, max-age=300, stale-while-revalidate=3600",
@@ -343,25 +424,37 @@ export default defineNuxtConfig({
 
       // Search page with moderate caching
       "/search": {
-        ssr: true,
-        headers: { "cache-control": "public, s-maxage=600, max-age=180" },
+        isr: 600, // Regenerate every 10 minutes
+        headers: {
+          "cache-control":
+            "public, s-maxage=600, max-age=180, stale-while-revalidate=1200",
+        },
       },
 
-      // Hotel pages with longer caching (content changes less frequently)
+      // Hotel pages with ISR and longer caching
       "/hotel/**": {
-        ssr: true,
-        headers: { "cache-control": "public, s-maxage=1800, max-age=600" },
+        isr: 3600, // Regenerate every hour
+        headers: {
+          "cache-control":
+            "public, s-maxage=3600, max-age=600, stale-while-revalidate=7200",
+        },
       },
 
-      // Category and canton pages with long-term caching
+      // Category and canton pages with ISR and long-term caching
       "/category/**": {
-        ssr: true,
-        headers: { "cache-control": "public, s-maxage=3600, max-age=1200" },
+        isr: 7200, // Regenerate every 2 hours
+        headers: {
+          "cache-control":
+            "public, s-maxage=7200, max-age=1200, stale-while-revalidate=14400",
+        },
       },
 
       "/canton/**": {
-        ssr: true,
-        headers: { "cache-control": "public, s-maxage=3600, max-age=1200" },
+        isr: 7200, // Regenerate every 2 hours
+        headers: {
+          "cache-control":
+            "public, s-maxage=7200, max-age=1200, stale-while-revalidate=14400",
+        },
       },
 
       "/privacy": {
@@ -396,10 +489,28 @@ export default defineNuxtConfig({
       "/contact": {
         ssr: true,
         headers: { "cache-control": "s-maxage=1800" },
-      }, // Enhanced API caching using Nuxt's route rules
+      },
+
+      // Enhanced API caching using Nuxt's native route rules
       "/api/**": {
         cors: true,
-        headers: { "cache-control": "public, s-maxage=300, max-age=120" },
+        headers: {
+          "cache-control": "public, s-maxage=900, stale-while-revalidate=3600",
+          "cdn-cache-control":
+            "public, s-maxage=900, stale-while-revalidate=3600",
+          vary: "Accept-Encoding, Accept-Language",
+        },
+      },
+
+      // Static assets with long-term caching
+      "/assets/**": {
+        headers: { "cache-control": "public, max-age=31536000, immutable" },
+      },
+      "/images/**": {
+        headers: { "cache-control": "public, max-age=31536000, immutable" },
+      },
+      "/fonts/**": {
+        headers: { "cache-control": "public, max-age=31536000, immutable" },
       },
     },
     rollupConfig: {
@@ -410,9 +521,10 @@ export default defineNuxtConfig({
     transpile: ["primevue"],
     analyze: false,
   },
+
   experimental: {
     payloadExtraction: false,
-    viewTransition: false, // Disable to prevent potential bundling issues
+    viewTransition: true,
     typedPages: false,
   },
 

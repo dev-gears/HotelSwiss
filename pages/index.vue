@@ -23,15 +23,12 @@
 
 <script setup lang="ts">
 import Slider from "~/components/PromoBlock/Slider.vue";
-import { useFirstScreenData } from "~/utils/api";
+import { useFirstScreen } from "~/composables/useApi";
 definePageMeta({
   layout: "base",
 });
 
-const { data: firstScreenData, pending } = useFirstScreenData({
-  lazy: false,
-  cache: true,
-});
+const { data: firstScreenData, pending } = await useFirstScreen();
 </script>
 
 <style>

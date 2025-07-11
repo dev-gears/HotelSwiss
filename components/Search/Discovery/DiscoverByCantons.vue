@@ -114,17 +114,11 @@
 </template>
 
 <script setup lang="ts">
-import { useCantonsData } from "~/utils/api";
+import { useCantons } from "~/composables/useApi";
 import DiscoveryCard from "./DiscoveryCard.vue";
 
 // Fetch cantons data using dedicated endpoint
-const {
-  data: cantons,
-  pending,
-  error,
-} = await useCantonsData({
-  lazy: false,
-});
+const { data: cantons, pending, error } = await useCantons();
 
 // Search functionality
 const cantonSearchQuery = ref("");

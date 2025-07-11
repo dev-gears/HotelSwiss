@@ -115,7 +115,7 @@ export interface Hotel {
   paid: boolean;
   categories: CategoryHotelOrderable[];
   amenities: AmenitiesHotelOrderable[];
-  images: string; // serialized according to API spec
+  images: Image[]; // parsed from serialized string on server side
   social_links: any[]; // read-only
   seo: object; // read-only object
   rooms: Room[]; // Array of Room objects

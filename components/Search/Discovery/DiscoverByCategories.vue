@@ -149,16 +149,10 @@
 </template>
 
 <script setup lang="ts">
-import { useCategoriesData } from "~/utils/api";
+import { useCategories } from "~/composables/useApi";
 
-// Fetch categories data using dedicated endpoint
-const {
-  data: categories,
-  pending,
-  error,
-} = await useCategoriesData({
-  lazy: false,
-});
+// Fetch categories data using native caching
+const { data: categories, pending, error } = await useCategories();
 
 // Search functionality
 const categorySearchQuery = ref("");
