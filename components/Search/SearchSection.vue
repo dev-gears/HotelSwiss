@@ -1,7 +1,7 @@
 <template>
   <div class="relative my-8 flex w-full items-center justify-center gap-2">
     <Button
-      @click="showFilters = true"
+      @click="handleShowFilters"
       v-ripple
       :label="$t('Search.searchForSpecificHotel')"
       variant="text"
@@ -17,7 +17,7 @@
         root: 'h-12 items-center justify-center rounded-none !rounded-br-xl !bg-light dark:!bg-dark-400 !px-4 shadow dark:shadow-primary-100/10',
         icon: 'text-primary-200 dark:text-light/80 !text-lg',
       }"
-      @click="showFilters = true"
+      @click="handleShowFilters"
     />
     <Badge
       v-if="activeFiltersCount !== 0"
@@ -159,7 +159,7 @@
             @click="showAllAmenities = !showAllAmenities"
             variant="text"
             size="small"
-            class="h-7 rounded-full bg-gradient-to-r from-primary-100/15 to-primary/25 px-3 text-xs font-semibold text-primary-100 shadow-sm transition-all hover:from-primary-100/25 hover:to-primary/35 hover:shadow-md dark:from-primary/20 dark:to-primary-200/30 dark:text-light dark:hover:from-primary/30 dark:hover:to-primary-200/40"
+            class="dark:hover:from-primary-30 h-7 rounded-full bg-gradient-to-r from-primary-100/15 to-primary/25 px-3 text-xs font-semibold text-primary-100 shadow-sm transition-all hover:from-primary-100/25 hover:to-primary/35 hover:shadow-md dark:from-primary/20 dark:to-primary-200/30 dark:text-light dark:hover:to-primary-200/40"
             :label="
               showAllAmenities
                 ? 'Show Less'
@@ -196,7 +196,7 @@
             {{ $t("Search.filters.refineSearch") || "Refine your search" }}
           </span>
           <Button
-            @click="showFilters = true"
+            @click="handleShowFilters"
             variant="text"
             size="small"
             icon="pi pi-sliders-h"
@@ -408,6 +408,15 @@ const handleFiltersUpdate = (newFilters: Filters) => {
     // The filter component already handles the URL navigation
   } catch (error) {
     console.warn("Error handling filters update:", error);
+  }
+};
+
+// Debug function to handle filter opening
+const handleShowFilters = () => {
+  try {
+    showFilters.value = true;
+  } catch (error) {
+    console.error("Error opening search filters:", error);
   }
 };
 
