@@ -2,7 +2,7 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
-    "build": "npm run clean && nuxt build",
+    "build": "nuxt build",
     "dev": "nuxt dev --host",
     "generate": "npm run clean && nuxt generate",
     "preview": "nuxt preview",
