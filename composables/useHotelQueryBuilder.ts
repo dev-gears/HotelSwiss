@@ -1,4 +1,8 @@
-import type { ApiQueryOptions } from "~/utils/api";
+// Types for API query options
+interface ApiQueryOptions {
+  query?: Record<string, string | number | boolean | number[]>;
+  headers?: Record<string, string>;
+}
 
 /**
  * Query parameters for hotel searches according to OpenAPI spec

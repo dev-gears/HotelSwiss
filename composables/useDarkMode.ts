@@ -1,27 +1,33 @@
-import { ref, onMounted } from "vue";
+import { ref, onMounted, nextTick } from "vue";
 
 const isDark = ref(false);
 let isInitialized = false;
 
 /**
- * Initialize theme immediately on client side to prevent flash
+ * Initialize theme safely on client side to prevent flash and hydration issues
  */
 const initializeTheme = () => {
-  if (!import.meta.client || isInitialized) return;
+  if (!import.meta.client || isInitialized || typeof window === "undefined")
+    return;
 
-  isInitialized = true;
+  try {
+    isInitialized = true;
 
-  const savedTheme = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
 
-  isDark.value = savedTheme === "dark" || (!savedTheme && prefersDark);
+    isDark.value = savedTheme === "dark" || (!savedTheme && prefersDark);
 
-  document.documentElement.classList.toggle("dark", isDark.value);
+    // Use requestAnimationFrame to avoid hydration issues
+    requestAnimationFrame(() => {
+      document.documentElement.classList.toggle("dark", isDark.value);
+    });
+  } catch (error) {
+    console.warn("Failed to initialize theme:", error);
+  }
 };
-
-if (import.meta.client) {
-  initializeTheme();
-}
 
 /**
  * Composable for managing dark mode in the application
@@ -29,16 +35,23 @@ if (import.meta.client) {
  */
 export const useDarkMode = () => {
   onMounted(() => {
-    initializeTheme();
+    // Ensure initialization happens after hydration
+    nextTick(() => {
+      initializeTheme();
+    });
   });
 
   const toggleDarkMode = () => {
-    if (!import.meta.client) return;
+    if (!import.meta.client || typeof window === "undefined") return;
 
-    isDark.value = !isDark.value;
+    try {
+      isDark.value = !isDark.value;
 
-    document.documentElement.classList.toggle("dark", isDark.value);
-    localStorage.setItem("theme", isDark.value ? "dark" : "light");
+      document.documentElement.classList.toggle("dark", isDark.value);
+      localStorage.setItem("theme", isDark.value ? "dark" : "light");
+    } catch (error) {
+      console.warn("Failed to toggle dark mode:", error);
+    }
   };
 
   return {

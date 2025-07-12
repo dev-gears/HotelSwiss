@@ -1,5 +1,5 @@
 import { computed, nextTick } from "vue";
-import { useCantonData } from "~/utils/api";
+import { useCantons } from "~/composables/useApi";
 import { useHotelList } from "./useHotelList";
 
 /**
@@ -12,8 +12,14 @@ import { useHotelList } from "./useHotelList";
  * @throws {Error} If canton data is not found
  */
 export const useCantonPage = (cantonId: string) => {
-  const { data: cantonData } = useCantonData(cantonId, {
-    lazy: false,
+  // Initialize cantons data with lazy approach for production builds
+  const cantonsResult = useCantons();
+
+  const cantonData = computed(() => {
+    if (!cantonsResult.data?.value?.results) return null;
+    return cantonsResult.data.value.results.find(
+      (canton) => canton.id.toString() === cantonId,
+    );
   });
 
   const getQueryParams = () => {
@@ -35,6 +41,11 @@ export const useCantonPage = (cantonId: string) => {
 
   return {
     cantonData,
+    // Expose cantons loading states for better UX
+    cantonsData: cantonsResult.data,
+    cantonsPending: cantonsResult.pending,
+    cantonsError: cantonsResult.error,
+    cantonsRefresh: cantonsResult.refresh,
 
     ...hotelList,
 

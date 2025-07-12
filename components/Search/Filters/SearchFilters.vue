@@ -64,23 +64,36 @@
 
 <script setup lang="ts">
 import type { Canton, Amenity, Filters, PriceRange } from "@/types/hotel";
-import { ref, onMounted, type PropType } from "vue";
+import { ref, onMounted, computed, type PropType } from "vue";
 import { Button } from "#components";
+import Drawer from "primevue/drawer";
 // Import utility function for extracting filters from URL
 import { extractFiltersFromUrl } from "~/utils/filter-url-params";
 
-const { filters } = defineProps({
+const { filters, visible } = defineProps({
   filters: {
     type: Object as PropType<Filters>,
     required: true,
   },
+  visible: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const emit = defineEmits(["clear-filters", "update-filters", "submit-search"]);
+const emit = defineEmits([
+  "clear-filters",
+  "update-filters",
+  "submit-search",
+  "update:visible",
+]);
 const route = useRoute();
 const router = useRouter();
 
-const showFilters = ref(false);
+const showFilters = computed({
+  get: () => visible,
+  set: (value: boolean) => emit("update:visible", value),
+});
 const localCantons = ref([]) as Ref<Canton[]>;
 const localPriceRange = ref<PriceRange>({ from: null, to: null });
 const localAmenities = ref([]) as Ref<number[]>;

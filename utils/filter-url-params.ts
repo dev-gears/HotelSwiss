@@ -99,51 +99,96 @@ export const extractFiltersFromUrl = (
   route: RouteLocationNormalizedLoaded,
   availableFilters: Filters,
 ): { filters: Partial<Filters>; searchTerm: string } => {
-  const filters: Partial<Filters> = {
-    cantons: [],
-    amenities: [],
-    stars: [],
-    price_range: { from: null, to: null },
-  };
+  try {
+    // Initialize with safe defaults to avoid cross-origin issues
+    const filters: Partial<Filters> = {
+      cantons: [],
+      amenities: [],
+      stars: [],
+      price_range: { from: null, to: null },
+    };
 
-  let searchTerm = "";
+    let searchTerm = "";
 
-  if (route.query.q) {
-    searchTerm = route.query.q as string;
-  }
+    // Safely extract query parameters
+    if (route.query.q && typeof route.query.q === "string") {
+      searchTerm = route.query.q;
+    }
 
-  if (route.query.cantons && availableFilters.cantons?.length) {
-    const cantonIds = String(route.query.cantons)
-      .split(",")
-      .map((id) => parseInt(id));
-    filters.cantons = availableFilters.cantons.filter((c) =>
-      cantonIds.includes(c.id),
-    );
-  }
+    if (route.query.cantons && availableFilters.cantons?.length) {
+      try {
+        const cantonIds = String(route.query.cantons)
+          .split(",")
+          .map((id) => parseInt(id))
+          .filter((id) => !isNaN(id));
 
-  if (route.query.amenities && availableFilters.amenities?.length) {
-    const amenityIds = String(route.query.amenities)
-      .split(",")
-      .map((id) => parseInt(id));
-    filters.amenities = availableFilters.amenities.filter((a) =>
-      amenityIds.includes(a.id),
-    );
-  }
-  if (route.query.stars) {
-    const stars = String(route.query.stars).split(",").filter(Boolean);
-    filters.stars = stars;
-  }
+        filters.cantons = availableFilters.cantons.filter((c) =>
+          cantonIds.includes(c.id),
+        );
+      } catch (error) {
+        console.warn("Error parsing canton IDs:", error);
+        filters.cantons = [];
+      }
+    }
 
-  if (route.query.price_min || route.query.price_max) {
-    filters.price_range = {
-      from: route.query.price_min
-        ? parseInt(String(route.query.price_min))
-        : null,
-      to: route.query.price_max
-        ? parseInt(String(route.query.price_max))
-        : null,
+    if (route.query.amenities && availableFilters.amenities?.length) {
+      try {
+        const amenityIds = String(route.query.amenities)
+          .split(",")
+          .map((id) => parseInt(id))
+          .filter((id) => !isNaN(id));
+
+        filters.amenities = availableFilters.amenities.filter((a) =>
+          amenityIds.includes(a.id),
+        );
+      } catch (error) {
+        console.warn("Error parsing amenity IDs:", error);
+        filters.amenities = [];
+      }
+    }
+
+    if (route.query.stars) {
+      try {
+        const stars = String(route.query.stars).split(",").filter(Boolean);
+        filters.stars = stars;
+      } catch (error) {
+        console.warn("Error parsing stars:", error);
+        filters.stars = [];
+      }
+    }
+
+    if (route.query.price_min || route.query.price_max) {
+      try {
+        const priceFrom = route.query.price_min
+          ? parseInt(String(route.query.price_min))
+          : null;
+        const priceTo = route.query.price_max
+          ? parseInt(String(route.query.price_max))
+          : null;
+
+        // Validate price values
+        filters.price_range = {
+          from: !isNaN(priceFrom as number) ? priceFrom : null,
+          to: !isNaN(priceTo as number) ? priceTo : null,
+        };
+      } catch (error) {
+        console.warn("Error parsing price range:", error);
+        filters.price_range = { from: null, to: null };
+      }
+    }
+
+    return { filters, searchTerm };
+  } catch (error) {
+    console.warn("Error extracting filters from URL:", error);
+    // Return safe defaults
+    return {
+      filters: {
+        cantons: [],
+        amenities: [],
+        stars: [],
+        price_range: { from: null, to: null },
+      },
+      searchTerm: "",
     };
   }
-
-  return { filters, searchTerm };
 };

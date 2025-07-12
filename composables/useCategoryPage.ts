@@ -1,5 +1,5 @@
 import { computed, ref } from "vue";
-import { useCategoryData } from "~/utils/api";
+import { useCategories } from "~/composables/useApi";
 import { useHotelList } from "./useHotelList";
 
 /**
@@ -11,13 +11,16 @@ import { useHotelList } from "./useHotelList";
  * @return {Object} - Reactive category data and hotel list methods
  */
 export const useCategoryPage = (categoryId: string) => {
-  // Only fetch category data if it's not "all"
-  const { data: categoryData } =
-    categoryId === "all"
-      ? { data: ref(undefined) }
-      : useCategoryData(categoryId, {
-          lazy: false,
-        });
+  // Initialize categories data with lazy approach for production builds
+  const categoriesResult = useCategories();
+
+  const categoryData = computed(() => {
+    if (categoryId === "all" || !categoriesResult.data?.value?.results)
+      return null;
+    return categoriesResult.data.value.results.find(
+      (category) => category.id.toString() === categoryId,
+    );
+  });
 
   const getQueryParams = () => {
     if (categoryId === "all") {
@@ -26,6 +29,7 @@ export const useCategoryPage = (categoryId: string) => {
       return { category_id: parseInt(categoryId, 10) };
     }
   };
+
   const hotelList = useHotelList({
     initialFilters: getQueryParams(),
     autoFetch: false,
@@ -37,6 +41,11 @@ export const useCategoryPage = (categoryId: string) => {
 
   return {
     categoryData,
+    // Expose categories loading states for better UX
+    categoriesData: categoriesResult.data,
+    categoriesPending: categoriesResult.pending,
+    categoriesError: categoriesResult.error,
+    categoriesRefresh: categoriesResult.refresh,
 
     ...hotelList,
 

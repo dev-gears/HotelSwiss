@@ -210,34 +210,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, onMounted, watch, nextTick } from "vue";
 import type { Canton, Amenity, Filters } from "@/types/hotel";
 import { convertFiltersResponseToFilters } from "@/types/hotel";
 import SearchFilters from "~/components/Search/Filters/SearchFilters.vue";
 import FilterGroup from "~/components/Search/FilterGroup.vue";
 import FilterChip from "~/components/Search/FilterChip.vue";
+import Button from "primevue/button";
+import Badge from "primevue/badge";
 import { useFilters } from "~/composables/useApi";
 // Import utility function for extracting filters from URL
 import { extractFiltersFromUrl } from "~/utils/filter-url-params";
 import { useFilterUrlManagement } from "~/composables/useFilterUrlManagement";
+import { safeAssign, safeClone } from "~/utils/safe-object";
 
+// Initialize reactive variables first to avoid lexical declaration issues
 const route = useRoute();
-const router = useRouter();
 const showFilters = ref(false);
 const showAllAmenities = ref(false);
 
-// Use the filter URL management composable
-const {
-  clearAllFilters,
-  removeSearchTerm,
-  removePriceRange,
-  removeCanton,
-  removeAmenity,
-  removeStar,
-} = useFilterUrlManagement();
-
-// Define reactive filters based on URL params
-const searchTerm = computed(() => (route.query.q as string) || "");
+// Initialize activeFilters with proper default values to avoid cross-origin issues
 const activeFilters = ref<{
   cantons: Canton[];
   amenities: Amenity[];
@@ -250,106 +242,245 @@ const activeFilters = ref<{
   price_range: { from: null, to: null },
 });
 
+// Use the filter URL management composable - destructure safely
+let filterUrlManagement: ReturnType<typeof useFilterUrlManagement>;
+
+try {
+  filterUrlManagement = useFilterUrlManagement();
+} catch (error) {
+  console.warn(
+    "Filter URL management composable initialization failed:",
+    error,
+  );
+  // Provide fallback functions
+  filterUrlManagement = {
+    clearAllFilters: async () => {},
+    removeSearchTerm: async () => {},
+    removePriceRange: async () => {},
+    removeCanton: async () => {},
+    removeAmenity: async () => {},
+    removeStar: async () => {},
+  } as any;
+}
+
+const {
+  clearAllFilters,
+  removeSearchTerm,
+  removePriceRange,
+  removeCanton,
+  removeAmenity,
+  removeStar,
+} = filterUrlManagement;
+
+// Define reactive computed properties
+const searchTerm = computed(() => {
+  try {
+    return (route.query.q as string) || "";
+  } catch (error) {
+    console.warn("Error accessing route query:", error);
+    return "";
+  }
+});
+
 // Computed property for displayed amenities (with show more/less functionality)
 const displayedAmenities = computed(() => {
-  if (showAllAmenities.value || activeFilters.value.amenities.length <= 3) {
-    return activeFilters.value.amenities;
+  try {
+    if (showAllAmenities.value || activeFilters.value.amenities.length <= 3) {
+      return activeFilters.value.amenities;
+    }
+    return activeFilters.value.amenities.slice(0, 3);
+  } catch (error) {
+    console.warn("Error computing displayed amenities:", error);
+    return [];
   }
-  return activeFilters.value.amenities.slice(0, 3);
 });
 
 // Count of active filters
 const activeFiltersCount = computed(() => {
-  let count = 0;
-  if (activeFilters.value.cantons.length > 0)
-    count += activeFilters.value.cantons.length;
-  if (activeFilters.value.amenities.length > 0)
-    count += activeFilters.value.amenities.length;
-  if (activeFilters.value.stars.length > 0)
-    count += activeFilters.value.stars.length;
-  if (hasPriceFilter.value) count += 1;
-  if (searchTerm.value) count += 1;
-  return count;
+  try {
+    let count = 0;
+    if (activeFilters.value.cantons.length > 0)
+      count += activeFilters.value.cantons.length;
+    if (activeFilters.value.amenities.length > 0)
+      count += activeFilters.value.amenities.length;
+    if (activeFilters.value.stars.length > 0)
+      count += activeFilters.value.stars.length;
+    if (hasPriceFilter.value) count += 1;
+    if (searchTerm.value) count += 1;
+    return count;
+  } catch (error) {
+    console.warn("Error computing active filters count:", error);
+    return 0;
+  }
 });
 
 // Check if price filter is active
 const hasPriceFilter = computed(() => {
-  const { from, to } = activeFilters.value.price_range;
-  return from !== null || to !== null;
+  try {
+    const { from, to } = activeFilters.value.price_range;
+    return from !== null || to !== null;
+  } catch (error) {
+    console.warn("Error checking price filter:", error);
+    return false;
+  }
 });
 
 // Format price range for display
 const formatPriceRange = computed(() => {
-  const { from, to } = activeFilters.value.price_range;
+  try {
+    const { from, to } = activeFilters.value.price_range;
 
-  if (from !== null && to !== null) {
-    return `${from} - ${to} CHF`;
-  } else if (from !== null) {
-    return `${from}+ CHF`;
-  } else if (to !== null) {
-    return `Up to ${to} CHF`;
+    if (from !== null && to !== null) {
+      return `${from} - ${to} CHF`;
+    } else if (from !== null) {
+      return `${from}+ CHF`;
+    } else if (to !== null) {
+      return `Up to ${to} CHF`;
+    }
+
+    return "";
+  } catch (error) {
+    console.warn("Error formatting price range:", error);
+    return "";
   }
-
-  return "";
 });
 
 // Check if current page is search page
 const isSearchPage = computed(() => {
-  return typeof route.name === "string" && route.name.startsWith("search");
+  try {
+    return typeof route.name === "string" && route.name.startsWith("search");
+  } catch (error) {
+    console.warn("Error checking search page:", error);
+    return false;
+  }
 });
 
-// Filter data from API
-const { data: filtersResponse } = await useFilters();
+// Filter data from API - handle potential initialization issues
+let filtersResponse: any;
+try {
+  const apiResult = await useFilters();
+  filtersResponse = apiResult.data;
+} catch (error) {
+  console.warn("Error fetching filters:", error);
+  filtersResponse = ref(null);
+}
 
-// Convert API response to UI format
-const filters = computed(() =>
-  filtersResponse.value
-    ? convertFiltersResponseToFilters(filtersResponse.value)
-    : null,
-);
+// Convert API response to UI format with error handling
+const filters = computed(() => {
+  try {
+    return filtersResponse.value
+      ? convertFiltersResponseToFilters(filtersResponse.value)
+      : null;
+  } catch (error) {
+    console.warn("Error converting filters response:", error);
+    return null;
+  }
+});
 
 // Update active filters from URL parameters
 const updateFiltersFromUrl = async () => {
-  if (!filters.value) return;
+  try {
+    if (!filters.value) return;
 
-  const { filters: extractedFilters } = extractFiltersFromUrl(
-    route,
-    filters.value,
-  );
-  // Update active filters
-  activeFilters.value = {
-    cantons: extractedFilters.cantons || [],
-    amenities: extractedFilters.amenities || [],
-    stars: extractedFilters.stars || [],
-    price_range: extractedFilters.price_range || { from: null, to: null },
-  };
+    const { filters: extractedFilters } = extractFiltersFromUrl(
+      route,
+      filters.value,
+    );
+
+    // Use safe assignment to avoid cross-origin issues
+    const newFilters = safeClone({
+      cantons: extractedFilters.cantons || [],
+      amenities: extractedFilters.amenities || [],
+      stars: extractedFilters.stars || [],
+      price_range: extractedFilters.price_range || { from: null, to: null },
+    });
+
+    safeAssign(activeFilters.value, newFilters);
+  } catch (error) {
+    console.warn("Error updating filters from URL:", error);
+  }
 };
 
 // Handle filters update from FiltersWithoutStore component
 const handleFiltersUpdate = (newFilters: Filters) => {
-  showFilters.value = false;
-  // The filter component already handles the URL navigation
+  try {
+    showFilters.value = false;
+    // The filter component already handles the URL navigation
+  } catch (error) {
+    console.warn("Error handling filters update:", error);
+  }
 };
 
-// Simplified filter removal functions using the composable
-const clearFiltersFromUrl = clearAllFilters;
-const removeSearchTermFromUrl = removeSearchTerm;
-const removePriceRangeFromUrl = removePriceRange;
-const removeCantonFromUrl = (canton: Canton) => removeCanton(canton);
-const removeAmenityFromUrl = (amenity: Amenity) => removeAmenity(amenity);
-const removeStarFromUrl = (star: string) => removeStar(star);
+// Create wrapper functions to avoid direct reference issues
+const clearFiltersFromUrl = () => {
+  try {
+    return clearAllFilters();
+  } catch (error) {
+    console.warn("Error clearing filters:", error);
+  }
+};
+
+const removeSearchTermFromUrl = () => {
+  try {
+    return removeSearchTerm();
+  } catch (error) {
+    console.warn("Error removing search term:", error);
+  }
+};
+
+const removePriceRangeFromUrl = () => {
+  try {
+    return removePriceRange();
+  } catch (error) {
+    console.warn("Error removing price range:", error);
+  }
+};
+
+const removeCantonFromUrl = (canton: Canton) => {
+  try {
+    return removeCanton(canton);
+  } catch (error) {
+    console.warn("Error removing canton:", error);
+  }
+};
+
+const removeAmenityFromUrl = (amenity: Amenity) => {
+  try {
+    return removeAmenity(amenity);
+  } catch (error) {
+    console.warn("Error removing amenity:", error);
+  }
+};
+
+const removeStarFromUrl = (star: string) => {
+  try {
+    return removeStar(star);
+  } catch (error) {
+    console.warn("Error removing star:", error);
+  }
+};
 
 // Watch for route query changes and update the active filters
 watch(
   () => route.query,
-  () => {
-    updateFiltersFromUrl();
+  async () => {
+    try {
+      await nextTick(); // Ensure DOM is updated
+      await updateFiltersFromUrl();
+    } catch (error) {
+      console.warn("Error in route query watcher:", error);
+    }
   },
   { immediate: true, deep: true },
 );
 
 onMounted(async () => {
-  await updateFiltersFromUrl();
+  try {
+    await nextTick(); // Ensure component is fully mounted
+    await updateFiltersFromUrl();
+  } catch (error) {
+    console.warn("Error in onMounted:", error);
+  }
 });
 </script>
 
