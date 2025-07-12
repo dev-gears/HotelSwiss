@@ -48,7 +48,7 @@
                     class="h-full w-full object-cover transition-all group-hover:scale-110"
                     :pt="{
                       root: 'h-full w-full',
-                      image: 'h-full w-full object-cover',
+                      image: 'h-full w-full object-cover max-h-[1000px]',
                     }"
                   />
                   <div

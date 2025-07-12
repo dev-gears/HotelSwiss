@@ -247,7 +247,6 @@ export default defineNuxtConfig({
       { code: "de", language: "de-DE" },
       { code: "it", language: "it-IT" },
     ],
-    vueI18n: "./i18n.config.ts",
   },
   pages: true,
 
