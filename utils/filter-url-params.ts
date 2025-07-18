@@ -13,31 +13,43 @@ export const buildApiQueryParams = (
 ): Record<string, string | number | number[]> => {
   const params: Record<string, string | number | number[]> = {};
 
-  if (route.query.q) {
+  // Only add parameters if they exist and are not empty
+  if (route.query.q && route.query.q.toString().trim()) {
     params.search = route.query.q as string;
   }
 
-  if (route.query.cantons) {
+  if (route.query.cantons && route.query.cantons.toString().trim()) {
     params.cantons = route.query.cantons as string;
   }
 
-  if (route.query.price_min) {
+  if (route.query.price_min && route.query.price_min.toString().trim()) {
     params.min_price = route.query.price_min as string;
   }
 
-  if (route.query.price_max) {
+  if (route.query.price_max && route.query.price_max.toString().trim()) {
     params.max_price = route.query.price_max as string;
   }
-  if (route.query.amenities) {
-    params.amenities = (route.query.amenities as string)
+
+  if (route.query.amenities && route.query.amenities.toString().trim()) {
+    const amenityIds = (route.query.amenities as string)
       .split(",")
-      .map((id) => parseInt(id));
+      .map((id) => parseInt(id))
+      .filter((id) => !isNaN(id));
+
+    if (amenityIds.length > 0) {
+      params.amenities = amenityIds;
+    }
   }
 
-  if (route.query.stars) {
-    params.stars = (route.query.stars as string)
+  if (route.query.stars && route.query.stars.toString().trim()) {
+    const starIds = (route.query.stars as string)
       .split(",")
-      .map((star) => parseInt(star));
+      .map((star) => parseInt(star))
+      .filter((star) => !isNaN(star));
+
+    if (starIds.length > 0) {
+      params.stars = starIds;
+    }
   }
 
   return { ...params, ...additionalParams };
@@ -126,7 +138,6 @@ export const extractFiltersFromUrl = (
           cantonIds.includes(c.id),
         );
       } catch (error) {
-        console.warn("Error parsing canton IDs:", error);
         filters.cantons = [];
       }
     }
@@ -142,7 +153,6 @@ export const extractFiltersFromUrl = (
           amenityIds.includes(a.id),
         );
       } catch (error) {
-        console.warn("Error parsing amenity IDs:", error);
         filters.amenities = [];
       }
     }
@@ -152,7 +162,6 @@ export const extractFiltersFromUrl = (
         const stars = String(route.query.stars).split(",").filter(Boolean);
         filters.stars = stars;
       } catch (error) {
-        console.warn("Error parsing stars:", error);
         filters.stars = [];
       }
     }
@@ -172,14 +181,12 @@ export const extractFiltersFromUrl = (
           to: !isNaN(priceTo as number) ? priceTo : null,
         };
       } catch (error) {
-        console.warn("Error parsing price range:", error);
         filters.price_range = { from: null, to: null };
       }
     }
 
     return { filters, searchTerm };
   } catch (error) {
-    console.warn("Error extracting filters from URL:", error);
     // Return safe defaults
     return {
       filters: {

@@ -60,11 +60,17 @@ export const useHotelList = (options: UseHotelListOptions = {}) => {
    * It validates the filters against the OpenAPI spec
    * and handles errors gracefully
    * @param additionalFilters - Additional filters to apply on top of current filters
+   * @param replaceFilters - If true, replace current filters instead of merging
    * @return {Promise<HotelListWithPagination | void>} - Returns hotel list with pagination or void on error
    * @throws {Error} If the query parameters are invalid
    */
-  const fetchHotelList = async (additionalFilters: HotelListFilters = {}) => {
-    const allFilters = { ...currentFilters.value, ...additionalFilters };
+  const fetchHotelList = async (
+    additionalFilters: HotelListFilters = {},
+    replaceFilters: boolean = false,
+  ) => {
+    const allFilters = replaceFilters
+      ? { ...additionalFilters }
+      : { ...currentFilters.value, ...additionalFilters };
 
     const validationErrors = validateHotelQuery(allFilters);
     if (validationErrors.length > 0) {
@@ -83,9 +89,11 @@ export const useHotelList = (options: UseHotelListOptions = {}) => {
           filters[key] = value;
         }
       });
+
       const data = await $fetch<HotelListWithPagination>("/api/hotels", {
         query: filters,
       });
+
       hotels.value = data.results;
       nextUrl.value = data.next ?? null;
       totalCount.value = data.count || data.results.length;
@@ -139,10 +147,18 @@ export const useHotelList = (options: UseHotelListOptions = {}) => {
    * @throws {Error} If the new filters are invalid
    */
   const updateFilters = async (newFilters: HotelListFilters) => {
-    await fetchHotelList(newFilters);
-  };
-
-  /**
+    // Use replaceFilters=true to ensure we replace rather than merge
+    await fetchHotelList(newFilters, true);
+  };  /**
+   * Clear all filters and refetch hotel list
+   * This function resets all filters to initial state and refetches the hotel list
+   * @returns {Promise<void>}
+   * @throws {Error} If there are any issues during the clear process
+   */
+  const clearFilters = async () => {
+    // Fetch with only initial filters
+    await fetchHotelList(initialFilters, true);
+  };  /**
    * Reset to initial state
    * This function resets the hotel list, filters, and loading states
    * It clears any existing errors and sets the loading state to idle
@@ -178,6 +194,7 @@ export const useHotelList = (options: UseHotelListOptions = {}) => {
     loadMore,
     handleSort,
     updateFilters,
+    clearFilters,
     reset,
     clearError,
   };

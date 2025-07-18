@@ -33,7 +33,9 @@ export const useFilterUrlManagement = () => {
         }
 
         const currentValues = query[filterKey] as string;
-        if (!currentValues) return;
+        if (!currentValues) {
+          return;
+        }
 
         const valuesArray = currentValues.split(",");
         const valueId =
@@ -41,7 +43,9 @@ export const useFilterUrlManagement = () => {
             ? valueToRemove[idField]?.toString()
             : valueToRemove?.toString();
 
-        if (!valueId) return;
+        if (!valueId) {
+          return;
+        }
 
         const newValues = valuesArray.filter((v) => v !== valueId);
 
@@ -90,7 +94,7 @@ export const useFilterUrlManagement = () => {
 
   const removeCanton = async (canton: any) => {
     try {
-      if (canton && (canton.id !== undefined || canton.id !== null)) {
+      if (canton && canton.id !== undefined && canton.id !== null) {
         await removeFilterFromUrl("cantons", canton);
       }
     } catch (error) {
@@ -100,7 +104,7 @@ export const useFilterUrlManagement = () => {
 
   const removeAmenity = async (amenity: any) => {
     try {
-      if (amenity && (amenity.id !== undefined || amenity.id !== null)) {
+      if (amenity && amenity.id !== undefined && amenity.id !== null) {
         await removeFilterFromUrl("amenities", amenity);
       }
     } catch (error) {

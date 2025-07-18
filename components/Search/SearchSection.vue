@@ -248,18 +248,30 @@ let filterUrlManagement: ReturnType<typeof useFilterUrlManagement>;
 try {
   filterUrlManagement = useFilterUrlManagement();
 } catch (error) {
-  console.warn(
-    "Filter URL management composable initialization failed:",
+  console.error(
+    "❌ Filter URL management composable initialization failed:",
     error,
   );
   // Provide fallback functions
   filterUrlManagement = {
-    clearAllFilters: async () => {},
-    removeSearchTerm: async () => {},
-    removePriceRange: async () => {},
-    removeCanton: async () => {},
-    removeAmenity: async () => {},
-    removeStar: async () => {},
+    clearAllFilters: async () => {
+      console.warn("Using fallback clearAllFilters");
+    },
+    removeSearchTerm: async () => {
+      console.warn("Using fallback removeSearchTerm");
+    },
+    removePriceRange: async () => {
+      console.warn("Using fallback removePriceRange");
+    },
+    removeCanton: async () => {
+      console.warn("Using fallback removeCanton");
+    },
+    removeAmenity: async () => {
+      console.warn("Using fallback removeAmenity");
+    },
+    removeStar: async () => {
+      console.warn("Using fallback removeStar");
+    },
   } as any;
 }
 
@@ -380,12 +392,20 @@ const filters = computed(() => {
 // Update active filters from URL parameters
 const updateFiltersFromUrl = async () => {
   try {
-    if (!filters.value) return;
+    if (!filters.value) {
+      console.log("No filters available, skipping update");
+      return;
+    }
+
+    console.log("Updating filters from URL. Current route query:", route.query);
+    console.log("Available filters:", filters.value);
 
     const { filters: extractedFilters } = extractFiltersFromUrl(
       route,
       filters.value,
     );
+
+    console.log("Extracted filters from URL:", extractedFilters);
 
     // Use safe assignment to avoid cross-origin issues
     const newFilters = safeClone({
@@ -395,7 +415,12 @@ const updateFiltersFromUrl = async () => {
       price_range: extractedFilters.price_range || { from: null, to: null },
     });
 
+    console.log("New filters to assign:", newFilters);
+    console.log("Previous active filters:", activeFilters.value);
+
     safeAssign(activeFilters.value, newFilters);
+
+    console.log("Updated active filters:", activeFilters.value);
   } catch (error) {
     console.warn("Error updating filters from URL:", error);
   }
@@ -447,33 +472,46 @@ const removePriceRangeFromUrl = () => {
 
 const removeCantonFromUrl = (canton: Canton) => {
   try {
-    return removeCanton(canton);
+    console.log("🔥 CLICK DETECTED: Removing canton from URL:", canton);
+    console.log("removeCanton function:", removeCanton);
+    const result = removeCanton(canton);
+    console.log("removeCanton result:", result);
+    return result;
   } catch (error) {
-    console.warn("Error removing canton:", error);
+    console.error("❌ Error removing canton:", error);
   }
 };
 
 const removeAmenityFromUrl = (amenity: Amenity) => {
   try {
-    return removeAmenity(amenity);
+    console.log("🔥 CLICK DETECTED: Removing amenity from URL:", amenity);
+    console.log("removeAmenity function:", removeAmenity);
+    const result = removeAmenity(amenity);
+    console.log("removeAmenity result:", result);
+    return result;
   } catch (error) {
-    console.warn("Error removing amenity:", error);
+    console.error("❌ Error removing amenity:", error);
   }
 };
 
 const removeStarFromUrl = (star: string) => {
   try {
-    return removeStar(star);
+    console.log("🔥 CLICK DETECTED: Removing star from URL:", star);
+    console.log("removeStar function:", removeStar);
+    const result = removeStar(star);
+    console.log("removeStar result:", result);
+    return result;
   } catch (error) {
-    console.warn("Error removing star:", error);
+    console.error("❌ Error removing star:", error);
   }
 };
 
 // Watch for route query changes and update the active filters
 watch(
   () => route.query,
-  async () => {
+  async (newQuery, oldQuery) => {
     try {
+      console.log("Route query changed:", { oldQuery, newQuery });
       await nextTick(); // Ensure DOM is updated
       await updateFiltersFromUrl();
     } catch (error) {

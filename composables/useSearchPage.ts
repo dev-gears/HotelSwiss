@@ -1,4 +1,4 @@
-import { computed, watch } from "vue";
+import { computed, watch, nextTick } from "vue";
 import { useRoute } from "vue-router";
 import { useHotelList } from "./useHotelList";
 import { buildApiQueryParams } from "~/utils/filter-url-params";
@@ -33,10 +33,24 @@ export const useSearchPage = () => {
 
   watch(
     () => route.query,
-    () => {
-      fetchFilteredHotels();
+    (newQuery, oldQuery) => {
+      // Only fetch if query actually changed (deep comparison)
+      if (JSON.stringify(newQuery) !== JSON.stringify(oldQuery)) {
+        // Force reactivity by using nextTick
+        nextTick(() => {
+          fetchFilteredHotels();
+        });
+      }
     },
     { immediate: true, deep: true },
+  );
+
+  // Additional watch on route.fullPath as backup
+  watch(
+    () => route.fullPath,
+    (newPath, oldPath) => {
+      // Silent watch for backup
+    },
   );
 
   return {

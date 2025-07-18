@@ -3,7 +3,7 @@
     removable
     :label="label"
     :class="chipClass"
-    @remove="$emit('remove')"
+    @remove="handleRemove"
     :pt="chipPt"
   />
 </template>
@@ -20,9 +20,13 @@ const props = withDefaults(defineProps<Props>(), {
   variant: "primary",
 });
 
-defineEmits<{
+const emit = defineEmits<{
   remove: [];
 }>();
+
+const handleRemove = (event: Event) => {
+  emit("remove");
+};
 
 const chipClass = computed(() => {
   const baseClass = "modern-chip";
