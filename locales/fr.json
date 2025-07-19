@@ -1034,5 +1034,35 @@
       "sortBy": "Trier par",
       "loadMore": "Charger plus"
     }
+  },
+  "Landing": {
+    "welcome": {
+      "title": "Découvrez les Plus Beaux Hôtels de Suisse",
+      "subtitle": "Contactez directement les hôtels suisses via notre plateforme sans commission. Explorez des hébergements authentiques dans les 26 cantons et découvrez la Suisse comme jamais auparavant."
+    },
+    "features": {
+      "directContact": {
+        "title": "Contact Direct",
+        "description": "Contactez les hôtels directement sans intermédiaires. Créez des relations authentiques et bénéficiez d'un service personnalisé dès le premier jour."
+      },
+      "noCommission": {
+        "title": "Sans Commission",
+        "description": "Économisez de l'argent avec notre modèle sans commission. Les hôtels offrent de meilleurs tarifs quand ils ne paient pas de frais de réservation."
+      },
+      "swissFocus": {
+        "title": "Expertise Suisse",
+        "description": "Connaissance spécialisée de l'hospitalité suisse. Découvrez des joyaux cachés et des favoris locaux dans les 26 cantons."
+      }
+    },
+    "stats": {
+      "cantons": "Cantons Suisses",
+      "hotels": "Hôtels Partenaires",
+      "languages": "Langues",
+      "commission": "Commission"
+    },
+    "cta": {
+      "exploreHotels": "Explorer les Hôtels",
+      "discoverRegions": "Découvrir les Régions"
+    }
   }
 }

@@ -14,6 +14,7 @@
       v-if="firstScreenData?.promo_hotels"
       :hotels="firstScreenData.promo_hotels"
     />
+    <LandingWelcomeSection />
     <CategoryTabs
       v-if="firstScreenData?.categories"
       :categories="firstScreenData.categories"

@@ -1036,5 +1036,35 @@
       "sortBy": "Sortieren nach",
       "loadMore": "Mehr laden"
     }
+  },
+  "Landing": {
+    "welcome": {
+      "title": "Entdecken Sie die schönsten Hotels der Schweiz",
+      "subtitle": "Kontaktieren Sie Schweizer Hotels direkt über unsere gebührenfreie Plattform. Erkunden Sie authentische Unterkünfte in allen 26 Kantonen und erleben Sie die Schweiz wie nie zuvor."
+    },
+    "features": {
+      "directContact": {
+        "title": "Direkter Kontakt",
+        "description": "Kontaktieren Sie Hotels direkt ohne Vermittler. Bauen Sie authentische Beziehungen auf und erhalten Sie personalisierten Service von Anfang an."
+      },
+      "noCommission": {
+        "title": "Keine Provisionen",
+        "description": "Sparen Sie Geld mit unserem gebührenfreien Modell. Hotels bieten bessere Preise, wenn sie keine Buchungsgebühren zahlen müssen."
+      },
+      "swissFocus": {
+        "title": "Schweizer Expertise",
+        "description": "Spezialisiertes Wissen über Schweizer Gastfreundschaft. Entdecken Sie versteckte Perlen und lokale Favoriten in allen 26 Kantonen."
+      }
+    },
+    "stats": {
+      "cantons": "Schweizer Kantone",
+      "hotels": "Partner Hotels",
+      "languages": "Sprachen",
+      "commission": "Provision"
+    },
+    "cta": {
+      "exploreHotels": "Hotels Erkunden",
+      "discoverRegions": "Regionen Entdecken"
+    }
   }
 }

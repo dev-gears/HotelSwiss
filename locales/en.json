@@ -1057,5 +1057,35 @@
       "description": "The canton you're looking for doesn't exist or has been moved.",
       "backToDiscover": "Back to Discover"
     }
+  },
+  "Landing": {
+    "welcome": {
+      "title": "Discover Switzerland's Finest Hotels",
+      "subtitle": "Connect directly with Swiss hotels through our commission-free platform. Explore authentic accommodations across all 26 cantons and experience Switzerland like never before."
+    },
+    "features": {
+      "directContact": {
+        "title": "Direct Contact",
+        "description": "Contact hotels directly without intermediaries. Build authentic relationships and get personalized service from day one."
+      },
+      "noCommission": {
+        "title": "No Commission Fees",
+        "description": "Save money with our commission-free model. Hotels offer better rates when they don't pay booking fees."
+      },
+      "swissFocus": {
+        "title": "Swiss Expertise",
+        "description": "Specialized knowledge of Swiss hospitality. Discover hidden gems and local favorites across all 26 cantons."
+      }
+    },
+    "stats": {
+      "cantons": "Swiss Cantons",
+      "hotels": "Partner Hotels",
+      "languages": "Languages",
+      "commission": "Commission"
+    },
+    "cta": {
+      "exploreHotels": "Explore Hotels",
+      "discoverRegions": "Discover Regions"
+    }
   }
 }

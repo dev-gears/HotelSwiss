@@ -802,5 +802,35 @@
       "sortBy": "Ordina per",
       "loadMore": "Carica altro"
     }
+  },
+  "Landing": {
+    "welcome": {
+      "title": "Scopri i Migliori Hotel della Svizzera",
+      "subtitle": "Contatta direttamente gli hotel svizzeri tramite la nostra piattaforma senza commissioni. Esplora alloggi autentici in tutti i 26 cantoni e vivi la Svizzera come mai prima d'ora."
+    },
+    "features": {
+      "directContact": {
+        "title": "Contatto Diretto",
+        "description": "Contatta gli hotel direttamente senza intermediari. Costruisci relazioni autentiche e ricevi un servizio personalizzato fin dal primo giorno."
+      },
+      "noCommission": {
+        "title": "Nessuna Commissione",
+        "description": "Risparmia denaro con il nostro modello senza commissioni. Gli hotel offrono tariffe migliori quando non pagano commissioni di prenotazione."
+      },
+      "swissFocus": {
+        "title": "Esperienza Svizzera",
+        "description": "Conoscenza specializzata dell'ospitalità svizzera. Scopri gemme nascoste e favoriti locali in tutti i 26 cantoni."
+      }
+    },
+    "stats": {
+      "cantons": "Cantoni Svizzeri",
+      "hotels": "Hotel Partner",
+      "languages": "Lingue",
+      "commission": "Commissione"
+    },
+    "cta": {
+      "exploreHotels": "Esplora Hotel",
+      "discoverRegions": "Scopri Regioni"
+    }
   }
 }
