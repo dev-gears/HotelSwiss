@@ -149,7 +149,7 @@ export const useHotelList = (options: UseHotelListOptions = {}) => {
   const updateFilters = async (newFilters: HotelListFilters) => {
     // Use replaceFilters=true to ensure we replace rather than merge
     await fetchHotelList(newFilters, true);
-  };  /**
+  }; /**
    * Clear all filters and refetch hotel list
    * This function resets all filters to initial state and refetches the hotel list
    * @returns {Promise<void>}
@@ -158,7 +158,7 @@ export const useHotelList = (options: UseHotelListOptions = {}) => {
   const clearFilters = async () => {
     // Fetch with only initial filters
     await fetchHotelList(initialFilters, true);
-  };  /**
+  }; /**
    * Reset to initial state
    * This function resets the hotel list, filters, and loading states
    * It clears any existing errors and sets the loading state to idle
